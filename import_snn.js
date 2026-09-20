@@ -12,7 +12,6 @@ async function importExcel() {
   const sheet = workbook.Sheets[sheetName];
   const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-  // Get or create the "Sở Nông nghiệp và Môi trường" unit
   let donVi = await prisma.donVi.findFirst({
     where: { ten: { contains: "Sở Nông nghiệp" } }
   });
@@ -26,16 +25,22 @@ async function importExcel() {
         parentId: tinh ? tinh.id : null,
       }
     });
-    console.log("Created Đơn vị:", donVi.ten);
-  } else {
-    console.log("Found Đơn vị:", donVi.ten);
   }
+
+  await prisma.heThongSo.deleteMany({
+    where: {
+      ma: {
+        startsWith: "SNN-"
+      }
+    }
+  });
+  console.log("Deleted old SNN records.");
 
   let successCount = 0;
 
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i];
-    if (!row || !row[1]) continue; // Skip empty rows
+    if (!row || !row[1]) continue;
 
     const ten = String(row[1]).trim();
     const ma = `SNN-${String(row[0] || i).padStart(2, "0")}`;
@@ -55,11 +60,14 @@ async function importExcel() {
     const namStr = String(row[6] || "");
     const namTrienKhai = parseInt(namStr) || null;
 
-    // Build moTa from domain and data sharing info
     let moTaParts = [];
-    if (tenMien && tenMien !== "Không có") moTaParts.push(`Tên miền: ${tenMien}`);
-    if (row[13]) moTaParts.push(`Dữ liệu chia sẻ: ${String(row[13]).substring(0, 200)}...`);
-    if (row[14]) moTaParts.push(`Phạm vi: ${String(row[14]).substring(0, 200)}...`);
+    if (tenMien && tenMien !== "Không có") moTaParts.push(`Tên miền::${tenMien}`);
+    if (row[10] && String(row[10]).trim() !== "") moTaParts.push(`Khả năng chia sẻ::${String(row[10]).trim()}`);
+    if (row[11] && String(row[11]).trim() !== "") moTaParts.push(`Hình thức chia sẻ::${String(row[11]).trim()}`);
+    if (row[12] && String(row[12]).trim() !== "") moTaParts.push(`Tần suất cập nhật::${String(row[12]).trim()}`);
+    if (row[13] && String(row[13]).trim() !== "") moTaParts.push(`Phạm vi dữ liệu::${String(row[13]).trim()}`);
+    if (row[14] && String(row[14]).trim() !== "") moTaParts.push(`Danh mục cụ thể::${String(row[14]).trim()}`);
+    if (row[15] && String(row[15]).trim() !== "") moTaParts.push(`Hiện trạng kết nối::${String(row[15]).trim()}`);
 
     const isDuLieu = ten.toLowerCase().includes("csdl") || ten.toLowerCase().includes("dữ liệu");
     const loai = isDuLieu ? "du-lieu" : "ung-dung";
@@ -80,13 +88,12 @@ async function importExcel() {
         }
       });
       successCount++;
-      console.log(`Imported: ${ma} - ${ten.substring(0, 30)}...`);
     } catch (e) {
       console.error(`Error importing row ${i}:`, e.message);
     }
   }
 
-  console.log(`\\n✅ Import completed: ${successCount} systems added.`);
+  console.log(`\n✅ Re-import completed: ${successCount} systems added with FULL data.`);
   await prisma.$disconnect();
 }
 
