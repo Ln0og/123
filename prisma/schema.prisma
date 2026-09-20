@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("viewer")
+  donViId   String?
+  donVi     DonVi?   @relation(fields: [donViId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DonVi {
+  id        String      @id @default(cuid())
+  ten       String
+  loai      String
+  parentId  String?
+  parent    DonVi?      @relation("DonViParent", fields: [parentId], references: [id])
+  children  DonVi[]     @relation("DonViParent")
+  users     User[]
+  heSoList  HeThongSo[]
+  nhiemVus  NhiemVu[]
+  createdAt DateTime    @default(now())
+}
+
+model KhungKTS {
+  id              String    @id @default(cuid())
+  tenKhung        String
+  phienBan        String    @default("1.0")
+  ngayBanHanh     DateTime?
+  giaiDoanApDung  String?
+  mucTieu         String?
+  boiCanh         String?
+  nguyenTac       String?
+  daiDienPhuTrach String?
+  trangThai       String    @default("draft")
+  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime  @default(now())
+}
+
+model HeThongSo {
+  id           String    @id @default(cuid())
+  ma           String
+  ten          String
+  loai         String
+  lop          Int
+  moTa         String?
+  chuQuan      String?
+  trangThai    String    @default("dang-van-hanh")
+  namTrienKhai Int?
+  donViId      String?
+  donVi        DonVi?    @relation(fields: [donViId], references: [id])
+  anhXas       AnhXa[]
+  ketNois      KetNoi[]  @relation("KetNoiNguon")
+  ketNoisDich  KetNoi[]  @relation("KetNoiDich")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model KetNoi {
+  id         String    @id @default(cuid())
+  nguonId    String
+  nguon      HeThongSo @relation("KetNoiNguon", fields: [nguonId], references: [id])
+  dichId     String
+  dich       HeThongSo @relation("KetNoiDich", fields: [dichId], references: [id])
+  loaiKetNoi String
+  moTa       String?
+  createdAt  DateTime  @default(now())
+}
+
+model AnhXa {
+  id           String    @id @default(cuid())
+  heThongSoId  String
+  heThongSo    HeThongSo @relation(fields: [heThongSoId], references: [id])
+  mucTieu      String
+  phuongAnXuLy String
+  moTa         String?
+  createdAt    DateTime  @default(now())
+}
+
+model NhiemVu {
+  id             String    @id @default(cuid())
+  ma             String
+  ten            String
+  moTa           String?
+  donViChuTriId  String?
+  donViChuTri    DonVi?    @relation(fields: [donViChuTriId], references: [id])
+  uuTien         String    @default("trung-binh")
+  thoiHan        DateTime?
+  giaiDoan       String?
+  kpi            String?
+  nguonKiemChung String?
+  trangThai      String    @default("chua-bat-dau")
+  tienDo         Int       @default(0)
+  lop            Int
+  phuongAnXuLy   String?
+  ghiChu         String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}

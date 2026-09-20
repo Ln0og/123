@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #003087;
+  --primary-light: #0050b3;
+  --accent: #e63329;
+  --lop1: #722ed1;
+  --lop2: #1677ff;
+  --lop3: #52c41a;
+  --lop4: #fa8c16;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f5f6fa;
+}
+
+.ant-layout-sider {
+  background: #001529 !important;
+}
+
+.stat-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.lop-card {
+  border-radius: 10px;
+  border: 1px solid;
+  transition: all 0.2s;
+}
+
+.lop-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #003087 0%, #0050b3 50%, #003580 100%);
+}
+
+.page-header {
+  background: linear-gradient(135deg, #003087, #0050b3);
+  color: white;
+  padding: 24px 32px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.progress-critical {
+  --ant-progress-color: #ff4d4f;
+}
+
+/* Ẩn hoàn toàn Next.js Dev Indicator trên mọi trang */
+nextjs-portal, 
+#__next-build-watcher, 
+[data-nextjs-toast], 
+.nextjs-toast {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
