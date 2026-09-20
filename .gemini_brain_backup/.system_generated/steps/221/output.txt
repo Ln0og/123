@@ -1,0 +1,26 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -121,8 +121,9 @@
+   };
+ 
+   const tabItems = ([1, 2, 3, 4] as const).map((lop) => {
+-    const cfg = LOP_CONFIG[lop];
+-    const count = byLop(lop).length;
++    const items = byLop(lop);
++    const cfg = LOP_CONFIG[lop];
++    const count = items.length;
+     return {
+       key: String(lop),
+       label: (
+@@ -131,7 +131,7 @@
+           <Badge count={count} style={{ backgroundColor: cfg.color }} />
+         </span>
+       ),
+-      children: <LopTab lop={lop} />,
++      children: <LopTab lop={lop} items={items} />,
+     };
+   });
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

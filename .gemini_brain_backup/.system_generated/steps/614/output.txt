@@ -1,0 +1,36 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\api\nhiem-vu\route.ts. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -15,7 +15,7 @@
+ 
+     const list = await prisma.nhiemVu.findMany({
+       where,
+-      include: { donViChuTri: true },
++      include: { donViChuTri: true, heThongSos: true },
+       orderBy: [{ uuTien: "asc" }, { thoiHan: "asc" }],
+     });
+     return NextResponse.json(list);
+@@ -26,10 +26,18 @@
+ export async function POST(request: Request) {
+   try {
+     const body = await request.json();
+-    if (body.thoiHan) body.thoiHan = new Date(body.thoiHan);
++    const { heThongSoIds, ...data } = body;
++    
++    if (data.thoiHan) data.thoiHan = new Date(data.thoiHan);
++    
+     const item = await prisma.nhiemVu.create({
+-      data: body,
+-      include: { donViChuTri: true },
++      data: {
++        ...data,
++        heThongSos: heThongSoIds ? {
++          connect: heThongSoIds.map((id: string) => ({ id }))
++        } : undefined
++      },
++      include: { donViChuTri: true, heThongSos: true },
+     });
+     return NextResponse.json(item, { status: 201 });
+   } catch (e) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

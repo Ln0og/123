@@ -1,0 +1,16 @@
+{"name":".git", "isDir":true}
+{"name":".gitignore", "sizeBytes":"7983"}
+{"name":".idea", "isDir":true}
+{"name":"17112025.bak", "sizeBytes":"18997248"}
+{"name":"HTBCController.cs", "sizeBytes":"116376"}
+{"name":"Log_Upcode.txt", "sizeBytes":"9129"}
+{"name":"PropertyRental", "isDir":true}
+{"name":"PropertyRental.sln", "sizeBytes":"1148"}
+{"name":"db_nq57_05112025_v2.bak", "sizeBytes":"11954688"}
+{"name":"db_nq57_12112025.bak", "sizeBytes":"17984000"}
+{"name":"docs", "isDir":true}
+{"name":"screenshots", "isDir":true}
+{"name":"script", "isDir":true}
+{"name":"tatus", "sizeBytes":"5362"}
+
+Summary: This directory contains 6 subdirectories and 8 files.

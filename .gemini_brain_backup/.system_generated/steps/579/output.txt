@@ -1,0 +1,16 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -132,8 +132,8 @@
+     const lopCfg = LOP_CONFIG[selectedItem.lop as 1|2|3|4];
+     
+     const rawMoTa = selectedItem.moTa || "";
+-    // Phân tích cú pháp các thuộc tính mở rộng (Key::Value)
+-    const lines = rawMoTa.split(/\\n|\n/).filter(l => l.trim() !== "");
++    // Chỉ tách bằng chuỗi '\n' (2 ký tự do tool import sinh ra), giữ nguyên các dấu xuống dòng thật (\n) bên trong nội dung của file Excel
++    const lines = rawMoTa.split(/\\n/).filter(l => l.trim() !== "");
+     const attributes = lines.map(line => {
+       const parts = line.split("::");
+       if (parts.length >= 2) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

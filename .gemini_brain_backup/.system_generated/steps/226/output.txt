@@ -1,0 +1,61 @@
+
+Encountered error in step execution: context canceled
+Output:
+<truncated 1057 lines>
+ GET /kts/hien-trang 200 in 143ms (next.js: 23ms, application-code: 120ms)
+ GET /kts/tong-quan 200 in 145ms (next.js: 20ms, application-code: 125ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`KhungKTS`.`id`, `main`.`KhungKTS`.`tenKhung`, `main`.`KhungKTS`.`phienBan`, `main`.`KhungKTS`.`ngayBanHanh`, `main`.`KhungKTS`.`giaiDoanApDung`, `main`.`KhungKTS`.`mucTieu`, `main`.`KhungKTS`.`boiCanh`, `main`.`KhungKTS`.`nguyenTac`, `main`.`KhungKTS`.`daiDienPhuTrach`, `main`.`KhungKTS`.`trangThai`, `main`.`KhungKTS`.`updatedAt`, `main`.`KhungKTS`.`createdAt` FROM `main`.`KhungKTS` WHERE 1=1 ORDER BY `main`.`KhungKTS`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /kts/tong-quan 200 in 18ms (next.js: 3ms, application-code: 14ms)
+ GET /kts/muc-tieu 200 in 17ms (next.js: 4ms, application-code: 13ms)
+[browser] Warning: [antd: Card] `bodyStyle` is deprecated. Please use `styles.body` instead. 
+    at Array.forEach (<anonymous>) (<anonymous>)
+[browser] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002
+[browser] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-0. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-1. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-2. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-3. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-4. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-5. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-6. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-7. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-8. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-0. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-1. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-2. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-3. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-4. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-5. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-6. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-7. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-8. Help: https://reactflow.dev/error#008 (<anonymous>)
+ GET /kts/lo-trinh 200 in 17ms (next.js: 4ms, application-code: 12ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 10ms (next.js: 3ms, application-code: 7ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 18ms (next.js: 5ms, application-code: 12ms)
+[browser] Warning: `label` of `value` is not same as `label` in Select options. 
+    at Array.map (<anonymous>) (<anonymous>)
+ GET /kts/hien-trang 200 in 19ms (next.js: 7ms, application-code: 12ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE 1=1 ORDER BY `main`.`HeThongSo`.`lop` ASC, `main`.`HeThongSo`.`ma` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/he-thong 200 in 25ms (next.js: 6ms, application-code: 19ms)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE 1=1 ORDER BY `main`.`HeThongSo`.`lop` ASC, `main`.`HeThongSo`.`ma` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/he-thong 200 in 23ms (next.js: 4ms, application-code: 20ms)
+ GET /kts/hien-trang 200 in 31ms (next.js: 7ms, application-code: 25ms)
+✓ Compiled in 297ms
+ GET /kts/hien-trang 200 in 41ms (next.js: 14ms, application-code: 27ms)
+ GET /kts/hien-trang 200 in 35ms (next.js: 12ms, application-code: 24ms)
+✓ Compiled in 54ms
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://100.124.11.94:3000
+- Environments: .env
+✓ Ready in 4.2s
+

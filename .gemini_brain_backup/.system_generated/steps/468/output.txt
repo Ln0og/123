@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'src/app/(portal)/kts/hien-trang/page.tsx', LF will be replaced by CRLF the next time Git touches it
+[main 6fab7ec] Thêm tính năng Popup Modal chi tiết cho trang Hiện Trạng
+ 1 file changed, 223 insertions(+), 130 deletions(-)
+To https://github.com/Ln0og/123.git
+   1c4c6e2..6fab7ec  main -> main
+

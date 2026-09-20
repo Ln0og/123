@@ -1,0 +1,229 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1,8 +1,15 @@
+ "use client";
+ import { useEffect, useState } from "react";
+-import { Card, Tag, Progress, Tabs, Badge, Tooltip, Spin, Empty, Pagination } from "antd";
++import { Card, Tag, Progress, Tabs, Badge, Tooltip, Spin, Empty, Pagination, Modal, Descriptions } from "antd";
+ import { HeThongSoData } from "@/types";
+ import { LOP_CONFIG, TRANG_THAI_CONFIG } from "@/lib/utils";
++import { 
++  DatabaseOutlined, 
++  GlobalOutlined, 
++  BankOutlined,
++  CalendarOutlined,
++  InfoCircleOutlined
++} from "@ant-design/icons";
+ 
+ export default function HienTrangPage() {
+   const [data, setData] = useState<HeThongSoData[]>([]);
+@@ -9,4 +9,7 @@
+-  const [activeTab, setActiveTab] = useState("1");
++  const [selectedLop, setSelectedLop] = useState("1");
++  const [currentPage, setCurrentPage] = useState(1);
++  const [selectedItem, setSelectedItem] = useState<HeThongSoData | null>(null);
++  const PAGE_SIZE = 10;
+ 
+   useEffect(() => {
+     fetch("/api/he-thong")
+@@ -16,17 +16,6 @@
+       });
+   }, []);
+ 
+-  const byLop = (lop: number) => data.filter((d) => d.lop === lop);
+-
+-  const TrangThaiTag = ({ trangThai }: { trangThai: string }) => {
+-    const cfg = TRANG_THAI_CONFIG[trangThai];
+-    return cfg ? (
+-      <Tag color={cfg.antdColor}>{cfg.label}</Tag>
+-    ) : (
+-      <Tag>{trangThai}</Tag>
+-    );
+-  };
+-
+   const HeThongCard = ({ item }: { item: HeThongSoData }) => {
+     return (
+       <Card
+@@ -33,81 +33,93 @@
+-        className="mb-3 border hover:shadow-md transition-shadow"
+-        title={
+-          <div className="flex items-center justify-between">
+-            <span className="font-medium text-gray-800">{item.ten}</span>
+-            <TrangThaiTag trangThai={item.trangThai} />
+-          </div>
+-        }
+-        extra={
+-          <span className="text-xs text-gray-400 font-mono bg-gray-100 px-2 py-0.5 rounded">
+-            {item.ma}
+-          </span>
+-        }
++        className="mb-3 border hover:shadow-md transition-all cursor-pointer group hover:border-blue-300"
++        onClick={() => setSelectedItem(item)}
+       >
+-        {item.moTa && (
+-          <p className="text-gray-600 text-sm mb-3 whitespace-pre-line line-clamp-3" title={item.moTa}>{item.moTa}</p>
+-        )}
+-        <div className="flex gap-4 text-xs text-gray-400">
+-          {item.chuQuan && (
+-            <span>🏢 Chủ quản: <strong className="text-gray-600">{item.chuQuan}</strong></span>
+-          )}
+-          {item.namTrienKhai && (
+-            <span>📅 Triển khai: <strong className="text-gray-600">{item.namTrienKhai}</strong></span>
+-          )}
+-          {item.donVi && (
+-            <span>📍 Đơn vị: <strong className="text-gray-600">{item.donVi.ten}</strong></span>
+-          )}
+-        </div>
+-      </Card>
+-    );
+-  };
+-
+-  const LopTab = ({ lop, items }: { lop: 1 | 2 | 3 | 4, items: HeThongSoData[] }) => {
+-    const [page, setPage] = useState(1);
+-    const pageSize = 15;
++        <div className="flex justify-between items-start">
++          <div className="flex-1 pr-4">
++            <div className="font-bold text-gray-800 text-sm group-hover:text-blue-700 transition-colors">
++              {item.ten}
++            </div>
++            <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
++              <span><BankOutlined /> {item.donVi?.ten || item.chuQuan}</span>
++              {item.namTrienKhai && (
++                <>
++                  <span className="text-gray-300">|</span>
++                  <span><CalendarOutlined /> Năm {item.namTrienKhai}</span>
++                </>
++              )}
++            </div>
++            {item.moTa && (
++              <div className="text-xs text-gray-400 mt-2 line-clamp-1 italic bg-gray-50 p-1 px-2 rounded border border-gray-100">
++                {item.moTa.replace(/\\n/g, ' • ')}
++              </div>
++            )}
++          </div>
++          <div className="text-right flex flex-col items-end gap-2">
++            <span className="font-mono text-xs text-gray-400 bg-gray-100 px-1 rounded">
++              {item.ma}
++            </span>
++            <Tag color={TRANG_THAI_CONFIG[item.trangThai]?.antdColor || "default"} className="m-0 text-[10px]">
++              {TRANG_THAI_CONFIG[item.trangThai]?.label || item.trangThai}
++            </Tag>
++          </div>
++        </div>
++      </Card>
++    );
++  };
++
++  const renderLop = (lop: number) => {
++    const items = data.filter((d) => d.lop === lop);
++    const config = LOP_CONFIG[lop as 1 | 2 | 3 | 4];
+     
+-    const cfg = LOP_CONFIG[lop];
+-    const dangVanHanh = items.filter((i) => i.trangThai === "dang-van-hanh").length;
+-    const canNangCap = items.filter((i) => i.trangThai === "can-nang-cap").length;
+-    const canThayThe = items.filter((i) => i.trangThai === "can-thay-the").length;
+-
+-    const currentItems = items.slice((page - 1) * pageSize, page * pageSize);
+-
+-    return (
+-      <div>
+-        {/* Summary */}
+-        <div
+-          className="p-4 rounded-xl mb-4 border"
+-          style={{ backgroundColor: cfg.bgColor, borderColor: cfg.borderColor }}
++    // Pagination logic
++    const total = items.length;
++    const startIndex = (currentPage - 1) * PAGE_SIZE;
++    const paginatedItems = items.slice(startIndex, startIndex + PAGE_SIZE);
++
++    return (
++      <div className="py-4 animate-fade-in">
++        <div 
++          className="p-4 rounded-xl mb-6 flex justify-between items-center"
++          style={{ backgroundColor: config.bgColor, border: `1px solid ${config.borderColor}` }}
+         >
+-          <div className="flex items-center gap-3 mb-3">
+-            <span className="text-2xl">{cfg.icon}</span>
+-            <div>
+-              <div className="font-bold" style={{ color: cfg.color }}>{cfg.label}</div>
+-              <div className="text-gray-500 text-sm">Tổng cộng: {items.length} hệ thống/thành phần</div>
+-            </div>
+-          </div>
+-          <div className="flex gap-4">
+-            <Badge color="green" text={<span className="text-sm">Đang vận hành: {dangVanHanh}</span>} />
+-            <Badge color="orange" text={<span className="text-sm">Cần nâng cấp: {canNangCap}</span>} />
+-            <Badge color="red" text={<span className="text-sm">Cần thay thế: {canThayThe}</span>} />
+-          </div>
+-        </div>
+-
+-        {/* Items */}
++          <div>
++            <h2 className="text-lg font-bold flex items-center gap-2" style={{ color: config.color }}>
++              <span className="text-2xl">{config.icon}</span> Lớp {lop} — {config.label}
++            </h2>
++            <p className="text-gray-600 mt-1">Tổng cộng: {items.length} hệ thống/thành phần</p>
++          </div>
++          <div className="flex gap-4 text-sm bg-white p-2 px-4 rounded-lg shadow-sm">
++            <div className="flex items-center gap-1">
++              <div className="w-2 h-2 rounded-full bg-green-500"></div> Đang vận hành: {items.filter(i => i.trangThai === 'dang-van-hanh').length}
++            </div>
++            <div className="flex items-center gap-1">
++              <div className="w-2 h-2 rounded-full bg-orange-500"></div> Cần nâng cấp: {items.filter(i => i.trangThai === 'can-nang-cap').length}
++            </div>
++            <div className="flex items-center gap-1">
++              <div className="w-2 h-2 rounded-full bg-red-500"></div> Cần thay thế: {items.filter(i => i.trangThai === 'can-thay-the').length}
++            </div>
++          </div>
++        </div>
++
+         {items.length === 0 ? (
+-          <Empty description="Chưa có hệ thống nào trong lớp này" />
++          <Empty description="Chưa có dữ liệu lớp này" />
+         ) : (
+           <>
+-            {currentItems.map((item) => <HeThongCard key={item.id} item={item} />)}
+-            <div className="flex justify-center mt-6">
+-              <Pagination 
+-                current={page} 
+-                total={items.length} 
+-                pageSize={pageSize} 
+-                onChange={setPage} 
+-                showSizeChanger={false}
+-              />
+-            </div>
++            <div className="grid grid-cols-1 gap-1">
++              {paginatedItems.map((item) => (
++                <HeThongCard key={item.id} item={item} />
++              ))}
++            </div>
++            {total > PAGE_SIZE && (
++              <div className="mt-6 flex justify-center">
++                <Pagination
++                  current={currentPage}
++                  total={total}
++                  pageSize={PAGE_SIZE}
++                  onChange={(page) => setCurrentPage(page)}
++                  showSizeChanger={false}
++                />
++              </div>
++            )}
+           </>
+         )}
+       </div>
+@@ -114,11 +114,5 @@
+   };
+ 
+-  const tabItems = ([1, 2, 3, 4] as const).map((lop) => {
+-    const items = byLop(lop);
+-    const cfg = LOP_CONFIG[lop];
+-    const count = items.length;
+-    return {
+-      key: String(lop),
+       label: (
+         <span className="flex items-center gap-2">
+           <span>{cfg.icon}</span>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
+
+We did our best to apply changes despite some inaccuracies. Double check if the edit applied is what you intended.

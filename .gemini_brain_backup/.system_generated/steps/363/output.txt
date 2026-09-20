@@ -1,0 +1,21 @@
+{"name":".env", "sizeBytes":"190"}
+{"name":".gitignore", "sizeBytes":"480"}
+{"name":".next", "isDir":true}
+{"name":"AGENTS.md", "sizeBytes":"678"}
+{"name":"CLAUDE.md", "sizeBytes":"11"}
+{"name":"README.md", "sizeBytes":"1450"}
+{"name":"eslint.config.mjs", "sizeBytes":"465"}
+{"name":"import_snn.js", "sizeBytes":"3067"}
+{"name":"next-env.d.ts", "sizeBytes":"296"}
+{"name":"next.config.ts", "sizeBytes":"157"}
+{"name":"node_modules", "isDir":true}
+{"name":"package-lock.json", "sizeBytes":"316281"}
+{"name":"package.json", "sizeBytes":"1250"}
+{"name":"postcss.config.mjs", "sizeBytes":"94"}
+{"name":"preview_excel.js", "sizeBytes":"672"}
+{"name":"prisma", "isDir":true}
+{"name":"public", "isDir":true}
+{"name":"src", "isDir":true}
+{"name":"tsconfig.json", "sizeBytes":"670"}
+
+Summary: This directory contains 5 subdirectories and 14 files.

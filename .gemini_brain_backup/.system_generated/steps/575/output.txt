@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'import_snn.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/hien-trang/page.tsx', LF will be replaced by CRLF the next time Git touches it
+[main 63abbd4] Cập nhật nạp toàn bộ các cột dữ liệu chia sẻ từ Excel vào DB và hiển thị động trên Popup
+ 3 files changed, 39 insertions(+), 45 deletions(-)
+To https://github.com/Ln0og/123.git
+   189dccb..63abbd4  main -> main
+

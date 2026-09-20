@@ -1,0 +1,754 @@
+
+> kts-vinhlong@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://100.124.11.94:3000
+- Environments: .env
+✓ Ready in 4.1s
+✓ Running next.config.ts took 246ms
+
+○ Compiling /kts/hien-trang ...
+Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead.
+ GET /kts/hien-trang 200 in 9.5s (next.js: 8.7s, application-code: 815ms)
+[browser] Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead. 
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE 1=1 ORDER BY `main`.`HeThongSo`.`lop` ASC, `main`.`HeThongSo`.`ma` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/he-thong 200 in 639ms (next.js: 172ms, application-code: 467ms)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE 1=1 ORDER BY `main`.`HeThongSo`.`lop` ASC, `main`.`HeThongSo`.`ma` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/he-thong 200 in 41ms (next.js: 7ms, application-code: 34ms)
+ GET /kts/muc-tieu 200 in 50ms (next.js: 30ms, application-code: 20ms)
+[browser] Warning: [antd: Card] `bodyStyle` is deprecated. Please use `styles.body` instead. 
+    at Array.forEach (<anonymous>) (<anonymous>)
+[browser] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002
+[browser] [React Flow]: It looks like you've created a new nodeTypes or edgeTypes object. If this wasn't on purpose please define the nodeTypes/edgeTypes outside of the component or memoize them. Help: https://reactflow.dev/error#002
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-0. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-1. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-2. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-3. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-4. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-5. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-6. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-7. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-8. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-0. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-1. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-2. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-3. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-4. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-5. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-6. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-7. Help: https://reactflow.dev/error#008 (<anonymous>)
+[browser] [React Flow]: Couldn't create edge for source handle id: "undefined", edge id: e-8. Help: https://reactflow.dev/error#008 (<anonymous>)
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined,
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 2.9s (next.js: 1028ms, application-code: 1852ms)
+ GET /kts/tong-quan 307 in 9ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 33ms (next.js: 6ms, application-code: 26ms)
+ GET /kts/tong-quan 307 in 8ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 29ms (next.js: 6ms, application-code: 22ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 30ms (next.js: 8ms, application-code: 23ms)
+ GET /kts/tong-quan 307 in 8ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 35ms (next.js: 6ms, application-code: 29ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 30ms (next.js: 7ms, application-code: 23ms)
+ GET /kts/tong-quan 307 in 8ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 32ms (next.js: 7ms, application-code: 25ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 29ms (next.js: 6ms, application-code: 22ms)
+ GET /kts/tong-quan 307 in 6ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 27ms (next.js: 7ms, application-code: 20ms)
+ GET /kts/tong-quan 307 in 32ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 26ms (next.js: 6ms, application-code: 20ms)
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 24ms
+ GET /kts/tong-quan 307 in 35ms (next.js: 14ms, application-code: 21ms)
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 22ms
+ GET /kts/tong-quan 307 in 35ms (next.js: 11ms, application-code: 24ms)
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+[browser] Failed to fetch RSC payload for http://localhost:3000/kts/tong-quan. Falling back to browser navigation. TypeError: Failed to fetch
+ GET /kts/tong-quan 307 in 43ms (next.js: 10ms, application-code: 33ms)
+ GET /kts/tong-quan 307 in 14ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 29ms (next.js: 7ms, application-code: 22ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 30ms (next.js: 7ms, application-code: 23ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 27ms (next.js: 6ms, application-code: 21ms)
+ GET /kts/tong-quan 307 in 8ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 27ms (next.js: 6ms, application-code: 21ms)
+ GET /kts/tong-quan 307 in 6ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 30ms (next.js: 7ms, application-code: 23ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 26ms (next.js: 6ms, application-code: 20ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 32ms (next.js: 6ms, application-code: 25ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 28ms (next.js: 7ms, application-code: 21ms)
+ GET /kts/tong-quan 307 in 7ms
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 307 in 30ms (next.js: 7ms, application-code: 23ms)
+[browser] Failed to fetch RSC payload for http://localhost:3000/kts/tong-quan. Falling back to browser navigation. TypeError: Failed to fetch
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 500 in 579ms (next.js: 32ms, application-code: 547ms)
+[browser] Uncaught TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src/app/(portal)/kts/tong-quan/page.tsx:3:1)
+    at module evaluation (src/app/(portal)/kts/tong-quan/page.tsx:147:1)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined,
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 500 in 51ms (next.js: 36ms, application-code: 15ms)
+[browser] Uncaught TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src/app/(portal)/kts/tong-quan/page.tsx:3:1)
+    at module evaluation (src/app/(portal)/kts/tong-quan/page.tsx:147:1)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined,
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 500 in 39ms (next.js: 26ms, application-code: 14ms)
+[browser] Uncaught TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src/app/(portal)/kts/tong-quan/page.tsx:3:1)
+    at module evaluation (src/app/(portal)/kts/tong-quan/page.tsx:147:1)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined,
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+⨯ TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src\app\(portal)\kts\tong-quan\page.tsx:3:1)
+    at module evaluation (C:\Delta Force\kts-vinhlong\.next\dev\server\chunks\ssr\[root-of-the-server]__0uzj82m._.js:372:47)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined, {
+  page: '/kts/tong-quan'
+}
+ GET /kts/tong-quan 500 in 66ms (next.js: 49ms, application-code: 16ms)
+[browser] Uncaught TypeError: (0 , _react.createContext) is not a function
+    at module evaluation (src/app/(portal)/kts/tong-quan/page.tsx:3:1)
+    at module evaluation (src/app/(portal)/kts/tong-quan/page.tsx:147:1)
+  1 | import { prisma } from "@/lib/prisma";
+  2 | import { Card, Tag, Descriptions } from "antd";
+> 3 | import {
+    | ^
+  4 |   AimOutlined,
+  5 |   InfoCircleOutlined,
+  6 |   CheckCircleOutlined,

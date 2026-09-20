@@ -1,0 +1,6 @@
+
+The command exited with code 1.
+Output:
+{"kind":"result","envelope":{"ok":false,"commandId":"","error":{"code":"CLI.UNKNOWN_COMMAND","severity":"error","summary":"No command registered for `push`, did you mean `update`?","nextActions":[{"kind":"run-command","label":"List every command","command":"prisma --help"}]},"diagnostics":[],"nextActions":[{"kind":"run-command","label":"List every command","command":"prisma --help"}]},"commandId":"","timestamp":"2026-09-19T16:07:22.919Z"}
+Prisma agent skills are out of date (installed @prisma/composer 0.20.0, synced none). Run: prisma skills sync
+

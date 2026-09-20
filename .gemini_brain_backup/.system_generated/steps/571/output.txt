@@ -1,0 +1,89 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -132,14 +132,18 @@
+     const lopCfg = LOP_CONFIG[selectedItem.lop as 1|2|3|4];
+     
+     const rawMoTa = selectedItem.moTa || "";
+-    // Xử lý cả dấu xuống dòng thật (\n) và chuỗi chữ \n (\\n) trong CSDL
+-    const moTaLines = rawMoTa.split(/\\n|\n/);
+-    
+-    const tenMien = moTaLines.find(l => l.startsWith('Tên miền:'))?.replace('Tên miền:', '').trim();
+-    const duLieu = moTaLines.find(l => l.startsWith('Dữ liệu chia sẻ:'))?.replace('Dữ liệu chia sẻ:', '').trim();
+-    const phamVi = moTaLines.find(l => l.startsWith('Phạm vi:'))?.replace('Phạm vi:', '').trim();
+-    
+-    const plainMoTa = moTaLines.filter(l => !l.startsWith('Tên miền:') && !l.startsWith('Dữ liệu chia sẻ:') && !l.startsWith('Phạm vi:')).join('\n');
++    // Phân tích cú pháp các thuộc tính mở rộng (Key::Value)
++    const lines = rawMoTa.split(/\\n|\n/).filter(l => l.trim() !== "");
++    const attributes = lines.map(line => {
++      const parts = line.split("::");
++      if (parts.length >= 2) {
++        return { key: parts[0].trim(), value: parts.slice(1).join("::").trim() };
++      }
++      return { key: "Thông tin khác", value: line.trim() };
++    });
++
++    const tenMienAttr = attributes.find(a => a.key === "Tên miền");
++    const otherAttributes = attributes.filter(a => a.key !== "Tên miền" && a.value);
+ 
+     return (
+       <div className="mt-4">
+@@ -152,7 +152,7 @@
+           <Tag className="font-mono text-xs">{selectedItem.ma}</Tag>
+         </div>
+ 
+-        <Descriptions bordered column={1} size="small" labelStyle={{ width: '30%', backgroundColor: '#f8fafc', fontWeight: 600 }}>
++        <Descriptions bordered column={1} size="small" labelStyle={{ width: '35%', backgroundColor: '#f8fafc', fontWeight: 600 }}>
+           <Descriptions.Item label="Đơn vị chủ quản">
+             <div className="flex items-center gap-2">
+               <BankOutlined className="text-gray-400" />
+@@ -163,12 +163,12 @@
+             {selectedItem.namTrienKhai || "Chưa xác định"}
+           </Descriptions.Item>
+ 
+-          {tenMien && (
++          {tenMienAttr && (
+             <Descriptions.Item label="Tên miền truy cập">
+               <div className="flex items-center gap-2">
+                 <GlobalOutlined className="text-blue-500" />
+-                <a href={tenMien.startsWith('http') ? tenMien : `https://${tenMien}`} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
+-                  {tenMien}
++                <a href={tenMienAttr.value.startsWith('http') ? tenMienAttr.value : `https://${tenMienAttr.value}`} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
++                  {tenMienAttr.value}
+                 </a>
+               </div>
+             </Descriptions.Item>
+@@ -175,26 +175,9 @@
+ 
+-          {duLieu && (
+-            <Descriptions.Item label="Dữ liệu chia sẻ">
+-              <div className="flex gap-2">
+-                <DatabaseOutlined className="text-green-500 mt-1" />
+-                <span className="whitespace-pre-line">{duLieu}</span>
+-              </div>
+-            </Descriptions.Item>
+-          )}
+-
+-          {phamVi && (
+-            <Descriptions.Item label="Phạm vi chia sẻ">
+-              <span className="whitespace-pre-line">{phamVi}</span>
+-            </Descriptions.Item>
+-          )}
+-
+-          {(plainMoTa || (!tenMien && !duLieu && !phamVi)) && (
+-            <Descriptions.Item label="Mô tả / Thông tin khác">
+-              <div className="whitespace-pre-line text-gray-600">
+-                {plainMoTa || selectedItem.moTa || "Chưa có mô tả chi tiết."}
+-              </div>
+-            </Descriptions.Item>
+-          )}
++          {otherAttributes.map((attr, idx) => (
++            <Descriptions.Item key={idx} label={attr.key}>
++              <span className="whitespace-pre-wrap">{attr.value}</span>
++            </Descriptions.Item>
++          ))}
+         </Descriptions>
+       </div>
+     );
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

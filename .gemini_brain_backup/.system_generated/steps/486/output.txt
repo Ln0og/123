@@ -1,0 +1,15 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\layout.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -42,9 +42,6 @@
+             ))}
+           </nav>
+           <div className="flex gap-2">
+-            <Link href="/dashboard">
+-              <Button icon={<BarChartOutlined />} size="small">Dashboard</Button>
+-            </Link>
+             <Link href="/admin">
+               <Button type="primary" size="small" style={{ backgroundColor: "#003087" }}>
+                 Quản trị
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
