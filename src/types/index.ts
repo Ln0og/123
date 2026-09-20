@@ -33,6 +33,7 @@ export interface HeThongSoData {
   namTrienKhai: number | null;
   donViId: string | null;
   donVi?: DonViData;
+  nhiemVus?: NhiemVuData[];
   createdAt: string;
   updatedAt: string;
 }
@@ -54,6 +55,7 @@ export interface NhiemVuData {
   lop: number;
   phuongAnXuLy: string | null;
   ghiChu: string | null;
+  heThongSos?: HeThongSoData[];
   createdAt: string;
   updatedAt: string;
 }

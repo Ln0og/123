@@ -185,6 +185,22 @@ export default function HienTrangPage() {
               <span className="whitespace-pre-wrap">{attr.value}</span>
             </Descriptions.Item>
           ))}
+          
+          {selectedItem.nhiemVus && selectedItem.nhiemVus.length > 0 && (
+            <Descriptions.Item label="Nhiệm vụ lộ trình liên quan">
+              <div className="flex flex-col gap-2">
+                {selectedItem.nhiemVus.map((nv, idx) => (
+                  <div key={idx} className="bg-blue-50 p-2 rounded border border-blue-100">
+                    <div className="font-semibold text-blue-800 text-sm">{nv.ten}</div>
+                    <div className="text-xs text-blue-600 mt-1 flex justify-between">
+                      <span>Tiến độ: {nv.tienDo}%</span>
+                      <span>Hạn chót: {nv.thoiHan ? new Date(nv.thoiHan).toLocaleDateString("vi-VN") : "Chưa xác định"}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Descriptions.Item>
+          )}
         </Descriptions>
       </div>
     );

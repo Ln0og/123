@@ -62,6 +62,7 @@ model HeThongSo {
   anhXas       AnhXa[]
   ketNois      KetNoi[]  @relation("KetNoiNguon")
   ketNoisDich  KetNoi[]  @relation("KetNoiDich")
+  nhiemVus     NhiemVu[] @relation("HeThongNhiemVu")
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
@@ -104,6 +105,9 @@ model NhiemVu {
   lop            Int
   phuongAnXuLy   String?
   ghiChu         String?
+  
+  heThongSos     HeThongSo[] @relation("HeThongNhiemVu")
+
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 }

@@ -12,6 +12,7 @@ const { TextArea } = Input;
 export default function AdminNhiemVuPage() {
   const [data, setData] = useState<NhiemVuData[]>([]);
   const [donVis, setDonVis] = useState<DonViData[]>([]);
+  const [heThongSos, setHeThongSos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<NhiemVuData | null>(null);
@@ -22,9 +23,11 @@ export default function AdminNhiemVuPage() {
     Promise.all([
       fetch("/api/nhiem-vu").then(r => r.json()),
       fetch("/api/don-vi").then(r => r.json()),
-    ]).then(([nv, dv]) => {
+      fetch("/api/he-thong").then(r => r.json()),
+    ]).then(([nv, dv, hts]) => {
       setData(nv);
       setDonVis(dv);
+      setHeThongSos(hts);
       setLoading(false);
     });
   };
@@ -36,7 +39,11 @@ export default function AdminNhiemVuPage() {
 
   const openEdit = (record: NhiemVuData) => {
     setEditing(record);
-    form.setFieldsValue({ ...record, thoiHan: record.thoiHan ? dayjs(record.thoiHan) : null });
+    form.setFieldsValue({ 
+      ...record, 
+      thoiHan: record.thoiHan ? dayjs(record.thoiHan) : null,
+      heThongSoIds: record.heThongSos?.map(h => h.id) || []
+    });
     setModalOpen(true);
   };
 
@@ -136,6 +143,13 @@ export default function AdminNhiemVuPage() {
             <Form.Item label="Ưu tiên" name="uuTien"><Select><Select.Option value="cao">🔴 Cao</Select.Option><Select.Option value="trung-binh">🟡 Trung bình</Select.Option><Select.Option value="thap">🟢 Thấp</Select.Option></Select></Form.Item>
           </div>
           <Form.Item label="Tên nhiệm vụ" name="ten" rules={[{ required: true }]}><Input /></Form.Item>
+          
+          <Form.Item label="Hệ thống số chịu tác động (Liên kết với Hiện trạng)" name="heThongSoIds">
+            <Select mode="multiple" allowClear placeholder="Chọn các hệ thống bị tác động bởi nhiệm vụ này" optionFilterProp="children">
+              {heThongSos.map(ht => <Select.Option key={ht.id} value={ht.id}>[{ht.ma}] {ht.ten}</Select.Option>)}
+            </Select>
+          </Form.Item>
+          
           <Form.Item label="Mô tả" name="moTa"><TextArea rows={3} /></Form.Item>
           <div className="grid grid-cols-2 gap-4">
             <Form.Item label="Đơn vị chủ trì" name="donViChuTriId">

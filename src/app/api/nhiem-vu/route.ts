@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
     const list = await prisma.nhiemVu.findMany({
       where,
-      include: { donViChuTri: true },
+      include: { donViChuTri: true, heThongSos: true },
       orderBy: [{ uuTien: "asc" }, { thoiHan: "asc" }],
     });
     return NextResponse.json(list);
@@ -27,10 +27,18 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    if (body.thoiHan) body.thoiHan = new Date(body.thoiHan);
+    const { heThongSoIds, ...data } = body;
+    
+    if (data.thoiHan) data.thoiHan = new Date(data.thoiHan);
+    
     const item = await prisma.nhiemVu.create({
-      data: body,
-      include: { donViChuTri: true },
+      data: {
+        ...data,
+        heThongSos: heThongSoIds ? {
+          connect: heThongSoIds.map((id: string) => ({ id }))
+        } : undefined
+      },
+      include: { donViChuTri: true, heThongSos: true },
     });
     return NextResponse.json(item, { status: 201 });
   } catch (e) {

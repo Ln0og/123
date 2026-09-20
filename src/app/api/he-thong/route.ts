@@ -13,7 +13,7 @@ export async function GET(request: Request) {
 
     const list = await prisma.heThongSo.findMany({
       where,
-      include: { donVi: true },
+      include: { donVi: true, nhiemVus: true },
       orderBy: [{ lop: "asc" }, { ma: "asc" }],
     });
     return NextResponse.json(list);

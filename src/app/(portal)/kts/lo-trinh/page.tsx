@@ -43,6 +43,20 @@ export default function LoTrinhPage() {
               {PHUONG_AN_CONFIG[rec.phuongAnXuLy] || rec.phuongAnXuLy}
             </div>
           )}
+          {rec.heThongSos && rec.heThongSos.length > 0 && (
+            <div className="mt-2 text-xs border-t border-dashed pt-1">
+              <span className="text-gray-500 mr-1">Tác động đến Hệ thống:</span>
+              <div className="flex flex-wrap gap-1 mt-1">
+                {rec.heThongSos.map(ht => (
+                  <Tooltip key={ht.id} title={ht.ten}>
+                    <Tag className="m-0 text-[10px] cursor-pointer bg-blue-50 border-blue-200 text-blue-600">
+                      {ht.ma}
+                    </Tag>
+                  </Tooltip>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       ),
     },

@@ -8,11 +8,18 @@ export async function PUT(
   const { id } = await params;
   try {
     const body = await request.json();
-    if (body.thoiHan) body.thoiHan = new Date(body.thoiHan);
+    const { heThongSoIds, ...data } = body;
+    if (data.thoiHan) data.thoiHan = new Date(data.thoiHan);
+    
     const item = await prisma.nhiemVu.update({
       where: { id },
-      data: body,
-      include: { donViChuTri: true },
+      data: {
+        ...data,
+        heThongSos: heThongSoIds ? {
+          set: heThongSoIds.map((id: string) => ({ id }))
+        } : undefined
+      },
+      include: { donViChuTri: true, heThongSos: true },
     });
     return NextResponse.json(item);
   } catch {
