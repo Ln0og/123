@@ -42,9 +42,6 @@ export default function HomePage() {
             <Link href="/kts/hien-trang" className="text-white hover:text-blue-200 text-sm transition-colors">
               Hiện trạng
             </Link>
-            <Link href="/kts/muc-tieu" className="text-white hover:text-blue-200 text-sm transition-colors">
-              Mục tiêu
-            </Link>
             <Link href="/kts/lo-trinh" className="text-white hover:text-blue-200 text-sm transition-colors">
               Lộ trình
             </Link>

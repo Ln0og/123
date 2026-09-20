@@ -6,7 +6,6 @@ import { Button } from "antd";
 
 const navItems = [
   { href: "/kts/hien-trang", label: "Hiện trạng" },
-  { href: "/kts/muc-tieu", label: "Kiến trúc mục tiêu" },
   { href: "/kts/lo-trinh", label: "Lộ trình" },
 ];
 
