@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Button, Card, Statistic, Tag } from "antd";
+import { Button, Card, Tag } from "antd";
 import {
   DatabaseOutlined,
   ApartmentOutlined,
@@ -14,12 +14,7 @@ import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const router = useRouter();
-  const stats = [
-    { label: "Hệ thống số", value: 10, suffix: "hệ thống", color: "#1677ff" },
-    { label: "Nhiệm vụ lộ trình", value: 8, suffix: "nhiệm vụ", color: "#722ed1" },
-    { label: "Hoàn thành", value: 0, suffix: "%", color: "#52c41a" },
-    { label: "Đơn vị tham gia", value: 8, suffix: "đơn vị", color: "#fa8c16" },
-  ];
+
 
   const principles = [
     "Ưu tiên dùng chung, kế thừa tối đa",
@@ -91,24 +86,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="max-w-7xl mx-auto px-6 -mt-8 mb-8">
-        <div className="grid grid-cols-4 gap-4">
-          {stats.map((s) => (
-            <Card key={s.label} className="stat-card text-center shadow-md">
-              <Statistic
-                title={<span className="text-gray-600 text-sm">{s.label}</span>}
-                value={s.value}
-                suffix={<span className="text-gray-400 text-base">{s.suffix}</span>}
-                valueStyle={{ color: s.color, fontSize: 32, fontWeight: 700 }}
-              />
-            </Card>
-          ))}
-        </div>
-      </section>
+
 
       {/* 4 Lớp kiến trúc */}
-      <section className="max-w-7xl mx-auto px-6 mb-12">
+      <section className="max-w-7xl mx-auto px-6 pt-12 mb-12">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-gray-800">4 Lớp Kiến trúc Số</h2>
           <p className="text-gray-500 mt-2">
