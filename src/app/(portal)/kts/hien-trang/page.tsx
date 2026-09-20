@@ -51,7 +51,7 @@ export default function HienTrangPage() {
             </div>
             {item.moTa && (
               <div className="text-xs text-gray-400 mt-2 line-clamp-1 italic bg-gray-50 p-1 px-2 rounded border border-gray-100">
-                {item.moTa.replace(/\n/g, ' • ')}
+                {item.moTa.replace(/\\n|\n/g, ' • ')}
               </div>
             )}
           </div>
@@ -131,7 +131,10 @@ export default function HienTrangPage() {
     if (!selectedItem) return null;
     const lopCfg = LOP_CONFIG[selectedItem.lop as 1|2|3|4];
     
-    const moTaLines = selectedItem.moTa ? selectedItem.moTa.split('\n') : [];
+    const rawMoTa = selectedItem.moTa || "";
+    // Xử lý cả dấu xuống dòng thật (\n) và chuỗi chữ \n (\\n) trong CSDL
+    const moTaLines = rawMoTa.split(/\\n|\n/);
+    
     const tenMien = moTaLines.find(l => l.startsWith('Tên miền:'))?.replace('Tên miền:', '').trim();
     const duLieu = moTaLines.find(l => l.startsWith('Dữ liệu chia sẻ:'))?.replace('Dữ liệu chia sẻ:', '').trim();
     const phamVi = moTaLines.find(l => l.startsWith('Phạm vi:'))?.replace('Phạm vi:', '').trim();
