@@ -39,9 +39,6 @@ export default function HomePage() {
             </div>
           </div>
           <nav className="flex gap-4 items-center">
-            <Link href="/kts/tong-quan" className="text-white hover:text-blue-200 text-sm transition-colors">
-              Tổng quan
-            </Link>
             <Link href="/kts/hien-trang" className="text-white hover:text-blue-200 text-sm transition-colors">
               Hiện trạng
             </Link>
@@ -77,9 +74,9 @@ export default function HomePage() {
             thống nhất, kết nối liên thông với Khung Kiến trúc Tổng thể Quốc gia Số.
           </p>
           <div className="flex gap-4">
-            <Link href="/kts/tong-quan">
+            <Link href="/kts/hien-trang">
               <Button type="primary" size="large" className="bg-yellow-400 border-yellow-400 text-yellow-900 hover:bg-yellow-300 font-semibold">
-                Xem Khung KTS <RightOutlined />
+                Xem Hiện Trạng KTS <RightOutlined />
               </Button>
             </Link>
           </div>

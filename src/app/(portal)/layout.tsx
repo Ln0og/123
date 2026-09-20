@@ -5,7 +5,6 @@ import { ApartmentOutlined, BarChartOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 
 const navItems = [
-  { href: "/kts/tong-quan", label: "Tổng quan" },
   { href: "/kts/hien-trang", label: "Hiện trạng" },
   { href: "/kts/muc-tieu", label: "Kiến trúc mục tiêu" },
   { href: "/kts/lo-trinh", label: "Lộ trình" },
