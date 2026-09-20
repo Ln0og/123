@@ -1,22 +1,22 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ApartmentOutlined, BarChartOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-
-const navItems = [
-  { href: "/kts/hien-trang", label: "Hiện trạng" },
-  { href: "/kts/lo-trinh", label: "Lộ trình" },
-];
+import { usePathname, useRouter } from "next/navigation";
+import { ApartmentOutlined } from "@ant-design/icons";
+import { Button, Segmented } from "antd";
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  // Xác định view hiện tại để set giá trị cho Segmented
+  const currentValue = pathname.includes("/kts/lo-trinh") ? "lo-trinh" : "hien-trang";
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-800 rounded-lg flex items-center justify-center">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="w-8 h-8 bg-blue-800 rounded-lg flex items-center justify-center shadow-inner">
               <ApartmentOutlined className="text-white text-sm" />
             </div>
             <div className="leading-tight">
@@ -24,21 +24,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
               <div className="text-gray-400 text-xs">Khung Kiến trúc Số</div>
             </div>
           </Link>
-          <nav className="flex gap-1 flex-1">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
-                <span
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer inline-block ${
-                    pathname === item.href
-                      ? "bg-blue-800 text-white"
-                      : "text-gray-600 hover:bg-gray-100"
-                  }`}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            ))}
-          </nav>
+          
           <div className="flex gap-2">
             <Link href="/admin">
               <Button type="primary" size="small" style={{ backgroundColor: "#003087" }}>
@@ -48,7 +34,43 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
           </div>
         </div>
       </header>
-      <main className="max-w-7xl mx-auto px-6 py-8">{children}</main>
+      
+      <main className="max-w-7xl mx-auto px-6 py-8">
+        {/* Nút Segmented Control dạng Pill */}
+        <div className="flex justify-center mb-10">
+          <div className="p-1 bg-gray-200/50 rounded-lg shadow-inner">
+            <Segmented
+              size="large"
+              value={currentValue}
+              onChange={(val) => {
+                if (val === "hien-trang") router.push("/kts/hien-trang");
+                else router.push("/kts/lo-trinh");
+              }}
+              className="bg-transparent"
+              options={[
+                {
+                  label: (
+                    <div className="px-8 py-2 text-base font-semibold">
+                      📊 Đánh giá Hiện trạng
+                    </div>
+                  ),
+                  value: "hien-trang",
+                },
+                {
+                  label: (
+                    <div className="px-8 py-2 text-base font-semibold">
+                      🚀 Kế hoạch Lộ trình
+                    </div>
+                  ),
+                  value: "lo-trinh",
+                },
+              ]}
+            />
+          </div>
+        </div>
+        
+        {children}
+      </main>
     </div>
   );
 }

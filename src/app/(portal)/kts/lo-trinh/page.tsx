@@ -138,9 +138,9 @@ export default function LoTrinhPage() {
 
   return (
     <div>
-      <div className="page-header mb-6">
+      <div className="page-header mb-6 hidden">
         <h1 className="text-2xl font-bold">Lộ trình Nhiệm vụ Chuyển đổi Kiến trúc</h1>
-        <p className="text-blue-200 mt-1">
+        <p className="text-gray-500 mt-1">
           Theo dõi tiến độ các nhiệm vụ chuyển đổi kiến trúc số theo lộ trình 2026–2028
         </p>
       </div>

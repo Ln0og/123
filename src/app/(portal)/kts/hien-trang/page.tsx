@@ -221,9 +221,9 @@ export default function HienTrangPage() {
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
-      <div className="page-header">
+      <div className="page-header hidden">
         <h1 className="text-2xl font-bold">Đánh giá Hiện trạng Kiến trúc Số</h1>
-        <p className="text-blue-200 mt-1">Kiểm kê và đánh giá các thành phần số hiện có theo 4 lớp kiến trúc</p>
+        <p className="text-gray-500 mt-1">Kiểm kê và đánh giá các thành phần số hiện có theo 4 lớp kiến trúc</p>
       </div>
 
       <div className="grid grid-cols-4 gap-4 mb-6">
