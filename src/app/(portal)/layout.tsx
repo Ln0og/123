@@ -42,9 +42,6 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             ))}
           </nav>
           <div className="flex gap-2">
-            <Link href="/dashboard">
-              <Button icon={<BarChartOutlined />} size="small">Dashboard</Button>
-            </Link>
             <Link href="/admin">
               <Button type="primary" size="small" style={{ backgroundColor: "#003087" }}>
                 Quản trị

@@ -56,11 +56,6 @@ export default function HomePage() {
             <Link href="/kts/lo-trinh" className="text-white hover:text-blue-200 text-sm transition-colors">
               Lộ trình
             </Link>
-            <Link href="/dashboard">
-              <Button type="default" size="small" className="border-white text-white hover:bg-white hover:text-blue-800">
-                Dashboard
-              </Button>
-            </Link>
             <Link href="/admin">
               <Button type="primary" size="small" danger>
                 Quản trị
@@ -90,11 +85,6 @@ export default function HomePage() {
             <Link href="/kts/tong-quan">
               <Button type="primary" size="large" className="bg-yellow-400 border-yellow-400 text-yellow-900 hover:bg-yellow-300 font-semibold">
                 Xem Khung KTS <RightOutlined />
-              </Button>
-            </Link>
-            <Link href="/dashboard">
-              <Button size="large" className="border-white text-white hover:bg-white hover:text-blue-800">
-                <BarChartOutlined /> Dashboard lãnh đạo
               </Button>
             </Link>
           </div>
