@@ -329,7 +329,7 @@ export default function LoTrinhPage() {
             STT: #{sttNumber}
           </span>
           <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-md border ${lopCfg.badgeClass}`}>
-            {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.title}
+            {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.shortLabel}
           </span>
           <span className={`inline-flex items-center text-xs font-bold px-3 py-1 rounded-md border ${UU_TIEN_CONFIG[selectedTask.uuTien]?.badgeClass || "bg-gray-100 text-gray-800 border-gray-300 font-bold"}`}>
             Ưu tiên: {UU_TIEN_CONFIG[selectedTask.uuTien]?.label || selectedTask.uuTien}
@@ -579,7 +579,7 @@ export default function LoTrinhPage() {
                         outerRadius={85}
                         paddingAngle={5}
                         dataKey="value"
-                        label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                        label={({ name, percent }: { name?: string; percent?: number }) => `${name || ""} (${((percent || 0) * 100).toFixed(0)}%)`}
                       >
                         {priorityChartData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
@@ -606,7 +606,7 @@ export default function LoTrinhPage() {
                         outerRadius={85}
                         paddingAngle={5}
                         dataKey="value"
-                        label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                        label={({ name, percent }: { name?: string; percent?: number }) => `${name || ""} (${((percent || 0) * 100).toFixed(0)}%)`}
                       >
                         {solutionChartData.map((entry, index) => (
                           <Cell key={`cell-sol-${index}`} fill={entry.color} />

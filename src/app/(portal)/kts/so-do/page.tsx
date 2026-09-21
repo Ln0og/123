@@ -1,7 +1,21 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { Tag, Modal, Button, Spin, Tooltip } from "antd";
+import {
+  Tag,
+  Modal,
+  Button,
+  Spin,
+  Tooltip,
+  Card,
+  Input,
+  Select,
+  Table,
+  Progress,
+  Tabs,
+  Badge,
+  Descriptions,
+} from "antd";
 import {
   ApartmentOutlined,
   DatabaseOutlined,
@@ -27,9 +41,26 @@ import {
   CompassOutlined,
   InfoCircleOutlined,
   CheckCircleOutlined,
+  WarningOutlined,
+  SearchOutlined,
+  TableOutlined,
+  CalendarOutlined,
+  ClockCircleOutlined,
+  FilterOutlined,
 } from "@ant-design/icons";
+import type { ColumnsType } from "antd/es/table";
 import { HeThongSoData, NhiemVuData } from "@/types";
-import { TRANG_THAI_CONFIG, PHUONG_AN_CONFIG } from "@/lib/utils";
+import {
+  LOP_CONFIG,
+  TRANG_THAI_CONFIG,
+  PHUONG_AN_CONFIG,
+  UU_TIEN_CONFIG,
+  formatDate,
+  isOverdue,
+  getDaysRemaining,
+} from "@/lib/utils";
+
+const { Search } = Input;
 
 interface FrameworkBlock {
   id: string;
@@ -50,7 +81,24 @@ export default function SoDoKhungKTSPage() {
   const [heThongs, setHeThongs] = useState<HeThongSoData[]>([]);
   const [nhiemVus, setNhiemVus] = useState<NhiemVuData[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Modals
   const [selectedBlock, setSelectedBlock] = useState<FrameworkBlock | null>(null);
+  const [selectedHT, setSelectedHT] = useState<HeThongSoData | null>(null);
+
+  // Data Explorer Tab state
+  const [activeTab, setActiveTab] = useState("hien-trang");
+
+  // Filters for Hiện trạng
+  const [searchHT, setSearchHT] = useState("");
+  const [selectedLopHT, setSelectedLopHT] = useState("all");
+  const [filterDonViHT, setFilterDonViHT] = useState("");
+  const [filterTrangThaiHT, setFilterTrangThaiHT] = useState("");
+
+  // Filters for Lộ trình
+  const [searchNV, setSearchNV] = useState("");
+  const [selectedLopNV, setSelectedLopNV] = useState("all");
+  const [filterTrangThaiNV, setFilterTrangThaiNV] = useState("");
 
   useEffect(() => {
     Promise.all([
@@ -474,10 +522,256 @@ export default function SoDoKhungKTSPage() {
     );
   };
 
+  // Department list for Hiện trạng filter
+  const donViOptions = useMemo(() => {
+    const set = new Set<string>();
+    heThongs.forEach((d) => {
+      const name = d.donVi?.ten || d.chuQuan;
+      if (name) set.add(name.trim());
+    });
+    return Array.from(set).sort();
+  }, [heThongs]);
+
+  // Filtered dataset for Hiện trạng table
+  const filteredHT = useMemo(() => {
+    return heThongs.filter((item) => {
+      if (selectedLopHT !== "all" && item.lop !== parseInt(selectedLopHT)) return false;
+      if (filterTrangThaiHT && item.trangThai !== filterTrangThaiHT) return false;
+      if (filterDonViHT) {
+        const dvName = item.donVi?.ten || item.chuQuan || "";
+        if (dvName.trim() !== filterDonViHT.trim()) return false;
+      }
+      if (searchHT.trim()) {
+        const q = searchHT.toLowerCase().trim();
+        const mTen = item.ten.toLowerCase().includes(q);
+        const mMoTa = item.moTa ? item.moTa.toLowerCase().includes(q) : false;
+        const mDonVi = item.donVi?.ten ? item.donVi.ten.toLowerCase().includes(q) : false;
+        const mChuQuan = item.chuQuan ? item.chuQuan.toLowerCase().includes(q) : false;
+        return mTen || mMoTa || mDonVi || mChuQuan;
+      }
+      return true;
+    });
+  }, [heThongs, selectedLopHT, filterTrangThaiHT, filterDonViHT, searchHT]);
+
+  // Filtered dataset for Lộ trình table
+  const filteredNV = useMemo(() => {
+    return nhiemVus.filter((item) => {
+      if (selectedLopNV !== "all" && item.lop !== parseInt(selectedLopNV)) return false;
+      if (filterTrangThaiNV && item.trangThai !== filterTrangThaiNV) return false;
+      if (searchNV.trim()) {
+        const q = searchNV.toLowerCase().trim();
+        const mTen = item.ten.toLowerCase().includes(q);
+        const mMoTa = item.moTa ? item.moTa.toLowerCase().includes(q) : false;
+        const mDonVi = item.donViChuTri?.ten ? item.donViChuTri.ten.toLowerCase().includes(q) : false;
+        return mTen || mMoTa || mDonVi;
+      }
+      return true;
+    });
+  }, [nhiemVus, selectedLopNV, filterTrangThaiNV, searchNV]);
+
+  // Columns for Hiện trạng Table
+  const htTableColumns: ColumnsType<HeThongSoData> = [
+    {
+      title: "STT",
+      key: "stt",
+      width: 65,
+      align: "center",
+      render: (_, __, index) => (
+        <span className="font-bold text-gray-500 text-xs">{index + 1}</span>
+      ),
+    },
+    {
+      title: "Tên hệ thống số / CSDL / Phần mềm",
+      dataIndex: "ten",
+      render: (ten: string, rec: HeThongSoData) => (
+        <div className="group cursor-pointer">
+          <div className="font-semibold text-slate-800 group-hover:text-blue-600 transition-colors text-sm">
+            {ten}
+          </div>
+          {rec.moTa && (
+            <div className="text-xs text-slate-400 mt-0.5 line-clamp-1 italic">
+              {rec.moTa.replace(/\\n|\n/g, " • ").replace(/::/g, ": ")}
+            </div>
+          )}
+          {rec.nhiemVus && rec.nhiemVus.length > 0 && (
+            <div className="mt-1 flex items-center gap-1">
+              <span className="text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                ⚡ Có {rec.nhiemVus.length} nhiệm vụ nâng cấp
+              </span>
+            </div>
+          )}
+        </div>
+      ),
+    },
+    {
+      title: "Lớp",
+      dataIndex: "lop",
+      width: 130,
+      render: (lop: number) => {
+        const cfg = LOP_CONFIG[lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
+        return (
+          <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
+            {cfg.icon} Lớp {lop}
+          </span>
+        );
+      },
+    },
+    {
+      title: "Đơn vị chủ quản",
+      dataIndex: "chuQuan",
+      width: 220,
+      render: (_: string, rec: HeThongSoData) => (
+        <div className="text-xs text-slate-700">
+          <div className="font-medium">{rec.donVi?.ten || rec.chuQuan || "Chưa xác định"}</div>
+          {rec.namTrienKhai && (
+            <div className="text-slate-400 text-[11px]">Năm khai thác: {rec.namTrienKhai}</div>
+          )}
+        </div>
+      ),
+    },
+    {
+      title: "Trạng thái",
+      dataIndex: "trangThai",
+      width: 150,
+      render: (trangThai: string) => {
+        const cfg = TRANG_THAI_CONFIG[trangThai] || { label: trangThai, antdColor: "default", badgeClass: "" };
+        return (
+          <span className={`inline-flex items-center text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
+            {cfg.label}
+          </span>
+        );
+      },
+    },
+    {
+      title: "Thao tác",
+      key: "action",
+      width: 100,
+      align: "center",
+      render: (_, record) => (
+        <Button
+          size="small"
+          type="link"
+          className="text-blue-600 font-bold hover:underline p-0"
+          onClick={() => setSelectedHT(record)}
+        >
+          Chi tiết →
+        </Button>
+      ),
+    },
+  ];
+
+  // Columns for Lộ trình Table
+  const nvTableColumns: ColumnsType<NhiemVuData> = [
+    {
+      title: "STT",
+      key: "stt",
+      width: 65,
+      align: "center",
+      render: (_, __, index) => (
+        <span className="font-bold text-gray-500 text-xs">{index + 1}</span>
+      ),
+    },
+    {
+      title: "Nhiệm vụ & Đề án Chuyển đổi",
+      dataIndex: "ten",
+      render: (ten, rec) => (
+        <div>
+          <div className="font-bold text-slate-800 text-sm">{ten}</div>
+          {rec.moTa && <div className="text-xs text-slate-400 mt-0.5 line-clamp-2">{rec.moTa}</div>}
+          {rec.phuongAnXuLy && (
+            <div className="mt-1.5 flex items-center gap-1.5">
+              <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
+                {PHUONG_AN_CONFIG[rec.phuongAnXuLy] || rec.phuongAnXuLy}
+              </span>
+            </div>
+          )}
+          {rec.heThongSos && rec.heThongSos.length > 0 && (
+            <div className="mt-2 text-xs border-t border-dashed pt-1.5">
+              <span className="text-slate-500 mr-1.5 font-medium">Tác động đến Hệ thống:</span>
+              <div className="flex flex-wrap gap-1 mt-1">
+                {rec.heThongSos.map((ht) => (
+                  <Tag key={ht.id} className="m-0 text-[11px] bg-slate-100 text-slate-700 border-slate-200 font-medium">
+                    {ht.ten}
+                  </Tag>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      ),
+    },
+    {
+      title: "Lớp",
+      dataIndex: "lop",
+      width: 120,
+      render: (lop) => {
+        const cfg = LOP_CONFIG[lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
+        return (
+          <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
+            {cfg.icon} Lớp {lop}
+          </span>
+        );
+      },
+    },
+    {
+      title: "Đơn vị chủ trì",
+      dataIndex: ["donViChuTri", "ten"],
+      width: 180,
+      render: (_, rec) => <span className="text-xs font-medium text-slate-700">{rec.donViChuTri?.ten || "UBND tỉnh"}</span>,
+    },
+    {
+      title: "Ưu tiên",
+      dataIndex: "uuTien",
+      width: 110,
+      render: (uuTien) => {
+        const cfg = UU_TIEN_CONFIG[uuTien] || { label: uuTien, badgeClass: "bg-gray-100 text-gray-800" };
+        return <span className={`text-xs font-bold px-2 py-0.5 rounded border ${cfg.badgeClass}`}>{cfg.label}</span>;
+      },
+    },
+    {
+      title: "Thời hạn",
+      dataIndex: "thoiHan",
+      width: 120,
+      render: (thoiHan, rec) => {
+        if (!thoiHan) return <span className="text-slate-400">—</span>;
+        const overdue = isOverdue(thoiHan) && rec.trangThai !== "hoan-thanh";
+        const days = getDaysRemaining(thoiHan);
+        return (
+          <Tooltip title={days !== null ? (overdue ? `Trễ ${Math.abs(days)} ngày` : `Còn ${days} ngày`) : ""}>
+            <span className={`text-xs ${overdue ? "text-red-500 font-bold" : "text-slate-600 font-medium"}`}>
+              {overdue && <WarningOutlined className="mr-1" />}
+              {formatDate(thoiHan)}
+            </span>
+          </Tooltip>
+        );
+      },
+    },
+    {
+      title: "Tiến độ",
+      dataIndex: "tienDo",
+      width: 160,
+      render: (tienDo, rec) => (
+        <div>
+          <Progress
+            percent={tienDo}
+            size="small"
+            status={rec.trangThai === "tre-han" ? "exception" : rec.trangThai === "hoan-thanh" ? "success" : "active"}
+            strokeColor={
+              rec.trangThai === "hoan-thanh" ? "#16a34a" : rec.trangThai === "tre-han" ? "#dc2626" : tienDo > 50 ? "#2563eb" : "#f59e0b"
+            }
+          />
+          <div className="text-[11px] text-slate-400 mt-0.5 font-medium">
+            {TRANG_THAI_CONFIG[rec.trangThai]?.label || rec.trangThai}
+          </div>
+        </div>
+      ),
+    },
+  ];
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
-        <Spin size="large" tip="Đang tải sơ đồ kiến trúc..." />
+        <Spin size="large" tip="Đang tải khung kiến trúc số Vĩnh Long..." />
       </div>
     );
   }
@@ -486,10 +780,10 @@ export default function SoDoKhungKTSPage() {
   const totalSystems = heThongs.length;
 
   return (
-    <div className="w-full space-y-5 pb-16">
+    <div className="w-full space-y-8 pb-20">
       
       {/* ========================================================================= */}
-      {/* HEADER HERO BAR (Sleek Executive Tech Banner) */}
+      {/* TẦNG 1: HEADER HERO BAR (Sleek Executive Tech Banner) */}
       {/* ========================================================================= */}
       <div className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-blue-950 text-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-700/50">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
@@ -505,43 +799,35 @@ export default function SoDoKhungKTSPage() {
             </div>
             
             <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white m-0">
-              Sơ Đồ Phân Tầng Kiến Trúc Tổng Thể
+              Trung Tâm Quản Trị Kiến Trúc Số Tổng Thể
             </h1>
             <p className="text-xs md:text-sm text-slate-300/90 mt-1 max-w-2xl leading-relaxed">
-              Mô hình 4 lớp kiến trúc chuẩn quốc gia kết hợp 4 trụ cột xuyên suốt, định hướng chuẩn hóa kết nối, chia sẻ dữ liệu và chuyển đổi số toàn diện tỉnh Vĩnh Long.
+              Mô hình 4 tầng lớp kiến trúc kết hợp 4 trụ cột xuyên suốt, tích hợp đồng bộ giữa <b>Kiểm kê Hiện trạng 389+ CSDL/Hệ thống</b> và <b>Kế hoạch Lộ trình 9+ Đề án</b> chuyển đổi số tỉnh Vĩnh Long.
             </p>
           </div>
 
-          {/* Metric Stats + Quick Actions */}
+          {/* Metric Stats */}
           <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <div className="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/10 text-center shadow-inner">
-              <div className="text-xs text-slate-300 font-medium">Hệ thống số</div>
-              <div className="text-lg font-black text-emerald-400 leading-tight">{totalSystems}</div>
+            <div className="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10 text-center shadow-inner">
+              <div className="text-xs text-slate-300 font-medium">Hệ thống số & CSDL</div>
+              <div className="text-2xl font-black text-emerald-400 leading-tight">{totalSystems}</div>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/10 text-center shadow-inner">
+            <div className="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10 text-center shadow-inner">
               <div className="text-xs text-slate-300 font-medium">Nhiệm vụ lộ trình</div>
-              <div className="text-lg font-black text-amber-400 leading-tight">{totalTasks}</div>
+              <div className="text-2xl font-black text-amber-400 leading-tight">{totalTasks}</div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 ml-1">
-              <Link href="/kts/hien-trang">
-                <Button size="middle" className="bg-white/15 border-white/20 text-white hover:bg-white/25 font-bold rounded-xl h-10 px-4">
-                  Xem Hiện Trạng
-                </Button>
-              </Link>
-              <Link href="/kts/lo-trinh">
-                <Button type="primary" size="middle" className="bg-blue-600 hover:bg-blue-500 font-bold rounded-xl h-10 px-4 shadow-md">
-                  Xem Lộ Trình
-                </Button>
-              </Link>
+            <div className="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10 text-center shadow-inner">
+              <div className="text-xs text-slate-300 font-medium">Tầng lớp chuẩn hóa</div>
+              <div className="text-2xl font-black text-blue-400 leading-tight">4 Lớp</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* GUIDE & LEGEND BAR (Bảng Chú Thích & Hướng Dẫn Sử Dụng Sơ Đồ) */}
+      {/* GUIDE & LEGEND BAR */}
       {/* ========================================================================= */}
       <div className="bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 p-4 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2 flex-wrap">
@@ -549,12 +835,12 @@ export default function SoDoKhungKTSPage() {
             <InfoCircleOutlined className="text-blue-600 text-sm" /> Chú thích & Hướng dẫn:
           </span>
           <span className="text-slate-600">
-            Nhấp chuột vào bất kỳ <b>Khối chức năng</b> để tra cứu chi tiết danh mục phần mềm & nhiệm vụ lộ trình.
+            Nhấp chuột vào bất kỳ <b>Khối chức năng</b> trên sơ đồ để xem ngay danh mục phần mềm và nhiệm vụ nâng cấp.
           </span>
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-slate-400 font-medium">Ký hiệu nhiệm vụ:</span>
+          <span className="text-slate-400 font-medium">Ký hiệu phương án:</span>
           <span className="inline-flex items-center gap-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
             <ThunderboltOutlined className="text-[9px]" /> Nâng cấp
           </span>
@@ -571,7 +857,7 @@ export default function SoDoKhungKTSPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* 3-COLUMN MASTER BLUEPRINT (Left Pillar - 4 Layers - Right Pillar) */}
+      {/* TẦNG 2: 3-COLUMN MASTER BLUEPRINT (SƠ ĐỒ PHÂN TẦNG KIẾN TRÚC TỔNG THỂ) */}
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-stretch">
         
@@ -806,7 +1092,192 @@ export default function SoDoKhungKTSPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* DETAIL MODAL WHEN CLICKING ANY BLOCK */}
+      {/* TẦNG 3: KHU VỰC BẢNG DỮ LIỆU TRA CỨU CHI TIẾT (UNIFIED DATA EXPLORER) */}
+      {/* ========================================================================= */}
+      <div className="bg-white rounded-3xl border border-slate-200/90 p-6 shadow-sm space-y-6">
+        
+        {/* Header of Data Explorer */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-blue-600"></span>
+              <h2 className="text-xl font-black text-slate-900 m-0">
+                Tra Cứu Dữ Liệu Chi Tiết Kiến Trúc Số
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 mt-1 mb-0">
+              Kiểm kê toàn bộ danh mục tài sản số hiện có và theo dõi tiến độ các nhiệm vụ đề án chuyển đổi số
+            </p>
+          </div>
+
+          {/* Master Tabs Switcher */}
+          <div className="bg-slate-100 p-1.5 rounded-2xl border border-slate-200 flex items-center gap-1">
+            <button
+              onClick={() => setActiveTab("hien-trang")}
+              className={`px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                activeTab === "hien-trang"
+                  ? "bg-white text-blue-900 shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              <DatabaseOutlined className={activeTab === "hien-trang" ? "text-blue-600" : ""} />
+              <span>Kiểm kê Hiện trạng ({totalSystems})</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab("lo-trinh")}
+              className={`px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                activeTab === "lo-trinh"
+                  ? "bg-white text-blue-900 shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              <ThunderboltOutlined className={activeTab === "lo-trinh" ? "text-amber-500" : ""} />
+              <span>Tiến độ Lộ trình ({totalTasks})</span>
+            </button>
+          </div>
+        </div>
+
+        {/* TAB 1: HIỆN TRẠNG (389+ CSDL & PHẦN MỀM) */}
+        {activeTab === "hien-trang" && (
+          <div className="space-y-4">
+            {/* Filter Toolbar */}
+            <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/80 flex flex-wrap gap-3 items-center justify-between">
+              <div className="flex flex-wrap gap-3 items-center flex-1">
+                <Search
+                  placeholder="Tìm theo tên phần mềm, CSDL, mô tả..."
+                  allowClear
+                  value={searchHT}
+                  onChange={(e) => setSearchHT(e.target.value)}
+                  style={{ width: 280 }}
+                  prefix={<SearchOutlined className="text-gray-400" />}
+                />
+
+                <Select
+                  placeholder="Tất cả lớp kiến trúc"
+                  value={selectedLopHT}
+                  onChange={(val) => setSelectedLopHT(val)}
+                  style={{ width: 180 }}
+                >
+                  <Select.Option value="all">🌐 Tất cả các lớp ({totalSystems})</Select.Option>
+                  {[1, 2, 3, 4].map((l) => (
+                    <Select.Option key={l} value={String(l)}>
+                      {LOP_CONFIG[l as 1 | 2 | 3 | 4].icon} {LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel}
+                    </Select.Option>
+                  ))}
+                </Select>
+
+                <Select
+                  placeholder="Tất cả đơn vị"
+                  allowClear
+                  value={filterDonViHT || undefined}
+                  onChange={(val) => setFilterDonViHT(val || "")}
+                  style={{ width: 220 }}
+                  showSearch
+                >
+                  {donViOptions.map((dv) => (
+                    <Select.Option key={dv} value={dv}>{dv}</Select.Option>
+                  ))}
+                </Select>
+
+                <Select
+                  placeholder="Tất cả trạng thái"
+                  allowClear
+                  value={filterTrangThaiHT || undefined}
+                  onChange={(val) => setFilterTrangThaiHT(val || "")}
+                  style={{ width: 170 }}
+                >
+                  {Object.entries(TRANG_THAI_CONFIG).map(([k, v]) => (
+                    <Select.Option key={k} value={k}>{v.label}</Select.Option>
+                  ))}
+                </Select>
+              </div>
+
+              <div className="text-xs text-slate-500 font-medium">
+                Tìm thấy <span className="font-bold text-blue-600">{filteredHT.length}</span> / {totalSystems} hệ thống
+              </div>
+            </div>
+
+            {/* Table */}
+            <Table
+              columns={htTableColumns}
+              dataSource={filteredHT}
+              rowKey="id"
+              pagination={{ pageSize: 12, showQuickJumper: true }}
+              size="middle"
+              className="border rounded-2xl overflow-hidden"
+              onRow={(record) => ({
+                onClick: () => setSelectedHT(record),
+                className: "cursor-pointer hover:bg-blue-50/40 transition-colors",
+              })}
+            />
+          </div>
+        )}
+
+        {/* TAB 2: LỘ TRÌNH (9+ NHIỆM VỤ & ĐỀ ÁN) */}
+        {activeTab === "lo-trinh" && (
+          <div className="space-y-4">
+            {/* Filter Toolbar */}
+            <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/80 flex flex-wrap gap-3 items-center justify-between">
+              <div className="flex flex-wrap gap-3 items-center flex-1">
+                <Search
+                  placeholder="Tìm theo tên nhiệm vụ, đề án..."
+                  allowClear
+                  value={searchNV}
+                  onChange={(e) => setSearchNV(e.target.value)}
+                  style={{ width: 300 }}
+                  prefix={<SearchOutlined className="text-gray-400" />}
+                />
+
+                <Select
+                  placeholder="Tất cả lớp kiến trúc"
+                  value={selectedLopNV}
+                  onChange={(val) => setSelectedLopNV(val)}
+                  style={{ width: 180 }}
+                >
+                  <Select.Option value="all">🌐 Tất cả các lớp ({totalTasks})</Select.Option>
+                  {[1, 2, 3, 4].map((l) => (
+                    <Select.Option key={l} value={String(l)}>
+                      {LOP_CONFIG[l as 1 | 2 | 3 | 4].icon} {LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel}
+                    </Select.Option>
+                  ))}
+                </Select>
+
+                <Select
+                  placeholder="Tất cả trạng thái"
+                  allowClear
+                  value={filterTrangThaiNV || undefined}
+                  onChange={(val) => setFilterTrangThaiNV(val || "")}
+                  style={{ width: 180 }}
+                >
+                  {Object.entries(TRANG_THAI_CONFIG).map(([k, v]) => (
+                    <Select.Option key={k} value={k}>{v.label}</Select.Option>
+                  ))}
+                </Select>
+              </div>
+
+              <div className="text-xs text-slate-500 font-medium">
+                Tìm thấy <span className="font-bold text-blue-600">{filteredNV.length}</span> / {totalTasks} nhiệm vụ
+              </div>
+            </div>
+
+            {/* Table */}
+            <Table
+              columns={nvTableColumns}
+              dataSource={filteredNV}
+              rowKey="id"
+              pagination={{ pageSize: 10, showQuickJumper: true }}
+              size="middle"
+              className="border rounded-2xl overflow-hidden"
+              rowClassName={(record) => (record.trangThai === "hoan-thanh" ? "bg-green-50/30" : isOverdue(record.thoiHan) && record.trangThai !== "hoan-thanh" ? "bg-red-50/30" : "")}
+            />
+          </div>
+        )}
+
+      </div>
+
+      {/* ========================================================================= */}
+      {/* DETAIL MODAL WHEN CLICKING ANY BLUEPRINT BLOCK */}
       {/* ========================================================================= */}
       <Modal
         title={
@@ -911,6 +1382,87 @@ export default function SoDoKhungKTSPage() {
           </div>
         )}
       </Modal>
+
+      {/* ========================================================================= */}
+      {/* DETAIL MODAL WHEN CLICKING ANY SYSTEM IN TABLE */}
+      {/* ========================================================================= */}
+      <Modal
+        title={
+          <div className="flex items-center gap-2 text-base font-bold text-slate-900 pr-6 border-b pb-2.5">
+            <DatabaseOutlined className="text-blue-600" />
+            <span>Thông tin chi tiết Hệ thống số / CSDL</span>
+          </div>
+        }
+        open={!!selectedHT}
+        onCancel={() => setSelectedHT(null)}
+        footer={[
+          <Button key="close" type="primary" onClick={() => setSelectedHT(null)} className="rounded-xl font-bold px-6">
+            Đóng
+          </Button>,
+        ]}
+        width={750}
+        destroyOnClose
+      >
+        {selectedHT && (
+          <div className="mt-3 space-y-4">
+            <h3 className="text-lg font-bold text-blue-900 m-0">{selectedHT.ten}</h3>
+            
+            <div className="flex gap-2 flex-wrap items-center">
+              <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${LOP_CONFIG[selectedHT.lop as 1|2|3|4]?.badgeClass}`}>
+                {LOP_CONFIG[selectedHT.lop as 1|2|3|4]?.icon} Lớp {selectedHT.lop}: {LOP_CONFIG[selectedHT.lop as 1|2|3|4]?.shortLabel}
+              </span>
+              <span className={`inline-flex items-center text-xs font-bold px-2.5 py-1 rounded-md border ${TRANG_THAI_CONFIG[selectedHT.trangThai]?.badgeClass}`}>
+                {TRANG_THAI_CONFIG[selectedHT.trangThai]?.label || selectedHT.trangThai}
+              </span>
+            </div>
+
+            <Descriptions bordered column={1} size="small" labelStyle={{ width: "32%", backgroundColor: "#f8fafc", fontWeight: 600 }}>
+              <Descriptions.Item label="Đơn vị chủ quản">
+                <div className="flex items-center gap-2 font-medium text-slate-800">
+                  <BankOutlined className="text-blue-500" />
+                  {selectedHT.donVi?.ten || selectedHT.chuQuan || "Chưa xác định"}
+                </div>
+              </Descriptions.Item>
+
+              <Descriptions.Item label="Năm triển khai">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <CalendarOutlined className="text-slate-400" />
+                  <span>{selectedHT.namTrienKhai ? `Năm ${selectedHT.namTrienKhai}` : "Chưa xác định"}</span>
+                </div>
+              </Descriptions.Item>
+
+              {/* Parsed description Key::Value pairs */}
+              {selectedHT.moTa && selectedHT.moTa.split(/\\n/).filter(l => l.trim()).map((line, idx) => {
+                const parts = line.split("::");
+                const k = parts.length >= 2 ? parts[0].trim() : "Thông tin";
+                const v = parts.length >= 2 ? parts.slice(1).join("::").trim() : line.trim();
+                return (
+                  <Descriptions.Item key={idx} label={k}>
+                    <span className="whitespace-pre-wrap">{v}</span>
+                  </Descriptions.Item>
+                );
+              })}
+
+              {selectedHT.nhiemVus && selectedHT.nhiemVus.length > 0 && (
+                <Descriptions.Item label="Nhiệm vụ lộ trình liên quan">
+                  <div className="space-y-2">
+                    {selectedHT.nhiemVus.map((nv, idx) => (
+                      <div key={idx} className="bg-blue-50 p-2.5 rounded-xl border border-blue-200">
+                        <div className="font-bold text-blue-900 text-xs">{nv.ten}</div>
+                        <div className="text-[11px] text-blue-700 mt-1 flex justify-between">
+                          <span>Tiến độ: <b>{nv.tienDo}%</b></span>
+                          <span>Hạn chót: <b>{nv.thoiHan ? new Date(nv.thoiHan).toLocaleDateString("vi-VN") : "Chưa rõ"}</b></span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Descriptions.Item>
+              )}
+            </Descriptions>
+          </div>
+        )}
+      </Modal>
+
     </div>
   );
 }

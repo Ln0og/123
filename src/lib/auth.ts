@@ -41,17 +41,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as { role: string }).role;
-        token.donViId = (user as { donViId: string }).donViId;
-        token.donViTen = (user as { donViTen: string }).donViTen;
+        token.role = (user as unknown as { role: string }).role;
+        token.donViId = (user as unknown as { donViId: string }).donViId;
+        token.donViTen = (user as unknown as { donViTen: string }).donViTen;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        (session.user as { role: string }).role = token.role as string;
-        (session.user as { donViId: string }).donViId = token.donViId as string;
-        (session.user as { donViTen: string }).donViTen = token.donViTen as string;
+        (session.user as unknown as { role: string }).role = token.role as string;
+        (session.user as unknown as { donViId: string }).donViId = token.donViId as string;
+        (session.user as unknown as { donViTen: string }).donViTen = token.donViTen as string;
       }
       return session;
     },

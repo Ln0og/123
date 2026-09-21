@@ -531,7 +531,7 @@ export default function HienTrangPage() {
                         outerRadius={90}
                         paddingAngle={4}
                         dataKey="value"
-                        label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+                        label={({ percent }: { percent?: number }) => `${((percent || 0) * 100).toFixed(0)}%`}
                       >
                         {layerChartData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
@@ -564,7 +564,7 @@ export default function HienTrangPage() {
           {/* Additional Trends & Quick Action */}
           <Card 
             title={<span className="font-bold text-gray-800">📅 Phân Bố Theo Năm Đưa Vào Khai Thác</span>}
-            extra={<Button type="link" onClick={() => setViewMode("cards")}>Xem chi tiết từng hệ thống →</Button>}
+            extra={<Button type="link" onClick={() => setViewMode("list")}>Xem chi tiết từng hệ thống →</Button>}
             className="shadow-xs"
           >
             <div className="h-56 w-full">
