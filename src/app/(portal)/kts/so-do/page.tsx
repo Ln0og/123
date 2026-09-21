@@ -31,7 +31,7 @@ import {
   BarChartOutlined,
 } from "@ant-design/icons";
 import { HeThongSoData, NhiemVuData } from "@/types";
-import { TRANG_THAI_CONFIG } from "@/lib/utils";
+import { TRANG_THAI_CONFIG, PHUONG_AN_CONFIG } from "@/lib/utils";
 
 interface FrameworkBlock {
   id: string;
@@ -364,6 +364,41 @@ export default function SoDoKhungKTSPage() {
     });
   };
 
+  const getTaskActionBadge = (tasks: NhiemVuData[]) => {
+    if (tasks.length === 0) return null;
+    const hasThayThe = tasks.some((t) => t.phuongAnXuLy === "thay-the");
+    const hasNangCap = tasks.some((t) => t.phuongAnXuLy === "nang-cap");
+    const hasBoSung = tasks.some((t) => t.phuongAnXuLy === "bo-sung");
+    const hasTichHop = tasks.some((t) => t.phuongAnXuLy === "tich-hop");
+
+    let actionLabel = `${tasks.length} nhiệm vụ`;
+    let badgeColor = "from-amber-500 to-orange-500";
+
+    if (hasThayThe) {
+      actionLabel = tasks.length === 1 ? "1 Thay thế" : `${tasks.length} NV (Thay thế)`;
+      badgeColor = "from-rose-500 to-red-600";
+    } else if (hasNangCap) {
+      actionLabel = tasks.length === 1 ? "1 Nâng cấp" : `${tasks.length} NV (Nâng cấp)`;
+      badgeColor = "from-amber-500 to-orange-500";
+    } else if (hasBoSung) {
+      actionLabel = tasks.length === 1 ? "1 Bổ sung" : `${tasks.length} NV (Bổ sung)`;
+      badgeColor = "from-emerald-500 to-teal-600";
+    } else if (hasTichHop) {
+      actionLabel = tasks.length === 1 ? "1 Tích hợp" : `${tasks.length} NV (Tích hợp)`;
+      badgeColor = "from-blue-500 to-indigo-600";
+    }
+
+    return (
+      <span
+        className={`inline-flex items-center gap-1 bg-gradient-to-r ${badgeColor} text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-full shadow-xs tracking-tight`}
+        title={`Có ${tasks.length} nhiệm vụ lộ trình (${actionLabel})`}
+      >
+        <ThunderboltOutlined className="text-[10px] animate-bounce" />
+        <span>{actionLabel}</span>
+      </span>
+    );
+  };
+
   // Render a clean architectural block (tile) with high legibility and 100% visible text
   const renderTile = (blockKey: string) => {
     const block = frameworkBlocks[blockKey];
@@ -387,13 +422,7 @@ export default function SoDoKhungKTSPage() {
 
           <div className="flex items-center gap-1.5 shrink-0">
             {tasks.length > 0 ? (
-              <span
-                className="inline-flex items-center gap-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-full shadow-xs tracking-tight"
-                title={`Có ${tasks.length} nhiệm vụ lộ trình cần thực hiện`}
-              >
-                <ThunderboltOutlined className="text-[10px] animate-bounce" />
-                <span>{tasks.length} nhiệm vụ</span>
-              </span>
+              getTaskActionBadge(tasks)
             ) : items.length > 0 ? (
               <span className="text-[10px] text-slate-400 font-medium px-2 py-0.5 rounded-full bg-slate-100/80">
                 {items.length} HT
@@ -744,9 +773,16 @@ export default function SoDoKhungKTSPage() {
                 <div className="space-y-2">
                   {getMatchedTasks(selectedBlock).map((nv) => (
                     <div key={nv.id} className="p-3 bg-amber-50/70 rounded-2xl border border-amber-200 flex justify-between items-center hover:border-amber-300 transition-colors">
-                      <div>
-                        <div className="font-bold text-slate-800 text-xs">
-                          {nv.ten}
+                      <div className="flex-1 pr-3">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="font-bold text-slate-800 text-xs">
+                            {nv.ten}
+                          </span>
+                          {nv.phuongAnXuLy && (
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 border border-blue-200">
+                              {PHUONG_AN_CONFIG[nv.phuongAnXuLy] || nv.phuongAnXuLy}
+                            </span>
+                          )}
                         </div>
                         <div className="text-[11px] text-slate-500 mt-1">
                           Chủ trì: {nv.donViChuTri?.ten || "UBND tỉnh"} • Hạn chót: {nv.thoiHan ? new Date(nv.thoiHan).toLocaleDateString("vi-VN") : "—"}
