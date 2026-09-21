@@ -76,7 +76,7 @@ export default function AdminHeThongPage() {
   };
 
   const columns: ColumnsType<HeThongSoData> = [
-    { title: "Mã", dataIndex: "ma", width: 90, render: ma => <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded">{ma}</span> },
+    
     { title: "Tên hệ thống", dataIndex: "ten", render: (ten, rec) => (
       <div><div className="font-medium">{ten}</div>{rec.moTa && <div className="text-xs text-gray-400 truncate max-w-xs">{rec.moTa}</div>}</div>
     )},

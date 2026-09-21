@@ -223,9 +223,7 @@ export default function LoTrinhPage() {
               <div className="flex flex-wrap gap-1 mt-1">
                 {rec.heThongSos.map((ht) => (
                   <Tooltip key={ht.id} title={ht.ten}>
-                    <Tag className="m-0 text-[10px] bg-blue-50 border-blue-200 text-blue-600">
-                      {ht.ma}
-                    </Tag>
+                    <Tag className="m-0 text-[10px] bg-blue-50 text-blue-600 border-blue-200">{ht.ten}</Tag>
                   </Tooltip>
                 ))}
               </div>
@@ -441,9 +439,7 @@ export default function LoTrinhPage() {
                     <div className="font-semibold text-gray-800 text-xs line-clamp-1">{ht.ten}</div>
                     <div className="text-[11px] text-gray-500 mt-0.5">{ht.donVi?.ten || ht.chuQuan || "Chưa xác định"}</div>
                   </div>
-                  <Tag className="m-0 font-mono text-[10px] bg-blue-50 text-blue-600 border-blue-200">
-                    {ht.ma}
-                  </Tag>
+                  <Tag className="m-0 text-[10px] bg-blue-50 text-blue-600 border-blue-200">{ht.ten}</Tag>
                 </div>
               ))}
             </div>

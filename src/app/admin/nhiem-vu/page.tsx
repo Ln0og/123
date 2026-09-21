@@ -79,7 +79,7 @@ export default function AdminNhiemVuPage() {
   };
 
   const columns: ColumnsType<NhiemVuData> = [
-    { title: "Mã", dataIndex: "ma", width: 80, render: ma => <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded">{ma}</span> },
+    
     { title: "Nhiệm vụ", dataIndex: "ten", render: (ten, rec) => (
       <div>
         <div className="font-medium text-gray-800">{ten}</div>
