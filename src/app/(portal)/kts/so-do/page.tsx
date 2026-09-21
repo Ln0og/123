@@ -353,7 +353,11 @@ export default function SoDoKhungKTSPage() {
   };
 
   const getMatchedTasks = (block: FrameworkBlock) => {
-    return nhiemVus.filter(block.tasksMatch);
+    return nhiemVus.filter((nv) => {
+      if (block.tasksMatch(nv)) return true;
+      if (nv.heThongSos && nv.heThongSos.some((ht) => block.itemsMatch(ht))) return true;
+      return false;
+    });
   };
 
   // Render a clean architectural block (tile) with high legibility and 100% visible text
@@ -362,15 +366,14 @@ export default function SoDoKhungKTSPage() {
     if (!block) return null;
     const items = getMatchedItems(block);
     const tasks = getMatchedTasks(block);
-    const hasUpgrade = items.some((i) => i.trangThai === "can-nang-cap") || tasks.length > 0;
 
     return (
       <div
         onClick={() => setSelectedBlock(block)}
-        className="bg-white hover:bg-slate-50/90 rounded-xl p-3.5 border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[92px] group select-none relative"
+        className="bg-white hover:bg-slate-50/90 rounded-xl p-3.5 border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[96px] group select-none relative"
       >
         {/* Top Header inside tile: Icon + Action */}
-        <div className="flex items-center justify-between gap-2 mb-2">
+        <div className="flex items-center justify-between gap-1.5 mb-2">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center text-sm shrink-0 transition-transform group-hover:scale-105 shadow-xs"
             style={{ backgroundColor: block.bgColor, color: block.color }}
@@ -379,9 +382,15 @@ export default function SoDoKhungKTSPage() {
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
-            {hasUpgrade && (
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" title="Có nhiệm vụ lộ trình nâng cấp" />
-            )}
+            {tasks.length > 0 ? (
+              <span
+                className="inline-flex items-center gap-1 bg-amber-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-xs"
+                title={`Có ${tasks.length} nhiệm vụ lộ trình cần thực hiện`}
+              >
+                <ThunderboltOutlined className="text-[10px]" />
+                <span>{tasks.length} nhiệm vụ</span>
+              </span>
+            ) : null}
             <RightOutlined className="text-[11px] text-slate-300 group-hover:text-blue-500 transition-colors" />
           </div>
         </div>
