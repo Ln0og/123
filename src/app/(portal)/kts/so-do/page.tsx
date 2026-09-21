@@ -25,10 +25,8 @@ import {
   EnvironmentOutlined,
   EyeOutlined,
   CompassOutlined,
-  AppstoreOutlined,
+  InfoCircleOutlined,
   CheckCircleOutlined,
-  ArrowRightOutlined,
-  BarChartOutlined,
 } from "@ant-design/icons";
 import { HeThongSoData, NhiemVuData } from "@/types";
 import { TRANG_THAI_CONFIG, PHUONG_AN_CONFIG } from "@/lib/utils";
@@ -36,6 +34,7 @@ import { TRANG_THAI_CONFIG, PHUONG_AN_CONFIG } from "@/lib/utils";
 interface FrameworkBlock {
   id: string;
   title: string;
+  subNote: string;
   description: string;
   icon: React.ReactNode;
   lop: number;
@@ -78,6 +77,7 @@ export default function SoDoKhungKTSPage() {
     lop4_dvc: {
       id: "lop4_dvc",
       title: "Cổng DVC & Một Cửa",
+      subNote: "Nộp hồ sơ trực tuyến, thanh toán phí/lệ phí điện tử",
       description: "Cổng Dịch vụ công trực tuyến tỉnh tích hợp kết nối Cổng DVC Quốc gia và Hệ thống Một cửa điện tử tập trung.",
       icon: <GlobalOutlined />,
       lop: 4,
@@ -91,6 +91,7 @@ export default function SoDoKhungKTSPage() {
     lop4_app_mobile: {
       id: "lop4_app_mobile",
       title: "App Vĩnh Long Smart",
+      subNote: "Tiện ích công dân số, Zalo Mini App, VNeID",
       description: "Ứng dụng công dân số đa tiện ích tích hợp Zalo Mini App, VNeID và các dịch vụ tiện ích phục vụ người dân.",
       icon: <MobileOutlined />,
       lop: 4,
@@ -104,6 +105,7 @@ export default function SoDoKhungKTSPage() {
     lop4_portal: {
       id: "lop4_portal",
       title: "Cổng Thông Tin Tỉnh",
+      subNote: "Mạng lưới cổng tin tức điện tử Sở, Ngành, Huyện",
       description: "Cổng thông tin điện tử tỉnh Vĩnh Long và mạng lưới các trang thông tin điện tử thành phần của Sở, Ban, Ngành, Huyện.",
       icon: <ApartmentOutlined />,
       lop: 4,
@@ -117,6 +119,7 @@ export default function SoDoKhungKTSPage() {
     lop4_kpi_metric: {
       id: "lop4_kpi_metric",
       title: "Dashboard Đo Lường KPI",
+      subNote: "Đo lường tỷ lệ DVC toàn trình & mức độ hài lòng",
       description: "Hệ thống giám sát, đo lường tỷ lệ dịch vụ công trực tuyến toàn trình và mức độ hài lòng của người dân, doanh nghiệp.",
       icon: <FundProjectionScreenOutlined />,
       lop: 4,
@@ -135,6 +138,7 @@ export default function SoDoKhungKTSPage() {
     lop3_chidao_dieuhanh: {
       id: "lop3_chidao_dieuhanh",
       title: "Chỉ Đạo & Báo Cáo",
+      subNote: "Văn bản iOffice, họp e-Cabinet, báo cáo tỉnh",
       description: "Quản lý văn bản điều hành iOffice, phòng họp không giấy e-Cabinet, Hệ thống thông tin báo cáo tỉnh.",
       icon: <FileProtectOutlined />,
       lop: 3,
@@ -148,6 +152,7 @@ export default function SoDoKhungKTSPage() {
     lop3_tthc_sohoa: {
       id: "lop3_tthc_sohoa",
       title: "Giải Quyết TTHC",
+      subNote: "Số hóa hồ sơ, giải quyết TTHC liên thông 3 cấp",
       description: "Quy trình giải quyết TTHC liên thông, số hóa hồ sơ giấy và cấp kết quả bản điện tử đồng bộ toàn tỉnh.",
       icon: <DesktopOutlined />,
       lop: 3,
@@ -161,6 +166,7 @@ export default function SoDoKhungKTSPage() {
     lop3_ioc_tinh: {
       id: "lop3_ioc_tinh",
       title: "Trung Tâm IOC Tỉnh",
+      subNote: "Giám sát, điều hành thông minh thời gian thực",
       description: "Trung tâm Giám sát, Điều hành thông minh tỉnh Vĩnh Long liên thông số liệu thời gian thực phục vụ lãnh đạo.",
       icon: <FundProjectionScreenOutlined />,
       lop: 3,
@@ -174,6 +180,7 @@ export default function SoDoKhungKTSPage() {
     lop3_nghiepvu_chuyennganh: {
       id: "lop3_nghiepvu_chuyennganh",
       title: "Nghiệp Vụ Sở Ngành",
+      subNote: "Phần mềm CBCC, tài chính, tư pháp, thanh tra",
       description: "Các phần mềm chuyên môn: Cán bộ công chức, Tư pháp hộ tịch, Thanh tra, Tài chính ngân sách nhà nước.",
       icon: <AuditOutlined />,
       lop: 3,
@@ -189,6 +196,7 @@ export default function SoDoKhungKTSPage() {
     lop3_nongnghiep_so: {
       id: "lop3_nongnghiep_so",
       title: "Nông Nghiệp (380+ CSDL)",
+      subNote: "Trồng trọt, chăn nuôi, thủy sản, quan trắc, OCOP",
       description: "Bản đồ canh tác, trạm quan trắc VnEmisoft, CSDL trồng trọt, chăn nuôi, thủy sản, OCOP và truy xuất nguồn gốc.",
       icon: <ShopOutlined />,
       lop: 3,
@@ -202,6 +210,7 @@ export default function SoDoKhungKTSPage() {
     lop3_yte_so: {
       id: "lop3_yte_so",
       title: "Y Tế & Sức Khỏe Số",
+      subNote: "Bệnh án điện tử EMR, quản lý trạm y tế, HIS",
       description: "Hệ thống HIS bệnh viện, Bệnh án điện tử EMR, quản lý trạm y tế cơ sở và Hồ sơ sức khỏe toàn dân.",
       icon: <MedicineBoxOutlined />,
       lop: 3,
@@ -215,6 +224,7 @@ export default function SoDoKhungKTSPage() {
     lop3_datdai_tnmt: {
       id: "lop3_datdai_tnmt",
       title: "Đất Đai & Môi Trường",
+      subNote: "CSDL Đất đai NDOP, trạm quan trắc tự động",
       description: "CSDL Đất đai tỉnh kết nối nền tảng điều phối quốc gia (NDOP), trạm quan trắc môi trường tự động.",
       icon: <EnvironmentOutlined />,
       lop: 3,
@@ -228,6 +238,7 @@ export default function SoDoKhungKTSPage() {
     lop3_dothi_kinhte: {
       id: "lop3_dothi_kinhte",
       title: "Đô Thị & Du Lịch Số",
+      subNote: "Du lịch thông minh, giáo dục số, giao thông",
       description: "Cổng thông tin du lịch thông minh, Giáo dục số, Chiếu sáng và giao thông thông minh đô thị.",
       icon: <CompassOutlined />,
       lop: 3,
@@ -245,6 +256,7 @@ export default function SoDoKhungKTSPage() {
     lop2_lgsp_ndxp: {
       id: "lop2_lgsp_ndxp",
       title: "Trục Tích Hợp LGSP",
+      subNote: "Cầu nối chia sẻ dữ liệu tỉnh với Quốc gia (NDXP)",
       description: "Nền tảng tích hợp, chia sẻ dữ liệu cấp tỉnh (LGSP) liên thông kết nối Trục Quốc gia (NDXP).",
       icon: <NodeIndexOutlined />,
       lop: 2,
@@ -258,6 +270,7 @@ export default function SoDoKhungKTSPage() {
     lop2_kho_dulieu_master: {
       id: "lop2_kho_dulieu_master",
       title: "Kho Dữ Liệu Dùng Chung",
+      subNote: "Kho dữ liệu tổng hợp & Cổng dữ liệu mở Open Data",
       description: "Kho dữ liệu tổng hợp tỉnh, Từ điển danh mục dùng chung và Nền tảng dữ liệu mở (Open Data).",
       icon: <DatabaseOutlined />,
       lop: 2,
@@ -271,6 +284,7 @@ export default function SoDoKhungKTSPage() {
     lop2_csdl_quocgia: {
       id: "lop2_csdl_quocgia",
       title: "CSDL Quốc Gia (ĐA 06)",
+      subNote: "Dân cư VNeID, đất đai, bảo hiểm, doanh nghiệp",
       description: "Kết nối CSDL Quốc gia về Dân cư, Đất đai, Đăng ký Doanh nghiệp, Bảo hiểm xã hội và Tư pháp.",
       icon: <ApartmentOutlined />,
       lop: 2,
@@ -284,6 +298,7 @@ export default function SoDoKhungKTSPage() {
     lop2_nentang_loi: {
       id: "lop2_nentang_loi",
       title: "Định Danh VNeID & GIS",
+      subNote: "Đăng nhập một lần (SSO), thanh toán & bản đồ số",
       description: "Nền tảng định danh xác thực (VNeID/SSO), Thanh toán trực tuyến Payment và Bản đồ số GIS tỉnh.",
       icon: <DeploymentUnitOutlined />,
       lop: 2,
@@ -301,6 +316,7 @@ export default function SoDoKhungKTSPage() {
     lop1_idc_cloud: {
       id: "lop1_idc_cloud",
       title: "Trung Tâm Dữ Liệu IDC",
+      subNote: "Trung tâm dữ liệu tỉnh, chuyển đổi sang Cloud tập trung",
       description: "Trung tâm tích hợp dữ liệu tỉnh, chuyển đổi sang kiến trúc Cloud kết nối Cloud Quốc gia.",
       icon: <CloudServerOutlined />,
       lop: 1,
@@ -314,6 +330,7 @@ export default function SoDoKhungKTSPage() {
     lop1_mang_tslcd: {
       id: "lop1_mang_tslcd",
       title: "Mạng TSLCD Cấp I, II",
+      subNote: "Mạng chuyên dùng bảo mật cao kết nối 3 cấp chính quyền",
       description: "Mạng Truyền số liệu chuyên dùng cấp I, II kết nối 100% cơ quan Đảng, chính quyền 3 cấp an toàn, thông suốt.",
       icon: <NodeIndexOutlined />,
       lop: 1,
@@ -327,6 +344,7 @@ export default function SoDoKhungKTSPage() {
     lop1_soc_anm: {
       id: "lop1_soc_anm",
       title: "SOC Tỉnh (ATTT 4 Lớp)",
+      subNote: "Giám sát an toàn thông tin 4 lớp kết nối SOC Quốc gia",
       description: "Mô hình bảo vệ an toàn thông tin 4 lớp, kết nối SOC Quốc gia của Bộ Công an, Chữ ký số PKI.",
       icon: <LockOutlined />,
       lop: 1,
@@ -340,6 +358,7 @@ export default function SoDoKhungKTSPage() {
     lop1_iot_bien: {
       id: "lop1_iot_bien",
       title: "Hạ Tầng IoT & Camera",
+      subNote: "Camera an ninh đô thị & cảm biến quan trắc",
       description: "Hệ thống camera giám sát an ninh đô thị tập trung, mạng lưới cảm biến quan trắc môi trường và nông nghiệp.",
       icon: <EyeOutlined />,
       lop: 1,
@@ -409,10 +428,10 @@ export default function SoDoKhungKTSPage() {
     return (
       <div
         onClick={() => setSelectedBlock(block)}
-        className="group relative bg-white hover:bg-gradient-to-br hover:from-white hover:to-slate-50 rounded-2xl p-4 border border-slate-200/90 hover:border-blue-400/80 shadow-xs hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[105px] select-none"
+        className="group relative bg-white hover:bg-gradient-to-br hover:from-white hover:to-slate-50 rounded-2xl p-4 border border-slate-200/90 hover:border-blue-400/80 shadow-xs hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[118px] select-none"
       >
         {/* Top Header inside tile: Icon + Action / Task Badge */}
-        <div className="flex items-center justify-between gap-2 mb-2.5">
+        <div className="flex items-center justify-between gap-2 mb-2">
           <div
             className="w-9 h-9 rounded-xl flex items-center justify-center text-base shrink-0 transition-transform duration-300 group-hover:scale-110 shadow-xs"
             style={{ backgroundColor: block.bgColor, color: block.color }}
@@ -435,11 +454,16 @@ export default function SoDoKhungKTSPage() {
           </div>
         </div>
 
-        {/* Title: 100% width, full text, never truncated */}
+        {/* Title + SubNote */}
         <div>
-          <div className="font-bold text-slate-800 text-[13px] group-hover:text-blue-600 transition-colors leading-snug">
+          <div className="font-bold text-slate-900 text-[13px] group-hover:text-blue-600 transition-colors leading-snug">
             {block.title}
           </div>
+          {block.subNote && (
+            <div className="text-[11px] text-slate-500 line-clamp-1 mt-0.5 font-normal leading-tight">
+              {block.subNote}
+            </div>
+          )}
           {items.length > 0 && tasks.length > 0 && (
             <div className="text-[10px] text-slate-400 mt-1 font-medium">
               {items.length} CSDL/Hệ thống
@@ -462,7 +486,7 @@ export default function SoDoKhungKTSPage() {
   const totalSystems = heThongs.length;
 
   return (
-    <div className="w-full space-y-6 pb-16">
+    <div className="w-full space-y-5 pb-16">
       
       {/* ========================================================================= */}
       {/* HEADER HERO BAR (Sleek Executive Tech Banner) */}
@@ -513,6 +537,36 @@ export default function SoDoKhungKTSPage() {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* GUIDE & LEGEND BAR (Bảng Chú Thích & Hướng Dẫn Sử Dụng Sơ Đồ) */}
+      {/* ========================================================================= */}
+      <div className="bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 p-4 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+            <InfoCircleOutlined className="text-blue-600 text-sm" /> Chú thích & Hướng dẫn:
+          </span>
+          <span className="text-slate-600">
+            Nhấp chuột vào bất kỳ <b>Khối chức năng</b> để tra cứu chi tiết danh mục phần mềm & nhiệm vụ lộ trình.
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-slate-400 font-medium">Ký hiệu nhiệm vụ:</span>
+          <span className="inline-flex items-center gap-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
+            <ThunderboltOutlined className="text-[9px]" /> Nâng cấp
+          </span>
+          <span className="inline-flex items-center gap-1 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
+            <ThunderboltOutlined className="text-[9px]" /> Thay thế
+          </span>
+          <span className="inline-flex items-center gap-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
+            <ThunderboltOutlined className="text-[9px]" /> Bổ sung mới
+          </span>
+          <span className="inline-flex items-center gap-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
+            <ThunderboltOutlined className="text-[9px]" /> Tích hợp
+          </span>
         </div>
       </div>
 
@@ -568,15 +622,20 @@ export default function SoDoKhungKTSPage() {
           {/* ------------------------------------------------------------- */}
           <div className="bg-gradient-to-r from-amber-50/70 via-amber-50/40 to-orange-50/70 rounded-3xl border border-amber-300/80 p-4 md:p-5 shadow-xs transition-all hover:shadow-md">
             <div className="flex items-center justify-between gap-3 mb-3.5 pb-3 border-b border-amber-200/80">
-              <div className="flex items-center gap-2.5">
-                <span className="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
-                  LỚP 4
-                </span>
-                <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
-                  KÊNH TƯƠNG TÁC & ĐO LƯỜNG HIỆU QUẢ
-                </span>
+              <div>
+                <div className="flex items-center gap-2.5">
+                  <span className="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
+                    LỚP 4
+                  </span>
+                  <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
+                    KÊNH TƯƠNG TÁC & ĐO LƯỜNG HIỆU QUẢ
+                  </span>
+                </div>
+                <div className="text-[11px] text-amber-900/80 font-medium mt-1">
+                  💡 Giao tiếp đa kênh phục vụ Người dân, Doanh nghiệp và đo lường mức độ hài lòng DVC trực tuyến
+                </div>
               </div>
-              <span className="text-[11px] text-amber-800 font-bold bg-amber-100/90 px-3 py-0.5 rounded-full border border-amber-300/80 hidden sm:inline-block">
+              <span className="text-[11px] text-amber-800 font-bold bg-amber-100/90 px-3 py-0.5 rounded-full border border-amber-300/80 hidden sm:inline-block shrink-0">
                 Tương tác Đa kênh • Đánh giá DVC
               </span>
             </div>
@@ -594,15 +653,20 @@ export default function SoDoKhungKTSPage() {
           {/* ------------------------------------------------------------- */}
           <div className="bg-gradient-to-r from-emerald-50/70 via-teal-50/40 to-emerald-50/70 rounded-3xl border border-emerald-300/80 p-4 md:p-5 shadow-xs space-y-4 transition-all hover:shadow-md">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-200/80">
-              <div className="flex items-center gap-2.5">
-                <span className="bg-gradient-to-r from-emerald-700 to-teal-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
-                  LỚP 3
-                </span>
-                <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
-                  ỨNG DỤNG VÀ NGHIỆP VỤ DÙNG CHUNG
-                </span>
+              <div>
+                <div className="flex items-center gap-2.5">
+                  <span className="bg-gradient-to-r from-emerald-700 to-teal-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
+                    LỚP 3
+                  </span>
+                  <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
+                    ỨNG DỤNG VÀ NGHIỆP VỤ DÙNG CHUNG
+                  </span>
+                </div>
+                <div className="text-[11px] text-emerald-900/80 font-medium mt-1">
+                  💡 Hệ thống phần mềm tác nghiệp nội bộ chính quyền và các ứng dụng phát triển kinh tế - xã hội số
+                </div>
               </div>
-              <span className="text-[11px] text-emerald-800 bg-emerald-100 font-extrabold px-3 py-0.5 rounded-full border border-emerald-300">
+              <span className="text-[11px] text-emerald-800 bg-emerald-100 font-extrabold px-3 py-0.5 rounded-full border border-emerald-300 shrink-0">
                 389+ Hệ thống số & CSDL
               </span>
             </div>
@@ -643,15 +707,20 @@ export default function SoDoKhungKTSPage() {
           {/* ------------------------------------------------------------- */}
           <div className="bg-gradient-to-r from-blue-50/70 via-blue-50/40 to-cyan-50/70 rounded-3xl border border-blue-300/80 p-4 md:p-5 shadow-xs transition-all hover:shadow-md">
             <div className="flex items-center justify-between gap-3 mb-3.5 pb-3 border-b border-blue-200/80">
-              <div className="flex items-center gap-2.5">
-                <span className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
-                  LỚP 2
-                </span>
-                <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
-                  DỮ LIỆU VÀ NỀN TẢNG LÕI
-                </span>
+              <div>
+                <div className="flex items-center gap-2.5">
+                  <span className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
+                    LỚP 2
+                  </span>
+                  <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
+                    DỮ LIỆU VÀ NỀN TẢNG LÕI
+                  </span>
+                </div>
+                <div className="text-[11px] text-blue-900/80 font-medium mt-1">
+                  💡 Trung tâm tích hợp, liên thông dữ liệu qua LGSP/NDXP và các CSDL Quốc gia cốt lõi (Đề án 06)
+                </div>
               </div>
-              <span className="text-[11px] text-blue-800 font-bold bg-blue-100/90 px-3 py-0.5 rounded-full border border-blue-300/80 hidden sm:inline-block">
+              <span className="text-[11px] text-blue-800 font-bold bg-blue-100/90 px-3 py-0.5 rounded-full border border-blue-300/80 hidden sm:inline-block shrink-0">
                 Trục LGSP • CSDL Quốc Gia • Kho Dữ Liệu
               </span>
             </div>
@@ -669,15 +738,20 @@ export default function SoDoKhungKTSPage() {
           {/* ------------------------------------------------------------- */}
           <div className="bg-gradient-to-r from-purple-50/70 via-purple-50/40 to-indigo-50/70 rounded-3xl border border-purple-300/80 p-4 md:p-5 shadow-xs transition-all hover:shadow-md">
             <div className="flex items-center justify-between gap-3 mb-3.5 pb-3 border-b border-purple-200/80">
-              <div className="flex items-center gap-2.5">
-                <span className="bg-gradient-to-r from-purple-700 to-indigo-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
-                  LỚP 1
-                </span>
-                <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
-                  HẠ TẦNG SỐ VÀ AN NINH MẠNG DÙNG CHUNG
-                </span>
+              <div>
+                <div className="flex items-center gap-2.5">
+                  <span className="bg-gradient-to-r from-purple-700 to-indigo-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
+                    LỚP 1
+                  </span>
+                  <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
+                    HẠ TẦNG SỐ VÀ AN NINH MẠNG DÙNG CHUNG
+                  </span>
+                </div>
+                <div className="text-[11px] text-purple-900/80 font-medium mt-1">
+                  💡 Nền tảng Trung tâm dữ liệu (IDC/Cloud), Mạng truyền số liệu chuyên dùng (TSLCD) và SOC An toàn 4 lớp
+                </div>
               </div>
-              <span className="text-[11px] text-purple-800 font-bold bg-purple-100/90 px-3 py-0.5 rounded-full border border-purple-300/80 hidden sm:inline-block">
+              <span className="text-[11px] text-purple-800 font-bold bg-purple-100/90 px-3 py-0.5 rounded-full border border-purple-300/80 hidden sm:inline-block shrink-0">
                 Cloud IDC • TSLCD • SOC An Toàn 4 Lớp
               </span>
             </div>
@@ -708,7 +782,7 @@ export default function SoDoKhungKTSPage() {
               </div>
               <div className="font-extrabold text-slate-900 text-xs sm:text-sm">3. Ưu Tiên AI (AI First)</div>
               <div className="text-[11px] text-slate-500 mt-1 leading-snug">
-                Trợ lý ảo CCVC • Tự động hóa thủ tục • AI Phân tích
+                Trợ lý ảo CCVC • Tự động hóa thủ tục • AI Phân tích dữ liệu
               </div>
             </div>
 
