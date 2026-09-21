@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Tag, Modal, Button, Spin } from "antd";
+import { Tag, Modal, Button, Spin, Tooltip } from "antd";
 import {
   ApartmentOutlined,
   DatabaseOutlined,
@@ -25,6 +25,10 @@ import {
   EnvironmentOutlined,
   EyeOutlined,
   CompassOutlined,
+  AppstoreOutlined,
+  CheckCircleOutlined,
+  ArrowRightOutlined,
+  BarChartOutlined,
 } from "@ant-design/icons";
 import { HeThongSoData, NhiemVuData } from "@/types";
 import { TRANG_THAI_CONFIG } from "@/lib/utils";
@@ -82,7 +86,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-04" || nv.lop === 4,
       color: "#ea580c",
       bgColor: "#fff7ed",
-      borderColor: "#fdba74",
+      borderColor: "#fed7aa",
     },
     lop4_app_mobile: {
       id: "lop4_app_mobile",
@@ -95,7 +99,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-07" || nv.ma === "NV-03",
       color: "#ea580c",
       bgColor: "#fff7ed",
-      borderColor: "#fdba74",
+      borderColor: "#fed7aa",
     },
     lop4_portal: {
       id: "lop4_portal",
@@ -105,10 +109,10 @@ export default function SoDoKhungKTSPage() {
       lop: 4,
       category: "Lớp 4: Kênh tương tác & Đo lường",
       itemsMatch: (ht) => ht.ten.toLowerCase().includes("cổng thông tin") || ht.ten.toLowerCase().includes("portal"),
-      tasksMatch: (nv) => false,
+      tasksMatch: () => false,
       color: "#ea580c",
       bgColor: "#fff7ed",
-      borderColor: "#fdba74",
+      borderColor: "#fed7aa",
     },
     lop4_kpi_metric: {
       id: "lop4_kpi_metric",
@@ -121,7 +125,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-04",
       color: "#ea580c",
       bgColor: "#fff7ed",
-      borderColor: "#fdba74",
+      borderColor: "#fed7aa",
     },
 
     // =========================================================================
@@ -139,7 +143,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ten.toLowerCase().includes("văn bản"),
       color: "#16a34a",
       bgColor: "#f0fdf4",
-      borderColor: "#86efac",
+      borderColor: "#bbf7d0",
     },
     lop3_tthc_sohoa: {
       id: "lop3_tthc_sohoa",
@@ -152,7 +156,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-04",
       color: "#16a34a",
       bgColor: "#f0fdf4",
-      borderColor: "#86efac",
+      borderColor: "#bbf7d0",
     },
     lop3_ioc_tinh: {
       id: "lop3_ioc_tinh",
@@ -165,7 +169,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-08",
       color: "#16a34a",
       bgColor: "#f0fdf4",
-      borderColor: "#86efac",
+      borderColor: "#bbf7d0",
     },
     lop3_nghiepvu_chuyennganh: {
       id: "lop3_nghiepvu_chuyennganh",
@@ -175,10 +179,10 @@ export default function SoDoKhungKTSPage() {
       lop: 3,
       category: "Lớp 3: Chính quyền số (Nội bộ & TTHC)",
       itemsMatch: (ht) => (ht.lop === 3 && !ht.ma.startsWith("SNN-") && ht.ma !== "UD-03") || ht.ten.toLowerCase().includes("cán bộ"),
-      tasksMatch: (nv) => false,
+      tasksMatch: () => false,
       color: "#16a34a",
       bgColor: "#f0fdf4",
-      borderColor: "#86efac",
+      borderColor: "#bbf7d0",
     },
 
     // Nhánh 2: Kinh tế số & Xã hội số
@@ -190,10 +194,10 @@ export default function SoDoKhungKTSPage() {
       lop: 3,
       category: "Lớp 3: Kinh tế số & Xã hội số",
       itemsMatch: (ht) => ht.ma.startsWith("SNN-") || (ht.donVi?.ten || "").includes("Nông nghiệp"),
-      tasksMatch: (nv) => false,
+      tasksMatch: () => false,
       color: "#059669",
       bgColor: "#ecfdf5",
-      borderColor: "#6ee7b7",
+      borderColor: "#a7f3d0",
     },
     lop3_yte_so: {
       id: "lop3_yte_so",
@@ -206,7 +210,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-09",
       color: "#059669",
       bgColor: "#ecfdf5",
-      borderColor: "#6ee7b7",
+      borderColor: "#a7f3d0",
     },
     lop3_datdai_tnmt: {
       id: "lop3_datdai_tnmt",
@@ -219,7 +223,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-01",
       color: "#059669",
       bgColor: "#ecfdf5",
-      borderColor: "#6ee7b7",
+      borderColor: "#a7f3d0",
     },
     lop3_dothi_kinhte: {
       id: "lop3_dothi_kinhte",
@@ -229,10 +233,10 @@ export default function SoDoKhungKTSPage() {
       lop: 3,
       category: "Lớp 3: Kinh tế số & Xã hội số",
       itemsMatch: (ht) => ht.ten.toLowerCase().includes("du lịch") || ht.ten.toLowerCase().includes("giáo dục") || ht.ten.toLowerCase().includes("thương mại"),
-      tasksMatch: (nv) => false,
+      tasksMatch: () => false,
       color: "#059669",
       bgColor: "#ecfdf5",
-      borderColor: "#6ee7b7",
+      borderColor: "#a7f3d0",
     },
 
     // ==========================================
@@ -249,7 +253,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-04" || nv.ma === "NV-06",
       color: "#2563eb",
       bgColor: "#eff6ff",
-      borderColor: "#93c5fd",
+      borderColor: "#bfdbfe",
     },
     lop2_kho_dulieu_master: {
       id: "lop2_kho_dulieu_master",
@@ -262,7 +266,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-06",
       color: "#2563eb",
       bgColor: "#eff6ff",
-      borderColor: "#93c5fd",
+      borderColor: "#bfdbfe",
     },
     lop2_csdl_quocgia: {
       id: "lop2_csdl_quocgia",
@@ -275,7 +279,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-03" || nv.ma === "NV-01",
       color: "#2563eb",
       bgColor: "#eff6ff",
-      borderColor: "#93c5fd",
+      borderColor: "#bfdbfe",
     },
     lop2_nentang_loi: {
       id: "lop2_nentang_loi",
@@ -288,7 +292,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-03",
       color: "#2563eb",
       bgColor: "#eff6ff",
-      borderColor: "#93c5fd",
+      borderColor: "#bfdbfe",
     },
 
     // ==========================================
@@ -305,7 +309,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-02",
       color: "#7c3aed",
       bgColor: "#f5f3ff",
-      borderColor: "#c4b5fd",
+      borderColor: "#ddd6fe",
     },
     lop1_mang_tslcd: {
       id: "lop1_mang_tslcd",
@@ -315,10 +319,10 @@ export default function SoDoKhungKTSPage() {
       lop: 1,
       category: "Lớp 1: Hạ tầng số & An ninh mạng",
       itemsMatch: (ht) => ht.ma === "HT-01" || ht.ten.toLowerCase().includes("wan") || ht.ten.toLowerCase().includes("mạng"),
-      tasksMatch: (nv) => false,
+      tasksMatch: () => false,
       color: "#7c3aed",
       bgColor: "#f5f3ff",
-      borderColor: "#c4b5fd",
+      borderColor: "#ddd6fe",
     },
     lop1_soc_anm: {
       id: "lop1_soc_anm",
@@ -331,7 +335,7 @@ export default function SoDoKhungKTSPage() {
       tasksMatch: (nv) => nv.ma === "NV-05",
       color: "#7c3aed",
       bgColor: "#f5f3ff",
-      borderColor: "#c4b5fd",
+      borderColor: "#ddd6fe",
     },
     lop1_iot_bien: {
       id: "lop1_iot_bien",
@@ -341,10 +345,10 @@ export default function SoDoKhungKTSPage() {
       lop: 1,
       category: "Lớp 1: Hạ tầng số & An ninh mạng",
       itemsMatch: (ht) => ht.ten.toLowerCase().includes("camera") || ht.ten.toLowerCase().includes("quan trắc") || ht.ten.toLowerCase().includes("iot"),
-      tasksMatch: (nv) => false,
+      tasksMatch: () => false,
       color: "#7c3aed",
       bgColor: "#f5f3ff",
-      borderColor: "#c4b5fd",
+      borderColor: "#ddd6fe",
     },
   };
 
@@ -370,12 +374,12 @@ export default function SoDoKhungKTSPage() {
     return (
       <div
         onClick={() => setSelectedBlock(block)}
-        className="bg-white hover:bg-slate-50/90 rounded-xl p-3.5 border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[96px] group select-none relative"
+        className="group relative bg-white hover:bg-gradient-to-br hover:from-white hover:to-slate-50 rounded-2xl p-4 border border-slate-200/90 hover:border-blue-400/80 shadow-xs hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[105px] select-none"
       >
-        {/* Top Header inside tile: Icon + Action */}
-        <div className="flex items-center justify-between gap-1.5 mb-2">
+        {/* Top Header inside tile: Icon + Action / Task Badge */}
+        <div className="flex items-center justify-between gap-2 mb-2.5">
           <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-sm shrink-0 transition-transform group-hover:scale-105 shadow-xs"
+            className="w-9 h-9 rounded-xl flex items-center justify-center text-base shrink-0 transition-transform duration-300 group-hover:scale-110 shadow-xs"
             style={{ backgroundColor: block.bgColor, color: block.color }}
           >
             {block.icon}
@@ -384,20 +388,34 @@ export default function SoDoKhungKTSPage() {
           <div className="flex items-center gap-1.5 shrink-0">
             {tasks.length > 0 ? (
               <span
-                className="inline-flex items-center gap-1 bg-amber-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-xs"
+                className="inline-flex items-center gap-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-full shadow-xs tracking-tight"
                 title={`Có ${tasks.length} nhiệm vụ lộ trình cần thực hiện`}
               >
-                <ThunderboltOutlined className="text-[10px]" />
+                <ThunderboltOutlined className="text-[10px] animate-bounce" />
                 <span>{tasks.length} nhiệm vụ</span>
               </span>
+            ) : items.length > 0 ? (
+              <span className="text-[10px] text-slate-400 font-medium px-2 py-0.5 rounded-full bg-slate-100/80">
+                {items.length} HT
+              </span>
             ) : null}
-            <RightOutlined className="text-[11px] text-slate-300 group-hover:text-blue-500 transition-colors" />
+            
+            <div className="w-6 h-6 rounded-full bg-slate-100 group-hover:bg-blue-500 flex items-center justify-center transition-colors">
+              <RightOutlined className="text-[10px] text-slate-400 group-hover:text-white transition-colors" />
+            </div>
           </div>
         </div>
 
         {/* Title: 100% width, full text, never truncated */}
-        <div className="font-bold text-slate-800 text-xs sm:text-[13px] group-hover:text-blue-700 transition-colors leading-snug">
-          {block.title}
+        <div>
+          <div className="font-bold text-slate-800 text-[13px] group-hover:text-blue-600 transition-colors leading-snug">
+            {block.title}
+          </div>
+          {items.length > 0 && tasks.length > 0 && (
+            <div className="text-[10px] text-slate-400 mt-1 font-medium">
+              {items.length} CSDL/Hệ thống
+            </div>
+          )}
         </div>
       </div>
     );
@@ -406,75 +424,108 @@ export default function SoDoKhungKTSPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
-        <Spin size="large" />
+        <Spin size="large" tip="Đang tải sơ đồ kiến trúc..." />
       </div>
     );
   }
 
-  return (
-    <div className="w-full space-y-5 pb-12">
-      
-      {/* Header Bar */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-950 text-white px-6 py-4 rounded-2xl shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="bg-blue-500/30 text-blue-200 border border-blue-400/40 text-xs px-2.5 py-0.5 rounded-full font-bold">
-              QĐ 1425/QĐ-TTg (PB 1.0)
-            </span>
-            <span className="text-xs text-blue-200/90 font-medium">Khung Kiến Trúc Chính Quyền Số Tỉnh Vĩnh Long</span>
-          </div>
-          <h1 className="text-lg md:text-xl font-extrabold text-white m-0">
-            Sơ Đồ Phân Tầng Kiến Trúc Tổng Thể
-          </h1>
-        </div>
+  const totalTasks = nhiemVus.length;
+  const totalSystems = heThongs.length;
 
-        <div className="flex gap-2 shrink-0">
-          <Link href="/kts/hien-trang">
-            <Button size="middle" className="bg-white/10 border-white/20 text-white hover:bg-white/20 font-semibold">
-              Hiện Trạng (389 HT)
-            </Button>
-          </Link>
-          <Link href="/kts/lo-trinh">
-            <Button type="primary" size="middle" className="bg-blue-600 font-bold shadow-sm">
-              Lộ Trình (9 NV)
-            </Button>
-          </Link>
+  return (
+    <div className="w-full space-y-6 pb-16">
+      
+      {/* ========================================================================= */}
+      {/* HEADER HERO BAR (Sleek Executive Tech Banner) */}
+      {/* ========================================================================= */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-blue-950 text-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-700/50">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div className="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+          <div>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <span className="bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs px-3 py-1 rounded-full font-bold flex items-center gap-1.5 backdrop-blur-sm">
+                <SafetyCertificateOutlined className="text-blue-400" /> QĐ 1425/QĐ-TTg (PB 1.0)
+              </span>
+              <span className="text-xs text-slate-300/80 font-medium">Khung Kiến Trúc Chính Quyền Số Tỉnh Vĩnh Long</span>
+            </div>
+            
+            <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white m-0">
+              Sơ Đồ Phân Tầng Kiến Trúc Tổng Thể
+            </h1>
+            <p className="text-xs md:text-sm text-slate-300/90 mt-1 max-w-2xl leading-relaxed">
+              Mô hình 4 lớp kiến trúc chuẩn quốc gia kết hợp 4 trụ cột xuyên suốt, định hướng chuẩn hóa kết nối, chia sẻ dữ liệu và chuyển đổi số toàn diện tỉnh Vĩnh Long.
+            </p>
+          </div>
+
+          {/* Metric Stats + Quick Actions */}
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <div className="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/10 text-center shadow-inner">
+              <div className="text-xs text-slate-300 font-medium">Hệ thống số</div>
+              <div className="text-lg font-black text-emerald-400 leading-tight">{totalSystems}</div>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/10 text-center shadow-inner">
+              <div className="text-xs text-slate-300 font-medium">Nhiệm vụ lộ trình</div>
+              <div className="text-lg font-black text-amber-400 leading-tight">{totalTasks}</div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-2 ml-1">
+              <Link href="/kts/hien-trang">
+                <Button size="middle" className="bg-white/15 border-white/20 text-white hover:bg-white/25 font-bold rounded-xl h-10 px-4">
+                  Xem Hiện Trạng
+                </Button>
+              </Link>
+              <Link href="/kts/lo-trinh">
+                <Button type="primary" size="middle" className="bg-blue-600 hover:bg-blue-500 font-bold rounded-xl h-10 px-4 shadow-md">
+                  Xem Lộ Trình
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* 3-COLUMN MASTER BLUEPRINT */}
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 items-stretch">
+      {/* ========================================================================= */}
+      {/* 3-COLUMN MASTER BLUEPRINT (Left Pillar - 4 Layers - Right Pillar) */}
+      {/* ========================================================================= */}
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-stretch">
         
         {/* ========================================================================= */}
         {/* CỘT TRÁI: THÀNH PHẦN XUYÊN SUỐT (I & II) */}
         {/* ========================================================================= */}
-        <div className="xl:col-span-2 bg-slate-100/70 rounded-2xl border border-slate-200 p-4 flex flex-col justify-between space-y-4">
-          <div className="space-y-3">
-            <div className="bg-slate-800 text-white text-center font-bold text-xs py-2 rounded-lg shadow-xs uppercase tracking-wider">
+        <div className="xl:col-span-2 bg-gradient-to-b from-slate-100/90 to-slate-200/60 backdrop-blur-sm rounded-3xl border border-slate-300/80 p-4 flex flex-col justify-between space-y-4 shadow-xs">
+          <div className="space-y-3.5">
+            <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white text-center font-black text-[11px] py-2 rounded-xl shadow-xs uppercase tracking-wider">
               TRỤ CỘT XUYÊN SUỐT
             </div>
 
             {/* 1. Quản trị & Thể chế */}
-            <div className="bg-white p-4 rounded-xl border border-slate-200 text-center shadow-xs hover:border-slate-400 transition-colors">
-              <BankOutlined className="text-blue-700 text-2xl mb-1.5" />
-              <div className="font-extrabold text-slate-900 text-sm">1. Quản Trị & Thể Chế</div>
-              <div className="text-xs text-slate-500 mt-1">
-                Ban chỉ đạo CĐS • Giám sát KPI
+            <div className="bg-white hover:bg-slate-50/90 p-4 rounded-2xl border border-slate-200 text-center shadow-xs hover:border-slate-300 transition-all group">
+              <div className="w-11 h-11 mx-auto bg-blue-50 text-blue-700 rounded-xl flex items-center justify-center text-xl mb-2 group-hover:scale-105 transition-transform shadow-2xs">
+                <BankOutlined />
+              </div>
+              <div className="font-extrabold text-slate-900 text-xs sm:text-sm">1. Quản Trị & Thể Chế</div>
+              <div className="text-[11px] text-slate-500 mt-1 leading-snug">
+                Ban chỉ đạo CĐS • Giám sát KPI • Kiến trúc sư trưởng
               </div>
             </div>
 
             {/* 2. Tiêu chuẩn & Quy chuẩn */}
-            <div className="bg-white p-4 rounded-xl border border-slate-200 text-center shadow-xs hover:border-slate-400 transition-colors">
-              <SafetyCertificateOutlined className="text-blue-700 text-2xl mb-1.5" />
-              <div className="font-extrabold text-slate-900 text-sm">2. Tiêu Chuẩn Kỹ Thuật</div>
-              <div className="text-xs text-slate-500 mt-1">
-                Quy chuẩn kết nối • Open API
+            <div className="bg-white hover:bg-slate-50/90 p-4 rounded-2xl border border-slate-200 text-center shadow-xs hover:border-slate-300 transition-all group">
+              <div className="w-11 h-11 mx-auto bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center text-xl mb-2 group-hover:scale-105 transition-transform shadow-2xs">
+                <SafetyCertificateOutlined />
+              </div>
+              <div className="font-extrabold text-slate-900 text-xs sm:text-sm">2. Tiêu Chuẩn Kỹ Thuật</div>
+              <div className="text-[11px] text-slate-500 mt-1 leading-snug">
+                Quy chuẩn kết nối • Open API • Danh mục dùng chung
               </div>
             </div>
           </div>
 
-          <div className="text-[11px] text-slate-500 text-center font-bold uppercase tracking-wider pt-2 border-t border-slate-200">
-            Thể Chế & Chỉ Đạo
+          <div className="text-[11px] text-slate-600 text-center font-extrabold uppercase tracking-wider pt-3 border-t border-slate-300/80 flex items-center justify-center gap-1">
+            <span>🏛️ Thể Chế & Chỉ Đạo</span>
           </div>
         </div>
 
@@ -486,17 +537,22 @@ export default function SoDoKhungKTSPage() {
           {/* ------------------------------------------------------------- */}
           {/* LỚP 4: KÊNH TƯƠNG TÁC VÀ ĐO LƯỜNG */}
           {/* ------------------------------------------------------------- */}
-          <div className="bg-amber-50/50 rounded-2xl border-2 border-amber-200 p-4 shadow-xs">
-            <div className="flex items-center gap-3 mb-3.5 pb-2.5 border-b border-amber-200">
-              <span className="bg-amber-600 text-white font-black text-xs px-3 py-1 rounded-md shadow-xs tracking-wider">
-                LỚP 4
-              </span>
-              <span className="font-black text-base text-slate-900 uppercase tracking-wide">
-                KÊNH TƯƠNG TÁC & ĐO LƯỜNG HIỆU QUẢ
+          <div className="bg-gradient-to-r from-amber-50/70 via-amber-50/40 to-orange-50/70 rounded-3xl border border-amber-300/80 p-4 md:p-5 shadow-xs transition-all hover:shadow-md">
+            <div className="flex items-center justify-between gap-3 mb-3.5 pb-3 border-b border-amber-200/80">
+              <div className="flex items-center gap-2.5">
+                <span className="bg-gradient-to-r from-amber-600 to-orange-600 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
+                  LỚP 4
+                </span>
+                <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
+                  KÊNH TƯƠNG TÁC & ĐO LƯỜNG HIỆU QUẢ
+                </span>
+              </div>
+              <span className="text-[11px] text-amber-800 font-bold bg-amber-100/90 px-3 py-0.5 rounded-full border border-amber-300/80 hidden sm:inline-block">
+                Tương tác Đa kênh • Đánh giá DVC
               </span>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {renderTile("lop4_dvc")}
               {renderTile("lop4_app_mobile")}
               {renderTile("lop4_portal")}
@@ -507,28 +563,29 @@ export default function SoDoKhungKTSPage() {
           {/* ------------------------------------------------------------- */}
           {/* LỚP 3: ỨNG DỤNG VÀ NGHIỆP VỤ DÙNG CHUNG */}
           {/* ------------------------------------------------------------- */}
-          <div className="bg-emerald-50/50 rounded-2xl border-2 border-emerald-200 p-4 shadow-xs space-y-3.5">
-            <div className="flex items-center justify-between pb-2.5 border-b border-emerald-200">
-              <div className="flex items-center gap-3">
-                <span className="bg-emerald-700 text-white font-black text-xs px-3 py-1 rounded-md shadow-xs tracking-wider">
+          <div className="bg-gradient-to-r from-emerald-50/70 via-teal-50/40 to-emerald-50/70 rounded-3xl border border-emerald-300/80 p-4 md:p-5 shadow-xs space-y-4 transition-all hover:shadow-md">
+            <div className="flex items-center justify-between pb-3 border-b border-emerald-200/80">
+              <div className="flex items-center gap-2.5">
+                <span className="bg-gradient-to-r from-emerald-700 to-teal-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
                   LỚP 3
                 </span>
-                <span className="font-black text-base text-slate-900 uppercase tracking-wide">
+                <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
                   ỨNG DỤNG VÀ NGHIỆP VỤ DÙNG CHUNG
                 </span>
               </div>
-              <span className="text-xs text-emerald-800 bg-emerald-100/90 font-bold px-3 py-1 rounded-full border border-emerald-300">
-                389+ Hệ thống
+              <span className="text-[11px] text-emerald-800 bg-emerald-100 font-extrabold px-3 py-0.5 rounded-full border border-emerald-300">
+                389+ Hệ thống số & CSDL
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Nhánh 1: Chính quyền số */}
-              <div className="space-y-2">
-                <div className="font-extrabold text-xs text-emerald-900 uppercase tracking-wider px-1">
-                  🏛️ Chính Quyền Số (Nội Bộ & TTHC)
+              <div className="space-y-2.5 bg-white/60 p-3 rounded-2xl border border-emerald-200/60">
+                <div className="font-black text-xs text-emerald-900 uppercase tracking-wider px-1 flex items-center justify-between">
+                  <span>🏛️ Chính Quyền Số (Nội Bộ & TTHC)</span>
+                  <span className="text-[10px] text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded font-bold">4 Khối</span>
                 </div>
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {renderTile("lop3_chidao_dieuhanh")}
                   {renderTile("lop3_tthc_sohoa")}
                   {renderTile("lop3_ioc_tinh")}
@@ -537,11 +594,12 @@ export default function SoDoKhungKTSPage() {
               </div>
 
               {/* Nhánh 2: Kinh tế số & Xã hội số */}
-              <div className="space-y-2">
-                <div className="font-extrabold text-xs text-emerald-900 uppercase tracking-wider px-1">
-                  🌾 Kinh Tế Số & Xã Hội Số
+              <div className="space-y-2.5 bg-white/60 p-3 rounded-2xl border border-emerald-200/60">
+                <div className="font-black text-xs text-emerald-900 uppercase tracking-wider px-1 flex items-center justify-between">
+                  <span>🌾 Kinh Tế Số & Xã Hội Số</span>
+                  <span className="text-[10px] text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded font-bold">4 Khối</span>
                 </div>
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {renderTile("lop3_nongnghiep_so")}
                   {renderTile("lop3_yte_so")}
                   {renderTile("lop3_datdai_tnmt")}
@@ -554,17 +612,22 @@ export default function SoDoKhungKTSPage() {
           {/* ------------------------------------------------------------- */}
           {/* LỚP 2: DỮ LIỆU VÀ NỀN TẢNG LÕI */}
           {/* ------------------------------------------------------------- */}
-          <div className="bg-blue-50/50 rounded-2xl border-2 border-blue-200 p-4 shadow-xs">
-            <div className="flex items-center gap-3 mb-3.5 pb-2.5 border-b border-blue-200">
-              <span className="bg-blue-700 text-white font-black text-xs px-3 py-1 rounded-md shadow-xs tracking-wider">
-                LỚP 2
-              </span>
-              <span className="font-black text-base text-slate-900 uppercase tracking-wide">
-                DỮ LIỆU VÀ NỀN TẢNG LÕI
+          <div className="bg-gradient-to-r from-blue-50/70 via-blue-50/40 to-cyan-50/70 rounded-3xl border border-blue-300/80 p-4 md:p-5 shadow-xs transition-all hover:shadow-md">
+            <div className="flex items-center justify-between gap-3 mb-3.5 pb-3 border-b border-blue-200/80">
+              <div className="flex items-center gap-2.5">
+                <span className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
+                  LỚP 2
+                </span>
+                <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
+                  DỮ LIỆU VÀ NỀN TẢNG LÕI
+                </span>
+              </div>
+              <span className="text-[11px] text-blue-800 font-bold bg-blue-100/90 px-3 py-0.5 rounded-full border border-blue-300/80 hidden sm:inline-block">
+                Trục LGSP • CSDL Quốc Gia • Kho Dữ Liệu
               </span>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {renderTile("lop2_lgsp_ndxp")}
               {renderTile("lop2_kho_dulieu_master")}
               {renderTile("lop2_csdl_quocgia")}
@@ -575,17 +638,22 @@ export default function SoDoKhungKTSPage() {
           {/* ------------------------------------------------------------- */}
           {/* LỚP 1: HẠ TẦNG SỐ VÀ AN NINH MẠNG */}
           {/* ------------------------------------------------------------- */}
-          <div className="bg-purple-50/50 rounded-2xl border-2 border-purple-200 p-4 shadow-xs">
-            <div className="flex items-center gap-3 mb-3.5 pb-2.5 border-b border-purple-200">
-              <span className="bg-purple-700 text-white font-black text-xs px-3 py-1 rounded-md shadow-xs tracking-wider">
-                LỚP 1
-              </span>
-              <span className="font-black text-base text-slate-900 uppercase tracking-wide">
-                HẠ TẦNG SỐ VÀ AN NINH MẠNG DÙNG CHUNG
+          <div className="bg-gradient-to-r from-purple-50/70 via-purple-50/40 to-indigo-50/70 rounded-3xl border border-purple-300/80 p-4 md:p-5 shadow-xs transition-all hover:shadow-md">
+            <div className="flex items-center justify-between gap-3 mb-3.5 pb-3 border-b border-purple-200/80">
+              <div className="flex items-center gap-2.5">
+                <span className="bg-gradient-to-r from-purple-700 to-indigo-700 text-white font-black text-xs px-3 py-1 rounded-lg shadow-xs tracking-wider">
+                  LỚP 1
+                </span>
+                <span className="font-black text-sm md:text-base text-slate-900 uppercase tracking-wide">
+                  HẠ TẦNG SỐ VÀ AN NINH MẠNG DÙNG CHUNG
+                </span>
+              </div>
+              <span className="text-[11px] text-purple-800 font-bold bg-purple-100/90 px-3 py-0.5 rounded-full border border-purple-300/80 hidden sm:inline-block">
+                Cloud IDC • TSLCD • SOC An Toàn 4 Lớp
               </span>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {renderTile("lop1_idc_cloud")}
               {renderTile("lop1_mang_tslcd")}
               {renderTile("lop1_soc_anm")}
@@ -598,50 +666,61 @@ export default function SoDoKhungKTSPage() {
         {/* ========================================================================= */}
         {/* CỘT PHẢI: THÀNH PHẦN XUYÊN SUỐT (III & IV) */}
         {/* ========================================================================= */}
-        <div className="xl:col-span-2 bg-indigo-50/60 rounded-2xl border border-indigo-200 p-4 flex flex-col justify-between space-y-4">
-          <div className="space-y-3">
-            <div className="bg-indigo-900 text-white text-center font-bold text-xs py-2 rounded-lg shadow-xs uppercase tracking-wider">
+        <div className="xl:col-span-2 bg-gradient-to-b from-indigo-50/90 to-indigo-100/60 backdrop-blur-sm rounded-3xl border border-indigo-300/80 p-4 flex flex-col justify-between space-y-4 shadow-xs">
+          <div className="space-y-3.5">
+            <div className="bg-gradient-to-r from-indigo-900 to-slate-900 text-white text-center font-black text-[11px] py-2 rounded-xl shadow-xs uppercase tracking-wider">
               TRỤ CỘT XUYÊN SUỐT
             </div>
 
             {/* 3. AI First */}
-            <div className="bg-white p-4 rounded-xl border border-indigo-200 text-center shadow-xs hover:border-indigo-400 transition-colors">
-              <RobotOutlined className="text-indigo-600 text-2xl mb-1.5" />
-              <div className="font-extrabold text-slate-900 text-sm">3. Ưu Tiên AI (AI First)</div>
-              <div className="text-xs text-slate-500 mt-1">
-                Trợ lý ảo CCVC • Tự động hóa
+            <div className="bg-white hover:bg-slate-50/90 p-4 rounded-2xl border border-indigo-200 text-center shadow-xs hover:border-indigo-300 transition-all group">
+              <div className="w-11 h-11 mx-auto bg-indigo-50 text-indigo-700 rounded-xl flex items-center justify-center text-xl mb-2 group-hover:scale-105 transition-transform shadow-2xs">
+                <RobotOutlined />
+              </div>
+              <div className="font-extrabold text-slate-900 text-xs sm:text-sm">3. Ưu Tiên AI (AI First)</div>
+              <div className="text-[11px] text-slate-500 mt-1 leading-snug">
+                Trợ lý ảo CCVC • Tự động hóa thủ tục • AI Phân tích
               </div>
             </div>
 
             {/* 4. Data-Centric */}
-            <div className="bg-white p-4 rounded-xl border border-indigo-200 text-center shadow-xs hover:border-indigo-400 transition-colors">
-              <DatabaseOutlined className="text-blue-600 text-2xl mb-1.5" />
-              <div className="font-extrabold text-slate-900 text-sm">4. Dữ Liệu Trung Tâm</div>
-              <div className="text-xs text-slate-500 mt-1">
-                Đúng - Đủ - Sạch - Sống
+            <div className="bg-white hover:bg-slate-50/90 p-4 rounded-2xl border border-indigo-200 text-center shadow-xs hover:border-indigo-300 transition-all group">
+              <div className="w-11 h-11 mx-auto bg-blue-50 text-blue-700 rounded-xl flex items-center justify-center text-xl mb-2 group-hover:scale-105 transition-transform shadow-2xs">
+                <DatabaseOutlined />
+              </div>
+              <div className="font-extrabold text-slate-900 text-xs sm:text-sm">4. Dữ Liệu Trung Tâm</div>
+              <div className="text-[11px] text-slate-500 mt-1 leading-snug">
+                Đúng - Đủ - Sạch - Sống • Open Data • Chia sẻ liên thông
               </div>
             </div>
           </div>
 
-          <div className="text-[11px] text-indigo-700 text-center font-bold uppercase tracking-wider pt-2 border-t border-indigo-200">
-            Động Lực Số & Dữ Liệu
+          <div className="text-[11px] text-indigo-800 text-center font-extrabold uppercase tracking-wider pt-3 border-t border-indigo-300/80 flex items-center justify-center gap-1">
+            <span>🚀 Động Lực Số & Dữ Liệu</span>
           </div>
         </div>
 
       </div>
 
+      {/* ========================================================================= */}
       {/* DETAIL MODAL WHEN CLICKING ANY BLOCK */}
+      {/* ========================================================================= */}
       <Modal
         title={
-          <div className="flex items-center gap-2 pr-6">
-            <span className="text-xl" style={{ color: selectedBlock?.color }}>{selectedBlock?.icon}</span>
-            <span className="font-bold text-base text-gray-800">{selectedBlock?.title}</span>
+          <div className="flex items-center gap-2.5 pr-6 pb-2 border-b">
+            <span className="text-2xl p-1.5 rounded-xl bg-slate-100 flex items-center justify-center" style={{ color: selectedBlock?.color }}>
+              {selectedBlock?.icon}
+            </span>
+            <div>
+              <div className="font-extrabold text-lg text-slate-900 leading-tight">{selectedBlock?.title}</div>
+              <div className="text-xs text-slate-500 font-medium">{selectedBlock?.category}</div>
+            </div>
           </div>
         }
         open={!!selectedBlock}
         onCancel={() => setSelectedBlock(null)}
         footer={[
-          <Button key="close" type="primary" onClick={() => setSelectedBlock(null)}>
+          <Button key="close" type="primary" onClick={() => setSelectedBlock(null)} className="rounded-xl font-bold px-6">
             Đóng
           </Button>,
         ]}
@@ -650,38 +729,37 @@ export default function SoDoKhungKTSPage() {
       >
         {selectedBlock && (
           <div className="space-y-4 mt-3">
-            <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs text-gray-700 leading-relaxed">
-              <b>Phân loại kiến trúc:</b> <Tag color="blue">{selectedBlock.category}</Tag>
-              <div className="mt-1">{selectedBlock.description}</div>
+            <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 text-xs text-slate-700 leading-relaxed">
+              <div className="font-semibold text-slate-800 mb-1">Mục tiêu & Chức năng quy hoạch:</div>
+              <div>{selectedBlock.description}</div>
             </div>
 
             {/* Nhiệm vụ lộ trình liên quan */}
             <div>
-              <div className="font-bold text-gray-800 text-sm mb-2 flex items-center gap-1.5">
+              <div className="font-bold text-slate-900 text-sm mb-2 flex items-center gap-1.5">
                 <ThunderboltOutlined className="text-amber-500" />
                 <span>Nhiệm vụ & Đề án Lộ trình liên quan ({getMatchedTasks(selectedBlock).length}):</span>
               </div>
               {getMatchedTasks(selectedBlock).length > 0 ? (
                 <div className="space-y-2">
                   {getMatchedTasks(selectedBlock).map((nv) => (
-                    <div key={nv.id} className="p-3 bg-amber-50/60 rounded-lg border border-amber-200 flex justify-between items-center">
+                    <div key={nv.id} className="p-3 bg-amber-50/70 rounded-2xl border border-amber-200 flex justify-between items-center hover:border-amber-300 transition-colors">
                       <div>
-                        <div className="font-semibold text-gray-800 text-xs">
-                          
+                        <div className="font-bold text-slate-800 text-xs">
                           {nv.ten}
                         </div>
-                        <div className="text-[11px] text-gray-500 mt-1">
-                          Chủ trì: {nv.donViChuTri?.ten || "UBND tỉnh"} • Hạn: {nv.thoiHan ? new Date(nv.thoiHan).toLocaleDateString("vi-VN") : "—"}
+                        <div className="text-[11px] text-slate-500 mt-1">
+                          Chủ trì: {nv.donViChuTri?.ten || "UBND tỉnh"} • Hạn chót: {nv.thoiHan ? new Date(nv.thoiHan).toLocaleDateString("vi-VN") : "—"}
                         </div>
                       </div>
-                      <span className="font-bold text-xs text-blue-600 bg-white px-2 py-1 rounded border border-blue-200">
+                      <span className="font-black text-xs text-blue-600 bg-white px-3 py-1 rounded-full border border-blue-200 shadow-2xs">
                         {nv.tienDo}%
                       </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="text-xs text-gray-400 italic bg-gray-50 p-2 rounded">
+                <div className="text-xs text-slate-400 italic bg-slate-50 p-3 rounded-2xl border border-dashed border-slate-200 text-center">
                   (Khối này hiện đang vận hành ổn định, không có dự án nâng cấp quy mô lớn trong lộ trình hiện tại)
                 </div>
               )}
@@ -689,34 +767,33 @@ export default function SoDoKhungKTSPage() {
 
             {/* Danh sách hệ thống số hiện trạng */}
             <div>
-              <div className="font-bold text-gray-800 text-sm mb-2 flex items-center gap-1.5">
+              <div className="font-bold text-slate-900 text-sm mb-2 flex items-center gap-1.5">
                 <DatabaseOutlined className="text-blue-500" />
                 <span>Hệ thống số & CSDL Hiện trạng thuộc khối này ({getMatchedItems(selectedBlock).length}):</span>
               </div>
               {getMatchedItems(selectedBlock).length > 0 ? (
                 <div className="max-h-60 overflow-y-auto space-y-1.5 pr-1">
                   {getMatchedItems(selectedBlock).slice(0, 30).map((ht) => (
-                    <div key={ht.id} className="p-2 bg-white rounded border border-gray-200 hover:border-blue-300 text-xs flex justify-between items-center">
+                    <div key={ht.id} className="p-2.5 bg-white rounded-xl border border-slate-200 hover:border-blue-300 text-xs flex justify-between items-center shadow-2xs">
                       <div className="flex-1 pr-2">
-                        
-                        <span className="font-medium text-gray-800">{ht.ten}</span>
-                        <div className="text-[10px] text-gray-400 mt-0.5">
+                        <span className="font-bold text-slate-800">{ht.ten}</span>
+                        <div className="text-[10px] text-slate-400 mt-0.5">
                           {ht.donVi?.ten || ht.chuQuan || "Chưa xác định"} {ht.namTrienKhai ? `• Năm ${ht.namTrienKhai}` : ""}
                         </div>
                       </div>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${TRANG_THAI_CONFIG[ht.trangThai]?.badgeClass || ""}`}>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${TRANG_THAI_CONFIG[ht.trangThai]?.badgeClass || ""}`}>
                         {TRANG_THAI_CONFIG[ht.trangThai]?.label || ht.trangThai}
                       </span>
                     </div>
                   ))}
                   {getMatchedItems(selectedBlock).length > 30 && (
-                    <div className="text-center text-xs text-blue-600 py-2">
+                    <div className="text-center text-xs text-blue-600 font-bold py-2">
                       ...và còn {getMatchedItems(selectedBlock).length - 30} CSDL/phần mềm chuyên ngành khác.
                     </div>
                   )}
                 </div>
               ) : (
-                <div className="text-xs text-gray-400 italic bg-gray-50 p-2 rounded">
+                <div className="text-xs text-slate-400 italic bg-slate-50 p-3 rounded-2xl border border-dashed border-slate-200 text-center">
                   (Khối này đóng vai trò quy chuẩn mục tiêu kết nối liên thông)
                 </div>
               )}
