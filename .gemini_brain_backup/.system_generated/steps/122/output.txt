@@ -1,2 +1,0 @@
-Created file file:///C:/Delta%20Force/kts-vinhlong/src/app/layout.tsx with requested content.
-If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.

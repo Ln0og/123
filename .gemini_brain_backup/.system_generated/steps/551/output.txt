@@ -1,6 +1,0 @@
-
-The command exited with code 0.
-Output:
-src/app/(portal)/layout.tsx:  { href: "/kts/muc-tieu", label: "Kiến trúc mục tiêu" },
-src/app/page.tsx:            <Link href="/kts/muc-tieu" className="text-white hover:text-blue-200 text-sm transition-colors">
-

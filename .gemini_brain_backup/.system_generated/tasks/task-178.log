@@ -1,6 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-09-19T23:18:22+07:00
-Prompt: Check DB setup task status
-Early Termination: 0c724d03-995b-41e5-b753-c6096ba91ae8/task-174
-
-[2026-09-19T23:18:13+07:00] Timer cancelled: early-termination condition (0c724d03-995b-41e5-b753-c6096ba91ae8/task-174) met by a message from 0c724d03-995b-41e5-b753-c6096ba91ae8/task-174.

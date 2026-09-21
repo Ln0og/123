@@ -1,2 +1,0 @@
-﻿LOI 5. Tai lieu BCA.doc: Failed to open file 'C:\\Delta Force\\New folder\\5. Tai lieu BCA.doc' as type doc.
-LOI 6. PL Lo trinh nhiem vu BCA 2.doc: Failed to open file 'C:\\Delta Force\\New folder\\6. PL Lo trinh nhiem vu BCA 2.doc' as type doc.

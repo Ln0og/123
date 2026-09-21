@@ -1,4 +1,0 @@
-Task: 0c724d03-995b-41e5-b753-c6096ba91ae8/task-174
-Status: RUNNING
-Log: C:\Users\Lnog\.gemini\antigravity\brain\0c724d03-995b-41e5-b753-c6096ba91ae8\.system_generated\tasks\task-174.log
-Last progress: never
