@@ -59,7 +59,8 @@ const { Search } = Input;
 export default function HienTrangPage() {
   const [data, setData] = useState<HeThongSoData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<"cards" | "dashboard" | "table">("dashboard");
+  const [viewMode, setViewMode] = useState<"list" | "dashboard">("list");
+  const [displayType, setDisplayStyle] = useState<"table" | "cards">("table");
   const [selectedLop, setSelectedLop] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterTrangThai, setFilterTrangThai] = useState<string>("");
@@ -402,13 +403,12 @@ export default function HienTrangPage() {
         <div className="bg-white/10 p-1.5 rounded-xl backdrop-blur-md border border-white/20">
           <Segmented
             value={viewMode}
-            onChange={(val) => setViewMode(val as "cards" | "dashboard" | "table")}
+            onChange={(val) => setViewMode(val as "list" | "dashboard")}
             options={[
-              { label: "📊 Tổng quan Dashboard", value: "dashboard", icon: <PieChartOutlined /> },
-              { label: "🏛️ Khung 4 Lớp", value: "cards", icon: <AppstoreOutlined /> },
-              { label: "📋 Bảng Kiểm Kê", value: "table", icon: <TableOutlined /> },
+              { label: "📋 Danh mục Kiểm kê", value: "list", icon: <TableOutlined /> },
+              { label: "📊 Tổng quan Thống kê", value: "dashboard", icon: <PieChartOutlined /> },
             ]}
-            className="bg-white/20 text-white"
+            className="bg-white/20 text-white font-bold"
           />
         </div>
       </div>
@@ -581,13 +581,13 @@ export default function HienTrangPage() {
         </div>
       )}
 
-      {/* FILTER & CONTROLS TOOLBAR (Available for Card and Table views) */}
-      {viewMode !== "dashboard" && (
+      {/* FILTER & CONTROLS TOOLBAR (Available for List view) */}
+      {viewMode === "list" && (
         <Card className="shadow-xs" size="small">
           <div className="flex flex-wrap gap-3 items-center justify-between">
             <div className="flex flex-wrap gap-3 items-center flex-1">
               <Search
-                placeholder="Tìm theo tên, mã (HT-, DL-, SNN-), mô tả..."
+                placeholder="Tìm theo tên phần mềm, CSDL, mô tả..."
                 allowClear
                 value={searchQuery}
                 onChange={(e) => {
@@ -647,140 +647,154 @@ export default function HienTrangPage() {
               </Select>
             </div>
 
-            <div className="text-xs text-gray-500 font-medium">
-              Tìm thấy <span className="font-bold text-blue-600">{filteredData.length}</span> / {totalCount} hệ thống
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-gray-500 font-medium hidden sm:inline">
+                Tìm thấy <span className="font-bold text-blue-600">{filteredData.length}</span> / {totalCount} hệ thống
+              </span>
+
+              <div className="bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                <Segmented
+                  size="small"
+                  value={displayType}
+                  onChange={(val) => setDisplayStyle(val as "table" | "cards")}
+                  options={[
+                    { label: "Bảng", value: "table", icon: <TableOutlined /> },
+                    { label: "Thẻ", value: "cards", icon: <AppstoreOutlined /> },
+                  ]}
+                />
+              </div>
             </div>
           </div>
         </Card>
       )}
 
-      {/* CARD VIEW (4 LAYERS ARCHITECTURE) */}
-      {viewMode === "cards" && (
-        <div className="space-y-4">
-          {/* Layer Sub-header */}
-          <div className="bg-slate-100 p-3 rounded-xl flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-gray-800 text-sm">
-                {selectedLop === "all" ? "Tất cả các lớp kiến trúc số" : LOP_CONFIG[parseInt(selectedLop) as 1|2|3|4]?.label}
-              </span>
-              <Tag color="blue">{filteredData.length} hệ thống</Tag>
-            </div>
-            <div className="text-xs text-gray-500 flex gap-4">
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-green-500"></span> Vận hành: {filteredData.filter(d => d.trangThai === 'dang-van-hanh').length}</span>
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500"></span> Cần nâng cấp: {filteredData.filter(d => d.trangThai === 'can-nang-cap').length}</span>
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500"></span> Cần thay thế: {filteredData.filter(d => d.trangThai === 'can-thay-the').length}</span>
-            </div>
-          </div>
-
-          {paginatedCards.length === 0 ? (
-            <Card className="py-12 text-center">
-              <Empty description="Không tìm thấy hệ thống số nào phù hợp với bộ lọc." />
+      {/* UNIFIED LIST RENDERING (TABLE OR CARDS) */}
+      {viewMode === "list" && (
+        <>
+          {displayType === "table" ? (
+            <Card className="shadow-xs rounded-xl">
+              <Table
+                columns={tableColumns}
+                dataSource={filteredData}
+                rowKey="id"
+                pagination={{ pageSize: 15, showQuickJumper: true }}
+                onRow={(record) => ({
+                  onClick: () => setSelectedItem(record),
+                  className: "cursor-pointer hover:bg-blue-50/50 transition-colors",
+                })}
+              />
             </Card>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {paginatedCards.map((item) => {
-                const lopCfg = LOP_CONFIG[item.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
-                const statusCfg = TRANG_THAI_CONFIG[item.trangThai] || { label: item.trangThai, antdColor: "default" };
-                const hasCrossLink = item.nhiemVus && item.nhiemVus.length > 0;
+            <div className="space-y-4">
+              {/* Layer Sub-header */}
+              <div className="bg-slate-100 p-3 rounded-xl flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-gray-800 text-sm">
+                    {selectedLop === "all" ? "Tất cả các lớp kiến trúc số" : LOP_CONFIG[parseInt(selectedLop) as 1|2|3|4]?.label}
+                  </span>
+                  <Tag color="blue">{filteredData.length} hệ thống</Tag>
+                </div>
+                <div className="text-xs text-gray-500 flex gap-4">
+                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-green-500"></span> Vận hành: {filteredData.filter(d => d.trangThai === 'dang-van-hanh').length}</span>
+                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500"></span> Cần nâng cấp: {filteredData.filter(d => d.trangThai === 'can-nang-cap').length}</span>
+                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500"></span> Cần thay thế: {filteredData.filter(d => d.trangThai === 'can-thay-the').length}</span>
+                </div>
+              </div>
 
-                return (
-                  <Card
-                    key={item.id}
-                    size="small"
-                    hoverable
-                    className="border border-gray-200/80 hover:border-blue-400 hover:shadow-md transition-all flex flex-col justify-between rounded-xl bg-white"
-                    onClick={() => setSelectedItem(item)}
-                  >
-                    <div>
-                      {/* Card Top: Code & Layer Tag */}
-                      <div className="flex justify-between items-start mb-2.5">
-                        
-                        <div className="flex gap-1.5 flex-wrap justify-end">
-                          <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded border ${lopCfg.badgeClass}`}>
-                            {lopCfg.icon} Lớp {item.lop}
-                          </span>
-                          <span className={`inline-flex items-center text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
-                            {statusCfg.label}
-                          </span>
-                        </div>
-                      </div>
+              {paginatedCards.length === 0 ? (
+                <Card className="py-12 text-center">
+                  <Empty description="Không tìm thấy hệ thống số nào phù hợp với bộ lọc." />
+                </Card>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {paginatedCards.map((item) => {
+                    const lopCfg = LOP_CONFIG[item.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
+                    const statusCfg = TRANG_THAI_CONFIG[item.trangThai] || { label: item.trangThai, antdColor: "default" };
+                    const hasCrossLink = item.nhiemVus && item.nhiemVus.length > 0;
 
-                      {/* Title */}
-                      <h3 className="font-bold text-sm text-gray-800 line-clamp-2 hover:text-blue-600 transition-colors leading-snug mb-2">
-                        {item.ten}
-                      </h3>
-
-                      {/* Department & Year */}
-                      <div className="text-xs text-gray-500 space-y-1 mb-3">
-                        <div className="flex items-center gap-1.5 line-clamp-1">
-                          <BankOutlined className="text-gray-400 shrink-0" />
-                          <span>{item.donVi?.ten || item.chuQuan || "Chưa xác định"}</span>
-                        </div>
-                        {item.namTrienKhai && (
-                          <div className="flex items-center gap-1.5 text-gray-400">
-                            <CalendarOutlined className="shrink-0" />
-                            <span>Khai thác từ năm {item.namTrienKhai}</span>
+                    return (
+                      <Card
+                        key={item.id}
+                        size="small"
+                        hoverable
+                        className="border border-gray-200/80 hover:border-blue-400 hover:shadow-md transition-all flex flex-col justify-between rounded-xl bg-white"
+                        onClick={() => setSelectedItem(item)}
+                      >
+                        <div>
+                          {/* Card Top: Layer Tag & Status Tag */}
+                          <div className="flex justify-between items-start mb-2.5">
+                            <div className="flex gap-1.5 flex-wrap justify-end">
+                              <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded border ${lopCfg.badgeClass}`}>
+                                {lopCfg.icon} Lớp {item.lop}
+                              </span>
+                              <span className={`inline-flex items-center text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
+                                {statusCfg.label}
+                              </span>
+                            </div>
                           </div>
-                        )}
-                      </div>
 
-                      {/* Short Description */}
-                      {item.moTa && (
-                        <div className="text-xs text-gray-500 line-clamp-2 bg-slate-50 p-2 rounded-lg border border-slate-100 italic">
-                          {item.moTa.replace(/\\n|\n/g, " • ").replace(/::/g, ": ")}
+                          {/* Title */}
+                          <h3 className="font-bold text-sm text-gray-800 line-clamp-2 hover:text-blue-600 transition-colors leading-snug mb-2">
+                            {item.ten}
+                          </h3>
+
+                          {/* Department & Year */}
+                          <div className="text-xs text-gray-500 space-y-1 mb-3">
+                            <div className="flex items-center gap-1.5 line-clamp-1">
+                              <BankOutlined className="text-gray-400 shrink-0" />
+                              <span>{item.donVi?.ten || item.chuQuan || "Chưa xác định"}</span>
+                            </div>
+                            {item.namTrienKhai && (
+                              <div className="flex items-center gap-1.5 text-gray-400">
+                                <CalendarOutlined className="shrink-0" />
+                                <span>Khai thác từ năm {item.namTrienKhai}</span>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Short Description */}
+                          {item.moTa && (
+                            <div className="text-xs text-gray-500 line-clamp-2 bg-slate-50 p-2 rounded-lg border border-slate-100 italic">
+                              {item.moTa.replace(/\\n|\n/g, " • ").replace(/::/g, ": ")}
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
 
-                    {/* Card Footer: Cross-link Indicator */}
-                    <div className="mt-3 pt-2 border-t border-gray-100 flex justify-between items-center text-xs">
-                      {hasCrossLink ? (
-                        <span className="text-blue-600 font-medium flex items-center gap-1">
-                          <ApartmentOutlined /> Có nhiệm vụ lộ trình
-                        </span>
-                      ) : (
-                        <span className="text-gray-400 text-[11px]">Vận hành độc lập</span>
-                      )}
-                      <span className="text-blue-500 font-semibold hover:underline flex items-center gap-0.5">
-                        Xem chi tiết →
-                      </span>
-                    </div>
-                  </Card>
-                );
-              })}
+                        {/* Card Footer: Cross-link Indicator */}
+                        <div className="mt-3 pt-2 border-t border-gray-100 flex justify-between items-center text-xs">
+                          {hasCrossLink ? (
+                            <span className="text-blue-600 font-medium flex items-center gap-1">
+                              <ApartmentOutlined /> Có nhiệm vụ lộ trình
+                            </span>
+                          ) : (
+                            <span className="text-gray-400 text-[11px]">Vận hành độc lập</span>
+                          )}
+                          <span className="text-blue-500 font-semibold hover:underline flex items-center gap-0.5">
+                            Xem chi tiết →
+                          </span>
+                        </div>
+                      </Card>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Pagination */}
+              {filteredData.length > PAGE_SIZE && (
+                <div className="flex justify-center mt-6">
+                  <Pagination
+                    current={currentPage}
+                    pageSize={PAGE_SIZE}
+                    total={filteredData.length}
+                    onChange={(p) => setCurrentPage(p)}
+                    showSizeChanger={false}
+                    showQuickJumper
+                  />
+                </div>
+              )}
             </div>
           )}
-
-          {/* Pagination */}
-          {filteredData.length > PAGE_SIZE && (
-            <div className="flex justify-center mt-6">
-              <Pagination
-                current={currentPage}
-                pageSize={PAGE_SIZE}
-                total={filteredData.length}
-                onChange={(p) => setCurrentPage(p)}
-                showSizeChanger={false}
-                showQuickJumper
-              />
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* TABLE VIEW */}
-      {viewMode === "table" && (
-        <Card className="shadow-xs rounded-xl">
-          <Table
-            columns={tableColumns}
-            dataSource={filteredData}
-            rowKey="id"
-            pagination={{ pageSize: 15, showQuickJumper: true }}
-            onRow={(record) => ({
-              onClick: () => setSelectedItem(record),
-              className: "cursor-pointer hover:bg-blue-50/50 transition-colors",
-            })}
-          />
-        </Card>
+        </>
       )}
 
       {/* Detail Modal */}
