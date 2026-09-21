@@ -9,12 +9,17 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
   const router = useRouter();
 
   // Xác định view hiện tại để set giá trị cho Segmented
-  const currentValue = pathname.includes("/kts/lo-trinh") ? "lo-trinh" : "hien-trang";
+  let currentValue = "hien-trang";
+  if (pathname.includes("/kts/so-do")) {
+    currentValue = "so-do";
+  } else if (pathname.includes("/kts/lo-trinh")) {
+    currentValue = "lo-trinh";
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 bg-blue-800 rounded-lg flex items-center justify-center shadow-inner">
               <ApartmentOutlined className="text-white text-sm" />
@@ -35,22 +40,31 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         </div>
       </header>
       
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="w-full max-w-[1920px] mx-auto px-3 sm:px-6 md:px-8 py-5">
         {/* Nút Segmented Control dạng Pill */}
-        <div className="flex justify-center mb-10">
-          <div className="p-1 bg-gray-200/50 rounded-lg shadow-inner">
+        <div className="flex justify-center mb-6">
+          <div className="p-1 bg-gray-200/60 rounded-xl shadow-inner border border-gray-300/60">
             <Segmented
               size="large"
               value={currentValue}
               onChange={(val) => {
-                if (val === "hien-trang") router.push("/kts/hien-trang");
+                if (val === "so-do") router.push("/kts/so-do");
+                else if (val === "hien-trang") router.push("/kts/hien-trang");
                 else router.push("/kts/lo-trinh");
               }}
-              className="bg-transparent"
+              className="bg-transparent font-medium"
               options={[
                 {
                   label: (
-                    <div className="px-8 py-2 text-base font-semibold">
+                    <div className="px-5 py-1.5 text-sm sm:text-base font-semibold">
+                      🏛️ Sơ đồ Khung KTS
+                    </div>
+                  ),
+                  value: "so-do",
+                },
+                {
+                  label: (
+                    <div className="px-5 py-1.5 text-sm sm:text-base font-semibold">
                       📊 Đánh giá Hiện trạng
                     </div>
                   ),
@@ -58,7 +72,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                 },
                 {
                   label: (
-                    <div className="px-8 py-2 text-base font-semibold">
+                    <div className="px-5 py-1.5 text-sm sm:text-base font-semibold">
                       🚀 Kế hoạch Lộ trình
                     </div>
                   ),

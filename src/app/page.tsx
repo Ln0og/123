@@ -39,11 +39,14 @@ export default function HomePage() {
             </div>
           </div>
           <nav className="flex gap-4 items-center">
+            <Link href="/kts/so-do" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">
+              🏛️ Sơ đồ Khung
+            </Link>
             <Link href="/kts/hien-trang" className="text-white hover:text-blue-200 text-sm transition-colors">
-              Hiện trạng
+              📊 Hiện trạng
             </Link>
             <Link href="/kts/lo-trinh" className="text-white hover:text-blue-200 text-sm transition-colors">
-              Lộ trình
+              🚀 Lộ trình
             </Link>
             <Link href="/admin">
               <Button type="primary" size="small" danger>
@@ -70,10 +73,20 @@ export default function HomePage() {
             Hệ thống quản lý, giám sát và triển khai Khung Kiến trúc số đồng bộ,
             thống nhất, kết nối liên thông với Khung Kiến trúc Tổng thể Quốc gia Số.
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
+            <Link href="/kts/so-do">
+              <Button type="primary" size="large" className="bg-yellow-400 border-yellow-400 text-yellow-950 hover:bg-yellow-300 font-bold shadow-lg">
+                🏛️ Xem Sơ Đồ Khung KTS <RightOutlined />
+              </Button>
+            </Link>
             <Link href="/kts/hien-trang">
-              <Button type="primary" size="large" className="bg-yellow-400 border-yellow-400 text-yellow-900 hover:bg-yellow-300 font-semibold">
-                Xem Hiện Trạng KTS <RightOutlined />
+              <Button size="large" className="bg-white/20 border-white/40 text-white hover:bg-white/30 font-semibold backdrop-blur-xs">
+                📊 Đánh Giá Hiện Trạng
+              </Button>
+            </Link>
+            <Link href="/kts/lo-trinh">
+              <Button size="large" className="bg-white/20 border-white/40 text-white hover:bg-white/30 font-semibold backdrop-blur-xs">
+                🚀 Kế Hoạch Lộ Trình
               </Button>
             </Link>
           </div>
