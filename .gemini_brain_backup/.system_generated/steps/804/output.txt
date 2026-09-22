@@ -1,0 +1,19 @@
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -230,11 +230,8 @@
+       if (target) target.tasks.push(task);
+     });
+ 
+-    if (selectedTimelinePhase === "all") {
+-      return groups.filter((g) => g.tasks.length > 0);
+-    }
+-    return groups.filter((g) => g.phaseKey === selectedTimelinePhase && g.tasks.length > 0);
+-  }, [filteredData, selectedTimelinePhase]);
++    return groups.filter((g) => g.tasks.length > 0);
++  }, [filteredData]);
+ 
+   const columns: ColumnsType<NhiemVuData> = [
+     {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

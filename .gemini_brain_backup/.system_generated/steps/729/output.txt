@@ -1,12 +1,9 @@
 
-The command exited with code 1.
+The command exited with code 0.
 Output:
-portal : The term 'portal' is not recognized as the name of a cmdlet, function, script file, or operable program. 
-Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
-At line:1 char:19
-+ git diff src/app/(portal)/kts/hien-trang/page.tsx
-+                   ~~~~~~
-    + CategoryInfo          : ObjectNotFound: (portal:String) [], CommandNotFoundException
-    + FullyQualifiedErrorId : CommandNotFoundException
- 
+Found brain directory: C:\Users\ckgam\.gemini\antigravity\brain\724a6bcd-bcc3-4ca2-973c-d3661f6678bd
+Copying brain folder to backup directory...
+Brain backup copied successfully.
+Parsing transcript from: C:\Users\ckgam\.gemini\antigravity\brain\724a6bcd-bcc3-4ca2-973c-d3661f6678bd\.system_generated\logs\transcript_full.jsonl
+Saved LICH_SU_TRO_CHUYEN.md (46 turns, 120130 bytes) to E:\KTS\123\LICH_SU_TRO_CHUYEN.md
 

@@ -1,0 +1,37 @@
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -884,30 +884,8 @@
+         </div>
+       </Card>
+ 
+-      {/* TABLE VIEW */}
+-      {detailView === "table" && (
+-        <Card className="shadow-xs rounded-xl">
+-          <Table
+-            columns={columns}
+-            dataSource={filteredData}
+-            rowKey="id"
+-            pagination={{ pageSize: 15 }}
+-            onRow={(record) => ({
+-              onClick: () => setSelectedTask(record),
+-              className: "cursor-pointer hover:bg-blue-50/50 transition-colors",
+-            })}
+-            rowClassName={(record) => {
+-              if (record.trangThai === "hoan-thanh") return "bg-green-50/30";
+-              if (isOverdue(record.thoiHan) && record.trangThai !== "hoan-thanh") return "bg-red-50/30";
+-              return "";
+-            }}
+-          />
+-        </Card>
+-      )}
+-
+       {/* TIMELINE / ROADMAP VIEW (MODERN INTERACTIVE TREE SPINE) */}
+-      {detailView === "timeline" && (
+-        <div className="space-y-6">
++      <div className="space-y-6">
+           {timelineGroups.length === 0 ? (
+             <Card className="py-12 text-center rounded-2xl shadow-xs">
+               <Empty description="Không tìm thấy nhiệm vụ nào trong mốc thời gian này." />
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

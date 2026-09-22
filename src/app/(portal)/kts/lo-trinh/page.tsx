@@ -1,18 +1,15 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
 import { 
-  Table, 
   Tag, 
   Progress, 
   Select, 
   Card, 
-  Badge, 
   Tooltip, 
   Modal, 
   Descriptions, 
   Button, 
   Input, 
-  Segmented,
   Row,
   Col,
   Empty,
@@ -29,9 +26,6 @@ import {
   FileTextOutlined,
   CheckSquareOutlined,
   EyeOutlined,
-  PieChartOutlined,
-  TableOutlined,
-  FieldTimeOutlined,
   SearchOutlined,
   FireOutlined,
   RiseOutlined,
@@ -40,13 +34,8 @@ import {
   CheckOutlined,
   HourglassOutlined,
   ArrowRightOutlined,
-  BranchesOutlined,
-  AppstoreOutlined,
-  AimOutlined,
-  CompassOutlined,
-  NodeIndexOutlined
+  AimOutlined
 } from "@ant-design/icons";
-import type { ColumnsType } from "antd/es/table";
 import { NhiemVuData } from "@/types";
 import { 
   LOP_CONFIG, 
@@ -75,9 +64,6 @@ const { Search } = Input;
 export default function LoTrinhPage() {
   const [data, setData] = useState<NhiemVuData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [detailView, setDetailView] = useState<"timeline" | "table">("timeline");
-  const [timelineStyle, setTimelineStyle] = useState<"tree" | "grid">("tree");
-  const [selectedTimelinePhase, setSelectedTimelinePhase] = useState<string>("all");
   const [filterLop, setFilterLop] = useState<string>("");
   const [filterTrangThai, setFilterTrangThai] = useState<string>("");
   const [filterUuTien, setFilterUuTien] = useState<string>("");
@@ -233,135 +219,8 @@ export default function LoTrinhPage() {
       if (target) target.tasks.push(task);
     });
 
-    if (selectedTimelinePhase === "all") {
-      return groups.filter((g) => g.tasks.length > 0);
-    }
-    return groups.filter((g) => g.phaseKey === selectedTimelinePhase && g.tasks.length > 0);
-  }, [filteredData, selectedTimelinePhase]);
-
-  const columns: ColumnsType<NhiemVuData> = [
-    {
-      title: "STT",
-      key: "stt",
-      width: 75,
-      align: "center",
-      render: (_, __, index) => (
-        <span className="font-bold text-gray-700 bg-gray-100 border border-gray-200/80 px-2.5 py-1 rounded-full text-xs">
-          {index + 1}
-        </span>
-      ),
-    },
-    {
-      title: "Nhiệm vụ & Mục tiêu",
-      dataIndex: "ten",
-      render: (ten, rec) => (
-        <div className="group">
-          <div className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors flex items-center gap-1.5">
-            <span>{ten}</span>
-            <EyeOutlined className="text-gray-300 group-hover:text-blue-500 text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
-          {rec.moTa && <div className="text-xs text-gray-400 mt-0.5 line-clamp-2">{rec.moTa}</div>}
-          {rec.phuongAnXuLy && (
-            <div className="text-xs mt-1 text-blue-600 flex items-center gap-1">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-              {PHUONG_AN_CONFIG[rec.phuongAnXuLy] || rec.phuongAnXuLy}
-            </div>
-          )}
-          {rec.heThongSos && rec.heThongSos.length > 0 && (
-            <div className="mt-2 text-xs border-t border-dashed pt-1">
-              <span className="text-gray-500 mr-1">Tác động đến Hệ thống:</span>
-              <div className="flex flex-wrap gap-1 mt-1">
-                {rec.heThongSos.map((ht) => (
-                  <Tooltip key={ht.id} title={ht.ten}>
-                    <Tag className="m-0 text-[10px] bg-blue-50 text-blue-600 border-blue-200">{ht.ma}</Tag>
-                  </Tooltip>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      ),
-    },
-    {
-      title: "Lớp",
-      dataIndex: "lop",
-      width: 140,
-      filters: [1, 2, 3, 4].map((l) => ({ text: LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel, value: l })),
-      onFilter: (value, record) => record.lop === value,
-      render: (lop) => {
-        const cfg = LOP_CONFIG[lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
-        return (
-          <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
-            {cfg.icon} Lớp {lop}
-          </span>
-        );
-      },
-    },
-    {
-      title: "Đơn vị chủ trì",
-      dataIndex: ["donViChuTri", "ten"],
-      width: 180,
-      render: (_, rec) => (
-        <div className="text-xs font-medium text-gray-800 flex items-center gap-1.5">
-          <BankOutlined className="text-gray-400" />
-          <span>{rec.donViChuTri?.ten || "UBND tỉnh Vĩnh Long"}</span>
-        </div>
-      ),
-    },
-    {
-      title: "Ưu tiên",
-      dataIndex: "uuTien",
-      width: 120,
-      render: (uuTien) => {
-        const cfg = UU_TIEN_CONFIG[uuTien] || { label: uuTien, badgeClass: "bg-gray-100 text-gray-800 border-gray-300 font-bold" };
-        return (
-          <span className={`inline-flex items-center text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
-            {cfg.label}
-          </span>
-        );
-      },
-    },
-    {
-      title: "Thời hạn",
-      dataIndex: "thoiHan",
-      width: 130,
-      render: (thoiHan, rec) => {
-        if (!thoiHan) return "—";
-        const overdue = isOverdue(thoiHan) && rec.trangThai !== "hoan-thanh";
-        const days = getDaysRemaining(thoiHan);
-        return (
-          <Tooltip title={days !== null ? (overdue ? `Trễ ${Math.abs(days)} ngày` : `Còn ${days} ngày`) : ""}>
-            <span className={overdue ? "text-red-600 font-bold" : days !== null && days <= 30 ? "text-amber-600 font-bold" : "text-gray-700 font-medium"}>
-              {overdue && <WarningOutlined className="mr-1" />}
-              {formatDate(thoiHan)}
-            </span>
-          </Tooltip>
-        );
-      },
-    },
-    {
-      title: "Tiến độ",
-      dataIndex: "tienDo",
-      width: 160,
-      render: (tienDo, rec) => (
-        <div>
-          <Progress
-            percent={tienDo}
-            size="small"
-            status={rec.trangThai === "tre-han" ? "exception" : rec.trangThai === "hoan-thanh" ? "success" : "active"}
-            strokeColor={
-              rec.trangThai === "hoan-thanh" ? "#15803d" :
-              rec.trangThai === "tre-han" ? "#b91c1c" :
-              tienDo > 50 ? "#1d4ed8" : "#d97706"
-            }
-          />
-          <div className="text-xs font-semibold text-gray-500 mt-0.5">
-            {TRANG_THAI_CONFIG[rec.trangThai]?.label || rec.trangThai}
-          </div>
-        </div>
-      ),
-    },
-  ];
+    return groups.filter((g) => g.tasks.length > 0);
+  }, [filteredData]);
 
   const renderModalContent = () => {
     if (!selectedTask) return null;
@@ -890,105 +749,8 @@ export default function LoTrinhPage() {
         </div>
       </Card>
 
-      {/* TABLE VIEW */}
-      {detailView === "table" && (
-        <Card className="shadow-xs rounded-xl">
-          <Table
-            columns={columns}
-            dataSource={filteredData}
-            rowKey="id"
-            pagination={{ pageSize: 15 }}
-            onRow={(record) => ({
-              onClick: () => setSelectedTask(record),
-              className: "cursor-pointer hover:bg-blue-50/50 transition-colors",
-            })}
-            rowClassName={(record) => {
-              if (record.trangThai === "hoan-thanh") return "bg-green-50/30";
-              if (isOverdue(record.thoiHan) && record.trangThai !== "hoan-thanh") return "bg-red-50/30";
-              return "";
-            }}
-          />
-        </Card>
-      )}
-
-      {/* TIMELINE / ROADMAP VIEW (MODERN REDESIGNED INTERACTIVE TREE SPINE) */}
-      {detailView === "timeline" && (
-        <div className="space-y-6">
-          
-          {/* Phase Filter Tabs & Style Switcher */}
-          <div className="flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-3 bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 p-4 rounded-2xl shadow-sm text-white">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5 mr-2">
-                <CompassOutlined className="text-blue-400" /> Mốc Chiến Lược:
-              </span>
-              
-              <button
-                onClick={() => setSelectedTimelinePhase("all")}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  selectedTimelinePhase === "all"
-                    ? "bg-blue-600 text-white shadow-md ring-2 ring-blue-400"
-                    : "bg-white/10 text-slate-300 hover:bg-white/20 border border-white/10"
-                }`}
-              >
-                <span>Toàn bộ Lộ trình (2026–2030)</span>
-                <span className="bg-white/20 px-1.5 py-0.2 rounded-full text-[10px]">{filteredData.length}</span>
-              </button>
-
-              <button
-                onClick={() => setSelectedTimelinePhase("2026")}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  selectedTimelinePhase === "2026"
-                    ? "bg-blue-600 text-white shadow-md ring-2 ring-blue-400"
-                    : "bg-white/10 text-slate-300 hover:bg-white/20 border border-white/10"
-                }`}
-              >
-                <RocketOutlined />
-                <span>Năm 2026: Khởi động</span>
-                <span className="bg-blue-400/30 text-blue-200 px-1.5 py-0.2 rounded-full text-[10px]">4</span>
-              </button>
-
-              <button
-                onClick={() => setSelectedTimelinePhase("2027")}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  selectedTimelinePhase === "2027"
-                    ? "bg-amber-600 text-white shadow-md ring-2 ring-amber-400"
-                    : "bg-white/10 text-slate-300 hover:bg-white/20 border border-white/10"
-                }`}
-              >
-                <ThunderboltOutlined />
-                <span>Năm 2027: Tăng tốc</span>
-                <span className="bg-amber-400/30 text-amber-200 px-1.5 py-0.2 rounded-full text-[10px]">2</span>
-              </button>
-
-              <button
-                onClick={() => setSelectedTimelinePhase("2028-2030")}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  selectedTimelinePhase === "2028-2030"
-                    ? "bg-emerald-600 text-white shadow-md ring-2 ring-emerald-400"
-                    : "bg-white/10 text-slate-300 hover:bg-white/20 border border-white/10"
-                }`}
-              >
-                <RiseOutlined />
-                <span>2028–2030: Bứt phá</span>
-                <span className="bg-emerald-400/30 text-emerald-200 px-1.5 py-0.2 rounded-full text-[10px]">3</span>
-              </button>
-            </div>
-
-            {/* Layout Switcher (Tree Spine vs Grid) */}
-            <div className="bg-white/10 p-1 rounded-xl shrink-0 border border-white/10 self-start lg:self-auto">
-              <Segmented
-                value={timelineStyle}
-                onChange={(val) => setTimelineStyle(val as "tree" | "grid")}
-                options={[
-                  { label: "🌳 Cây Trục So Le", value: "tree", icon: <BranchesOutlined /> },
-                  { label: "📦 Lưới Khối Mốc", value: "grid", icon: <AppstoreOutlined /> },
-                ]}
-                className="bg-white/20 text-white text-xs font-semibold"
-              />
-            </div>
-          </div>
-
-          {/* Timeline Journey Stream */}
+      {/* TIMELINE / ROADMAP VIEW (MODERN INTERACTIVE TREE SPINE) */}
+      <div className="space-y-6">
           {timelineGroups.length === 0 ? (
             <Card className="py-12 text-center rounded-2xl shadow-xs">
               <Empty description="Không tìm thấy nhiệm vụ nào trong mốc thời gian này." />
@@ -1004,328 +766,31 @@ export default function LoTrinhPage() {
                   badgeBg: "bg-blue-50 border-blue-200 text-blue-800"
                 };
 
-                const avgPhaseProgress = group.tasks.length > 0 
-                  ? Math.round(group.tasks.reduce((a, b) => a + b.tienDo, 0) / group.tasks.length) 
-                  : 0;
-
                 return (
-                  <div key={group.key} className="space-y-6">
-                    {/* Phase Header Banner with Glowing Milestone Hub */}
-                    <div className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-900 text-white p-5 rounded-2xl border border-blue-800/40 shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                      {/* Decorative ambient light */}
-                      <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-                      
-                      <div className="flex items-center gap-3.5 z-10">
-                        <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-2xl shrink-0 shadow-inner">
-                          {meta.icon}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <h2 className="text-base md:text-lg font-black tracking-tight text-white m-0 uppercase">
-                              {meta.title}
-                            </h2>
-                            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-500/30 text-blue-200 border border-blue-400/30">
-                              {group.tasks.length} nhiệm vụ trọng tâm
-                            </span>
-                          </div>
-                          <p className="text-xs text-blue-200/80 mt-1 mb-0 max-w-2xl leading-relaxed">
-                            {meta.subtitle}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20 shrink-0 text-right z-10">
-                        <div className="text-[11px] text-blue-200 uppercase font-semibold">Tiến độ giai đoạn</div>
-                        <div className="text-xl font-black text-white">{avgPhaseProgress}%</div>
+                  <div key={group.key} className="space-y-4">
+                    {/* Minimalist Floating Phase / Year Milestone Pill */}
+                    <div className="relative z-10 flex justify-start md:justify-center my-4">
+                      <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-900 text-white shadow-md text-xs font-black tracking-wide border border-slate-700">
+                        <span className="text-blue-400">{meta.icon}</span>
+                        <span className="uppercase">{meta.title}</span>
+                        <span className="bg-blue-600 text-white text-[11px] px-2.5 py-0.5 rounded-full font-bold">
+                          {group.tasks.length} nhiệm vụ
+                        </span>
                       </div>
                     </div>
 
-                    {/* ========================================================================= */}
-                    {/* MODE 1: MODERN TREE SPINE TIMELINE (CÂY TRỤC THỜI GIAN SO LE HIỆN ĐẠI) */}
-                    {/* ========================================================================= */}
-                    {timelineStyle === "tree" ? (
-                      <div className="relative py-4">
-                        {/* Central Glowing Vertical Spine Trunk */}
-                        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 -ml-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-emerald-500 rounded-full opacity-60 shadow-[0_0_12px_rgba(59,130,246,0.5)] pointer-events-none hidden md:block" />
-                        <div className="absolute left-6 top-0 bottom-0 w-1 -ml-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-emerald-500 rounded-full opacity-60 md:hidden pointer-events-none" />
+                    {/* MODERN TREE SPINE TIMELINE (CÂY TRỤC THỜI GIAN SO LE) */}
+                    <div className="relative py-4">
+                      {/* Central Glowing Vertical Spine Trunk */}
+                      <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 -ml-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-emerald-500 rounded-full opacity-60 shadow-[0_0_12px_rgba(59,130,246,0.5)] pointer-events-none hidden md:block" />
+                      <div className="absolute left-6 top-0 bottom-0 w-1 -ml-0.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-emerald-500 rounded-full opacity-60 md:hidden pointer-events-none" />
 
-                        {/* Alternating Tree Branch Nodes */}
-                        <div className="space-y-6 md:space-y-8">
-                          {group.tasks.map((task, taskIdx) => {
-                            const globalIdx = data.findIndex((t) => t.id === task.id);
-                            const sttNum = globalIdx >= 0 ? globalIdx + 1 : 1;
-                            const isEven = taskIdx % 2 === 0;
-                            const lopCfg = LOP_CONFIG[task.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
-                            const statusCfg = TRANG_THAI_CONFIG[task.trangThai] || { label: task.trangThai, badgeClass: "bg-gray-100 text-gray-800" };
-                            const priorityCfg = UU_TIEN_CONFIG[task.uuTien] || { label: task.uuTien, badgeClass: "bg-gray-100 text-gray-800" };
-                            const overdue = task.thoiHan ? isOverdue(task.thoiHan) && task.trangThai !== "hoan-thanh" : false;
-                            const days = task.thoiHan ? getDaysRemaining(task.thoiHan) : null;
-
-                            return (
-                              <div key={task.id} className="relative flex flex-col md:flex-row items-center">
-                                
-                                {/* DESKTOP: Left Side Branch Content */}
-                                <div className={`w-full md:w-1/2 ${isEven ? "md:pr-10" : "md:hidden"} pl-12 md:pl-0`}>
-                                  {isEven && (
-                                    <div
-                                      onClick={() => setSelectedTask(task)}
-                                      className="bg-white hover:bg-slate-50/80 p-5 rounded-2xl border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer space-y-3.5 group relative"
-                                    >
-                                      {/* Horizontal Connector Line for Desktop Left Branch */}
-                                      <div className="hidden md:block absolute top-7 -right-10 w-10 h-0.5 bg-blue-400/80 border-t border-dashed border-blue-500" />
-                                      
-                                      {/* Card Top Row: STT, Layer, Priority, Status */}
-                                      <div className="flex justify-between items-start gap-2 flex-wrap">
-                                        <div className="flex items-center gap-2">
-                                          <span className="font-black text-xs bg-slate-900 text-white px-2.5 py-1 rounded-md shadow-xs flex items-center gap-1">
-                                            <AimOutlined className="text-blue-400" /> #{sttNum}
-                                          </span>
-                                          <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${lopCfg.badgeClass}`}>
-                                            {lopCfg.icon} Lớp {task.lop}
-                                          </span>
-                                        </div>
-
-                                        <div className="flex items-center gap-1.5 flex-wrap">
-                                          <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${priorityCfg.badgeClass}`}>
-                                            {priorityCfg.label}
-                                          </span>
-                                          <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
-                                            {statusCfg.label}
-                                          </span>
-                                        </div>
-                                      </div>
-
-                                      {/* Task Title */}
-                                      <h3 className="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors leading-snug m-0">
-                                        {task.ten}
-                                      </h3>
-
-                                      {/* Description */}
-                                      {task.moTa && (
-                                        <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed m-0">
-                                          {task.moTa}
-                                        </p>
-                                      )}
-
-                                      {/* Metadata Matrix */}
-                                      <div className="space-y-1.5 text-xs text-slate-600 bg-slate-50/90 p-3 rounded-xl border border-slate-100">
-                                        <div className="flex items-center gap-2">
-                                          <BankOutlined className="text-blue-500 shrink-0" />
-                                          <span className="font-semibold text-slate-800">Chủ trì:</span>
-                                          <span className="truncate">{task.donViChuTri?.ten || "UBND tỉnh Vĩnh Long"}</span>
-                                        </div>
-
-                                        <div className="flex items-center justify-between gap-2">
-                                          <div className="flex items-center gap-2">
-                                            <CalendarOutlined className="text-slate-400 shrink-0" />
-                                            <span className="font-semibold text-slate-800">Hạn:</span>
-                                            <span>{task.thoiHan ? formatDate(task.thoiHan) : "Giai đoạn 2026–2030"}</span>
-                                          </div>
-                                          {days !== null && (
-                                            <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${
-                                              overdue ? "bg-red-100 text-red-700" :
-                                              days <= 30 ? "bg-amber-100 text-amber-800" :
-                                              "bg-blue-100 text-blue-800"
-                                            }`}>
-                                              {overdue ? `Trễ ${Math.abs(days)} ngày` : task.trangThai === "hoan-thanh" ? "Đã nghiệm thu" : `Còn ${days} ngày`}
-                                            </span>
-                                          )}
-                                        </div>
-
-                                        {task.phuongAnXuLy && (
-                                          <div className="flex items-center gap-2 text-indigo-700 font-medium">
-                                            <ThunderboltOutlined className="shrink-0" />
-                                            <span className="truncate">{PHUONG_AN_CONFIG[task.phuongAnXuLy] || task.phuongAnXuLy}</span>
-                                          </div>
-                                        )}
-                                      </div>
-
-                                      {/* Progress Bar & Impacted Systems */}
-                                      <div className="pt-2 border-t border-slate-100 space-y-2">
-                                        <div>
-                                          <div className="flex justify-between text-xs text-slate-600 mb-1 font-medium">
-                                            <span>Tiến độ thực tế</span>
-                                            <span className="font-bold text-slate-900">{task.tienDo}%</span>
-                                          </div>
-                                          <Progress
-                                            percent={task.tienDo}
-                                            size="small"
-                                            status={task.trangThai === "tre-han" ? "exception" : task.trangThai === "hoan-thanh" ? "success" : "active"}
-                                            strokeColor={
-                                              task.trangThai === "hoan-thanh" ? "#16a34a" :
-                                              task.trangThai === "tre-han" ? "#dc2626" :
-                                              task.tienDo > 50 ? "#2563eb" : "#d97706"
-                                            }
-                                          />
-                                        </div>
-
-                                        {task.heThongSos && task.heThongSos.length > 0 && (
-                                          <div className="flex items-center gap-1.5 flex-wrap pt-1">
-                                            <span className="text-[11px] text-slate-500 font-semibold">Tác động:</span>
-                                            {task.heThongSos.slice(0, 4).map((ht) => (
-                                              <Tooltip key={ht.id} title={ht.ten}>
-                                                <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded hover:bg-blue-100 transition-colors">
-                                                  {ht.ma}
-                                                </span>
-                                              </Tooltip>
-                                            ))}
-                                            {task.heThongSos.length > 4 && (
-                                              <span className="text-[10px] text-slate-400 font-bold">+{task.heThongSos.length - 4}</span>
-                                            )}
-                                          </div>
-                                        )}
-
-                                        <div className="flex justify-end text-xs text-blue-600 font-bold pt-1 group-hover:translate-x-1 transition-transform">
-                                          <span className="flex items-center gap-1">Khám phá hồ sơ nhiệm vụ <ArrowRightOutlined /></span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-
-                                {/* Central Pulsing Connector Node on Spine */}
-                                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-7 z-20 flex items-center justify-center">
-                                  <div className={`w-9 h-9 rounded-full bg-white border-3 shadow-md flex items-center justify-center font-black text-xs transition-transform duration-300 group-hover:scale-110 ${
-                                    task.trangThai === "hoan-thanh" ? "border-emerald-500 text-emerald-700 ring-4 ring-emerald-100" :
-                                    task.trangThai === "tre-han" ? "border-red-500 text-red-700 ring-4 ring-red-100" :
-                                    "border-blue-600 text-blue-700 ring-4 ring-blue-100"
-                                  }`}>
-                                    {sttNum}
-                                  </div>
-                                </div>
-
-                                {/* DESKTOP: Right Side Branch Content (or Mobile Default) */}
-                                <div className={`w-full md:w-1/2 ${!isEven ? "md:pl-10" : "md:hidden"} pl-12 md:pl-0`}>
-                                  {(!isEven || true) && (
-                                    <div
-                                      onClick={() => setSelectedTask(task)}
-                                      className="bg-white hover:bg-slate-50/80 p-5 rounded-2xl border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer space-y-3.5 group relative"
-                                    >
-                                      {/* Horizontal Connector Line for Desktop Right Branch */}
-                                      <div className="hidden md:block absolute top-7 -left-10 w-10 h-0.5 bg-blue-400/80 border-t border-dashed border-blue-500" />
-                                      
-                                      {/* Card Top Row: STT, Layer, Priority, Status */}
-                                      <div className="flex justify-between items-start gap-2 flex-wrap">
-                                        <div className="flex items-center gap-2">
-                                          <span className="font-black text-xs bg-slate-900 text-white px-2.5 py-1 rounded-md shadow-xs flex items-center gap-1">
-                                            <AimOutlined className="text-blue-400" /> #{sttNum}
-                                          </span>
-                                          <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${lopCfg.badgeClass}`}>
-                                            {lopCfg.icon} Lớp {task.lop}
-                                          </span>
-                                        </div>
-
-                                        <div className="flex items-center gap-1.5 flex-wrap">
-                                          <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${priorityCfg.badgeClass}`}>
-                                            {priorityCfg.label}
-                                          </span>
-                                          <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
-                                            {statusCfg.label}
-                                          </span>
-                                        </div>
-                                      </div>
-
-                                      {/* Task Title */}
-                                      <h3 className="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors leading-snug m-0">
-                                        {task.ten}
-                                      </h3>
-
-                                      {/* Description */}
-                                      {task.moTa && (
-                                        <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed m-0">
-                                          {task.moTa}
-                                        </p>
-                                      )}
-
-                                      {/* Metadata Matrix */}
-                                      <div className="space-y-1.5 text-xs text-slate-600 bg-slate-50/90 p-3 rounded-xl border border-slate-100">
-                                        <div className="flex items-center gap-2">
-                                          <BankOutlined className="text-blue-500 shrink-0" />
-                                          <span className="font-semibold text-slate-800">Chủ trì:</span>
-                                          <span className="truncate">{task.donViChuTri?.ten || "UBND tỉnh Vĩnh Long"}</span>
-                                        </div>
-
-                                        <div className="flex items-center justify-between gap-2">
-                                          <div className="flex items-center gap-2">
-                                            <CalendarOutlined className="text-slate-400 shrink-0" />
-                                            <span className="font-semibold text-slate-800">Hạn:</span>
-                                            <span>{task.thoiHan ? formatDate(task.thoiHan) : "Giai đoạn 2026–2030"}</span>
-                                          </div>
-                                          {days !== null && (
-                                            <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${
-                                              overdue ? "bg-red-100 text-red-700" :
-                                              days <= 30 ? "bg-amber-100 text-amber-800" :
-                                              "bg-blue-100 text-blue-800"
-                                            }`}>
-                                              {overdue ? `Trễ ${Math.abs(days)} ngày` : task.trangThai === "hoan-thanh" ? "Đã nghiệm thu" : `Còn ${days} ngày`}
-                                            </span>
-                                          )}
-                                        </div>
-
-                                        {task.phuongAnXuLy && (
-                                          <div className="flex items-center gap-2 text-indigo-700 font-medium">
-                                            <ThunderboltOutlined className="shrink-0" />
-                                            <span className="truncate">{PHUONG_AN_CONFIG[task.phuongAnXuLy] || task.phuongAnXuLy}</span>
-                                          </div>
-                                        )}
-                                      </div>
-
-                                      {/* Progress Bar & Impacted Systems */}
-                                      <div className="pt-2 border-t border-slate-100 space-y-2">
-                                        <div>
-                                          <div className="flex justify-between text-xs text-slate-600 mb-1 font-medium">
-                                            <span>Tiến độ thực tế</span>
-                                            <span className="font-bold text-slate-900">{task.tienDo}%</span>
-                                          </div>
-                                          <Progress
-                                            percent={task.tienDo}
-                                            size="small"
-                                            status={task.trangThai === "tre-han" ? "exception" : task.trangThai === "hoan-thanh" ? "success" : "active"}
-                                            strokeColor={
-                                              task.trangThai === "hoan-thanh" ? "#16a34a" :
-                                              task.trangThai === "tre-han" ? "#dc2626" :
-                                              task.tienDo > 50 ? "#2563eb" : "#d97706"
-                                            }
-                                          />
-                                        </div>
-
-                                        {task.heThongSos && task.heThongSos.length > 0 && (
-                                          <div className="flex items-center gap-1.5 flex-wrap pt-1">
-                                            <span className="text-[11px] text-slate-500 font-semibold">Tác động:</span>
-                                            {task.heThongSos.slice(0, 4).map((ht) => (
-                                              <Tooltip key={ht.id} title={ht.ten}>
-                                                <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded hover:bg-blue-100 transition-colors">
-                                                  {ht.ma}
-                                                </span>
-                                              </Tooltip>
-                                            ))}
-                                            {task.heThongSos.length > 4 && (
-                                              <span className="text-[10px] text-slate-400 font-bold">+{task.heThongSos.length - 4}</span>
-                                            )}
-                                          </div>
-                                        )}
-
-                                        <div className="flex justify-end text-xs text-blue-600 font-bold pt-1 group-hover:translate-x-1 transition-transform">
-                                          <span className="flex items-center gap-1">Khám phá hồ sơ nhiệm vụ <ArrowRightOutlined /></span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    ) : (
-                      /* ========================================================================= */
-                      /* MODE 2: MODERN PHASE GRID (LƯỚI KHỐI MỐC THỜI GIAN NHANH GỌN) */
-                      /* ========================================================================= */
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        {group.tasks.map((task) => {
-                          const idx = data.findIndex((t) => t.id === task.id);
-                          const sttNum = idx >= 0 ? idx + 1 : 1;
+                      {/* Alternating Tree Branch Nodes */}
+                      <div className="space-y-6 md:space-y-8">
+                        {group.tasks.map((task, taskIdx) => {
+                          const globalIdx = data.findIndex((t) => t.id === task.id);
+                          const sttNum = globalIdx >= 0 ? globalIdx + 1 : 1;
+                          const isEven = taskIdx % 2 === 0;
                           const lopCfg = LOP_CONFIG[task.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
                           const statusCfg = TRANG_THAI_CONFIG[task.trangThai] || { label: task.trangThai, badgeClass: "bg-gray-100 text-gray-800" };
                           const priorityCfg = UU_TIEN_CONFIG[task.uuTien] || { label: task.uuTien, badgeClass: "bg-gray-100 text-gray-800" };
@@ -1333,123 +798,248 @@ export default function LoTrinhPage() {
                           const days = task.thoiHan ? getDaysRemaining(task.thoiHan) : null;
 
                           return (
-                            <div
-                              key={task.id}
-                              onClick={() => setSelectedTask(task)}
-                              className="bg-white hover:bg-slate-50/60 p-5 rounded-2xl border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between space-y-4 group"
-                            >
-                              <div>
-                                <div className="flex justify-between items-start gap-2 mb-2.5">
-                                  <div className="flex items-center gap-2">
-                                    <span className="font-extrabold text-xs bg-slate-900 text-white px-2.5 py-1 rounded-md shadow-xs">
-                                      STT #{sttNum}
-                                    </span>
-                                    <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${lopCfg.badgeClass}`}>
-                                      {lopCfg.icon} Lớp {task.lop}
-                                    </span>
-                                  </div>
-
-                                  <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${priorityCfg.badgeClass}`}>
-                                      {priorityCfg.label}
-                                    </span>
-                                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
-                                      {statusCfg.label}
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <h3 className="font-bold text-base text-slate-900 group-hover:text-blue-700 transition-colors leading-snug mb-2">
-                                  {task.ten}
-                                </h3>
-
-                                {task.moTa && (
-                                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
-                                    {task.moTa}
-                                  </p>
-                                )}
-
-                                <div className="space-y-1.5 text-xs text-slate-600 bg-slate-50/80 p-3 rounded-xl border border-slate-100">
-                                  <div className="flex items-center gap-2">
-                                    <BankOutlined className="text-slate-400 shrink-0" />
-                                    <span className="font-semibold text-slate-800">Chủ trì:</span>
-                                    <span className="truncate">{task.donViChuTri?.ten || "UBND tỉnh Vĩnh Long"}</span>
-                                  </div>
-
-                                  <div className="flex items-center justify-between gap-2">
-                                    <div className="flex items-center gap-2">
-                                      <CalendarOutlined className="text-slate-400 shrink-0" />
-                                      <span className="font-semibold text-slate-800">Thời hạn:</span>
-                                      <span>{task.thoiHan ? formatDate(task.thoiHan) : "Giai đoạn 2026–2030"}</span>
-                                    </div>
-                                    {days !== null && (
-                                      <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${
-                                        overdue ? "bg-red-100 text-red-700" :
-                                        days <= 30 ? "bg-amber-100 text-amber-800" :
-                                        "bg-blue-100 text-blue-800"
-                                      }`}>
-                                        {overdue ? `Trễ ${Math.abs(days)} ngày` : task.trangThai === "hoan-thanh" ? "Đã nghiệm thu" : `Còn ${days} ngày`}
-                                      </span>
-                                    )}
-                                  </div>
-
-                                  {task.phuongAnXuLy && (
-                                    <div className="flex items-center gap-2 text-blue-700 font-medium">
-                                      <ThunderboltOutlined className="shrink-0" />
-                                      <span className="truncate">{PHUONG_AN_CONFIG[task.phuongAnXuLy] || task.phuongAnXuLy}</span>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-
-                              <div className="pt-2 border-t border-slate-100 space-y-3">
-                                <div>
-                                  <div className="flex justify-between text-xs text-slate-600 mb-1 font-medium">
-                                    <span>Tiến độ thực hiện</span>
-                                    <span className="font-bold text-slate-900">{task.tienDo}%</span>
-                                  </div>
-                                  <Progress
-                                    percent={task.tienDo}
-                                    size="small"
-                                    status={task.trangThai === "tre-han" ? "exception" : task.trangThai === "hoan-thanh" ? "success" : "active"}
-                                    strokeColor={
-                                      task.trangThai === "hoan-thanh" ? "#16a34a" :
-                                      task.trangThai === "tre-han" ? "#dc2626" :
-                                      task.tienDo > 50 ? "#2563eb" : "#d97706"
-                                    }
-                                  />
-                                </div>
-
-                                {task.heThongSos && task.heThongSos.length > 0 && (
-                                  <div className="flex items-center gap-1.5 flex-wrap">
-                                    <span className="text-[11px] text-slate-500 font-semibold">Tác động HT:</span>
-                                    {task.heThongSos.map((ht) => (
-                                      <Tooltip key={ht.id} title={ht.ten}>
-                                        <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded hover:bg-blue-100 transition-colors">
-                                          {ht.ma}
+                            <div key={task.id} className="relative flex flex-col md:flex-row items-center">
+                              
+                              {/* DESKTOP: Left Side Branch Content */}
+                              <div className={`w-full md:w-1/2 ${isEven ? "md:pr-10" : "md:hidden"} pl-12 md:pl-0`}>
+                                {isEven && (
+                                  <div
+                                    onClick={() => setSelectedTask(task)}
+                                    className="bg-white hover:bg-slate-50/80 p-5 rounded-2xl border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer space-y-3.5 group relative"
+                                  >
+                                    {/* Horizontal Connector Line for Desktop Left Branch */}
+                                    <div className="hidden md:block absolute top-7 -right-10 w-10 h-0.5 bg-blue-400/80 border-t border-dashed border-blue-500" />
+                                    
+                                    {/* Card Top Row: STT, Layer, Priority, Status */}
+                                    <div className="flex justify-between items-start gap-2 flex-wrap">
+                                      <div className="flex items-center gap-2">
+                                        <span className="font-black text-xs bg-slate-900 text-white px-2.5 py-1 rounded-md shadow-xs flex items-center gap-1">
+                                          <AimOutlined className="text-blue-400" /> #{sttNum}
                                         </span>
-                                      </Tooltip>
-                                    ))}
+                                        <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${lopCfg.badgeClass}`}>
+                                          {lopCfg.icon} Lớp {task.lop}
+                                        </span>
+                                      </div>
+
+                                      <div className="flex items-center gap-1.5 flex-wrap">
+                                        <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${priorityCfg.badgeClass}`}>
+                                          {priorityCfg.label}
+                                        </span>
+                                        <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
+                                          {statusCfg.label}
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    {/* Task Title */}
+                                    <h3 className="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors leading-snug m-0">
+                                      {task.ten}
+                                    </h3>
+
+                                    {/* Task Summary Description */}
+                                    {task.moTa && (
+                                      <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed m-0">
+                                        {task.moTa}
+                                      </p>
+                                    )}
+
+                                    {/* Host Unit & Target Deadline */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 bg-slate-50/80 p-3 rounded-xl border border-slate-100">
+                                      <div className="flex items-center gap-1.5 min-w-0">
+                                        <BankOutlined className="text-slate-400 shrink-0" />
+                                        <span className="font-semibold text-slate-700 shrink-0">Chủ trì:</span>
+                                        <span className="truncate">{task.donViChuTri?.ten || "UBND tỉnh"}</span>
+                                      </div>
+
+                                      <div className="flex items-center gap-1.5 min-w-0">
+                                        <CalendarOutlined className="text-slate-400 shrink-0" />
+                                        <span className="font-semibold text-slate-700 shrink-0">Hạn:</span>
+                                        <span className="truncate">{task.thoiHan ? formatDate(task.thoiHan) : "2026–2030"}</span>
+                                      </div>
+                                    </div>
+
+                                    {/* Solution Plan Pill */}
+                                    {task.phuongAnXuLy && (
+                                      <div className="flex items-center gap-1.5 text-xs text-blue-700 font-medium bg-blue-50/60 px-3 py-1.5 rounded-lg border border-blue-100">
+                                        <ThunderboltOutlined className="text-blue-600 shrink-0" />
+                                        <span className="truncate">{PHUONG_AN_CONFIG[task.phuongAnXuLy] || task.phuongAnXuLy}</span>
+                                      </div>
+                                    )}
+
+                                    {/* Progress Bar & Impacted Systems */}
+                                    <div className="pt-2 border-t border-slate-100 space-y-2">
+                                      <div>
+                                        <div className="flex justify-between text-xs text-slate-600 mb-1 font-medium">
+                                          <span>Tiến độ thực hiện</span>
+                                          <span className="font-bold text-slate-900">{task.tienDo}%</span>
+                                        </div>
+                                        <Progress
+                                          percent={task.tienDo}
+                                          size="small"
+                                          status={task.trangThai === "tre-han" ? "exception" : task.trangThai === "hoan-thanh" ? "success" : "active"}
+                                          strokeColor={
+                                            task.trangThai === "hoan-thanh" ? "#16a34a" :
+                                            task.trangThai === "tre-han" ? "#dc2626" :
+                                            task.tienDo > 50 ? "#2563eb" : "#d97706"
+                                          }
+                                        />
+                                      </div>
+
+                                      {task.heThongSos && task.heThongSos.length > 0 && (
+                                        <div className="flex items-center gap-1.5 flex-wrap pt-1">
+                                          <span className="text-[11px] text-slate-500 font-semibold">Tác động:</span>
+                                          {task.heThongSos.slice(0, 4).map((ht) => (
+                                            <Tooltip key={ht.id} title={ht.ten}>
+                                              <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded hover:bg-blue-100 transition-colors">
+                                                {ht.ma}
+                                              </span>
+                                            </Tooltip>
+                                          ))}
+                                          {task.heThongSos.length > 4 && (
+                                            <span className="text-[10px] text-slate-400 font-bold">+{task.heThongSos.length - 4}</span>
+                                          )}
+                                        </div>
+                                      )}
+
+                                      <div className="flex justify-end text-xs text-blue-600 font-bold pt-1 group-hover:translate-x-1 transition-transform">
+                                        <span className="flex items-center gap-1">Khám phá hồ sơ nhiệm vụ <ArrowRightOutlined /></span>
+                                      </div>
+                                    </div>
                                   </div>
                                 )}
+                              </div>
 
-                                <div className="flex justify-end text-xs text-blue-600 font-bold group-hover:translate-x-0.5 transition-transform">
-                                  <span className="flex items-center gap-1">Xem chi tiết hồ sơ <ArrowRightOutlined /></span>
+                              {/* Central Pulsing Connector Node on Spine */}
+                              <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-7 z-20 flex items-center justify-center">
+                                <div className={`w-9 h-9 rounded-full bg-white border-3 shadow-md flex items-center justify-center font-black text-xs transition-transform duration-300 group-hover:scale-110 ${
+                                  task.trangThai === "hoan-thanh" ? "border-emerald-500 text-emerald-700 ring-4 ring-emerald-100" :
+                                  task.trangThai === "tre-han" ? "border-red-500 text-red-700 ring-4 ring-red-100" :
+                                  "border-blue-600 text-blue-700 ring-4 ring-blue-100"
+                                }`}>
+                                  {sttNum}
                                 </div>
                               </div>
+
+                              {/* DESKTOP: Right Side Branch Content (or Mobile Default) */}
+                              <div className={`w-full md:w-1/2 ${!isEven ? "md:pl-10" : "md:hidden"} pl-12 md:pl-0`}>
+                                {(!isEven || true) && (
+                                  <div
+                                    onClick={() => setSelectedTask(task)}
+                                    className="bg-white hover:bg-slate-50/80 p-5 rounded-2xl border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer space-y-3.5 group relative"
+                                  >
+                                    {/* Horizontal Connector Line for Desktop Right Branch */}
+                                    <div className="hidden md:block absolute top-7 -left-10 w-10 h-0.5 bg-blue-400/80 border-t border-dashed border-blue-500" />
+                                    
+                                    {/* Card Top Row: STT, Layer, Priority, Status */}
+                                    <div className="flex justify-between items-start gap-2 flex-wrap">
+                                      <div className="flex items-center gap-2">
+                                        <span className="font-black text-xs bg-slate-900 text-white px-2.5 py-1 rounded-md shadow-xs flex items-center gap-1">
+                                          <AimOutlined className="text-blue-400" /> #{sttNum}
+                                        </span>
+                                        <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${lopCfg.badgeClass}`}>
+                                          {lopCfg.icon} Lớp {task.lop}
+                                        </span>
+                                      </div>
+
+                                      <div className="flex items-center gap-1.5 flex-wrap">
+                                        <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${priorityCfg.badgeClass}`}>
+                                          {priorityCfg.label}
+                                        </span>
+                                        <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
+                                          {statusCfg.label}
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    {/* Task Title */}
+                                    <h3 className="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors leading-snug m-0">
+                                      {task.ten}
+                                    </h3>
+
+                                    {/* Task Summary Description */}
+                                    {task.moTa && (
+                                      <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed m-0">
+                                        {task.moTa}
+                                      </p>
+                                    )}
+
+                                    {/* Host Unit & Target Deadline */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 bg-slate-50/80 p-3 rounded-xl border border-slate-100">
+                                      <div className="flex items-center gap-1.5 min-w-0">
+                                        <BankOutlined className="text-slate-400 shrink-0" />
+                                        <span className="font-semibold text-slate-700 shrink-0">Chủ trì:</span>
+                                        <span className="truncate">{task.donViChuTri?.ten || "UBND tỉnh"}</span>
+                                      </div>
+
+                                      <div className="flex items-center gap-1.5 min-w-0">
+                                        <CalendarOutlined className="text-slate-400 shrink-0" />
+                                        <span className="font-semibold text-slate-700 shrink-0">Hạn:</span>
+                                        <span className="truncate">{task.thoiHan ? formatDate(task.thoiHan) : "2026–2030"}</span>
+                                      </div>
+                                    </div>
+
+                                    {/* Solution Plan Pill */}
+                                    {task.phuongAnXuLy && (
+                                      <div className="flex items-center gap-1.5 text-xs text-blue-700 font-medium bg-blue-50/60 px-3 py-1.5 rounded-lg border border-blue-100">
+                                        <ThunderboltOutlined className="text-blue-600 shrink-0" />
+                                        <span className="truncate">{PHUONG_AN_CONFIG[task.phuongAnXuLy] || task.phuongAnXuLy}</span>
+                                      </div>
+                                    )}
+
+                                    {/* Progress Bar & Impacted Systems */}
+                                    <div className="pt-2 border-t border-slate-100 space-y-2">
+                                      <div>
+                                        <div className="flex justify-between text-xs text-slate-600 mb-1 font-medium">
+                                          <span>Tiến độ thực hiện</span>
+                                          <span className="font-bold text-slate-900">{task.tienDo}%</span>
+                                        </div>
+                                        <Progress
+                                          percent={task.tienDo}
+                                          size="small"
+                                          status={task.trangThai === "tre-han" ? "exception" : task.trangThai === "hoan-thanh" ? "success" : "active"}
+                                          strokeColor={
+                                            task.trangThai === "hoan-thanh" ? "#16a34a" :
+                                            task.trangThai === "tre-han" ? "#dc2626" :
+                                            task.tienDo > 50 ? "#2563eb" : "#d97706"
+                                          }
+                                        />
+                                      </div>
+
+                                      {task.heThongSos && task.heThongSos.length > 0 && (
+                                        <div className="flex items-center gap-1.5 flex-wrap pt-1">
+                                          <span className="text-[11px] text-slate-500 font-semibold">Tác động:</span>
+                                          {task.heThongSos.slice(0, 4).map((ht) => (
+                                            <Tooltip key={ht.id} title={ht.ten}>
+                                              <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded hover:bg-blue-100 transition-colors">
+                                                {ht.ma}
+                                              </span>
+                                            </Tooltip>
+                                          ))}
+                                          {task.heThongSos.length > 4 && (
+                                            <span className="text-[10px] text-slate-400 font-bold">+{task.heThongSos.length - 4}</span>
+                                          )}
+                                        </div>
+                                      )}
+
+                                      <div className="flex justify-end text-xs text-blue-600 font-bold pt-1 group-hover:translate-x-1 transition-transform">
+                                        <span className="flex items-center gap-1">Khám phá hồ sơ nhiệm vụ <ArrowRightOutlined /></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+
                             </div>
                           );
                         })}
                       </div>
-                    )}
+                    </div>
                   </div>
                 );
               })}
             </div>
           )}
-
         </div>
-      )}
 
       {/* Detail Modal */}
       <Modal
