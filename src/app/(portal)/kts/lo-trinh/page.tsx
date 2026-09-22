@@ -606,8 +606,7 @@ export default function LoTrinhPage() {
               <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded">
                 Giai đoạn 1 (2026)
               </span>
-              <h3 className="font-black text-slate-900 text-sm mt-1.5 mb-0">Khởi Động & Nền Tảng</h3>
-              <div className="text-xs text-slate-500 mt-0.5">4 nhiệm vụ cốt lõi</div>
+              <div className="text-xs text-slate-500 mt-1.5">4 nhiệm vụ cốt lõi</div>
             </div>
             <div className="text-xl font-black text-blue-700 bg-blue-100/80 w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
               68%
@@ -632,8 +631,7 @@ export default function LoTrinhPage() {
               <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded">
                 Giai đoạn 2 (2027)
               </span>
-              <h3 className="font-black text-slate-900 text-sm mt-1.5 mb-0">Tăng Tốc & Tích Hợp</h3>
-              <div className="text-xs text-slate-500 mt-0.5">2 nhiệm vụ liên thông</div>
+              <div className="text-xs text-slate-500 mt-1.5">2 nhiệm vụ liên thông</div>
             </div>
             <div className="text-xl font-black text-amber-700 bg-amber-100/80 w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
               40%
@@ -658,8 +656,7 @@ export default function LoTrinhPage() {
               <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded">
                 Giai đoạn 3 (2028–2030)
               </span>
-              <h3 className="font-black text-slate-900 text-sm mt-1.5 mb-0">Bứt Phá Đô Thị Thông Minh</h3>
-              <div className="text-xs text-slate-500 mt-0.5">3 nhiệm vụ đột phá</div>
+              <div className="text-xs text-slate-500 mt-1.5">3 nhiệm vụ đột phá</div>
             </div>
             <div className="text-xl font-black text-emerald-700 bg-emerald-100/80 w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
               20%
