@@ -377,9 +377,6 @@ export default function HienTrangPage() {
           <h1 className="text-2xl font-bold tracking-tight text-white m-0">
             Đánh Giá & Quản Lý Hiện Trạng Kiến Trúc Số
           </h1>
-          <p className="text-sm text-blue-200/90 mt-1 mb-0 max-w-2xl">
-            Tổng hợp kiểm kê <b>{totalCount} thành phần số</b> trên toàn tỉnh, phân tích theo 4 lớp chuẩn kiến trúc và trạng thái hoạt động.
-          </p>
         </div>
       </div>
 

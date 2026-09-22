@@ -1,0 +1,1 @@
+{"File":"E:\\KTS\\123\\src\\app\\(portal)\\kts\\hien-trang\\page.tsx","LineNumber":381,"LineContent":"            Tổng hợp kiểm kê \u003cb\u003e{totalCount} thành phần số\u003c/b\u003e trên toàn tỉnh, phân tích theo 4 lớp chuẩn kiến trúc và trạng thái hoạt động."}
