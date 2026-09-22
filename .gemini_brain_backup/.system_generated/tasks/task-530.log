@@ -467,3 +467,7 @@ prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`He
  GET /api/nhiem-vu 200 in 17ms (next.js: 5ms, application-code: 12ms)
 ✓ Compiled in 324ms
  GET /kts/lo-trinh 200 in 50ms (next.js: 13ms, application-code: 38ms)
+[browser] Warning: [antd: Descriptions] `labelStyle` is deprecated. Please use `styles.label` instead. 
+    at Array.forEach (<anonymous>) (<anonymous>)
+✓ Compiled in 207ms
+ GET /kts/lo-trinh 200 in 48ms (next.js: 15ms, application-code: 33ms)

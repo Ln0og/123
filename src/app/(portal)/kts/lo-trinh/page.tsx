@@ -596,40 +596,156 @@ export default function LoTrinhPage() {
         </Col>
       </Row>
 
-      {/* DASHBOARD CHARTS SECTION (ALWAYS VISIBLE AT TOP) */}
+      {/* DASHBOARD CHARTS & EXECUTIVE CONTROL SECTION */}
       <div className="space-y-6">
-        {/* Progress Chart */}
+        
+        {/* 1. BẢNG CHỈ HUY TIẾN ĐỘ 09 NHIỆM VỤ TRỌNG TÂM */}
         <Card 
-          title={<span className="font-bold text-gray-800">📊 Tiến Độ Thực Hiện 09 Nhiệm Vụ Trọng Tâm</span>}
-          className="shadow-xs"
-        >
-          <div className="h-72 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={taskProgressChartData} margin={{ top: 10, right: 30, left: 0, bottom: 25 }}>
-                <XAxis dataKey="name" tick={{ fontSize: 12, fontWeight: "bold" }} />
-                <YAxis domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
-                <RechartsTooltip 
-                  formatter={(value: any, name: any, props: any) => [`${value}%`, props.payload.fullName]}
-                  labelFormatter={(label) => `Nhiệm vụ ${label}`}
-                />
-                <Bar dataKey="tienDo" name="Tiến độ hoàn thành (%)" fill="#2563eb" radius={[6, 6, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="grid grid-cols-3 sm:grid-cols-9 gap-1.5 mt-3 pt-3 border-t text-center">
-            {data.map((d, idx) => (
-              <div key={d.id} className="p-1 rounded bg-slate-50 border border-slate-100 cursor-pointer hover:bg-blue-50" onClick={() => setSelectedTask(d)}>
-                <div className="text-[11px] font-bold text-blue-700">STT #{idx + 1}</div>
-                <div className="text-[10px] text-gray-500 font-semibold">{d.tienDo}%</div>
+          title={
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-5 bg-blue-600 rounded-full inline-block"></span>
+                <span className="font-bold text-gray-900 text-base">📊 Bảng Chỉ Huy & Tiến Độ Thực Thi 09 Nhiệm Vụ Số Hóa Trọng Tâm</span>
               </div>
-            ))}
+              <span className="text-xs font-normal text-gray-500 hidden sm:inline">Nhấp vào từng nhiệm vụ để xem hồ sơ chi tiết</span>
+            </div>
+          }
+          className="shadow-xs rounded-2xl border-slate-200"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            {data.map((task, idx) => {
+              const lopCfg = LOP_CONFIG[task.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
+              const statusCfg = TRANG_THAI_CONFIG[task.trangThai] || { label: task.trangThai, badgeClass: "bg-gray-100 text-gray-800" };
+              const priorityCfg = UU_TIEN_CONFIG[task.uuTien] || { label: task.uuTien, badgeClass: "bg-gray-100 text-gray-800" };
+              
+              const progressColor = 
+                task.trangThai === "hoan-thanh" ? "#16a34a" :
+                task.trangThai === "tre-han" ? "#dc2626" :
+                task.tienDo >= 70 ? "#16a34a" :
+                task.tienDo >= 40 ? "#2563eb" :
+                task.tienDo > 0 ? "#d97706" : "#94a3b8";
+
+              return (
+                <div
+                  key={task.id}
+                  onClick={() => setSelectedTask(task)}
+                  className="p-3.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50/80 hover:border-blue-400 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between space-y-3 group"
+                >
+                  {/* Top Bar: STT, Layer & Status */}
+                  <div className="flex items-center justify-between gap-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-black text-xs bg-slate-900 text-white px-2 py-0.5 rounded shadow-xs">
+                        #{idx + 1}
+                      </span>
+                      <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${lopCfg.badgeClass}`}>
+                        Lớp {task.lop}
+                      </span>
+                    </div>
+
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
+                      {statusCfg.label}
+                    </span>
+                  </div>
+
+                  {/* Task Name */}
+                  <div>
+                    <h4 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-700 transition-colors line-clamp-2 leading-snug m-0">
+                      {task.ten}
+                    </h4>
+                    <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-1 truncate">
+                      <BankOutlined className="text-slate-400" />
+                      <span className="truncate">{task.donViChuTri?.ten || "UBND tỉnh"}</span>
+                    </div>
+                  </div>
+
+                  {/* Progress & Target date */}
+                  <div className="pt-2 border-t border-slate-100 space-y-1.5">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-slate-500 text-[11px]">
+                        {task.thoiHan ? formatDate(task.thoiHan) : "2026–2030"}
+                      </span>
+                      <span className="font-bold text-slate-900 text-xs">
+                        {task.tienDo}%
+                      </span>
+                    </div>
+                    <Progress 
+                      percent={task.tienDo} 
+                      size="small" 
+                      showInfo={false}
+                      strokeColor={progressColor} 
+                      className="m-0"
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </Card>
 
-        {/* 2 Sub-charts: Layer Execution & Department Delivery */}
+        {/* 2. TIẾN TRÌNH THEO 3 GIAI ĐOẠN CHIẾN LƯỢC */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="shadow-xs rounded-2xl border-l-4 border-l-blue-600 bg-gradient-to-br from-white to-blue-50/40" size="small">
+            <div className="flex items-start justify-between">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded">
+                  Giai đoạn 1 (2026)
+                </span>
+                <h3 className="font-black text-slate-900 text-sm mt-1.5 mb-0">Khởi Động & Nền Tảng</h3>
+                <div className="text-xs text-slate-500 mt-0.5">4 nhiệm vụ cốt lõi</div>
+              </div>
+              <div className="text-xl font-black text-blue-700 bg-blue-100/80 w-12 h-12 rounded-xl flex items-center justify-center">
+                68%
+              </div>
+            </div>
+            <Progress percent={68} strokeColor="#2563eb" size="small" className="mt-3 mb-1" />
+            <div className="text-[11px] text-slate-600 mt-1">
+              Cloud, Bảo mật SOC 4 lớp, Đề án 06, CSDL Nông nghiệp
+            </div>
+          </Card>
+
+          <Card className="shadow-xs rounded-2xl border-l-4 border-l-amber-500 bg-gradient-to-br from-white to-amber-50/40" size="small">
+            <div className="flex items-start justify-between">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded">
+                  Giai đoạn 2 (2027)
+                </span>
+                <h3 className="font-black text-slate-900 text-sm mt-1.5 mb-0">Tăng Tốc & Tích Hợp</h3>
+                <div className="text-xs text-slate-500 mt-0.5">2 nhiệm vụ liên thông</div>
+              </div>
+              <div className="text-xl font-black text-amber-700 bg-amber-100/80 w-12 h-12 rounded-xl flex items-center justify-center">
+                40%
+              </div>
+            </div>
+            <Progress percent={40} strokeColor="#d97706" size="small" className="mt-3 mb-1" />
+            <div className="text-[11px] text-slate-600 mt-1">
+              Kho dữ liệu dùng chung, DVC trực tuyến toàn trình
+            </div>
+          </Card>
+
+          <Card className="shadow-xs rounded-2xl border-l-4 border-l-emerald-600 bg-gradient-to-br from-white to-emerald-50/40" size="small">
+            <div className="flex items-start justify-between">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded">
+                  Giai đoạn 3 (2028–2030)
+                </span>
+                <h3 className="font-black text-slate-900 text-sm mt-1.5 mb-0">Bứt Phá Đô Thị Thông Minh</h3>
+                <div className="text-xs text-slate-500 mt-0.5">3 nhiệm vụ đột phá</div>
+              </div>
+              <div className="text-xl font-black text-emerald-700 bg-emerald-100/80 w-12 h-12 rounded-xl flex items-center justify-center">
+                20%
+              </div>
+            </div>
+            <Progress percent={20} strokeColor="#059669" size="small" className="mt-3 mb-1" />
+            <div className="text-[11px] text-slate-600 mt-1">
+              VinhLong Smart, IOC Điều hành thông minh, Y tế EMR
+            </div>
+          </Card>
+        </div>
+
+        {/* 3. BIỂU ĐỒ 4 LỚP & SỞ NGÀNH */}
         <Row gutter={[16, 16]}>
           <Col xs={24} lg={12}>
-            <Card title={<span className="font-bold text-gray-800">🏗️ Tiến Độ Bình Quân Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs h-full">
+            <Card title={<span className="font-bold text-gray-800">🏗️ Tiến Độ Bình Quân Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs rounded-2xl h-full">
               <div className="h-64 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
@@ -660,7 +776,7 @@ export default function LoTrinhPage() {
           </Col>
 
           <Col xs={24} lg={12}>
-            <Card title={<span className="font-bold text-gray-800">🏛️ Phân Công Trách Nhiệm & Tiến Độ Theo Sở / Ngành</span>} className="shadow-xs h-full">
+            <Card title={<span className="font-bold text-gray-800">🏛️ Phân Công Trách Nhiệm & Tiến Độ Theo Sở / Ngành</span>} className="shadow-xs rounded-2xl h-full">
               <div className="h-64 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
@@ -696,10 +812,10 @@ export default function LoTrinhPage() {
           </Col>
         </Row>
 
-        {/* 2 Sub-charts: Priority & Solution */}
+        {/* 4. BIỂU ĐỒ ƯU TIÊN & PHƯƠNG ÁN XỬ LÝ */}
         <Row gutter={[16, 16]}>
           <Col xs={24} lg={12}>
-            <Card title={<span className="font-bold text-gray-800">🎯 Phân Bổ Theo Mức Độ Ưu Tiên</span>} className="shadow-xs h-full">
+            <Card title={<span className="font-bold text-gray-800">🎯 Phân Bổ Theo Mức Độ Ưu Tiên</span>} className="shadow-xs rounded-2xl h-full">
               <div className="h-64 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -726,7 +842,7 @@ export default function LoTrinhPage() {
           </Col>
 
           <Col xs={24} lg={12}>
-            <Card title={<span className="font-bold text-gray-800">⚡ Cơ Cấu Theo Phương Án Xử Lý</span>} className="shadow-xs h-full">
+            <Card title={<span className="font-bold text-gray-800">⚡ Cơ Cấu Theo Phương Án Xử Lý</span>} className="shadow-xs rounded-2xl h-full">
               <div className="h-64 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={solutionChartData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>

@@ -1,115 +1,28 @@
 
 The command exited with code 0.
 Output:
-<truncated 557 lines>
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/557/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/559/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/565/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/567/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/569/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/57/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/571/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/573/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/575/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/579/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/581/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/59/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/591/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/595/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/597/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/599/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/6/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/601/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/603/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/608/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/61/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/614/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/616/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/620/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/625/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/627/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/63/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/631/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/635/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/637/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/641/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/645/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/647/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/65/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/70/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/72/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/74/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/76/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/78/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/8/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/80/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/82/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/85/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/87/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/89/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/91/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/93/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/96/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/steps/98/output.txt
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-159.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-174.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-178.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-185.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-205.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-226.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-248.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-271.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-296.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-319.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-347.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-372.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-606.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-63.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-65.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-74.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-76.log
- delete mode 100644 .gemini_brain_backup/.system_generated/tasks/task-85.log
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789831851459.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789917998341.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789918138848.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789918337737.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789918457761.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789918657574.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789919437392.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789919706970.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789922308319.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789922328027.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789922592337.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789922811591.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789923712530.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789924403607.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789924718659.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789925134695.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789925267871.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789925532730.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789926249368.png
- delete mode 100644 .gemini_brain_backup/.user_uploaded/media_1789926268149.png
- delete mode 100644 .gemini_brain_backup/de_xuat_web_kts.md
- delete mode 100644 .gemini_brain_backup/de_xuat_web_kts.md.metadata.json
- delete mode 100644 .gemini_brain_backup/implementation_plan.md
- delete mode 100644 .gemini_brain_backup/implementation_plan.md.metadata.json
- delete mode 100644 .gemini_brain_backup/scratch/doc5.txt
- delete mode 100644 .gemini_brain_backup/scratch/doc6.txt
- delete mode 100644 .gemini_brain_backup/scratch/doc_output.txt
- delete mode 100644 .gemini_brain_backup/scratch/extract_files.py
- delete mode 100644 .gemini_brain_backup/scratch/output.txt
- delete mode 100644 .gemini_brain_backup/task.md
- delete mode 100644 .gemini_brain_backup/task.md.metadata.json
- delete mode 100644 .gemini_brain_backup/tong_hop_noi_dung.md
- delete mode 100644 .gemini_brain_backup/tong_hop_noi_dung.md.metadata.json
- create mode 100644 HUONG_DAN_VA_LOGIC_HE_THONG.md
- create mode 100644 LICH_SU_TRO_CHUYEN.md
- create mode 100644 LICH_SU_TRO_CHUYEN_PHU.md
- create mode 100644 add_y_te_roadmap.js
- create mode 100644 check_5_items.js
- create mode 100644 check_link.js
- create mode 100644 connect_cross_links.js
- create mode 100644 export_chat_history.js
- create mode 100644 src/app/(portal)/kts/so-do/page.tsx
- create mode 100644 test_db.js
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript/00000010.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000021.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/transcript.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/transcript_full.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/647/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/tasks/task-530.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'LICH_SU_TRO_CHUYEN.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/lo-trinh/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000022.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000023.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/649/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/669/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/673/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/675/output.txt', LF will be replaced by CRLF the next time Git touches it
+[main 17027de] feat: redesign Roadmap Timeline with modern interactive Tree Spine and Phase Grid views
+ 14 files changed, 1512 insertions(+), 203 deletions(-)
+ create mode 100644 .gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000022.jsonl
+ create mode 100644 .gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000023.jsonl
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/649/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/669/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/673/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/675/output.txt
+To https://github.com/Ln0og/123.git
+   1de79ee..17027de  main -> main
 
