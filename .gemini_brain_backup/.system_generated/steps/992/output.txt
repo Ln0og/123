@@ -1,0 +1,5 @@
+{"File":"E:\\KTS\\123\\src\\app\\(portal)\\kts\\so-do\\page.tsx","LineNumber":212,"LineContent":"      title: \"Y Tế \u0026 Sức Khỏe Số\","}
+{"File":"E:\\KTS\\123\\src\\app\\(portal)\\kts\\so-do\\page.tsx","LineNumber":214,"LineContent":"      description: \"Hệ thống HIS bệnh viện, Bệnh án điện tử EMR, quản lý trạm y tế cơ sở và Hồ sơ sức khỏe toàn dân.\","}
+{"File":"E:\\KTS\\123\\src\\app\\(portal)\\kts\\hien-trang\\page.tsx","LineNumber":393,"LineContent":"              Tổng Quan Thống Kê \u0026 Phân Tích Sức Khỏe Hệ Thống"}
+{"File":"E:\\KTS\\123\\src\\app\\(portal)\\kts\\hien-trang\\page.tsx","LineNumber":499,"LineContent":"        {/* Sức khỏe 4 lớp kiến trúc \u0026 Phân bổ tổng thể */}"}
+{"File":"E:\\KTS\\123\\src\\app\\(portal)\\kts\\hien-trang\\page.tsx","LineNumber":502,"LineContent":"            \u003cCard title={\u003cspan className=\"font-bold text-gray-800\"\u003e🏥 Ma Trận Đánh Giá Tình Trạng Sức Khỏe Theo 4 Lớp\u003c/span\u003e} className=\"shadow-xs h-full\"\u003e"}

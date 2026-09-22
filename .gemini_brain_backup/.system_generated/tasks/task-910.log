@@ -250,3 +250,8 @@ prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemV
  GET /admin/he-thong 200 in 49ms (next.js: 30ms, application-code: 19ms)
  GET /kts/hien-trang 200 in 50ms (next.js: 11ms, application-code: 39ms)
  GET /kts/hien-trang 200 in 115ms (next.js: 4ms, application-code: 111ms)
+ GET /admin/he-thong 200 in 53ms (next.js: 14ms, application-code: 39ms)
+ GET /kts/hien-trang 200 in 54ms (next.js: 32ms, application-code: 21ms)
+ GET /admin/he-thong 200 in 41ms (next.js: 11ms, application-code: 31ms)
+ GET /kts/hien-trang 200 in 43ms (next.js: 26ms, application-code: 16ms)
+ GET /kts/hien-trang 200 in 39ms (next.js: 5ms, application-code: 34ms)

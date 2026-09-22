@@ -1,0 +1,18 @@
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -496,10 +496,10 @@
+           </Col>
+         </Row>
+ 
+-        {/* Sức khỏe 4 lớp kiến trúc & Phân bổ tổng thể */}
++        {/* Trạng thái 4 lớp kiến trúc & Phân bổ tổng thể */}
+         <Row gutter={[16, 16]}>
+           <Col xs={24} lg={14}>
+-            <Card title={<span className="font-bold text-gray-800">🏥 Ma Trận Đánh Giá Tình Trạng Sức Khỏe Theo 4 Lớp</span>} className="shadow-xs h-full">
++            <Card title={<span className="font-bold text-gray-800">📊 Ma Trận Đánh Giá Trạng Thái Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs h-full">
+               <div className="h-72 w-full">
+                 <ResponsiveContainer width="100%" height="100%">
+                   <BarChart
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

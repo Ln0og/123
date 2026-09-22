@@ -390,7 +390,7 @@ export default function HienTrangPage() {
           <div className="flex items-center gap-2">
             <PieChartOutlined className="text-blue-600 text-xl" />
             <h2 className="text-lg font-bold text-slate-800 m-0 uppercase tracking-wide">
-              Tổng Quan Thống Kê & Phân Tích Sức Khỏe Hệ Thống
+              Tổng Quan Thống Kê & Phân Tích Hệ Thống
             </h2>
           </div>
           <span className="text-xs text-slate-500">Số liệu cập nhật thời gian thực</span>
@@ -496,10 +496,10 @@ export default function HienTrangPage() {
           </Col>
         </Row>
 
-        {/* Sức khỏe 4 lớp kiến trúc & Phân bổ tổng thể */}
+        {/* Trạng thái 4 lớp kiến trúc & Phân bổ tổng thể */}
         <Row gutter={[16, 16]}>
           <Col xs={24} lg={14}>
-            <Card title={<span className="font-bold text-gray-800">🏥 Ma Trận Đánh Giá Tình Trạng Sức Khỏe Theo 4 Lớp</span>} className="shadow-xs h-full">
+            <Card title={<span className="font-bold text-gray-800">📊 Ma Trận Đánh Giá Trạng Thái Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs h-full">
               <div className="h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart

@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -390,7 +390,7 @@
+           <div className="flex items-center gap-2">
+             <PieChartOutlined className="text-blue-600 text-xl" />
+             <h2 className="text-lg font-bold text-slate-800 m-0 uppercase tracking-wide">
+-              Tổng Quan Thống Kê & Phân Tích Sức Khỏe Hệ Thống
++              Tổng Quan Thống Kê & Phân Tích Hệ Thống
+             </h2>
+           </div>
+           <span className="text-xs text-slate-500">Số liệu cập nhật thời gian thực</span>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
