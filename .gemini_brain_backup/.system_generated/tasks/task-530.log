@@ -496,3 +496,7 @@ prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`He
  GET /api/nhiem-vu 200 in 16ms (next.js: 3ms, application-code: 13ms)
 ✓ Compiled in 133ms
  GET /kts/lo-trinh 200 in 52ms (next.js: 13ms, application-code: 39ms)
+✓ Compiled in 181ms
+ GET /kts/lo-trinh 200 in 45ms (next.js: 14ms, application-code: 31ms)
+✓ Compiled in 251ms
+ GET /kts/lo-trinh 200 in 59ms (next.js: 16ms, application-code: 43ms)
