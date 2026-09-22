@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+Found brain directory: C:\Users\ckgam\.gemini\antigravity\brain\724a6bcd-bcc3-4ca2-973c-d3661f6678bd
+Copying brain folder to backup directory...
+Brain backup copied successfully.
+Parsing transcript from: C:\Users\ckgam\.gemini\antigravity\brain\724a6bcd-bcc3-4ca2-973c-d3661f6678bd\.system_generated\logs\transcript_full.jsonl
+Saved LICH_SU_TRO_CHUYEN.md (38 turns, 105038 bytes) to E:\KTS\123\LICH_SU_TRO_CHUYEN.md
+

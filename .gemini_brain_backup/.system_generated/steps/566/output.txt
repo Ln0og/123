@@ -1,0 +1,129 @@
+The following changes were made by the replace_file_content tool to: e:\KTS\123\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -516,11 +516,40 @@
+             </Col>
+           </Row>
+ 
+-          {/* Charts Row */}
+-          <Row gutter={[16, 16]}>
+-            <Col xs={24} lg={12}>
+-              <Card title={<span className="font-bold text-gray-800">📊 Phân Bổ Hệ Thống Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs h-full">
+-                <div className="h-64 w-full">
++          {/* Sức khỏe 4 lớp kiến trúc & Phân bổ tổng thể */}
++          <Row gutter={[16, 16]}>
++            <Col xs={24} lg={14}>
++              <Card title={<span className="font-bold text-gray-800">🏥 Ma Trận Đánh Giá Tình Trạng Sức Khỏe Theo 4 Lớp</span>} className="shadow-xs h-full">
++                <div className="h-72 w-full">
++                  <ResponsiveContainer width="100%" height="100%">
++                    <BarChart
++                      data={[1, 2, 3, 4].map((lop) => {
++                        const items = data.filter((d) => d.lop === lop);
++                        return {
++                          name: `Lớp ${lop}: ${LOP_CONFIG[lop as 1|2|3|4].shortLabel}`,
++                          "Đang vận hành": items.filter((d) => d.trangThai === "dang-van-hanh").length,
++                          "Cần nâng cấp": items.filter((d) => d.trangThai === "can-nang-cap").length,
++                          "Cần thay thế": items.filter((d) => d.trangThai === "can-thay-the").length,
++                        };
++                      })}
++                      margin={{ top: 15, right: 30, left: 10, bottom: 5 }}
++                    >
++                      <XAxis dataKey="name" tick={{ fontSize: 11, fontWeight: 600 }} />
++                      <YAxis />
++                      <RechartsTooltip />
++                      <Legend />
++                      <Bar dataKey="Đang vận hành" fill="#16a34a" stackId="a" radius={[0, 0, 0, 0]} />
++                      <Bar dataKey="Cần nâng cấp" fill="#eab308" stackId="a" radius={[0, 0, 0, 0]} />
++                      <Bar dataKey="Cần thay thế" fill="#ef4444" stackId="a" radius={[4, 4, 0, 0]} />
++                    </BarChart>
++                  </ResponsiveContainer>
++                </div>
++              </Card>
++            </Col>
++
++            <Col xs={24} lg={10}>
++              <Card title={<span className="font-bold text-gray-800">📊 Tỷ Trọng Phân Bổ Theo 4 Lớp</span>} className="shadow-xs h-full">
++                <div className="h-72 w-full">
+                   <ResponsiveContainer width="100%" height="100%">
+                     <PieChart>
+                       <Pie
+@@ -527,7 +527,7 @@
+                         cx="50%"
+                         cy="50%"
+-                        innerRadius={60}
+-                        outerRadius={90}
++                        innerRadius={65}
++                        outerRadius={95}
+                         paddingAngle={4}
+                         dataKey="value"
+                         label={({ percent }: { percent?: number }) => `${((percent || 0) * 100).toFixed(0)}%`}
+@@ -542,9 +542,12 @@
+                 </div>
+               </Card>
+             </Col>
+-
+-            <Col xs={24} lg={12}>
+-              <Card title={<span className="font-bold text-gray-800">🏛️ Top Sở / Ngành Có Nhiều Hệ Thống & CSDL Nhất</span>} className="shadow-xs h-full">
++          </Row>
++
++          {/* Top Departments & Historical Deployment Year */}
++          <Row gutter={[16, 16]}>
++            <Col xs={24} lg={12}>
++              <Card title={<span className="font-bold text-gray-800">🏛️ Top Cơ Quan Quản Lý Nhiều CSDL / Hệ Thống Nhất</span>} className="shadow-xs h-full">
+                 <div className="h-64 w-full">
+                   <ResponsiveContainer width="100%" height="100%">
+                     <BarChart data={deptChartData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+@@ -551,4 +551,4 @@
+-                      <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={120} />
++                      <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={130} />
+                       <RechartsTooltip />
+                       <Bar dataKey="count" name="Số lượng hệ thống" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+                     </BarChart>
+@@ -555,25 +555,26 @@
+                 </div>
+               </Card>
+             </Col>
+-          </Row>
+-
+-          {/* Additional Trends & Quick Action */}
+-          <Card 
+-            title={<span className="font-bold text-gray-800">📅 Phân Bố Theo Năm Đưa Vào Khai Thác</span>}
+-            extra={<Button type="link" onClick={() => setViewMode("list")}>Xem chi tiết từng hệ thống →</Button>}
+-            className="shadow-xs"
+-          >
+-            <div className="h-56 w-full">
+-              <ResponsiveContainer width="100%" height="100%">
+-                <BarChart data={yearChartData} margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
+-                  <XAxis dataKey="year" />
+-                  <YAxis />
+-                  <RechartsTooltip />
+-                  <Bar dataKey="count" name="Số lượng đưa vào vận hành" fill="#10b981" radius={[4, 4, 0, 0]} />
+-                </BarChart>
+-              </ResponsiveContainer>
+-            </div>
+-          </Card>
++
++            <Col xs={24} lg={12}>
++              <Card 
++                title={<span className="font-bold text-gray-800">📅 Lịch Sử Đưa Hệ Thống Vào Khai Thác Theo Năm</span>}
++                extra={<Button type="link" onClick={() => setViewMode("list")}>Xem toàn bộ danh mục →</Button>}
++                className="shadow-xs h-full"
++              >
++                <div className="h-64 w-full">
++                  <ResponsiveContainer width="100%" height="100%">
++                    <BarChart data={yearChartData} margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
++                      <XAxis dataKey="year" />
++                      <YAxis />
++                      <RechartsTooltip />
++                      <Bar dataKey="count" name="Số lượng đưa vào vận hành" fill="#10b981" radius={[4, 4, 0, 0]} />
++                    </BarChart>
++                  </ResponsiveContainer>
++                </div>
++              </Card>
++            </Col>
++          </Row>
+         </div>
+       )}
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

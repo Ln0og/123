@@ -1,0 +1,28 @@
+
+The command exited with code 1.
+Output:
+<truncated 2 lines>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+PrismaClientInitializationError: 
+Invalid `prisma.nhiemVu.findMany()` invocation:
+
+
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "sqlite"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at $n.handleRequestError (E:\KTS\123\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (E:\KTS\123\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (E:\KTS\123\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (E:\KTS\123\node_modules\@prisma\client\runtime\library.js:130:9633) {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+
+Node.js v24.19.0
+

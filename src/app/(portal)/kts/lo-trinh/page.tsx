@@ -16,8 +16,7 @@ import {
   Row,
   Col,
   Empty,
-  Spin,
-  Timeline
+  Spin
 } from "antd";
 import { 
   WarningOutlined, 
@@ -36,7 +35,11 @@ import {
   SearchOutlined,
   FireOutlined,
   RiseOutlined,
-  FlagOutlined
+  FlagOutlined,
+  RocketOutlined,
+  CheckOutlined,
+  HourglassOutlined,
+  ArrowRightOutlined
 } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import { NhiemVuData } from "@/types";
@@ -67,7 +70,8 @@ const { Search } = Input;
 export default function LoTrinhPage() {
   const [data, setData] = useState<NhiemVuData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<"dashboard" | "table" | "timeline">("dashboard");
+  const [detailView, setDetailView] = useState<"timeline" | "table">("timeline");
+  const [selectedTimelinePhase, setSelectedTimelinePhase] = useState<string>("all");
   const [filterLop, setFilterLop] = useState<string>("");
   const [filterTrangThai, setFilterTrangThai] = useState<string>("");
   const [filterUuTien, setFilterUuTien] = useState<string>("");
@@ -174,20 +178,60 @@ export default function LoTrinhPage() {
     }));
   }, [data]);
 
-  // Grouped tasks by Year for Timeline view
-  const tasksByYear = useMemo(() => {
-    const groups: Record<string, NhiemVuData[]> = {};
-    data.forEach((d) => {
-      let year = "Giai đoạn 2026–2030";
-      if (d.thoiHan) {
-        const y = new Date(d.thoiHan).getFullYear();
-        if (y) year = `Năm ${y}`;
+  // Structured Phase Definition for Timeline
+  const phaseMetadata: Record<string, { title: string; subtitle: string; icon: React.ReactNode; color: string; badgeBg: string }> = {
+    "2026": {
+      title: "NĂM 2026: NỀN TẢNG & SỐ HÓA CỐT LÕI",
+      subtitle: "Tập trung nâng cấp hạ tầng Cloud, bảo mật 4 lớp SOC, triển khai Đề án 06 và CSDL Nông nghiệp",
+      icon: <RocketOutlined className="text-blue-600" />,
+      color: "#2563eb",
+      badgeBg: "bg-blue-50 border-blue-200 text-blue-800"
+    },
+    "2027": {
+      title: "NĂM 2027: TÍCH HỢP & DỊCH VỤ TOÀN TRÌNH",
+      subtitle: "Hoàn thiện Kho dữ liệu tổng hợp, dữ liệu mở Open Data và Cổng DVC liên thông toàn trình",
+      icon: <ThunderboltOutlined className="text-amber-600" />,
+      color: "#d97706",
+      badgeBg: "bg-amber-50 border-amber-200 text-amber-800"
+    },
+    "2028-2030": {
+      title: "GIAI ĐOẠN 2028–2030: BỨT PHÁ ĐÔ THỊ THÔNG MINH & XÃ HỘI SỐ",
+      subtitle: "Phát triển nền tảng công dân số Vĩnh Long Smart, trung tâm IOC liên ngành và y tế thông minh",
+      icon: <RiseOutlined className="text-emerald-600" />,
+      color: "#059669",
+      badgeBg: "bg-emerald-50 border-emerald-200 text-emerald-800"
+    }
+  };
+
+  // Grouped tasks for Timeline view
+  const timelineGroups = useMemo(() => {
+    const groups: { key: string; phaseKey: string; yearLabel: string; tasks: NhiemVuData[] }[] = [
+      { key: "2026", phaseKey: "2026", yearLabel: "Năm 2026", tasks: [] },
+      { key: "2027", phaseKey: "2027", yearLabel: "Năm 2027", tasks: [] },
+      { key: "2028-2030", phaseKey: "2028-2030", yearLabel: "Giai đoạn 2028–2030", tasks: [] },
+    ];
+
+    filteredData.forEach((task) => {
+      let phase = "2028-2030";
+      if (task.thoiHan) {
+        const y = new Date(task.thoiHan).getFullYear();
+        if (y <= 2026) phase = "2026";
+        else if (y === 2027) phase = "2027";
+        else phase = "2028-2030";
+      } else if (task.giaiDoan) {
+        if (task.giaiDoan.includes("2026")) phase = "2026";
+        else if (task.giaiDoan.includes("2027")) phase = "2027";
       }
-      if (!groups[year]) groups[year] = [];
-      groups[year].push(d);
+
+      const target = groups.find((g) => g.phaseKey === phase);
+      if (target) target.tasks.push(task);
     });
-    return Object.entries(groups).sort((a, b) => a[0].localeCompare(b[0]));
-  }, [data]);
+
+    if (selectedTimelinePhase === "all") {
+      return groups.filter((g) => g.tasks.length > 0);
+    }
+    return groups.filter((g) => g.phaseKey === selectedTimelinePhase && g.tasks.length > 0);
+  }, [filteredData, selectedTimelinePhase]);
 
   const columns: ColumnsType<NhiemVuData> = [
     {
@@ -223,7 +267,7 @@ export default function LoTrinhPage() {
               <div className="flex flex-wrap gap-1 mt-1">
                 {rec.heThongSos.map((ht) => (
                   <Tooltip key={ht.id} title={ht.ten}>
-                    <Tag className="m-0 text-[10px] bg-blue-50 text-blue-600 border-blue-200">{ht.ten}</Tag>
+                    <Tag className="m-0 text-[10px] bg-blue-50 text-blue-600 border-blue-200">{ht.ma}</Tag>
                   </Tooltip>
                 ))}
               </div>
@@ -329,7 +373,7 @@ export default function LoTrinhPage() {
             STT: #{sttNumber}
           </span>
           <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-md border ${lopCfg.badgeClass}`}>
-            {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.shortLabel}
+            {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.title}
           </span>
           <span className={`inline-flex items-center text-xs font-bold px-3 py-1 rounded-md border ${UU_TIEN_CONFIG[selectedTask.uuTien]?.badgeClass || "bg-gray-100 text-gray-800 border-gray-300 font-bold"}`}>
             Ưu tiên: {UU_TIEN_CONFIG[selectedTask.uuTien]?.label || selectedTask.uuTien}
@@ -439,7 +483,9 @@ export default function LoTrinhPage() {
                     <div className="font-semibold text-gray-800 text-xs line-clamp-1">{ht.ten}</div>
                     <div className="text-[11px] text-gray-500 mt-0.5">{ht.donVi?.ten || ht.chuQuan || "Chưa xác định"}</div>
                   </div>
-                  <Tag className="m-0 text-[10px] bg-blue-50 text-blue-600 border-blue-200">{ht.ten}</Tag>
+                  <Tag className="m-0 font-mono text-[10px] bg-blue-50 text-blue-600 border-blue-200">
+                    {ht.ma}
+                  </Tag>
                 </div>
               ))}
             </div>
@@ -463,7 +509,7 @@ export default function LoTrinhPage() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 pb-12">
-      {/* Top Banner & Mode Switcher */}
+      {/* Top Banner */}
       <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-900 text-white p-6 rounded-2xl shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
@@ -480,18 +526,17 @@ export default function LoTrinhPage() {
           </p>
         </div>
 
-        {/* View Mode Toggle */}
-        <div className="bg-white/10 p-1.5 rounded-xl backdrop-blur-md border border-white/20">
-          <Segmented
-            value={viewMode}
-            onChange={(val) => setViewMode(val as "dashboard" | "table" | "timeline")}
-            options={[
-              { label: "📊 Dashboard Tiến Độ", value: "dashboard", icon: <PieChartOutlined /> },
-              { label: "📋 Bảng Nhiệm Vụ", value: "table", icon: <TableOutlined /> },
-              { label: "⏳ Mốc Thời Gian", value: "timeline", icon: <FieldTimeOutlined /> },
-            ]}
-            className="bg-white/20 text-white"
-          />
+        <div className="flex items-center gap-2">
+          <Button 
+            type="primary" 
+            className="bg-blue-600 hover:bg-blue-500 border-none font-semibold shadow-sm"
+            onClick={() => {
+              const el = document.getElementById("nhiem-vu-detail-section");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Xem Chi Tiết Nhiệm Vụ ↓
+          </Button>
         </div>
       </div>
 
@@ -546,203 +591,260 @@ export default function LoTrinhPage() {
           <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-red-500 bg-white" size="small">
             <div className="flex justify-between items-center">
               <div>
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Cảnh Báo / Trễ Hạn</div>
+                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Quá Hạn / Nguy Cơ</div>
                 <div className="text-2xl font-bold text-red-600 mt-1">{tongTH} <span className="text-xs font-normal text-gray-400">nhiệm vụ</span></div>
               </div>
               <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-red-600 text-lg">
                 <WarningOutlined />
               </div>
             </div>
-            <div className="text-xs text-red-500 mt-2 font-medium">
-              {tongTH > 0 ? "Cần đôn đốc tiến độ" : "Các mốc thời gian đảm bảo"}
-            </div>
+            <Progress percent={Math.round((tongTH / totalTasks) * 100)} strokeColor="#ff4d4f" size="small" className="mt-2 mb-0" />
           </Card>
         </Col>
       </Row>
 
-      {/* DASHBOARD VIEW */}
-      {viewMode === "dashboard" && (
-        <div className="space-y-6">
-
-          {/* 2 Donut / Pie Charts: Priority & Solution */}
-          <Row gutter={[16, 16]}>
-            <Col xs={24} lg={12}>
-              <Card title={<span className="font-bold text-gray-800">🎯 Phân Bổ Theo Mức Độ Ưu Tiên</span>} className="shadow-xs h-full">
-                <div className="h-64 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={priorityChartData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={55}
-                        outerRadius={85}
-                        paddingAngle={5}
-                        dataKey="value"
-                        label={({ name, percent }: { name?: string; percent?: number }) => `${name || ""} (${((percent || 0) * 100).toFixed(0)}%)`}
-                      >
-                        {priorityChartData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <RechartsTooltip />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </Card>
-            </Col>
-
-            <Col xs={24} lg={12}>
-              <Card title={<span className="font-bold text-gray-800">⚡ Phân Bổ Theo Phương Án Xử Lý</span>} className="shadow-xs h-full">
-                <div className="h-64 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={solutionChartData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={55}
-                        outerRadius={85}
-                        paddingAngle={5}
-                        dataKey="value"
-                        label={({ name, percent }: { name?: string; percent?: number }) => `${name || ""} (${((percent || 0) * 100).toFixed(0)}%)`}
-                      >
-                        {solutionChartData.map((entry, index) => (
-                          <Cell key={`cell-sol-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <RechartsTooltip />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </Card>
-            </Col>
-          </Row>
-
-          {/* Quick Highlight Cards for Urgent Tasks */}
-          <Card title={<span className="font-bold text-gray-800">🔥 Nhiệm Vụ Trọng Tâm & Ưu Tiên Cao Cần Đẩy Nhanh</span>} className="shadow-xs">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {data
-                .filter((d) => d.uuTien === "cao")
-                .map((task) => {
-                  const idx = data.findIndex(t => t.id === task.id);
-                  return (
-                    <div
-                      key={task.id}
-                      onClick={() => setSelectedTask(task)}
-                      className="p-3.5 bg-gradient-to-br from-red-50/40 via-white to-orange-50/30 rounded-xl border border-red-200/80 hover:border-red-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between"
-                    >
-                      <div>
-                        <div className="flex justify-between items-start mb-2">
-                          <span className="font-bold text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
-                            STT #{idx + 1}
-                          </span>
-                          <Tag color="red">Ưu tiên Cao</Tag>
-                        </div>
-                        <h4 className="font-bold text-sm text-gray-800 line-clamp-2 hover:text-blue-600 transition-colors mb-1">
-                          {task.ten}
-                        </h4>
-                        <div className="text-xs text-gray-500 line-clamp-2 mb-3">
-                          {task.moTa || "Chưa có mô tả chi tiết."}
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="flex justify-between text-xs text-gray-500 mb-1">
-                          <span>Tiến độ</span>
-                          <span className="font-bold text-gray-700">{task.tienDo}%</span>
-                        </div>
-                        <Progress percent={task.tienDo} size="small" strokeColor="#ff4d4f" />
-                        <div className="text-[11px] text-gray-400 mt-2 flex justify-between">
-                          <span>Hạn: {task.thoiHan ? formatDate(task.thoiHan) : "—"}</span>
-                          <span className="text-blue-600 font-semibold hover:underline">Chi tiết →</span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-          </Card>
-        </div>
-      )}
-
-      {/* FILTER CONTROLS (Available in Table and Timeline views) */}
-      {viewMode !== "dashboard" && (
-        <Card className="shadow-xs" size="small">
-          <div className="flex flex-wrap gap-3 items-center justify-between">
-            <div className="flex flex-wrap gap-3 items-center flex-1">
-              <Search
-                placeholder="Tìm tên nhiệm vụ, mô tả..."
-                allowClear
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                style={{ width: 280 }}
-                prefix={<SearchOutlined className="text-gray-400" />}
-              />
-
-              <Select
-                placeholder="Tất cả lớp"
-                allowClear
-                value={filterLop || undefined}
-                onChange={(val) => setFilterLop(val || "")}
-                style={{ width: 170 }}
-              >
-                {[1, 2, 3, 4].map((l) => (
-                  <Select.Option key={l} value={String(l)}>
-                    {LOP_CONFIG[l as 1 | 2 | 3 | 4].icon} {LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel}
-                  </Select.Option>
-                ))}
-              </Select>
-
-              <Select
-                placeholder="Tất cả trạng thái"
-                allowClear
-                value={filterTrangThai || undefined}
-                onChange={(val) => setFilterTrangThai(val || "")}
-                style={{ width: 170 }}
-              >
-                {Object.entries(TRANG_THAI_CONFIG).map(([k, v]) => (
-                  <Select.Option key={k} value={k}>{v.label}</Select.Option>
-                ))}
-              </Select>
-
-              <Select
-                placeholder="Mức độ ưu tiên"
-                allowClear
-                value={filterUuTien || undefined}
-                onChange={(val) => setFilterUuTien(val || "")}
-                style={{ width: 150 }}
-              >
-                <Select.Option value="cao">Ưu tiên Cao</Select.Option>
-                <Select.Option value="trung-binh">Ưu tiên Trung bình</Select.Option>
-                <Select.Option value="thap">Ưu tiên Thấp</Select.Option>
-              </Select>
-
-              <Select
-                placeholder="Đơn vị chủ trì"
-                allowClear
-                value={filterDonVi || undefined}
-                onChange={(val) => setFilterDonVi(val || "")}
-                style={{ width: 200 }}
-                showSearch
-              >
-                {donViOptions.map((dv) => (
-                  <Select.Option key={dv} value={dv}>{dv}</Select.Option>
-                ))}
-              </Select>
-            </div>
-
-            <div className="text-xs text-gray-500 font-medium">
-              Hiển thị <span className="font-bold text-blue-600">{filteredData.length}</span> / {totalTasks} nhiệm vụ
-            </div>
+      {/* DASHBOARD CHARTS SECTION (ALWAYS VISIBLE AT TOP) */}
+      <div className="space-y-6">
+        {/* Progress Chart */}
+        <Card 
+          title={<span className="font-bold text-gray-800">📊 Tiến Độ Thực Hiện 09 Nhiệm Vụ Trọng Tâm</span>}
+          className="shadow-xs"
+        >
+          <div className="h-72 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={taskProgressChartData} margin={{ top: 10, right: 30, left: 0, bottom: 25 }}>
+                <XAxis dataKey="name" tick={{ fontSize: 12, fontWeight: "bold" }} />
+                <YAxis domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
+                <RechartsTooltip 
+                  formatter={(value: any, name: any, props: any) => [`${value}%`, props.payload.fullName]}
+                  labelFormatter={(label) => `Nhiệm vụ ${label}`}
+                />
+                <Bar dataKey="tienDo" name="Tiến độ hoàn thành (%)" fill="#2563eb" radius={[6, 6, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="grid grid-cols-3 sm:grid-cols-9 gap-1.5 mt-3 pt-3 border-t text-center">
+            {data.map((d, idx) => (
+              <div key={d.id} className="p-1 rounded bg-slate-50 border border-slate-100 cursor-pointer hover:bg-blue-50" onClick={() => setSelectedTask(d)}>
+                <div className="text-[11px] font-bold text-blue-700">STT #{idx + 1}</div>
+                <div className="text-[10px] text-gray-500 font-semibold">{d.tienDo}%</div>
+              </div>
+            ))}
           </div>
         </Card>
-      )}
+
+        {/* 2 Sub-charts: Layer Execution & Department Delivery */}
+        <Row gutter={[16, 16]}>
+          <Col xs={24} lg={12}>
+            <Card title={<span className="font-bold text-gray-800">🏗️ Tiến Độ Bình Quân Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs h-full">
+              <div className="h-64 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={[1, 2, 3, 4].map((lop) => {
+                      const tasks = data.filter((d) => d.lop === lop);
+                      const avg = tasks.length > 0 ? Math.round(tasks.reduce((a, b) => a + b.tienDo, 0) / tasks.length) : 0;
+                      return {
+                        name: `Lớp ${lop}: ${LOP_CONFIG[lop as 1|2|3|4].shortLabel}`,
+                        tienDo: avg,
+                        count: tasks.length,
+                        color: LOP_CONFIG[lop as 1|2|3|4].color,
+                      };
+                    })}
+                    margin={{ top: 15, right: 30, left: 0, bottom: 5 }}
+                  >
+                    <XAxis dataKey="name" tick={{ fontSize: 11, fontWeight: 600 }} />
+                    <YAxis domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
+                    <RechartsTooltip formatter={(v: any) => [`${v}%`, "Tiến độ bình quân"]} />
+                    <Bar dataKey="tienDo" name="Tiến độ bình quân (%)" fill="#3b82f6" radius={[6, 6, 0, 0]}>
+                      {[1, 2, 3, 4].map((lop, index) => (
+                        <Cell key={`cell-${index}`} fill={LOP_CONFIG[lop as 1|2|3|4].color} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={24} lg={12}>
+            <Card title={<span className="font-bold text-gray-800">🏛️ Phân Công Trách Nhiệm & Tiến Độ Theo Sở / Ngành</span>} className="shadow-xs h-full">
+              <div className="h-64 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={(() => {
+                      const map: Record<string, { count: number; sumProgress: number }> = {};
+                      data.forEach((d) => {
+                        const name = d.donViChuTri?.ten || "UBND tỉnh";
+                        let shortName = name.replace("Sở Nông nghiệp và Phát triển nông thôn", "Sở NN&PTNT")
+                                            .replace("Sở Thông tin và Truyền thông", "Sở TT&TT")
+                                            .replace("Văn phòng Ủy ban nhân dân tỉnh", "VP UBND tỉnh")
+                                            .replace("Công an tỉnh Vĩnh Long", "Công an tỉnh");
+                        if (!map[shortName]) map[shortName] = { count: 0, sumProgress: 0 };
+                        map[shortName].count += 1;
+                        map[shortName].sumProgress += d.tienDo;
+                      });
+                      return Object.entries(map).map(([name, val]) => ({
+                        name,
+                        avgProgress: Math.round(val.sumProgress / val.count),
+                        count: val.count,
+                      }));
+                    })()}
+                    layout="vertical"
+                    margin={{ top: 5, right: 30, left: 35, bottom: 5 }}
+                  >
+                    <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
+                    <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={110} />
+                    <RechartsTooltip formatter={(v: any, name: any, props: any) => [`${v}% (${props.payload.count} nhiệm vụ)`, "Tiến độ"]} />
+                    <Bar dataKey="avgProgress" name="Tiến độ trung bình (%)" fill="#10b981" radius={[0, 4, 4, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+
+        {/* 2 Sub-charts: Priority & Solution */}
+        <Row gutter={[16, 16]}>
+          <Col xs={24} lg={12}>
+            <Card title={<span className="font-bold text-gray-800">🎯 Phân Bổ Theo Mức Độ Ưu Tiên</span>} className="shadow-xs h-full">
+              <div className="h-64 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={priorityChartData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={90}
+                      paddingAngle={4}
+                      dataKey="value"
+                      label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+                    >
+                      {priorityChartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <RechartsTooltip />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={24} lg={12}>
+            <Card title={<span className="font-bold text-gray-800">⚡ Cơ Cấu Theo Phương Án Xử Lý</span>} className="shadow-xs h-full">
+              <div className="h-64 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={solutionChartData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+                    <XAxis type="number" />
+                    <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={130} />
+                    <RechartsTooltip />
+                    <Bar dataKey="value" name="Số lượng dự án" fill="#7c3aed" radius={[0, 4, 4, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+
+      {/* SECTION HEADER & EXECUTION VIEW SWITCHER */}
+      <div id="nhiem-vu-detail-section" className="pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-t border-slate-200">
+        <div>
+          <h2 className="text-xl font-bold text-gray-900 m-0 flex items-center gap-2">
+            <span className="w-2.5 h-6 bg-blue-600 rounded-full inline-block"></span>
+            Kế Hoạch Thực Thi & Chi Tiết 09 Nhiệm Vụ Số Hóa
+          </h2>
+          <p className="text-xs text-gray-500 mt-1 mb-0">
+            Xem theo mốc thời gian 3 giai đoạn hoặc chuyển sang dạng bảng dữ liệu chi tiết
+          </p>
+        </div>
+
+        <Segmented
+          value={detailView}
+          onChange={(val) => setDetailView(val as "timeline" | "table")}
+          options={[
+            { label: "⏳ Mốc Thời Gian (3 Giai Đoạn)", value: "timeline", icon: <FieldTimeOutlined /> },
+            { label: "📋 Bảng Danh Sách Nhiệm Vụ", value: "table", icon: <TableOutlined /> },
+          ]}
+          className="bg-slate-200/80 p-1 font-semibold text-gray-700"
+        />
+      </div>
+
+      {/* FILTER & CONTROLS TOOLBAR */}
+      <Card className="shadow-xs" size="small">
+        <div className="flex flex-wrap gap-3 items-center justify-between">
+          <div className="flex flex-wrap gap-3 items-center flex-1">
+            <Search
+              placeholder="Tìm nhiệm vụ, đơn vị chủ trì, giải pháp..."
+              allowClear
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ width: 280 }}
+              prefix={<SearchOutlined className="text-gray-400" />}
+            />
+
+            <Select
+              placeholder="Tất cả các lớp"
+              allowClear
+              value={filterLop || undefined}
+              onChange={(val) => setFilterLop(val || "")}
+              style={{ width: 170 }}
+            >
+              {[1, 2, 3, 4].map((l) => (
+                <Select.Option key={l} value={String(l)}>
+                  {LOP_CONFIG[l as 1 | 2 | 3 | 4].icon} {LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel}
+                </Select.Option>
+              ))}
+            </Select>
+
+            <Select
+              placeholder="Tất cả trạng thái"
+              allowClear
+              value={filterTrangThai || undefined}
+              onChange={(val) => setFilterTrangThai(val || "")}
+              style={{ width: 170 }}
+            >
+              {Object.entries(TRANG_THAI_CONFIG).map(([k, v]) => (
+                <Select.Option key={k} value={k}>{v.label}</Select.Option>
+              ))}
+            </Select>
+
+            <Select
+              placeholder="Mức độ ưu tiên"
+              allowClear
+              value={filterUuTien || undefined}
+              onChange={(val) => setFilterUuTien(val || "")}
+              style={{ width: 150 }}
+            >
+              <Select.Option value="cao">Ưu tiên Cao</Select.Option>
+              <Select.Option value="trung-binh">Ưu tiên Trung bình</Select.Option>
+              <Select.Option value="thap">Ưu tiên Thấp</Select.Option>
+            </Select>
+
+            <Select
+              placeholder="Đơn vị chủ trì"
+              allowClear
+              value={filterDonVi || undefined}
+              onChange={(val) => setFilterDonVi(val || "")}
+              style={{ width: 200 }}
+              showSearch
+            >
+              {donViOptions.map((dv) => (
+                <Select.Option key={dv} value={dv}>{dv}</Select.Option>
+              ))}
+            </Select>
+          </div>
+
+          <div className="text-xs text-gray-500 font-medium">
+            Hiển thị <span className="font-bold text-blue-600">{filteredData.length}</span> / {totalTasks} nhiệm vụ
+          </div>
+        </div>
+      </Card>
 
       {/* TABLE VIEW */}
-      {viewMode === "table" && (
+      {detailView === "table" && (
         <Card className="shadow-xs rounded-xl">
           <Table
             columns={columns}
@@ -762,61 +864,264 @@ export default function LoTrinhPage() {
         </Card>
       )}
 
-      {/* TIMELINE / ROADMAP VIEW */}
-      {viewMode === "timeline" && (
-        <Card className="shadow-xs rounded-xl p-4">
-          <div className="max-w-4xl mx-auto py-4">
-            <Timeline
-              mode="left"
-              items={tasksByYear.map(([year, taskList]) => ({
-                label: <span className="font-bold text-blue-800 text-sm">{year}</span>,
-                children: (
-                  <div className="space-y-3 pb-4">
-                    {taskList.map((task) => {
-                      const idx = data.findIndex(t => t.id === task.id);
-                      const overdue = task.thoiHan ? isOverdue(task.thoiHan) && task.trangThai !== "hoan-thanh" : false;
-                      return (
-                        <div
-                          key={task.id}
-                          onClick={() => setSelectedTask(task)}
-                          className="bg-slate-50 hover:bg-white p-3.5 rounded-xl border border-gray-200 hover:border-blue-400 hover:shadow-md transition-all cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
-                        >
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-bold text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
-                                STT #{idx + 1}
-                              </span>
-                              <span className="font-bold text-sm text-gray-800 hover:text-blue-600 transition-colors">
-                                {task.ten}
-                              </span>
-                            </div>
-                            <div className="text-xs text-gray-500 flex flex-wrap gap-3 mt-1">
-                              <span><BankOutlined /> {task.donViChuTri?.ten || "UBND tỉnh Vĩnh Long"}</span>
-                              <span><CalendarOutlined /> Hạn: {task.thoiHan ? formatDate(task.thoiHan) : "—"}</span>
-                              {overdue && <span className="text-red-500 font-semibold"><WarningOutlined /> Quá hạn</span>}
-                            </div>
-                          </div>
+      {/* TIMELINE / ROADMAP VIEW (MODERN REDESIGNED) */}
+      {detailView === "timeline" && (
+        <div className="space-y-6">
+          
+          {/* Phase Filter Tabs */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+            <button
+              onClick={() => setSelectedTimelinePhase("all")}
+              className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
+                selectedTimelinePhase === "all"
+                  ? "bg-slate-900 text-white border-slate-900 shadow-md ring-2 ring-blue-500"
+                  : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50 shadow-xs"
+              }`}
+            >
+              <div className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-1">Toàn bộ Lộ trình</div>
+              <div className="font-extrabold text-base flex items-center justify-between">
+                <span>2026 – 2030</span>
+                <span className={`text-xs px-2 py-0.5 rounded-full ${selectedTimelinePhase === "all" ? "bg-white/20 text-white" : "bg-slate-100 text-slate-700"}`}>
+                  {filteredData.length} NV
+                </span>
+              </div>
+              <div className="text-xs mt-2 opacity-70">Tổng thể 09 nhiệm vụ chuyển đổi số</div>
+            </button>
 
-                          <div className="w-full md:w-44 shrink-0">
-                            <div className="flex justify-between text-xs text-gray-500 mb-1">
-                              <span>Tiến độ</span>
-                              <span className="font-bold text-gray-800">{task.tienDo}%</span>
-                            </div>
-                            <Progress
-                              percent={task.tienDo}
-                              size="small"
-                              strokeColor={task.tienDo > 50 ? "#1677ff" : "#faad14"}
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ),
-              }))}
-            />
+            <button
+              onClick={() => setSelectedTimelinePhase("2026")}
+              className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
+                selectedTimelinePhase === "2026"
+                  ? "bg-blue-700 text-white border-blue-700 shadow-md ring-2 ring-blue-400"
+                  : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50 shadow-xs"
+              }`}
+            >
+              <div className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-1">Mốc 1: Khởi động</div>
+              <div className="font-extrabold text-base flex items-center justify-between">
+                <span>Năm 2026</span>
+                <span className={`text-xs px-2 py-0.5 rounded-full ${selectedTimelinePhase === "2026" ? "bg-white/20 text-white" : "bg-blue-50 text-blue-700"}`}>
+                  4 NV
+                </span>
+              </div>
+              <div className="text-xs mt-2 opacity-70">Hạ tầng Cloud, SOC, Đề án 06, Nông nghiệp</div>
+            </button>
+
+            <button
+              onClick={() => setSelectedTimelinePhase("2027")}
+              className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
+                selectedTimelinePhase === "2027"
+                  ? "bg-amber-600 text-white border-amber-600 shadow-md ring-2 ring-amber-400"
+                  : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50 shadow-xs"
+              }`}
+            >
+              <div className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-1">Mốc 2: Tăng tốc</div>
+              <div className="font-extrabold text-base flex items-center justify-between">
+                <span>Năm 2027</span>
+                <span className={`text-xs px-2 py-0.5 rounded-full ${selectedTimelinePhase === "2027" ? "bg-white/20 text-white" : "bg-amber-50 text-amber-700"}`}>
+                  2 NV
+                </span>
+              </div>
+              <div className="text-xs mt-2 opacity-70">Kho Dữ liệu dùng chung & DVC toàn trình</div>
+            </button>
+
+            <button
+              onClick={() => setSelectedTimelinePhase("2028-2030")}
+              className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
+                selectedTimelinePhase === "2028-2030"
+                  ? "bg-emerald-700 text-white border-emerald-700 shadow-md ring-2 ring-emerald-400"
+                  : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50 shadow-xs"
+              }`}
+            >
+              <div className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-1">Mốc 3: Bứt phá</div>
+              <div className="font-extrabold text-base flex items-center justify-between">
+                <span>2028 – 2030</span>
+                <span className={`text-xs px-2 py-0.5 rounded-full ${selectedTimelinePhase === "2028-2030" ? "bg-white/20 text-white" : "bg-emerald-50 text-emerald-700"}`}>
+                  3 NV
+                </span>
+              </div>
+              <div className="text-xs mt-2 opacity-70">App Công dân số, IOC Tỉnh & Y tế EMR</div>
+            </button>
           </div>
-        </Card>
+
+          {/* Timeline Journey Stream */}
+          {timelineGroups.length === 0 ? (
+            <Card className="py-12 text-center">
+              <Empty description="Không tìm thấy nhiệm vụ nào trong mốc thời gian này." />
+            </Card>
+          ) : (
+            <div className="space-y-8">
+              {timelineGroups.map((group) => {
+                const meta = phaseMetadata[group.phaseKey] || {
+                  title: group.yearLabel,
+                  subtitle: "Kế hoạch thực thi các nhiệm vụ chuyển đổi số",
+                  icon: <CalendarOutlined />,
+                  color: "#2563eb",
+                  badgeBg: "bg-blue-50 border-blue-200 text-blue-800"
+                };
+
+                return (
+                  <div key={group.key} className="space-y-4">
+                    {/* Phase Header Banner */}
+                    <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-xl shrink-0 shadow-inner">
+                          {meta.icon}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h2 className="text-sm md:text-base font-extrabold text-slate-900 m-0">
+                              {meta.title}
+                            </h2>
+                            <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${meta.badgeBg}`}>
+                              {group.tasks.length} nhiệm vụ
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-500 mt-0.5 mb-0">
+                            {meta.subtitle}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="text-xs text-slate-600 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shrink-0 font-medium">
+                        Tiến độ bình quân: <b>{Math.round(group.tasks.reduce((a, b) => a + b.tienDo, 0) / group.tasks.length)}%</b>
+                      </div>
+                    </div>
+
+                    {/* Timeline Task Cards Grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      {group.tasks.map((task) => {
+                        const idx = data.findIndex((t) => t.id === task.id);
+                        const sttNum = idx >= 0 ? idx + 1 : 1;
+                        const lopCfg = LOP_CONFIG[task.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
+                        const statusCfg = TRANG_THAI_CONFIG[task.trangThai] || { label: task.trangThai, badgeClass: "bg-gray-100 text-gray-800" };
+                        const priorityCfg = UU_TIEN_CONFIG[task.uuTien] || { label: task.uuTien, badgeClass: "bg-gray-100 text-gray-800" };
+                        const overdue = task.thoiHan ? isOverdue(task.thoiHan) && task.trangThai !== "hoan-thanh" : false;
+                        const days = task.thoiHan ? getDaysRemaining(task.thoiHan) : null;
+
+                        return (
+                          <div
+                            key={task.id}
+                            onClick={() => setSelectedTask(task)}
+                            className="bg-white hover:bg-slate-50/60 p-5 rounded-2xl border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between space-y-4 group"
+                          >
+                            {/* Card Top Row: STT, Layer & Status */}
+                            <div>
+                              <div className="flex justify-between items-start gap-2 mb-2.5">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-extrabold text-xs bg-slate-900 text-white px-2.5 py-1 rounded-md shadow-xs">
+                                    STT #{sttNum}
+                                  </span>
+                                  <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${lopCfg.badgeClass}`}>
+                                    {lopCfg.icon} Lớp {task.lop}
+                                  </span>
+                                </div>
+
+                                <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${priorityCfg.badgeClass}`}>
+                                    {priorityCfg.label}
+                                  </span>
+                                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
+                                    {statusCfg.label}
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Task Title */}
+                              <h3 className="font-bold text-base text-slate-900 group-hover:text-blue-700 transition-colors leading-snug mb-2">
+                                {task.ten}
+                              </h3>
+
+                              {/* Description */}
+                              {task.moTa && (
+                                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
+                                  {task.moTa}
+                                </p>
+                              )}
+
+                              {/* Key Attributes List */}
+                              <div className="space-y-1.5 text-xs text-slate-600 bg-slate-50/80 p-3 rounded-xl border border-slate-100">
+                                <div className="flex items-center gap-2">
+                                  <BankOutlined className="text-slate-400 shrink-0" />
+                                  <span className="font-semibold text-slate-800">Chủ trì:</span>
+                                  <span className="truncate">{task.donViChuTri?.ten || "UBND tỉnh Vĩnh Long"}</span>
+                                </div>
+
+                                <div className="flex items-center justify-between gap-2">
+                                  <div className="flex items-center gap-2">
+                                    <CalendarOutlined className="text-slate-400 shrink-0" />
+                                    <span className="font-semibold text-slate-800">Thời hạn:</span>
+                                    <span>{task.thoiHan ? formatDate(task.thoiHan) : "Giai đoạn 2026–2030"}</span>
+                                  </div>
+                                  {days !== null && (
+                                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${
+                                      overdue ? "bg-red-100 text-red-700" :
+                                      days <= 30 ? "bg-amber-100 text-amber-800" :
+                                      "bg-blue-100 text-blue-800"
+                                    }`}>
+                                      {overdue ? `Trễ ${Math.abs(days)} ngày` : task.trangThai === "hoan-thanh" ? "Đã nghiệm thu" : `Còn ${days} ngày`}
+                                    </span>
+                                  )}
+                                </div>
+
+                                {task.phuongAnXuLy && (
+                                  <div className="flex items-center gap-2 text-blue-700 font-medium">
+                                    <ThunderboltOutlined className="shrink-0" />
+                                    <span className="truncate">{PHUONG_AN_CONFIG[task.phuongAnXuLy] || task.phuongAnXuLy}</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Card Bottom: Progress & Impacted Systems */}
+                            <div className="pt-2 border-t border-slate-100 space-y-3">
+                              {/* Progress bar */}
+                              <div>
+                                <div className="flex justify-between text-xs text-slate-600 mb-1 font-medium">
+                                  <span>Tiến độ thực hiện</span>
+                                  <span className="font-bold text-slate-900">{task.tienDo}%</span>
+                                </div>
+                                <Progress
+                                  percent={task.tienDo}
+                                  size="small"
+                                  status={task.trangThai === "tre-han" ? "exception" : task.trangThai === "hoan-thanh" ? "success" : "active"}
+                                  strokeColor={
+                                    task.trangThai === "hoan-thanh" ? "#16a34a" :
+                                    task.trangThai === "tre-han" ? "#dc2626" :
+                                    task.tienDo > 50 ? "#2563eb" : "#d97706"
+                                  }
+                                />
+                              </div>
+
+                              {/* Impacted Systems Badges */}
+                              {task.heThongSos && task.heThongSos.length > 0 && (
+                                <div className="flex items-center gap-1.5 flex-wrap">
+                                  <span className="text-[11px] text-slate-500 font-semibold">Tác động HT:</span>
+                                  {task.heThongSos.map((ht) => (
+                                    <Tooltip key={ht.id} title={ht.ten}>
+                                      <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded hover:bg-blue-100 transition-colors">
+                                        {ht.ma}
+                                      </span>
+                                    </Tooltip>
+                                  ))}
+                                </div>
+                              )}
+
+                              {/* View detail link */}
+                              <div className="flex justify-end text-xs text-blue-600 font-bold group-hover:translate-x-0.5 transition-transform">
+                                <span className="flex items-center gap-1">Xem chi tiết hồ sơ <ArrowRightOutlined /></span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+        </div>
       )}
 
       {/* Detail Modal */}

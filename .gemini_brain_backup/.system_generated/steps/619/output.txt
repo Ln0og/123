@@ -1,0 +1,524 @@
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -509,7 +509,7 @@
+ 
+   return (
+     <div className="max-w-7xl mx-auto space-y-6 pb-12">
+-      {/* Top Banner & Mode Switcher */}
++      {/* Top Banner */}
+       <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-900 text-white p-6 rounded-2xl shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+         <div>
+           <div className="flex items-center gap-2 mb-2">
+@@ -525,18 +525,17 @@
+           </p>
+         </div>
+ 
+-        {/* View Mode Toggle */}
+-        <div className="bg-white/10 p-1.5 rounded-xl backdrop-blur-md border border-white/20">
+-          <Segmented
+-            value={viewMode}
+-            onChange={(val) => setViewMode(val as "dashboard" | "table" | "timeline")}
+-            options={[
+-              { label: "📊 Dashboard Tiến Độ", value: "dashboard", icon: <PieChartOutlined /> },
+-              { label: "📋 Bảng Nhiệm Vụ", value: "table", icon: <TableOutlined /> },
+-              { label: "⏳ Mốc Thời Gian", value: "timeline", icon: <FieldTimeOutlined /> },
+-            ]}
+-            className="bg-white/20 text-white"
+-          />
++        <div className="flex items-center gap-2">
++          <Button 
++            type="primary" 
++            className="bg-blue-600 hover:bg-blue-500 border-none font-semibold shadow-sm"
++            onClick={() => {
++              const el = document.getElementById("nhiem-vu-detail-section");
++              el?.scrollIntoView({ behavior: "smooth" });
++            }}
++          >
++            Xem Chi Tiết Nhiệm Vụ ↓
++          </Button>
+         </div>
+       </div>
+ 
+@@ -602,230 +602,248 @@
+         </Col>
+       </Row>
+ 
+-      {/* DASHBOARD VIEW */}
+-      {viewMode === "dashboard" && (
+-        <div className="space-y-6">
+-          {/* Progress Chart */}
+-          <Card 
+-            title={<span className="font-bold text-gray-800">📊 Tiến Độ Thực Hiện 09 Nhiệm Vụ Trọng Tâm</span>}
+-            extra={<Button type="link" onClick={() => setViewMode("timeline")}>Xem theo Mốc thời gian →</Button>}
+-            className="shadow-xs"
+-          >
+-            <div className="h-72 w-full">
+-              <ResponsiveContainer width="100%" height="100%">
+-                <BarChart data={taskProgressChartData} margin={{ top: 10, right: 30, left: 0, bottom: 25 }}>
+-                  <XAxis dataKey="name" tick={{ fontSize: 12, fontWeight: "bold" }} />
+-                  <YAxis domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
+-                  <RechartsTooltip 
+-                    formatter={(value: any, name: any, props: any) => [`${value}%`, props.payload.fullName]}
+-                    labelFormatter={(label) => `Nhiệm vụ ${label}`}
+-                  />
+-                  <Bar dataKey="tienDo" name="Tiến độ hoàn thành (%)" fill="#2563eb" radius={[6, 6, 0, 0]} />
+-                </BarChart>
+-              </ResponsiveContainer>
+-            </div>
+-            <div className="grid grid-cols-3 sm:grid-cols-9 gap-1.5 mt-3 pt-3 border-t text-center">
+-              {data.map((d, idx) => (
+-                <div key={d.id} className="p-1 rounded bg-slate-50 border border-slate-100 cursor-pointer hover:bg-blue-50" onClick={() => setSelectedTask(d)}>
+-                  <div className="text-[11px] font-bold text-blue-700">STT #{idx + 1}</div>
+-                  <div className="text-[10px] text-gray-500 font-semibold">{d.tienDo}%</div>
+-                </div>
+-              ))}
+-            </div>
+-          </Card>
+-
+-          {/* 2 Sub-charts: Layer Execution & Department Delivery */}
+-          <Row gutter={[16, 16]}>
+-            <Col xs={24} lg={12}>
+-              <Card title={<span className="font-bold text-gray-800">🏗️ Tiến Độ Bình Quân Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs h-full">
+-                <div className="h-64 w-full">
+-                  <ResponsiveContainer width="100%" height="100%">
+-                    <BarChart
+-                      data={[1, 2, 3, 4].map((lop) => {
+-                        const tasks = data.filter((d) => d.lop === lop);
+-                        const avg = tasks.length > 0 ? Math.round(tasks.reduce((a, b) => a + b.tienDo, 0) / tasks.length) : 0;
+-                        return {
+-                          name: `Lớp ${lop}: ${LOP_CONFIG[lop as 1|2|3|4].shortLabel}`,
+-                          tienDo: avg,
+-                          count: tasks.length,
+-                          color: LOP_CONFIG[lop as 1|2|3|4].color,
+-                        };
+-                      })}
+-                      margin={{ top: 15, right: 30, left: 0, bottom: 5 }}
+-                    >
+-                      <XAxis dataKey="name" tick={{ fontSize: 11, fontWeight: 600 }} />
+-                      <YAxis domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
+-                      <RechartsTooltip formatter={(v: any) => [`${v}%`, "Tiến độ bình quân"]} />
+-                      <Bar dataKey="tienDo" name="Tiến độ bình quân (%)" fill="#3b82f6" radius={[6, 6, 0, 0]}>
+-                        {[1, 2, 3, 4].map((lop, index) => (
+-                          <Cell key={`cell-${index}`} fill={LOP_CONFIG[lop as 1|2|3|4].color} />
+-                        ))}
+-                      </Bar>
+-                    </BarChart>
+-                  </ResponsiveContainer>
+-                </div>
+-              </Card>
+-            </Col>
+-
+-            <Col xs={24} lg={12}>
+-              <Card title={<span className="font-bold text-gray-800">🏛️ Phân Công Trách Nhiệm & Tiến Độ Theo Sở / Ngành</span>} className="shadow-xs h-full">
+-                <div className="h-64 w-full">
+-                  <ResponsiveContainer width="100%" height="100%">
+-                    <BarChart
+-                      data={(() => {
+-                        const map: Record<string, { count: number; sumProgress: number }> = {};
+-                        data.forEach((d) => {
+-                          const name = d.donViChuTri?.ten || "UBND tỉnh";
+-                          let shortName = name.replace("Sở Nông nghiệp và Phát triển nông thôn", "Sở NN&PTNT")
+-                                              .replace("Sở Thông tin và Truyền thông", "Sở TT&TT")
+-                                              .replace("Văn phòng Ủy ban nhân dân tỉnh", "VP UBND tỉnh")
+-                                              .replace("Công an tỉnh Vĩnh Long", "Công an tỉnh");
+-                          if (!map[shortName]) map[shortName] = { count: 0, sumProgress: 0 };
+-                          map[shortName].count += 1;
+-                          map[shortName].sumProgress += d.tienDo;
+-                        });
+-                        return Object.entries(map).map(([name, val]) => ({
+-                          name,
+-                          avgProgress: Math.round(val.sumProgress / val.count),
+-                          count: val.count,
+-                        }));
+-                      })()}
+-                      layout="vertical"
+-                      margin={{ top: 5, right: 30, left: 35, bottom: 5 }}
+-                    >
+-                      <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
+-                      <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={110} />
+-                      <RechartsTooltip formatter={(v: any, name: any, props: any) => [`${v}% (${props.payload.count} nhiệm vụ)`, "Tiến độ"]} />
+-                      <Bar dataKey="avgProgress" name="Tiến độ trung bình (%)" fill="#10b981" radius={[0, 4, 4, 0]} />
+-                    </BarChart>
+-                  </ResponsiveContainer>
+-                </div>
+-              </Card>
+-            </Col>
+-          </Row>
+-
+-          {/* 2 Sub-charts: Priority & Solution */}
+-          <Row gutter={[16, 16]}>
+-            <Col xs={24} lg={12}>
+-              <Card title={<span className="font-bold text-gray-800">🎯 Phân Bổ Theo Mức Độ Ưu Tiên</span>} className="shadow-xs h-full">
+-                <div className="h-64 w-full">
+-                  <ResponsiveContainer width="100%" height="100%">
+-                    <PieChart>
+-                      <Pie
+-                        data={priorityChartData}
+-                        cx="50%"
+-                        cy="50%"
+-                        innerRadius={60}
+-                        outerRadius={90}
+-                        paddingAngle={4}
+-                        dataKey="value"
+-                        label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+-                      >
+-                        {priorityChartData.map((entry, index) => (
+-                          <Cell key={`cell-${index}`} fill={entry.color} />
+-                        ))}
+-                      </Pie>
+-                      <RechartsTooltip />
+-                      <Legend />
+-                    </PieChart>
+-                  </ResponsiveContainer>
+-                </div>
+-              </Card>
+-            </Col>
+-
+-            <Col xs={24} lg={12}>
+-              <Card title={<span className="font-bold text-gray-800">⚡ Cơ Cấu Theo Phương Án Xử Lý</span>} className="shadow-xs h-full">
+-                <div className="h-64 w-full">
+-                  <ResponsiveContainer width="100%" height="100%">
+-                    <BarChart data={solutionChartData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+-                      <XAxis type="number" />
+-                      <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={130} />
+-                      <RechartsTooltip />
+-                      <Bar dataKey="value" name="Số lượng dự án" fill="#7c3aed" radius={[0, 4, 4, 0]} />
+-                    </BarChart>
+-                  </ResponsiveContainer>
+-                </div>
+-              </Card>
+-            </Col>
+-          </Row>
+-        </div>
+-      )}
+-
+-      {/* FILTER & CONTROLS TOOLBAR (For Table and Timeline views) */}
+-      {viewMode !== "dashboard" && (
+-        <Card className="shadow-xs" size="small">
+-          <div className="flex flex-wrap gap-3 items-center justify-between">
+-            <div className="flex flex-wrap gap-3 items-center flex-1">
+-              <Search
+-                placeholder="Tìm nhiệm vụ, đơn vị chủ trì, giải pháp..."
+-                allowClear
+-                value={searchQuery}
+-                onChange={(e) => setSearchQuery(e.target.value)}
+-                style={{ width: 280 }}
+-                prefix={<SearchOutlined className="text-gray-400" />}
+-              />
+-
+-              <Select
+-                placeholder="Tất cả các lớp"
+-                allowClear
+-                value={filterLop || undefined}
+-                onChange={(val) => setFilterLop(val || "")}
+-                style={{ width: 170 }}
+-              >
+-                {[1, 2, 3, 4].map((l) => (
+-                  <Select.Option key={l} value={String(l)}>
+-                    {LOP_CONFIG[l as 1 | 2 | 3 | 4].icon} {LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel}
+-                  </Select.Option>
+-                ))}
+-              </Select>
+-
+-              <Select
+-                placeholder="Tất cả trạng thái"
+-                allowClear
+-                value={filterTrangThai || undefined}
+-                onChange={(val) => setFilterTrangThai(val || "")}
+-                style={{ width: 170 }}
+-              >
+-                {Object.entries(TRANG_THAI_CONFIG).map(([k, v]) => (
+-                  <Select.Option key={k} value={k}>{v.label}</Select.Option>
+-                ))}
+-              </Select>
+-
+-              <Select
+-                placeholder="Mức độ ưu tiên"
+-                allowClear
+-                value={filterUuTien || undefined}
+-                onChange={(val) => setFilterUuTien(val || "")}
+-                style={{ width: 150 }}
+-              >
+-                <Select.Option value="cao">Ưu tiên Cao</Select.Option>
+-                <Select.Option value="trung-binh">Ưu tiên Trung bình</Select.Option>
+-                <Select.Option value="thap">Ưu tiên Thấp</Select.Option>
+-              </Select>
+-
+-              <Select
+-                placeholder="Đơn vị chủ trì"
+-                allowClear
+-                value={filterDonVi || undefined}
+-                onChange={(val) => setFilterDonVi(val || "")}
+-                style={{ width: 200 }}
+-                showSearch
+-              >
+-                {donViOptions.map((dv) => (
+-                  <Select.Option key={dv} value={dv}>{dv}</Select.Option>
+-                ))}
+-              </Select>
+-            </div>
+-
+-            <div className="text-xs text-gray-500 font-medium">
+-              Hiển thị <span className="font-bold text-blue-600">{filteredData.length}</span> / {totalTasks} nhiệm vụ
+-            </div>
+-          </div>
+-        </Card>
+-      )}
++      {/* DASHBOARD CHARTS SECTION (ALWAYS VISIBLE AT TOP) */}
++      <div className="space-y-6">
++        {/* Progress Chart */}
++        <Card 
++          title={<span className="font-bold text-gray-800">📊 Tiến Độ Thực Hiện 09 Nhiệm Vụ Trọng Tâm</span>}
++          className="shadow-xs"
++        >
++          <div className="h-72 w-full">
++            <ResponsiveContainer width="100%" height="100%">
++              <BarChart data={taskProgressChartData} margin={{ top: 10, right: 30, left: 0, bottom: 25 }}>
++                <XAxis dataKey="name" tick={{ fontSize: 12, fontWeight: "bold" }} />
++                <YAxis domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
++                <RechartsTooltip 
++                  formatter={(value: any, name: any, props: any) => [`${value}%`, props.payload.fullName]}
++                  labelFormatter={(label) => `Nhiệm vụ ${label}`}
++                />
++                <Bar dataKey="tienDo" name="Tiến độ hoàn thành (%)" fill="#2563eb" radius={[6, 6, 0, 0]} />
++              </BarChart>
++            </ResponsiveContainer>
++          </div>
++          <div className="grid grid-cols-3 sm:grid-cols-9 gap-1.5 mt-3 pt-3 border-t text-center">
++            {data.map((d, idx) => (
++              <div key={d.id} className="p-1 rounded bg-slate-50 border border-slate-100 cursor-pointer hover:bg-blue-50" onClick={() => setSelectedTask(d)}>
++                <div className="text-[11px] font-bold text-blue-700">STT #{idx + 1}</div>
++                <div className="text-[10px] text-gray-500 font-semibold">{d.tienDo}%</div>
++              </div>
++            ))}
++          </div>
++        </Card>
++
++        {/* 2 Sub-charts: Layer Execution & Department Delivery */}
++        <Row gutter={[16, 16]}>
++          <Col xs={24} lg={12}>
++            <Card title={<span className="font-bold text-gray-800">🏗️ Tiến Độ Bình Quân Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs h-full">
++              <div className="h-64 w-full">
++                <ResponsiveContainer width="100%" height="100%">
++                  <BarChart
++                    data={[1, 2, 3, 4].map((lop) => {
++                      const tasks = data.filter((d) => d.lop === lop);
++                      const avg = tasks.length > 0 ? Math.round(tasks.reduce((a, b) => a + b.tienDo, 0) / tasks.length) : 0;
++                      return {
++                        name: `Lớp ${lop}: ${LOP_CONFIG[lop as 1|2|3|4].shortLabel}`,
++                        tienDo: avg,
++                        count: tasks.length,
++                        color: LOP_CONFIG[lop as 1|2|3|4].color,
++                      };
++                    })}
++                    margin={{ top: 15, right: 30, left: 0, bottom: 5 }}
++                  >
++                    <XAxis dataKey="name" tick={{ fontSize: 11, fontWeight: 600 }} />
++                    <YAxis domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
++                    <RechartsTooltip formatter={(v: any) => [`${v}%`, "Tiến độ bình quân"]} />
++                    <Bar dataKey="tienDo" name="Tiến độ bình quân (%)" fill="#3b82f6" radius={[6, 6, 0, 0]}>
++                      {[1, 2, 3, 4].map((lop, index) => (
++                        <Cell key={`cell-${index}`} fill={LOP_CONFIG[lop as 1|2|3|4].color} />
++                      ))}
++                    </Bar>
++                  </BarChart>
++                </ResponsiveContainer>
++              </div>
++            </Card>
++          </Col>
++
++          <Col xs={24} lg={12}>
++            <Card title={<span className="font-bold text-gray-800">🏛️ Phân Công Trách Nhiệm & Tiến Độ Theo Sở / Ngành</span>} className="shadow-xs h-full">
++              <div className="h-64 w-full">
++                <ResponsiveContainer width="100%" height="100%">
++                  <BarChart
++                    data={(() => {
++                      const map: Record<string, { count: number; sumProgress: number }> = {};
++                      data.forEach((d) => {
++                        const name = d.donViChuTri?.ten || "UBND tỉnh";
++                        let shortName = name.replace("Sở Nông nghiệp và Phát triển nông thôn", "Sở NN&PTNT")
++                                            .replace("Sở Thông tin và Truyền thông", "Sở TT&TT")
++                                            .replace("Văn phòng Ủy ban nhân dân tỉnh", "VP UBND tỉnh")
++                                            .replace("Công an tỉnh Vĩnh Long", "Công an tỉnh");
++                        if (!map[shortName]) map[shortName] = { count: 0, sumProgress: 0 };
++                        map[shortName].count += 1;
++                        map[shortName].sumProgress += d.tienDo;
++                      });
++                      return Object.entries(map).map(([name, val]) => ({
++                        name,
++                        avgProgress: Math.round(val.sumProgress / val.count),
++                        count: val.count,
++                      }));
++                    })()}
++                    layout="vertical"
++                    margin={{ top: 5, right: 30, left: 35, bottom: 5 }}
++                  >
++                    <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
++                    <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={110} />
++                    <RechartsTooltip formatter={(v: any, name: any, props: any) => [`${v}% (${props.payload.count} nhiệm vụ)`, "Tiến độ"]} />
++                    <Bar dataKey="avgProgress" name="Tiến độ trung bình (%)" fill="#10b981" radius={[0, 4, 4, 0]} />
++                  </BarChart>
++                </ResponsiveContainer>
++              </div>
++            </Card>
++          </Col>
++        </Row>
++
++        {/* 2 Sub-charts: Priority & Solution */}
++        <Row gutter={[16, 16]}>
++          <Col xs={24} lg={12}>
++            <Card title={<span className="font-bold text-gray-800">🎯 Phân Bổ Theo Mức Độ Ưu Tiên</span>} className="shadow-xs h-full">
++              <div className="h-64 w-full">
++                <ResponsiveContainer width="100%" height="100%">
++                  <PieChart>
++                    <Pie
++                      data={priorityChartData}
++                      cx="50%"
++                      cy="50%"
++                      innerRadius={60}
++                      outerRadius={90}
++                      paddingAngle={4}
++                      dataKey="value"
++                      label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
++                    >
++                      {priorityChartData.map((entry, index) => (
++                        <Cell key={`cell-${index}`} fill={entry.color} />
++                      ))}
++                    </Pie>
++                    <RechartsTooltip />
++                    <Legend />
++                  </PieChart>
++                </ResponsiveContainer>
++              </div>
++            </Card>
++          </Col>
++
++          <Col xs={24} lg={12}>
++            <Card title={<span className="font-bold text-gray-800">⚡ Cơ Cấu Theo Phương Án Xử Lý</span>} className="shadow-xs h-full">
++              <div className="h-64 w-full">
++                <ResponsiveContainer width="100%" height="100%">
++                  <BarChart data={solutionChartData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
++                    <XAxis type="number" />
++                    <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={130} />
++                    <RechartsTooltip />
++                    <Bar dataKey="value" name="Số lượng dự án" fill="#7c3aed" radius={[0, 4, 4, 0]} />
++                  </BarChart>
++                </ResponsiveContainer>
++              </div>
++            </Card>
++          </Col>
++        </Row>
++      </div>
++
++      {/* SECTION HEADER & EXECUTION VIEW SWITCHER */}
++      <div id="nhiem-vu-detail-section" className="pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-t border-slate-200">
++        <div>
++          <h2 className="text-xl font-bold text-gray-900 m-0 flex items-center gap-2">
++            <span className="w-2.5 h-6 bg-blue-600 rounded-full inline-block"></span>
++            Kế Hoạch Thực Thi & Chi Tiết 09 Nhiệm Vụ Số Hóa
++          </h2>
++          <p className="text-xs text-gray-500 mt-1 mb-0">
++            Xem theo mốc thời gian 3 giai đoạn hoặc chuyển sang dạng bảng dữ liệu chi tiết
++          </p>
++        </div>
++
++        <Segmented
++          value={detailView}
++          onChange={(val) => setDetailView(val as "timeline" | "table")}
++          options={[
++            { label: "⏳ Mốc Thời Gian (3 Giai Đoạn)", value: "timeline", icon: <FieldTimeOutlined /> },
++            { label: "📋 Bảng Danh Sách Nhiệm Vụ", value: "table", icon: <TableOutlined /> },
++          ]}
++          className="bg-slate-200/80 p-1 font-semibold text-gray-700"
++        />
++      </div>
++
++      {/* FILTER & CONTROLS TOOLBAR */}
++      <Card className="shadow-xs" size="small">
++        <div className="flex flex-wrap gap-3 items-center justify-between">
++          <div className="flex flex-wrap gap-3 items-center flex-1">
++            <Search
++              placeholder="Tìm nhiệm vụ, đơn vị chủ trì, giải pháp..."
++              allowClear
++              value={searchQuery}
++              onChange={(e) => setSearchQuery(e.target.value)}
++              style={{ width: 280 }}
++              prefix={<SearchOutlined className="text-gray-400" />}
++            />
++
++            <Select
++              placeholder="Tất cả các lớp"
++              allowClear
++              value={filterLop || undefined}
++              onChange={(val) => setFilterLop(val || "")}
++              style={{ width: 170 }}
++            >
++              {[1, 2, 3, 4].map((l) => (
++                <Select.Option key={l} value={String(l)}>
++                  {LOP_CONFIG[l as 1 | 2 | 3 | 4].icon} {LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel}
++                </Select.Option>
++              ))}
++            </Select>
++
++            <Select
++              placeholder="Tất cả trạng thái"
++              allowClear
++              value={filterTrangThai || undefined}
++              onChange={(val) => setFilterTrangThai(val || "")}
++              style={{ width: 170 }}
++            >
++              {Object.entries(TRANG_THAI_CONFIG).map(([k, v]) => (
++                <Select.Option key={k} value={k}>{v.label}</Select.Option>
++              ))}
++            </Select>
++
++            <Select
++              placeholder="Mức độ ưu tiên"
++              allowClear
++              value={filterUuTien || undefined}
++              onChange={(val) => setFilterUuTien(val || "")}
++              style={{ width: 150 }}
++            >
++              <Select.Option value="cao">Ưu tiên Cao</Select.Option>
++              <Select.Option value="trung-binh">Ưu tiên Trung bình</Select.Option>
++              <Select.Option value="thap">Ưu tiên Thấp</Select.Option>
++            </Select>
++
++            <Select
++              placeholder="Đơn vị chủ trì"
++              allowClear
++              value={filterDonVi || undefined}
++              onChange={(val) => setFilterDonVi(val || "")}
++              style={{ width: 200 }}
++              showSearch
++            >
++              {donViOptions.map((dv) => (
++                <Select.Option key={dv} value={dv}>{dv}</Select.Option>
++              ))}
++            </Select>
++          </div>
++
++          <div className="text-xs text-gray-500 font-medium">
++            Hiển thị <span className="font-bold text-blue-600">{filteredData.length}</span> / {totalTasks} nhiệm vụ
++          </div>
++        </div>
++      </Card>
+ 
+       {/* TABLE VIEW */}
+-      {viewMode === "table" && (
++      {detailView === "table" && (
+         <Card className="shadow-xs rounded-xl">
+           <Table
+             columns={columns}
+@@ -845,7 +845,7 @@
+       )}
+ 
+       {/* TIMELINE / ROADMAP VIEW (MODERN REDESIGNED) */}
+-      {viewMode === "timeline" && (
++      {detailView === "timeline" && (
+         <div className="space-y-6">
+           
+           {/* Phase Filter Tabs */}
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

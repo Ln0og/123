@@ -4,8 +4,6 @@ import {
   Card, 
   Tag, 
   Progress, 
-  Tabs, 
-  Badge, 
   Spin, 
   Empty, 
   Pagination, 
@@ -16,30 +14,25 @@ import {
   Button, 
   Segmented, 
   Table, 
-  Tooltip,
-  Row,
-  Col,
-  Statistic
+  Row, 
+  Col 
 } from "antd";
 import { HeThongSoData } from "@/types";
 import { LOP_CONFIG, TRANG_THAI_CONFIG, PHUONG_AN_CONFIG } from "@/lib/utils";
 import { 
   DatabaseOutlined, 
   GlobalOutlined, 
-  BankOutlined,
-  CalendarOutlined,
-  SearchOutlined,
-  AppstoreOutlined,
-  TableOutlined,
-  PieChartOutlined,
-  CheckCircleOutlined,
-  WarningOutlined,
-  CloseCircleOutlined,
-  ApartmentOutlined,
-  LinkOutlined,
-  FilterOutlined,
-  EyeOutlined,
-  FileExcelOutlined
+  BankOutlined, 
+  CalendarOutlined, 
+  SearchOutlined, 
+  AppstoreOutlined, 
+  TableOutlined, 
+  PieChartOutlined, 
+  CheckCircleOutlined, 
+  WarningOutlined, 
+  CloseCircleOutlined, 
+  ApartmentOutlined, 
+  ThunderboltOutlined 
 } from "@ant-design/icons";
 import { 
   ResponsiveContainer, 
@@ -59,7 +52,6 @@ const { Search } = Input;
 export default function HienTrangPage() {
   const [data, setData] = useState<HeThongSoData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<"list" | "dashboard">("list");
   const [displayType, setDisplayStyle] = useState<"table" | "cards">("table");
   const [selectedLop, setSelectedLop] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -132,13 +124,6 @@ export default function HienTrangPage() {
     { name: "Lớp 4: Kênh tương tác", value: lop4Count, color: "#fa8c16" },
   ];
 
-  // Chart data: by Status
-  const statusChartData = [
-    { name: "Đang vận hành", value: dangVanHanhCount, color: "#52c41a" },
-    { name: "Cần nâng cấp", value: canNangCapCount, color: "#faad14" },
-    { name: "Cần thay thế", value: canThayTheCount, color: "#ff4d4f" },
-  ];
-
   // Chart data: top Departments
   const deptChartData = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -166,7 +151,7 @@ export default function HienTrangPage() {
       .sort((a, b) => parseInt(a.year) - parseInt(b.year));
   }, [data]);
 
-  // Pagination slice
+  // Pagination slice for cards
   const paginatedCards = useMemo(() => {
     const start = (currentPage - 1) * PAGE_SIZE;
     return filteredData.slice(start, start + PAGE_SIZE);
@@ -206,7 +191,6 @@ export default function HienTrangPage() {
     return (
       <div className="mt-3 space-y-4">
         <div className="flex flex-wrap gap-2 items-center">
-          
           <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-md border ${lopCfg.badgeClass}`}>
             {lopCfg.icon} Lớp {selectedItem.lop}: {lopCfg.shortLabel}
           </span>
@@ -287,7 +271,6 @@ export default function HienTrangPage() {
                 <div key={idx} className="bg-white p-3 rounded border border-blue-200 shadow-2xs">
                   <div className="flex justify-between items-start">
                     <div>
-                      
                       <span className="font-semibold text-gray-800 text-sm">{nv.ten}</span>
                     </div>
                     <Tag color="blue">{nv.phuongAnXuLy ? (PHUONG_AN_CONFIG[nv.phuongAnXuLy] || nv.phuongAnXuLy) : "Đề xuất nâng cấp"}</Tag>
@@ -310,13 +293,12 @@ export default function HienTrangPage() {
   };
 
   const tableColumns = [
-    
     {
       title: "Tên hệ thống số / CSDL / Phần mềm",
       dataIndex: "ten",
       render: (ten: string, rec: HeThongSoData) => (
         <div className="group cursor-pointer">
-          <div className="font-medium text-gray-800 group-hover:text-blue-600 transition-colors">
+          <div className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
             {ten}
           </div>
           {rec.moTa && (
@@ -343,7 +325,7 @@ export default function HienTrangPage() {
     {
       title: "Đơn vị chủ quản",
       dataIndex: ["donVi", "ten"],
-      width: 200,
+      width: 210,
       render: (_: unknown, rec: HeThongSoData) => (
         <div className="text-xs font-medium text-gray-800 flex items-center gap-1.5">
           <BankOutlined className="text-gray-400" />
@@ -381,8 +363,9 @@ export default function HienTrangPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6 pb-12">
-      {/* Top Banner & Mode Switcher */}
+    <div className="max-w-7xl mx-auto space-y-8 pb-16">
+      
+      {/* 1. TOP BANNER */}
       <div className="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white p-6 rounded-2xl shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
@@ -399,190 +382,250 @@ export default function HienTrangPage() {
           </p>
         </div>
 
-        {/* View Mode Toggle */}
-        <div className="bg-white/10 p-1.5 rounded-xl backdrop-blur-md border border-white/20">
-          <Segmented
-            value={viewMode}
-            onChange={(val) => setViewMode(val as "list" | "dashboard")}
-            options={[
-              { label: "📋 Danh mục Kiểm kê", value: "list", icon: <TableOutlined /> },
-              { label: "📊 Tổng quan Thống kê", value: "dashboard", icon: <PieChartOutlined /> },
-            ]}
-            className="bg-white/20 text-white font-bold"
-          />
+        <div className="flex gap-2">
+          <Button 
+            type="primary" 
+            className="bg-white/20 border-white/30 text-white font-semibold hover:bg-white/30"
+            onClick={() => {
+              const el = document.getElementById("danh-muc-kiem-ke");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Xuống Danh Mục Kiểm Kê ↓
+          </Button>
         </div>
       </div>
 
-      {/* 4 KPI Summary Cards */}
-      <Row gutter={[16, 16]}>
-        <Col xs={24} sm={12} lg={6}>
-          <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-purple-600 bg-white" size="small">
-            <div className="flex justify-between items-center">
-              <div>
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lớp 1: Hạ tầng & ATTT</div>
-                <div className="text-2xl font-bold text-gray-800 mt-1">{lop1Count} <span className="text-xs font-normal text-gray-400">hệ thống</span></div>
-              </div>
-              <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600 text-lg">
-                🏗️
-              </div>
-            </div>
-            <Progress percent={Math.round((lop1Count / totalCount) * 100)} strokeColor="#722ed1" size="small" className="mt-2 mb-0" />
-          </Card>
-        </Col>
-
-        <Col xs={24} sm={12} lg={6}>
-          <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-blue-600 bg-white" size="small">
-            <div className="flex justify-between items-center">
-              <div>
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lớp 2: Dữ liệu & Nền tảng</div>
-                <div className="text-2xl font-bold text-gray-800 mt-1">{lop2Count} <span className="text-xs font-normal text-gray-400">hệ thống</span></div>
-              </div>
-              <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-lg">
-                🗄️
-              </div>
-            </div>
-            <Progress percent={Math.round((lop2Count / totalCount) * 100)} strokeColor="#1677ff" size="small" className="mt-2 mb-0" />
-          </Card>
-        </Col>
-
-        <Col xs={24} sm={12} lg={6}>
-          <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-green-600 bg-white" size="small">
-            <div className="flex justify-between items-center">
-              <div>
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lớp 3: Ứng dụng & Nghiệp vụ</div>
-                <div className="text-2xl font-bold text-gray-800 mt-1">{lop3Count} <span className="text-xs font-normal text-gray-400">hệ thống</span></div>
-              </div>
-              <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-green-600 text-lg">
-                📱
-              </div>
-            </div>
-            <Progress percent={Math.round((lop3Count / totalCount) * 100)} strokeColor="#52c41a" size="small" className="mt-2 mb-0" />
-          </Card>
-        </Col>
-
-        <Col xs={24} sm={12} lg={6}>
-          <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-orange-500 bg-white" size="small">
-            <div className="flex justify-between items-center">
-              <div>
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lớp 4: Kênh tương tác</div>
-                <div className="text-2xl font-bold text-gray-800 mt-1">{lop4Count} <span className="text-xs font-normal text-gray-400">hệ thống</span></div>
-              </div>
-              <div className="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600 text-lg">
-                🌐
-              </div>
-            </div>
-            <Progress percent={Math.round((lop4Count / totalCount) * 100)} strokeColor="#fa8c16" size="small" className="mt-2 mb-0" />
-          </Card>
-        </Col>
-      </Row>
-
-      {/* DASHBOARD VIEW */}
-      {viewMode === "dashboard" && (
-        <div className="space-y-6">
-          {/* Status highlight summary */}
-          <Row gutter={[16, 16]}>
-            <Col xs={24} md={8}>
-              <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-xs" size="small">
-                <div className="flex items-center gap-3">
-                  <CheckCircleOutlined className="text-3xl text-green-600" />
-                  <div>
-                    <div className="text-xs text-green-700 font-semibold uppercase">Đang vận hành ổn định</div>
-                    <div className="text-2xl font-bold text-green-800">{dangVanHanhCount} <span className="text-xs font-normal text-green-600">({Math.round((dangVanHanhCount / totalCount) * 100)}%)</span></div>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={24} md={8}>
-              <Card className="bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-200 shadow-xs" size="small">
-                <div className="flex items-center gap-3">
-                  <WarningOutlined className="text-3xl text-amber-500" />
-                  <div>
-                    <div className="text-xs text-amber-700 font-semibold uppercase">Cần nâng cấp / Hoàn thiện</div>
-                    <div className="text-2xl font-bold text-amber-800">{canNangCapCount} <span className="text-xs font-normal text-amber-600">({Math.round((canNangCapCount / totalCount) * 100)}%)</span></div>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={24} md={8}>
-              <Card className="bg-gradient-to-br from-red-50 to-rose-50 border-red-200 shadow-xs" size="small">
-                <div className="flex items-center gap-3">
-                  <CloseCircleOutlined className="text-3xl text-red-500" />
-                  <div>
-                    <div className="text-xs text-red-700 font-semibold uppercase">Cần thay thế / Hợp nhất</div>
-                    <div className="text-2xl font-bold text-red-800">{canThayTheCount} <span className="text-xs font-normal text-red-600">({Math.round((canThayTheCount / totalCount) * 100)}%)</span></div>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-          </Row>
-
-          {/* Charts Row */}
-          <Row gutter={[16, 16]}>
-            <Col xs={24} lg={12}>
-              <Card title={<span className="font-bold text-gray-800">📊 Phân Bổ Hệ Thống Theo 4 Lớp Kiến Trúc</span>} className="shadow-xs h-full">
-                <div className="h-64 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={layerChartData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={60}
-                        outerRadius={90}
-                        paddingAngle={4}
-                        dataKey="value"
-                        label={({ percent }: { percent?: number }) => `${((percent || 0) * 100).toFixed(0)}%`}
-                      >
-                        {layerChartData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <RechartsTooltip />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </Card>
-            </Col>
-
-            <Col xs={24} lg={12}>
-              <Card title={<span className="font-bold text-gray-800">🏛️ Top Sở / Ngành Có Nhiều Hệ Thống & CSDL Nhất</span>} className="shadow-xs h-full">
-                <div className="h-64 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={deptChartData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
-                      <XAxis type="number" />
-                      <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={120} />
-                      <RechartsTooltip />
-                      <Bar dataKey="count" name="Số lượng hệ thống" fill="#3b82f6" radius={[0, 4, 4, 0]} />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </Card>
-            </Col>
-          </Row>
-
-          {/* Additional Trends & Quick Action */}
-          <Card 
-            title={<span className="font-bold text-gray-800">📅 Phân Bố Theo Năm Đưa Vào Khai Thác</span>}
-            extra={<Button type="link" onClick={() => setViewMode("list")}>Xem chi tiết từng hệ thống →</Button>}
-            className="shadow-xs"
-          >
-            <div className="h-56 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={yearChartData} margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
-                  <XAxis dataKey="year" />
-                  <YAxis />
-                  <RechartsTooltip />
-                  <Bar dataKey="count" name="Số lượng đưa vào vận hành" fill="#10b981" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </Card>
+      {/* ========================================================================= */}
+      {/* PHẦN 1 (TRÊN): TỔNG QUAN DASHBOARD & BIỂU ĐỒ PHÂN TÍCH THỐNG KÊ */}
+      {/* ========================================================================= */}
+      <div className="space-y-6">
+        
+        {/* Tiêu đề phần Dashboard */}
+        <div className="flex items-center justify-between border-b pb-3">
+          <div className="flex items-center gap-2">
+            <PieChartOutlined className="text-blue-600 text-xl" />
+            <h2 className="text-lg font-bold text-slate-800 m-0 uppercase tracking-wide">
+              Tổng Quan Thống Kê & Phân Tích Sức Khỏe Hệ Thống
+            </h2>
+          </div>
+          <span className="text-xs text-slate-500">Số liệu cập nhật thời gian thực</span>
         </div>
-      )}
 
-      {/* FILTER & CONTROLS TOOLBAR (Available for List view) */}
-      {viewMode === "list" && (
+        {/* 4 KPI Summary Cards */}
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={12} lg={6}>
+            <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-purple-600 bg-white" size="small">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lớp 1: Hạ tầng & ATTT</div>
+                  <div className="text-2xl font-bold text-gray-800 mt-1">{lop1Count} <span className="text-xs font-normal text-gray-400">hệ thống</span></div>
+                </div>
+                <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600 text-lg">
+                  🏗️
+                </div>
+              </div>
+              <Progress percent={Math.round((lop1Count / totalCount) * 100)} strokeColor="#722ed1" size="small" className="mt-2 mb-0" />
+            </Card>
+          </Col>
+
+          <Col xs={24} sm={12} lg={6}>
+            <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-blue-600 bg-white" size="small">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lớp 2: Dữ liệu & Nền tảng</div>
+                  <div className="text-2xl font-bold text-gray-800 mt-1">{lop2Count} <span className="text-xs font-normal text-gray-400">hệ thống</span></div>
+                </div>
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 text-lg">
+                  🗄️
+                </div>
+              </div>
+              <Progress percent={Math.round((lop2Count / totalCount) * 100)} strokeColor="#1677ff" size="small" className="mt-2 mb-0" />
+            </Card>
+          </Col>
+
+          <Col xs={24} sm={12} lg={6}>
+            <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-green-600 bg-white" size="small">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lớp 3: Ứng dụng & Nghiệp vụ</div>
+                  <div className="text-2xl font-bold text-gray-800 mt-1">{lop3Count} <span className="text-xs font-normal text-gray-400">hệ thống</span></div>
+                </div>
+                <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-green-600 text-lg">
+                  📱
+                </div>
+              </div>
+              <Progress percent={Math.round((lop3Count / totalCount) * 100)} strokeColor="#52c41a" size="small" className="mt-2 mb-0" />
+            </Card>
+          </Col>
+
+          <Col xs={24} sm={12} lg={6}>
+            <Card className="shadow-xs hover:shadow-md transition-all border-l-4 border-l-orange-500 bg-white" size="small">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lớp 4: Kênh tương tác</div>
+                  <div className="text-2xl font-bold text-gray-800 mt-1">{lop4Count} <span className="text-xs font-normal text-gray-400">hệ thống</span></div>
+                </div>
+                <div className="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600 text-lg">
+                  🌐
+                </div>
+              </div>
+              <Progress percent={Math.round((lop4Count / totalCount) * 100)} strokeColor="#fa8c16" size="small" className="mt-2 mb-0" />
+            </Card>
+          </Col>
+        </Row>
+
+        {/* 3 Status highlight summary cards */}
+        <Row gutter={[16, 16]}>
+          <Col xs={24} md={8}>
+            <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 shadow-xs" size="small">
+              <div className="flex items-center gap-3">
+                <CheckCircleOutlined className="text-3xl text-green-600" />
+                <div>
+                  <div className="text-xs text-green-700 font-semibold uppercase">Đang vận hành ổn định</div>
+                  <div className="text-2xl font-bold text-green-800">{dangVanHanhCount} <span className="text-xs font-normal text-green-600">({Math.round((dangVanHanhCount / totalCount) * 100)}%)</span></div>
+                </div>
+              </div>
+            </Card>
+          </Col>
+          <Col xs={24} md={8}>
+            <Card className="bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-200 shadow-xs" size="small">
+              <div className="flex items-center gap-3">
+                <WarningOutlined className="text-3xl text-amber-500" />
+                <div>
+                  <div className="text-xs text-amber-700 font-semibold uppercase">Cần nâng cấp / Hoàn thiện</div>
+                  <div className="text-2xl font-bold text-amber-800">{canNangCapCount} <span className="text-xs font-normal text-amber-600">({Math.round((canNangCapCount / totalCount) * 100)}%)</span></div>
+                </div>
+              </div>
+            </Card>
+          </Col>
+          <Col xs={24} md={8}>
+            <Card className="bg-gradient-to-br from-red-50 to-rose-50 border-red-200 shadow-xs" size="small">
+              <div className="flex items-center gap-3">
+                <CloseCircleOutlined className="text-3xl text-red-500" />
+                <div>
+                  <div className="text-xs text-red-700 font-semibold uppercase">Cần thay thế / Hợp nhất</div>
+                  <div className="text-2xl font-bold text-red-800">{canThayTheCount} <span className="text-xs font-normal text-red-600">({Math.round((canThayTheCount / totalCount) * 100)}%)</span></div>
+                </div>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+
+        {/* Sức khỏe 4 lớp kiến trúc & Phân bổ tổng thể */}
+        <Row gutter={[16, 16]}>
+          <Col xs={24} lg={14}>
+            <Card title={<span className="font-bold text-gray-800">🏥 Ma Trận Đánh Giá Tình Trạng Sức Khỏe Theo 4 Lớp</span>} className="shadow-xs h-full">
+              <div className="h-72 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={[1, 2, 3, 4].map((lop) => {
+                      const items = data.filter((d) => d.lop === lop);
+                      return {
+                        name: `Lớp ${lop}: ${LOP_CONFIG[lop as 1|2|3|4].shortLabel}`,
+                        "Đang vận hành": items.filter((d) => d.trangThai === "dang-van-hanh").length,
+                        "Cần nâng cấp": items.filter((d) => d.trangThai === "can-nang-cap").length,
+                        "Cần thay thế": items.filter((d) => d.trangThai === "can-thay-the").length,
+                      };
+                    })}
+                    margin={{ top: 15, right: 30, left: 10, bottom: 5 }}
+                  >
+                    <XAxis dataKey="name" tick={{ fontSize: 11, fontWeight: 600 }} />
+                    <YAxis />
+                    <RechartsTooltip />
+                    <Legend />
+                    <Bar dataKey="Đang vận hành" fill="#16a34a" stackId="a" radius={[0, 0, 0, 0]} />
+                    <Bar dataKey="Cần nâng cấp" fill="#eab308" stackId="a" radius={[0, 0, 0, 0]} />
+                    <Bar dataKey="Cần thay thế" fill="#ef4444" stackId="a" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={24} lg={10}>
+            <Card title={<span className="font-bold text-gray-800">📊 Tỷ Trọng Phân Bổ Theo 4 Lớp</span>} className="shadow-xs h-full">
+              <div className="h-72 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={layerChartData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={65}
+                      outerRadius={95}
+                      paddingAngle={4}
+                      dataKey="value"
+                      label={({ percent }: { percent?: number }) => `${((percent || 0) * 100).toFixed(0)}%`}
+                    >
+                      {layerChartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <RechartsTooltip />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+
+        {/* Top Departments & Historical Deployment Year */}
+        <Row gutter={[16, 16]}>
+          <Col xs={24} lg={12}>
+            <Card title={<span className="font-bold text-gray-800">🏛️ Top Cơ Quan Quản Lý Nhiều CSDL / Hệ Thống Nhất</span>} className="shadow-xs h-full">
+              <div className="h-64 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={deptChartData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+                    <XAxis type="number" />
+                    <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={130} />
+                    <RechartsTooltip />
+                    <Bar dataKey="count" name="Số lượng hệ thống" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs={24} lg={12}>
+            <Card 
+              title={<span className="font-bold text-gray-800">📅 Lịch Sử Đưa Hệ Thống Vào Khai Thác Theo Năm</span>}
+              className="shadow-xs h-full"
+            >
+              <div className="h-64 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={yearChartData} margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
+                    <XAxis dataKey="year" />
+                    <YAxis />
+                    <RechartsTooltip />
+                    <Bar dataKey="count" name="Số lượng đưa vào vận hành" fill="#10b981" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* PHẦN 2 (DƯỚI): DANH MỤC KIỂM KÊ 389 HỆ THỐNG SỐ & BỘ LỌC ĐA CHIỀU */}
+      {/* ========================================================================= */}
+      <div id="danh-muc-kiem-ke" className="space-y-4 pt-4 border-t-2 border-slate-200">
+        
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <TableOutlined className="text-blue-600 text-xl" />
+            <h2 className="text-lg font-bold text-slate-800 m-0 uppercase tracking-wide">
+              Danh Mục Kiểm Kê 389 Hệ Thống Số & CSDL Toàn Tỉnh
+            </h2>
+          </div>
+          <span className="text-xs text-slate-500 font-semibold bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-200">
+            Tìm thấy {filteredData.length} / {totalCount} hệ thống
+          </span>
+        </div>
+
+        {/* Filter Toolbar */}
         <Card className="shadow-xs" size="small">
           <div className="flex flex-wrap gap-3 items-center justify-between">
             <div className="flex flex-wrap gap-3 items-center flex-1">
@@ -647,11 +690,7 @@ export default function HienTrangPage() {
               </Select>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-gray-500 font-medium hidden sm:inline">
-                Tìm thấy <span className="font-bold text-blue-600">{filteredData.length}</span> / {totalCount} hệ thống
-              </span>
-
+            <div className="flex items-center gap-2">
               <div className="bg-slate-100 p-0.5 rounded-lg border border-slate-200">
                 <Segmented
                   size="small"
@@ -666,136 +705,117 @@ export default function HienTrangPage() {
             </div>
           </div>
         </Card>
-      )}
 
-      {/* UNIFIED LIST RENDERING (TABLE OR CARDS) */}
-      {viewMode === "list" && (
-        <>
-          {displayType === "table" ? (
-            <Card className="shadow-xs rounded-xl">
-              <Table
-                columns={tableColumns}
-                dataSource={filteredData}
-                rowKey="id"
-                pagination={{ pageSize: 15, showQuickJumper: true }}
-                onRow={(record) => ({
-                  onClick: () => setSelectedItem(record),
-                  className: "cursor-pointer hover:bg-blue-50/50 transition-colors",
-                })}
-              />
-            </Card>
-          ) : (
-            <div className="space-y-4">
-              {/* Layer Sub-header */}
-              <div className="bg-slate-100 p-3 rounded-xl flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-gray-800 text-sm">
-                    {selectedLop === "all" ? "Tất cả các lớp kiến trúc số" : LOP_CONFIG[parseInt(selectedLop) as 1|2|3|4]?.label}
-                  </span>
-                  <Tag color="blue">{filteredData.length} hệ thống</Tag>
-                </div>
-                <div className="text-xs text-gray-500 flex gap-4">
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-green-500"></span> Vận hành: {filteredData.filter(d => d.trangThai === 'dang-van-hanh').length}</span>
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500"></span> Cần nâng cấp: {filteredData.filter(d => d.trangThai === 'can-nang-cap').length}</span>
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500"></span> Cần thay thế: {filteredData.filter(d => d.trangThai === 'can-thay-the').length}</span>
-                </div>
-              </div>
+        {/* Table or Cards */}
+        {displayType === "table" ? (
+          <Card className="shadow-xs rounded-xl">
+            <Table
+              columns={tableColumns}
+              dataSource={filteredData}
+              rowKey="id"
+              pagination={{ pageSize: 15, showQuickJumper: true }}
+              onRow={(record) => ({
+                onClick: () => setSelectedItem(record),
+                className: "cursor-pointer hover:bg-blue-50/50 transition-colors",
+              })}
+            />
+          </Card>
+        ) : (
+          <div className="space-y-4">
+            {paginatedCards.length === 0 ? (
+              <Card className="py-12 text-center">
+                <Empty description="Không tìm thấy hệ thống số nào phù hợp với bộ lọc." />
+              </Card>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {paginatedCards.map((item) => {
+                  const lopCfg = LOP_CONFIG[item.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
+                  const statusCfg = TRANG_THAI_CONFIG[item.trangThai] || { label: item.trangThai, antdColor: "default" };
+                  const hasCrossLink = item.nhiemVus && item.nhiemVus.length > 0;
 
-              {paginatedCards.length === 0 ? (
-                <Card className="py-12 text-center">
-                  <Empty description="Không tìm thấy hệ thống số nào phù hợp với bộ lọc." />
-                </Card>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {paginatedCards.map((item) => {
-                    const lopCfg = LOP_CONFIG[item.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
-                    const statusCfg = TRANG_THAI_CONFIG[item.trangThai] || { label: item.trangThai, antdColor: "default" };
-                    const hasCrossLink = item.nhiemVus && item.nhiemVus.length > 0;
-
-                    return (
-                      <Card
-                        key={item.id}
-                        size="small"
-                        hoverable
-                        className="border border-gray-200/80 hover:border-blue-400 hover:shadow-md transition-all flex flex-col justify-between rounded-xl bg-white"
-                        onClick={() => setSelectedItem(item)}
-                      >
-                        <div>
-                          {/* Card Top: Layer Tag & Status Tag */}
-                          <div className="flex justify-between items-start mb-2.5">
-                            <div className="flex gap-1.5 flex-wrap justify-end">
-                              <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded border ${lopCfg.badgeClass}`}>
-                                {lopCfg.icon} Lớp {item.lop}
-                              </span>
-                              <span className={`inline-flex items-center text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
-                                {statusCfg.label}
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Title */}
-                          <h3 className="font-bold text-sm text-gray-800 line-clamp-2 hover:text-blue-600 transition-colors leading-snug mb-2">
-                            {item.ten}
-                          </h3>
-
-                          {/* Department & Year */}
-                          <div className="text-xs text-gray-500 space-y-1 mb-3">
-                            <div className="flex items-center gap-1.5 line-clamp-1">
-                              <BankOutlined className="text-gray-400 shrink-0" />
-                              <span>{item.donVi?.ten || item.chuQuan || "Chưa xác định"}</span>
-                            </div>
-                            {item.namTrienKhai && (
-                              <div className="flex items-center gap-1.5 text-gray-400">
-                                <CalendarOutlined className="shrink-0" />
-                                <span>Khai thác từ năm {item.namTrienKhai}</span>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Short Description */}
-                          {item.moTa && (
-                            <div className="text-xs text-gray-500 line-clamp-2 bg-slate-50 p-2 rounded-lg border border-slate-100 italic">
-                              {item.moTa.replace(/\\n|\n/g, " • ").replace(/::/g, ": ")}
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Card Footer: Cross-link Indicator */}
-                        <div className="mt-3 pt-2 border-t border-gray-100 flex justify-between items-center text-xs">
-                          {hasCrossLink ? (
-                            <span className="text-blue-600 font-medium flex items-center gap-1">
-                              <ApartmentOutlined /> Có nhiệm vụ lộ trình
+                  return (
+                    <Card
+                      key={item.id}
+                      size="small"
+                      hoverable
+                      className="border border-gray-200/80 hover:border-blue-400 hover:shadow-md transition-all flex flex-col justify-between rounded-xl bg-white"
+                      onClick={() => setSelectedItem(item)}
+                    >
+                      <div>
+                        {/* Card Top: Layer Tag & Status Tag */}
+                        <div className="flex justify-between items-start mb-2.5">
+                          <div className="flex gap-1.5 flex-wrap justify-end">
+                            <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded border ${lopCfg.badgeClass}`}>
+                              {lopCfg.icon} Lớp {item.lop}
                             </span>
-                          ) : (
-                            <span className="text-gray-400 text-[11px]">Vận hành độc lập</span>
-                          )}
-                          <span className="text-blue-500 font-semibold hover:underline flex items-center gap-0.5">
-                            Xem chi tiết →
-                          </span>
+                            <span className={`inline-flex items-center text-[11px] font-bold px-2 py-0.5 rounded border ${statusCfg.badgeClass}`}>
+                              {statusCfg.label}
+                            </span>
+                          </div>
                         </div>
-                      </Card>
-                    );
-                  })}
-                </div>
-              )}
 
-              {/* Pagination */}
-              {filteredData.length > PAGE_SIZE && (
-                <div className="flex justify-center mt-6">
-                  <Pagination
-                    current={currentPage}
-                    pageSize={PAGE_SIZE}
-                    total={filteredData.length}
-                    onChange={(p) => setCurrentPage(p)}
-                    showSizeChanger={false}
-                    showQuickJumper
-                  />
-                </div>
-              )}
-            </div>
-          )}
-        </>
-      )}
+                        {/* Title */}
+                        <h3 className="font-bold text-sm text-gray-800 line-clamp-2 hover:text-blue-600 transition-colors leading-snug mb-2">
+                          {item.ten}
+                        </h3>
+
+                        {/* Department & Year */}
+                        <div className="text-xs text-gray-500 space-y-1 mb-3">
+                          <div className="flex items-center gap-1.5 line-clamp-1">
+                            <BankOutlined className="text-gray-400 shrink-0" />
+                            <span>{item.donVi?.ten || item.chuQuan || "Chưa xác định"}</span>
+                          </div>
+                          {item.namTrienKhai && (
+                            <div className="flex items-center gap-1.5 text-gray-400">
+                              <CalendarOutlined className="shrink-0" />
+                              <span>Khai thác từ năm {item.namTrienKhai}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Short Description */}
+                        {item.moTa && (
+                          <div className="text-xs text-gray-500 line-clamp-2 bg-slate-50 p-2 rounded-lg border border-slate-100 italic">
+                            {item.moTa.replace(/\\n|\n/g, " • ").replace(/::/g, ": ")}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Card Footer: Cross-link Indicator */}
+                      <div className="mt-3 pt-2 border-t border-gray-100 flex justify-between items-center text-xs">
+                        {hasCrossLink ? (
+                          <span className="text-blue-600 font-medium flex items-center gap-1">
+                            <ApartmentOutlined /> Có nhiệm vụ lộ trình
+                          </span>
+                        ) : (
+                          <span className="text-gray-400 text-[11px]">Vận hành độc lập</span>
+                        )}
+                        <span className="text-blue-500 font-semibold hover:underline flex items-center gap-0.5">
+                          Xem chi tiết →
+                        </span>
+                      </div>
+                    </Card>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Pagination */}
+            {filteredData.length > PAGE_SIZE && (
+              <div className="flex justify-center mt-6">
+                <Pagination
+                  current={currentPage}
+                  pageSize={PAGE_SIZE}
+                  total={filteredData.length}
+                  onChange={(p) => setCurrentPage(p)}
+                  showSizeChanger={false}
+                  showQuickJumper
+                />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Detail Modal */}
       <Modal

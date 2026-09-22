@@ -1,1 +1,17 @@
-Task "0c724d03-995b-41e5-b753-c6096ba91ae8/task-372" cancelled.
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -567,8 +567,9 @@
+                   </PieChart>
+                 </ResponsiveContainer>
+               </div>
+-            </Col>
+-          </Row>
++            </Card>
++          </Col>
++        </Row>
+ 
+         {/* Top Departments & Historical Deployment Year */}
+         <Row gutter={[16, 16]}>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
