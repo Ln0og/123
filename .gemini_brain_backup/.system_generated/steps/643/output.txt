@@ -1,0 +1,25 @@
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -525,19 +525,6 @@
+             Theo dõi tiến độ, mốc thời gian hoàn thành, phân công đơn vị chủ trì và đo lường kết quả thực thi các nhiệm vụ số hóa.
+           </p>
+         </div>
+-
+-        <div className="flex items-center gap-2">
+-          <Button 
+-            type="primary" 
+-            className="bg-blue-600 hover:bg-blue-500 border-none font-semibold shadow-sm"
+-            onClick={() => {
+-              const el = document.getElementById("nhiem-vu-detail-section");
+-              el?.scrollIntoView({ behavior: "smooth" });
+-            }}
+-          >
+-            Xem Chi Tiết Nhiệm Vụ ↓
+-          </Button>
+-        </div>
+       </div>
+ 
+       {/* 4 Summary Metric Cards */}
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,25 @@
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -381,19 +381,6 @@
+             Tổng hợp kiểm kê <b>{totalCount} thành phần số</b> trên toàn tỉnh, phân tích theo 4 lớp chuẩn kiến trúc và trạng thái hoạt động.
+           </p>
+         </div>
+-
+-        <div className="flex gap-2">
+-          <Button 
+-            type="primary" 
+-            className="bg-white/20 border-white/30 text-white font-semibold hover:bg-white/30"
+-            onClick={() => {
+-              const el = document.getElementById("danh-muc-kiem-ke");
+-              if (el) el.scrollIntoView({ behavior: "smooth" });
+-            }}
+-          >
+-            Xuống Danh Mục Kiểm Kê ↓
+-          </Button>
+-        </div>
+       </div>
+ 
+       {/* ========================================================================= */}
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

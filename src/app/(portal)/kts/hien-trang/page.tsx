@@ -381,19 +381,6 @@ export default function HienTrangPage() {
             Tổng hợp kiểm kê <b>{totalCount} thành phần số</b> trên toàn tỉnh, phân tích theo 4 lớp chuẩn kiến trúc và trạng thái hoạt động.
           </p>
         </div>
-
-        <div className="flex gap-2">
-          <Button 
-            type="primary" 
-            className="bg-white/20 border-white/30 text-white font-semibold hover:bg-white/30"
-            onClick={() => {
-              const el = document.getElementById("danh-muc-kiem-ke");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Xuống Danh Mục Kiểm Kê ↓
-          </Button>
-        </div>
       </div>
 
       {/* ========================================================================= */}

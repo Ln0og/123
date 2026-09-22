@@ -525,19 +525,6 @@ export default function LoTrinhPage() {
             Theo dõi tiến độ, mốc thời gian hoàn thành, phân công đơn vị chủ trì và đo lường kết quả thực thi các nhiệm vụ số hóa.
           </p>
         </div>
-
-        <div className="flex items-center gap-2">
-          <Button 
-            type="primary" 
-            className="bg-blue-600 hover:bg-blue-500 border-none font-semibold shadow-sm"
-            onClick={() => {
-              const el = document.getElementById("nhiem-vu-detail-section");
-              el?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Xem Chi Tiết Nhiệm Vụ ↓
-          </Button>
-        </div>
       </div>
 
       {/* 4 Summary Metric Cards */}
