@@ -1,0 +1,15 @@
+Task: 0c724d03-995b-41e5-b753-c6096ba91ae8/task-859
+Status: DONE
+Log: C:\Users\Lnog\.gemini\antigravity\brain\0c724d03-995b-41e5-b753-c6096ba91ae8\.system_generated\tasks\task-859.log
+Log output:
+<truncated 18 lines>
+g; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'role' is missing in type 'AdapterUser & User' but required in type '{ role: string; }'.
+src/lib/auth.ts(53,10): error TS2352: Conversion of type 'AdapterUser & User' to type '{ donViId: string; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'donViId' is missing in type 'AdapterUser & User' but required in type '{ donViId: string; }'.
+src/lib/auth.ts(54,10): error TS2352: Conversion of type 'AdapterUser & User' to type '{ donViTen: string; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'donViTen' is missing in type 'AdapterUser & User' but required in type '{ donViTen: string; }'.
+Failed to type check.
+
+
+Last progress: 0s ago

@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -89,7 +89,7 @@
+ 
+ 
+       {/* 4 Lớp kiến trúc */}
+-      <section className="max-w-7xl mx-auto px-6 mb-12">
++      <section className="max-w-7xl mx-auto px-6 pt-12 mb-12">
+         <div className="text-center mb-8">
+           <h2 className="text-2xl font-bold text-gray-800">4 Lớp Kiến trúc Số</h2>
+           <p className="text-gray-500 mt-2">
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

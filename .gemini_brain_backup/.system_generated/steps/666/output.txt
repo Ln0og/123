@@ -1,0 +1,17 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -221,9 +221,9 @@
+ 
+   return (
+     <div className="space-y-6 max-w-6xl mx-auto">
+-      <div className="page-header">
++      <div className="page-header hidden">
+         <h1 className="text-2xl font-bold">Đánh giá Hiện trạng Kiến trúc Số</h1>
+-        <p className="text-blue-200 mt-1">Kiểm kê và đánh giá các thành phần số hiện có theo 4 lớp kiến trúc</p>
++        <p className="text-gray-500 mt-1">Kiểm kê và đánh giá các thành phần số hiện có theo 4 lớp kiến trúc</p>
+       </div>
+ 
+       <div className="grid grid-cols-4 gap-4 mb-6">
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

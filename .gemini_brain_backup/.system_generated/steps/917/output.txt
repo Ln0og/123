@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+ src/app/(portal)/kts/page.tsx       |   5 -
+ src/app/(portal)/kts/so-do/page.tsx | 612 ++----------------------------------
+ src/app/(portal)/layout.tsx         |  85 +++--
+ src/app/page.tsx                    |  26 +-
+ 4 files changed, 117 insertions(+), 611 deletions(-)
+

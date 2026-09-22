@@ -1,0 +1,25 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\so-do\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -773,9 +773,16 @@
+                 <div className="space-y-2">
+                   {getMatchedTasks(selectedBlock).map((nv) => (
+                     <div key={nv.id} className="p-3 bg-amber-50/70 rounded-2xl border border-amber-200 flex justify-between items-center hover:border-amber-300 transition-colors">
+-                      <div>
+-                        <div className="font-bold text-slate-800 text-xs">
+-                          {nv.ten}
++                      <div className="flex-1 pr-3">
++                        <div className="flex items-center gap-2 flex-wrap">
++                          <span className="font-bold text-slate-800 text-xs">
++                            {nv.ten}
++                          </span>
++                          {nv.phuongAnXuLy && (
++                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 border border-blue-200">
++                              {PHUONG_AN_CONFIG[nv.phuongAnXuLy] || nv.phuongAnXuLy}
++                            </span>
++                          )}
+                         </div>
+                         <div className="text-[11px] text-slate-500 mt-1">
+                           Chủ trì: {nv.donViChuTri?.ten || "UBND tỉnh"} • Hạn chót: {nv.thoiHan ? new Date(nv.thoiHan).toLocaleDateString("vi-VN") : "—"}
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,58 @@
+The following changes were made by the replace_file_content tool to: C:\Users\Lnog\.gemini\antigravity\brain\0c724d03-995b-41e5-b753-c6096ba91ae8\task.md. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -2,29 +2,29 @@
+ 
+ ## Giai đoạn 1 — Setup & MVP
+ 
+-### Khởi tạo & Cấu trúc dự án .NET
+-- [x] Tạo project ASP.NET Core MVC mới (.NET 7)
+-- [x] Cài đặt Entity Framework Core (SQL Server)
+-- [x] Cấu hình Connection String (`appsettings.json`)
+-
+-### Thiết kế Database (Code-First)
+-- [x] Tạo Model: `KhungKts.cs`
+-- [x] Tạo Model: `HeThongSo.cs`
+-- [x] Tạo Model: `NhiemVu.cs`
+-- [x] Tạo Model: `DonVi.cs`, `User.cs`
+-- [x] Tạo DbContext: `KtsDbContext.cs`
+-- [x] Tạo Migration và Cập nhật Database
+-
+-### Xây dựng Controllers & API
+-- [ ] `PortalController` (Tổng quan, Hiện trạng, Lộ trình)
+-- [ ] `AdminController` (Quản trị hệ thống, Nhiệm vụ)
+-- [ ] `AuthController` (Đăng nhập Cookie)
+-
+-### Chuyển đổi Giao diện (Razor Views)
+-- [ ] Cấu hình `_Layout.cshtml` & Tailwind/Bootstrap
+-- [ ] Giao diện: Hiện trạng (Tabs & Phân trang JS)
+-- [ ] Giao diện: Dashboard (Chart.js)
+-- [ ] Giao diện: Form quản trị (Thêm/Sửa/Xóa)/dashboard — Dashboard tổng thể
++### Setup dự án
++- [x] Tạo đề xuất thiết kế
++- [x] Tạo task list
++- [x] Khởi tạo Next.js 14 project
++- [x] Cài đặt dependencies (Ant Design, Prisma, NextAuth, React Flow, ECharts)
++- [x] Cấu hình database schema (Prisma)
++- [x] Setup NextAuth với phân quyền 3 role
++
++### Database Schema
++- [x] Table: don_vi (đơn vị tỉnh/sở/huyện)
++- [x] Table: khung_kts (thông tin tổng quan Khung)
++- [x] Table: he_thong_so (các hệ thống số — DM_DOITUONG)
++- [x] Table: ket_noi (quan hệ kết nối — QH_KETNOI)
++- [x] Table: anh_xa (ánh xạ đối tượng — ANHXA)
++- [x] Table: nhiem_vu (nhiệm vụ lộ trình — HOANTHIEN_NV)
++- [x] Table: users + roles
++
++### Trang Portal (xem công khai)
++- [x] Trang chủ — Tổng quan KTS Vĩnh Long
++- [ ] /kts/tong-quan — Mục tiêu, bối cảnh, nguyên tắc
++- [x] /kts/hien-trang — Hiện trạng 4 lớp kiến trúc
++- [x] /kts/muc-tieu — Sơ đồ kiến trúc mục tiêu (React Flow)
++- [x] /kts/lo-trinh — Bảng nhiệm vụ & timeline
+ - [ ] /admin/khung — Nhập liệu thông tin Khung KTS
+ - [ ] /admin/he-thong — Quản lý danh mục hệ thống số
+ - [ ] /admin/nhiem-vu — Quản lý nhiệm vụ & lộ trình
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

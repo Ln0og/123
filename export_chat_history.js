@@ -45,9 +45,8 @@ function generateMarkdown(title, sessionName, turns) {
   md += `---\n\n## 📑 Mục lục\n\n`;
 
   turns.forEach((t, i) => {
-    let preview = t.user.replace(/[\r\n]+/g, ' ').substring(0, 70);
-    if (t.user.length > 70) preview += '...';
-    // sanitize anchor
+    let preview = t.user.replace(/[\r\n]+/g, ' ').substring(0, 80);
+    if (t.user.length > 80) preview += '...';
     const anchor = `luot-${i + 1}`;
     md += `${i + 1}. [Lượt ${i + 1}: ${preview.replace(/[\[\]]/g, '')}](#${anchor})\n`;
   });
@@ -61,9 +60,8 @@ function generateMarkdown(title, sessionName, turns) {
     md += `**👤 Người dùng:**\n\n\`\`\`\n${t.user}\n\`\`\`\n\n`;
     md += `**🤖 Trợ lý AI:**\n\n`;
     if (t.responses.length === 0) {
-      md += `*(Thực hiện các thao tác lệnh / viết code / cập nhật hệ thống)*\n\n`;
+      md += `*(Thực hiện các thao tác xử lý lệnh / viết code / cấu hình hệ thống)*\n\n`;
     } else {
-      // Filter out raw system instructions if any leaked into content
       t.responses.forEach(r => {
         let cleanR = r.replace(/^CRITICAL INSTRUCTION \d+:.*$/gm, '').trim();
         if (cleanR) {
@@ -77,22 +75,49 @@ function generateMarkdown(title, sessionName, turns) {
   return md;
 }
 
+function copyDirRecursive(src, dest) {
+  if (!fs.existsSync(src)) return;
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
+  }
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      copyDirRecursive(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
 async function run() {
-  const backupPath = path.resolve('e:/KTS/123/.gemini_brain_backup/.system_generated/logs/transcript_full.jsonl');
-  const backupTurns = await parseTranscript(backupPath);
-  if (backupTurns.length > 0) {
-    const mdBackup = generateMarkdown('Lịch Sử Toàn Bộ Cuộc Trò Chuyện - Dự Án Kiến Trúc Số', 'Phiên Làm Việc Chính (Khởi tạo & Phát triển dự án)', backupTurns);
-    fs.writeFileSync('e:/KTS/123/LICH_SU_TRO_CHUYEN.md', mdBackup, 'utf8');
-    fs.writeFileSync('e:/KTS/LICH_SU_TRO_CHUYEN.md', mdBackup, 'utf8');
-    console.log(`Saved LICH_SU_TRO_CHUYEN.md (${backupTurns.length} turns, ${mdBackup.length} bytes)`);
+  const currentBrainDir = path.resolve('C:/Users/Lnog/.gemini/antigravity/brain/0c724d03-995b-41e5-b753-c6096ba91ae8');
+  const backupBrainDir = path.resolve(__dirname, '.gemini_brain_backup');
+
+  console.log('Copying brain folder to backup directory...');
+  copyDirRecursive(currentBrainDir, backupBrainDir);
+  console.log('Brain backup copied successfully.');
+
+  const transcriptPath = path.join(currentBrainDir, '.system_generated/logs/transcript_full.jsonl');
+  let turns = await parseTranscript(transcriptPath);
+  if (turns.length === 0) {
+    const fallbackPath = path.join(currentBrainDir, '.system_generated/logs/transcript.jsonl');
+    turns = await parseTranscript(fallbackPath);
   }
 
-  const ccebbPath = 'C:/Users/ckgam/.gemini/antigravity/brain/ccebb1f9-e2cd-4027-960c-006162871fa0/.system_generated/logs/transcript_full.jsonl';
-  const ccebbTurns = await parseTranscript(ccebbPath);
-  if (ccebbTurns.length > 0) {
-    const mdCcebb = generateMarkdown('Lịch Sử Cuộc Trò Chuyện - Phiên Kiểm Tra & Phân Quyền', 'Phiên Kiểm Tra (Dashboard & Authorize)', ccebbTurns);
-    fs.writeFileSync('e:/KTS/123/LICH_SU_TRO_CHUYEN_PHU.md', mdCcebb, 'utf8');
-    console.log(`Saved LICH_SU_TRO_CHUYEN_PHU.md (${ccebbTurns.length} turns, ${mdCcebb.length} bytes)`);
+  if (turns.length > 0) {
+    const md = generateMarkdown(
+      'Lịch Sử Toàn Bộ Cuộc Trò Chuyện - Dự Án Kiến Trúc Số Vĩnh Long',
+      'Phiên Làm Việc Chính (C:/Delta Force/kts-vinhlong)',
+      turns
+    );
+    const outputPath = path.resolve(__dirname, 'LICH_SU_TRO_CHUYEN.md');
+    fs.writeFileSync(outputPath, md, 'utf8');
+    console.log(`Saved LICH_SU_TRO_CHUYEN.md (${turns.length} turns, ${md.length} bytes) to ${outputPath}`);
+  } else {
+    console.warn('No turns found in transcript.');
   }
 }
 

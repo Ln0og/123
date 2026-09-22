@@ -1,0 +1,29 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\lib\auth.ts. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -41,9 +41,9 @@
+   callbacks: {
+     async jwt({ token, user }) {
+       if (user) {
+-        token.role = (user as { role: string }).role;
+-        token.donViId = (user as { donViId: string }).donViId;
+-        token.donViTen = (user as { donViTen: string }).donViTen;
++        token.role = (user as unknown as { role: string }).role;
++        token.donViId = (user as unknown as { donViId: string }).donViId;
++        token.donViTen = (user as unknown as { donViTen: string }).donViTen;
+       }
+       return token;
+     },
+@@ -50,7 +50,7 @@
+       if (session.user) {
+-        (session.user as { role: string }).role = token.role as string;
+-        (session.user as { donViId: string }).donViId = token.donViId as string;
+-        (session.user as { donViTen: string }).donViTen = token.donViTen as string;
++        (session.user as unknown as { role: string }).role = token.role as string;
++        (session.user as unknown as { donViId: string }).donViId = token.donViId as string;
++        (session.user as unknown as { donViTen: string }).donViTen = token.donViTen as string;
+       }
+       return session;
+     },
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

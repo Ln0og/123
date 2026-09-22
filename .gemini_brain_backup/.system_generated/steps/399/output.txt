@@ -1,0 +1,32 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\admin\nhiem-vu\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -56,9 +56,13 @@
+       const url = editing ? `/api/nhiem-vu/${editing.id}` : "/api/nhiem-vu";
+       const method = editing ? "PUT" : "POST";
+       const res = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+-      if (res.ok) { message.success(editing ? "Đã cập nhật!" : "Đã thêm!"); setModalOpen(false); load(); }
+-      else message.error("Lỗi khi lưu!");
+-    } catch {}
++      if (res.ok) { message.success(editing ? "Đã cập nhật!" : "Đã thêm!"); setModalOpen(false);        fetchNhiemVu();
++      } else {
++        message.error("Lỗi khi lưu!");
++      }
++    } catch {
++      // validation error
++    }
+     setSaving(false);
+   };
+ 
+@@ -65,5 +65,6 @@
+     const res = await fetch(`/api/nhiem-vu/${id}`, { method: "DELETE" });
+-    if (res.ok) { message.success("Đã xóa!"); load(); }
++    if (res.ok) { message.success("Đã xóa!"); fetchNhiemVu(); }
++    else message.error("Lỗi khi xóa!");
+   };
+ 
+   const columns: ColumnsType<NhiemVuData> = [
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
+
+We did our best to apply changes despite some inaccuracies. Double check if the edit applied is what you intended.

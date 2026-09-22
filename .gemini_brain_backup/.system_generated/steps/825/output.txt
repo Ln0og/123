@@ -1,0 +1,23 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -403,13 +403,12 @@
+         <div className="bg-white/10 p-1.5 rounded-xl backdrop-blur-md border border-white/20">
+           <Segmented
+             value={viewMode}
+-            onChange={(val) => setViewMode(val as "cards" | "dashboard" | "table")}
++            onChange={(val) => setViewMode(val as "list" | "dashboard")}
+             options={[
+-              { label: "📊 Tổng quan Dashboard", value: "dashboard", icon: <PieChartOutlined /> },
+-              { label: "🏛️ Khung 4 Lớp", value: "cards", icon: <AppstoreOutlined /> },
+-              { label: "📋 Bảng Kiểm Kê", value: "table", icon: <TableOutlined /> },
++              { label: "📋 Danh mục Kiểm kê", value: "list", icon: <TableOutlined /> },
++              { label: "📊 Tổng quan Thống kê", value: "dashboard", icon: <PieChartOutlined /> },
+             ]}
+-            className="bg-white/20 text-white"
++            className="bg-white/20 text-white font-bold"
+           />
+         </div>
+       </div>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

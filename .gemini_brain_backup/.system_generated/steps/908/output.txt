@@ -1,0 +1,12 @@
+
+The command exited with code 1.
+Output:
+portal : The term 'portal' is not recognized as the name of a cmdlet, function, script file, or operable program. 
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:27
++ git show 6624e3a:src/app/(portal)/layout.tsx
++                           ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (portal:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+

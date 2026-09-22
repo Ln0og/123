@@ -1,0 +1,16 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'prisma/schema.prisma', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/hien-trang/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/lo-trinh/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/nhiem-vu/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/api/he-thong/route.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/api/nhiem-vu/[id]/route.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/api/nhiem-vu/route.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/types/index.ts', LF will be replaced by CRLF the next time Git touches it
+[main 4f99dc0] Tính năng Liên kết chéo: Cho phép chọn nhiều Hệ thống số cho một Nhiệm vụ lộ trình và hiển thị chéo trên 2 phân hệ
+ 9 files changed, 75 insertions(+), 10 deletions(-)
+To https://github.com/Ln0og/123.git
+   3314b50..4f99dc0  main -> main
+

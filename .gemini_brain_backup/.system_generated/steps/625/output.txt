@@ -1,0 +1,39 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\admin\nhiem-vu\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -12,6 +12,7 @@
+ export default function AdminNhiemVuPage() {
+   const [data, setData] = useState<NhiemVuData[]>([]);
+   const [donVis, setDonVis] = useState<DonViData[]>([]);
++  const [heThongSos, setHeThongSos] = useState<any[]>([]);
+   const [loading, setLoading] = useState(true);
+   const [modalOpen, setModalOpen] = useState(false);
+   const [editing, setEditing] = useState<NhiemVuData | null>(null);
+@@ -21,9 +21,11 @@
+     Promise.all([
+       fetch("/api/nhiem-vu").then(r => r.json()),
+       fetch("/api/don-vi").then(r => r.json()),
+-    ]).then(([nv, dv]) => {
++      fetch("/api/he-thong").then(r => r.json()),
++    ]).then(([nv, dv, hts]) => {
+       setData(nv);
+       setDonVis(dv);
++      setHeThongSos(hts);
+       setLoading(false);
+     });
+   };
+@@ -34,7 +34,11 @@
+ 
+   const openEdit = (record: NhiemVuData) => {
+     setEditing(record);
+-    form.setFieldsValue({ ...record, thoiHan: record.thoiHan ? dayjs(record.thoiHan) : null });
++    form.setFieldsValue({ 
++      ...record, 
++      thoiHan: record.thoiHan ? dayjs(record.thoiHan) : null,
++      heThongSoIds: record.heThongSos?.map(h => h.id) || []
++    });
+     setModalOpen(true);
+   };
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

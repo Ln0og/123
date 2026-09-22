@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+[main 6624e3a] UI: Hợp nhất 'Khung 4 Lớp' và 'Bảng Kiểm Kê' thành 1 mục 'Danh mục Kiểm kê' duy nhất, có nút chuyển đổi Bảng/Thẻ linh hoạt
+ 1 file changed, 143 insertions(+), 129 deletions(-)
+To https://github.com/Ln0og/123.git
+   d580ead..6624e3a  main -> main
+

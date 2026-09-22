@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+Updated src/app/(portal)/kts/hien-trang/page.tsx
+Updated src/app/(portal)/kts/lo-trinh/page.tsx
+Updated src/app/(portal)/kts/so-do/page.tsx
+Updated src/app/admin/he-thong/page.tsx
+Updated src/app/admin/nhiem-vu/page.tsx
+

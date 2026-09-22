@@ -1,0 +1,45 @@
+
+Encountered error in step execution: context canceled
+Output:
+<truncated 1955 lines>
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/he-thong 200 in 20ms (next.js: 3ms, application-code: 17ms)
+ GET /admin/khung 200 in 26ms (next.js: 11ms, application-code: 15ms)
+prisma:query SELECT `main`.`KhungKTS`.`id`, `main`.`KhungKTS`.`tenKhung`, `main`.`KhungKTS`.`phienBan`, `main`.`KhungKTS`.`ngayBanHanh`, `main`.`KhungKTS`.`giaiDoanApDung`, `main`.`KhungKTS`.`mucTieu`, `main`.`KhungKTS`.`boiCanh`, `main`.`KhungKTS`.`nguyenTac`, `main`.`KhungKTS`.`daiDienPhuTrach`, `main`.`KhungKTS`.`trangThai`, `main`.`KhungKTS`.`updatedAt`, `main`.`KhungKTS`.`createdAt` FROM `main`.`KhungKTS` WHERE 1=1 ORDER BY `main`.`KhungKTS`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/kts 200 in 33ms (next.js: 27ms, application-code: 6ms)
+prisma:query SELECT `main`.`KhungKTS`.`id`, `main`.`KhungKTS`.`tenKhung`, `main`.`KhungKTS`.`phienBan`, `main`.`KhungKTS`.`ngayBanHanh`, `main`.`KhungKTS`.`giaiDoanApDung`, `main`.`KhungKTS`.`mucTieu`, `main`.`KhungKTS`.`boiCanh`, `main`.`KhungKTS`.`nguyenTac`, `main`.`KhungKTS`.`daiDienPhuTrach`, `main`.`KhungKTS`.`trangThai`, `main`.`KhungKTS`.`updatedAt`, `main`.`KhungKTS`.`createdAt` FROM `main`.`KhungKTS` WHERE 1=1 ORDER BY `main`.`KhungKTS`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/kts 200 in 10ms (next.js: 3ms, application-code: 7ms)
+[browser] Warning: Instance created by `useForm` is not connected to any Form element. Forget to pass `form` prop? 
+ GET /admin/import 200 in 27ms (next.js: 10ms, application-code: 17ms)
+ GET /admin/nhiem-vu 200 in 20ms (next.js: 5ms, application-code: 15ms)
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE 1=1 ORDER BY `main`.`DonVi`.`loai` ASC, `main`.`DonVi`.`ten` ASC LIMIT ? OFFSET ?
+ GET /api/don-vi 200 in 16ms (next.js: 3ms, application-code: 13ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 18ms (next.js: 10ms, application-code: 8ms)
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE 1=1 ORDER BY `main`.`DonVi`.`loai` ASC, `main`.`DonVi`.`ten` ASC LIMIT ? OFFSET ?
+ GET /api/don-vi 200 in 15ms (next.js: 3ms, application-code: 12ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 16ms (next.js: 8ms, application-code: 8ms)
+ GET /kts/lo-trinh 200 in 16ms (next.js: 4ms, application-code: 12ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 8ms (next.js: 2ms, application-code: 6ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 17ms (next.js: 4ms, application-code: 13ms)
+ GET /api/auth/session 200 in 22ms (next.js: 11ms, application-code: 11ms)
+ GET /api/auth/session 200 in 10ms (next.js: 2ms, application-code: 7ms)
+ GET /kts/hien-trang 200 in 19ms (next.js: 5ms, application-code: 14ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE 1=1 ORDER BY `main`.`HeThongSo`.`lop` ASC, `main`.`HeThongSo`.`ma` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/he-thong 200 in 24ms (next.js: 3ms, application-code: 20ms)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE 1=1 ORDER BY `main`.`HeThongSo`.`lop` ASC, `main`.`HeThongSo`.`ma` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/he-thong 200 in 24ms (next.js: 3ms, application-code: 21ms)
+ GET /api/auth/session 200 in 23ms (next.js: 9ms, application-code: 14ms)
+ GET /api/auth/session 200 in 13ms (next.js: 4ms, application-code: 9ms)
+

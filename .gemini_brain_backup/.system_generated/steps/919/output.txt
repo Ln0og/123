@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+[main 3456067] UI: Khôi phục lại giao diện phân chia 3 trang độc lập (Sơ đồ Khung KTS, Đánh giá Hiện trạng, Kế hoạch Lộ trình) theo yêu cầu
+ 4 files changed, 117 insertions(+), 611 deletions(-)
+ delete mode 100644 src/app/(portal)/kts/page.tsx
+To https://github.com/Ln0og/123.git
+   fb8eccd..3456067  main -> main
+

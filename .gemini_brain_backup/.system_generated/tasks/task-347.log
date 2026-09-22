@@ -1,0 +1,86 @@
+
+C:\Delta Force\kts-vinhlong\import_snn.js
+  1:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:26  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+C:\Delta Force\kts-vinhlong\preview_excel.js
+  1:14  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:7   warning  'fs' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  2:12  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+C:\Delta Force\kts-vinhlong\prisma\seed.ts
+  17:9  warning  'soTC' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  20:9  warning  'soNV' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  26:9  warning  'soGD' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  79:9  warning  'hts' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx
+   7:9   warning  'Option' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  35:11  warning  'lopCfg' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\lo-trinh\page.tsx
+  3:62  warning  'Button' is defined but never used  @typescript-eslint/no-unused-vars
+  8:8   warning  'dayjs' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\tong-quan\TongQuanClient.tsx
+  12:60  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Delta Force\kts-vinhlong\src\app\admin\he-thong\page.tsx
+  32:21  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Delta Force\kts-vinhlong\src\app\admin\he-thong\page.tsx:32:21
+  30 |   };
+  31 |
+> 32 |   useEffect(() => { load(); }, []);
+     |                     ^^^^ Avoid calling setState() directly within an effect
+  33 |
+  34 |   const openCreate = () => {
+  35 |     setEditing(null);  react-hooks/set-state-in-effect
+
+C:\Delta Force\kts-vinhlong\src\app\admin\import\page.tsx
+   4:10  warning  'UploadOutlined' is defined but never used  @typescript-eslint/no-unused-vars
+   4:47  warning  'InboxOutlined' is defined but never used   @typescript-eslint/no-unused-vars
+  57:16  warning  'err' is defined but never used             @typescript-eslint/no-unused-vars
+
+C:\Delta Force\kts-vinhlong\src\app\admin\layout.tsx
+  2:21  warning  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+  3:10  warning  'signIn' is defined but never used    @typescript-eslint/no-unused-vars
+  6:24  warning  'Button' is defined but never used    @typescript-eslint/no-unused-vars
+
+C:\Delta Force\kts-vinhlong\src\app\admin\nhiem-vu\page.tsx
+  29:21  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Delta Force\kts-vinhlong\src\app\admin\nhiem-vu\page.tsx:29:21
+  27 |   };
+  28 |
+> 29 |   useEffect(() => { load(); }, []);
+     |                     ^^^^ Avoid calling setState() directly within an effect
+  30 |
+  31 |   const openEdit = (record: NhiemVuData) => {
+  32 |     setEditing(record);  react-hooks/set-state-in-effect
+
+C:\Delta Force\kts-vinhlong\src\app\admin\page.tsx
+  2:10  warning  'redirect' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Delta Force\kts-vinhlong\src\app\dashboard\page.tsx
+  16:22  warning  'TRANG_THAI_CONFIG' is defined but never used  @typescript-eslint/no-unused-vars
+  16:41  warning  'UU_TIEN_CONFIG' is defined but never used     @typescript-eslint/no-unused-vars
+  19:7   warning  'COLORS' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+C:\Delta Force\kts-vinhlong\src\app\page.tsx
+  138:20  warning  Do not use `window.location.href` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination  @next/next/no-location-assign-relative-destination
+
+✖ 27 problems (7 errors, 20 warnings)
+

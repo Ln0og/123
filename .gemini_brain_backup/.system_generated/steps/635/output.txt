@@ -1,0 +1,26 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -43,6 +43,20 @@
+               {PHUONG_AN_CONFIG[rec.phuongAnXuLy] || rec.phuongAnXuLy}
+             </div>
+           )}
++          {rec.heThongSos && rec.heThongSos.length > 0 && (
++            <div className="mt-2 text-xs border-t border-dashed pt-1">
++              <span className="text-gray-500 mr-1">Tác động đến Hệ thống:</span>
++              <div className="flex flex-wrap gap-1 mt-1">
++                {rec.heThongSos.map(ht => (
++                  <Tooltip key={ht.id} title={ht.ten}>
++                    <Tag className="m-0 text-[10px] cursor-pointer bg-blue-50 border-blue-200 text-blue-600">
++                      {ht.ma}
++                    </Tag>
++                  </Tooltip>
++                ))}
++              </div>
++            </div>
++          )}
+         </div>
+       ),
+     },
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

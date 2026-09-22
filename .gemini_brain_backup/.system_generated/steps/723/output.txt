@@ -1,0 +1,43 @@
+
+The command exited with code 1.
+Output:
+At line:19 char:89
++ ... (/<span className=\"font-mono[^>]*>\s*\{item\.ma\}\s*<\/span>/g, '');
++                                                                        ~
+Unexpected token ')' in expression or statement.
+At line:33 char:21
++   fs.writeFileSync(f, code);
++                     ~
+Missing argument in parameter list.
+At line:34 char:27
++   console.log('Updated ' + f);
++                           ~
+You must provide a value expression following the '+' operator.
+At line:34 char:28
++   console.log('Updated ' + f);
++                            ~
+Unexpected token 'f' in expression or statement.
+At line:34 char:27
++   console.log('Updated ' + f);
++                           ~
+Missing closing ')' in expression.
+At line:34 char:29
++   console.log('Updated ' + f);
++                             ~
+Unexpected token ')' in expression or statement.
+At line:35 char:1
++ });
++ ~
+Unexpected token '}' in expression or statement.
+At line:35 char:2
++ });
++  ~
+Unexpected token ')' in expression or statement.
+At line:36 char:1
++ "
++ ~
+The string is missing the terminator: ".
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnexpectedToken
+ 
+

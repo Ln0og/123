@@ -1,0 +1,28 @@
+{"name":"$GetCurrent", "isDir":true}
+{"name":"$Recycle.Bin", "isDir":true}
+{"name":"$WINDOWS.~BT", "isDir":true}
+{"name":"$Windows.~WS", "isDir":true}
+{"name":"Config.Msi", "isDir":true}
+{"name":"Delta Force", "isDir":true}
+{"name":"Documents and Settings"}
+{"name":"DumpStack.log", "sizeBytes":"8192"}
+{"name":"DumpStack.log.tmp", "sizeBytes":"8192"}
+{"name":"ESD", "isDir":true}
+{"name":"GF2Exilium", "isDir":true}
+{"name":"PerfLogs", "isDir":true}
+{"name":"Program Files", "isDir":true}
+{"name":"Program Files (x86)", "isDir":true}
+{"name":"ProgramData", "isDir":true}
+{"name":"Recovery", "isDir":true}
+{"name":"Riot Games", "isDir":true}
+{"name":"SQL2022", "isDir":true}
+{"name":"System Volume Information", "isDir":true}
+{"name":"UploadFile", "isDir":true}
+{"name":"Users", "isDir":true}
+{"name":"Windows", "isDir":true}
+{"name":"hiberfil.sys", "sizeBytes":"6793691136"}
+{"name":"inetpub", "isDir":true}
+{"name":"pagefile.sys", "sizeBytes":"15032385536"}
+{"name":"swapfile.sys", "sizeBytes":"16777216"}
+
+Summary: This directory contains 20 subdirectories and 6 files.

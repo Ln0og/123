@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'next.config.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/so-do/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/auth.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/page.tsx', LF will be replaced by CRLF the next time Git touches it
+[main fb8eccd] UI: Hợp nhất toàn bộ Khung Kiến trúc số (Sơ đồ 4 lớp + Kiểm kê Hiện trạng + Tiến độ Lộ trình) thành 1 Cổng Quản trị Kiến trúc duy nhất, loại bỏ thanh điều hướng trùng lặp
+ 8 files changed, 622 insertions(+), 132 deletions(-)
+ create mode 100644 src/app/(portal)/kts/page.tsx
+To https://github.com/Ln0og/123.git
+   6624e3a..fb8eccd  main -> main
+

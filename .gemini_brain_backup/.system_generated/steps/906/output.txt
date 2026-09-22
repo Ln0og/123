@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+ next.config.ts                           |   4 -
+ src/app/(portal)/kts/hien-trang/page.tsx |   4 +-
+ src/app/(portal)/kts/lo-trinh/page.tsx   |   6 +-
+ src/app/(portal)/kts/page.tsx            |   5 +
+ src/app/(portal)/kts/so-do/page.tsx      | 612 +++++++++++++++++++++++++++++--
+ src/app/(portal)/layout.tsx              |  85 +----
+ src/app/page.tsx                         |  26 +-
+ src/lib/auth.ts                          |  12 +-
+ 8 files changed, 622 insertions(+), 132 deletions(-)
+

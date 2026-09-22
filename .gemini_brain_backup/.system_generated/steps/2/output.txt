@@ -1,0 +1,7 @@
+{"name":"2.Slide_Bao_cao_Huong_dan_Khung_KTS_Bo KHCN.pdf", "sizeBytes":"106604"}
+{"name":"3. QD.1425. KHUNG KTTT QGS (PB 1.0) BAN HANH_F.pdf", "sizeBytes":"1296436"}
+{"name":"4.DU THAO_BKHCN_HD XAYDUNG KHUNG KTS COQUAN TOCHUC.pdf", "sizeBytes":"9049614"}
+{"name":"5. Tai lieu BCA.doc", "sizeBytes":"38400"}
+{"name":"6. PL Lo trinh nhiem vu BCA 2.doc", "sizeBytes":"130048"}
+
+Summary: This directory contains 0 subdirectories and 5 files.

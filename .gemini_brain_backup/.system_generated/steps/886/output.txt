@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -329,7 +329,7 @@
+             STT: #{sttNumber}
+           </span>
+           <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-md border ${lopCfg.badgeClass}`}>
+-            {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.title}
++            {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.shortLabel}
+           </span>
+           <span className={`inline-flex items-center text-xs font-bold px-3 py-1 rounded-md border ${UU_TIEN_CONFIG[selectedTask.uuTien]?.badgeClass || "bg-gray-100 text-gray-800 border-gray-300 font-bold"}`}>
+             Ưu tiên: {UU_TIEN_CONFIG[selectedTask.uuTien]?.label || selectedTask.uuTien}
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

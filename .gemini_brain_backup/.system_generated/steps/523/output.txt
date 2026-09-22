@@ -1,0 +1,19 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -14,12 +14,7 @@
+ 
+ export default function HomePage() {
+   const router = useRouter();
+-  const stats = [
+-    { label: "Hệ thống số", value: 10, suffix: "hệ thống", color: "#1677ff" },
+-    { label: "Nhiệm vụ lộ trình", value: 8, suffix: "nhiệm vụ", color: "#722ed1" },
+-    { label: "Hoàn thành", value: 0, suffix: "%", color: "#52c41a" },
+-    { label: "Đơn vị tham gia", value: 8, suffix: "đơn vị", color: "#fa8c16" },
+-  ];
++
+ 
+   const principles = [
+     "Ưu tiên dùng chung, kế thừa tối đa",
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

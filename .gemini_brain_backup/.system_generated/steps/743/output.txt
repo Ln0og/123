@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'src/app/admin/he-thong/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/nhiem-vu/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'remove_ma.js', LF will be replaced by CRLF the next time Git touches it
+[main 2793882] UI: Loại bỏ toàn bộ việc hiển thị mã (Mã số SNN-, NV-) trên các giao diện người dùng theo yêu cầu, chỉ giữ lại Tên
+ 6 files changed, 47 insertions(+), 31 deletions(-)
+ create mode 100644 remove_ma.js
+To https://github.com/Ln0og/123.git
+   321cfa3..2793882  main -> main
+

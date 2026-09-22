@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+
+src\app\(portal)\kts\hien-trang\page.tsx:318:      dataIndex: "ma",
+
+
+

@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'src/app/(portal)/kts/hien-trang/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/lo-trinh/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+[main 6f8a946] Cải tiến UI/UX: Đổi Menu ngang thành Nút chuyển đổi Segmented Control (Pill-shaped) hiện đại
+ 3 files changed, 53 insertions(+), 31 deletions(-)
+To https://github.com/Ln0og/123.git
+   4778036..6f8a946  main -> main
+

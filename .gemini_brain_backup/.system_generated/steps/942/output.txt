@@ -1,0 +1,20 @@
+
+The command exited with code 0.
+Output:
+
+
+    Directory: C:\Delta Force
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----          9/3/2026  10:04 PM                Code                                                                 
+d-----         9/15/2026  11:58 PM                KIEN TRUC                                                            
+d-----         9/21/2026   9:05 PM                kts-vinhlong                                                         
+d-----         9/19/2026  10:54 PM                kts-vinhlong-prep                                                    
+d-----         9/19/2026  10:30 PM                New folder                                                           
+d-----         9/20/2026  10:06 PM                NQ57_github                                                          
+-a----         9/19/2026  11:43 PM          76835 v4. ten mien - snnmt - bo_sung_CSDL_theo_ND278_15.9.2026 (1).xlsx    
+
+
+

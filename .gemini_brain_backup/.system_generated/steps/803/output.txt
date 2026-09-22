@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'src/app/(portal)/kts/so-do/page.tsx', LF will be replaced by CRLF the next time Git touches it
+[main d580ead] UI: Bổ sung thanh chú thích & hướng dẫn sử dụng, ghi chú giải thích ngắn gọn cho từng khối chức năng và từng tầng lớp kiến trúc
+ 1 file changed, 115 insertions(+), 41 deletions(-)
+To https://github.com/Ln0og/123.git
+   e15c44c..d580ead  main -> main
+

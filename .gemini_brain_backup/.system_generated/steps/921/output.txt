@@ -1,0 +1,11 @@
+Task: 0c724d03-995b-41e5-b753-c6096ba91ae8/task-919
+Status: DONE
+Log: C:\Users\Lnog\.gemini\antigravity\brain\0c724d03-995b-41e5-b753-c6096ba91ae8\.system_generated\tasks\task-919.log
+Log output:
+[main 3456067] UI: Khôi phục lại giao diện phân chia 3 trang độc lập (Sơ đồ Khung KTS, Đánh giá Hiện trạng, Kế hoạch Lộ trình) theo yêu cầu
+ 4 files changed, 117 insertions(+), 611 deletions(-)
+ delete mode 100644 src/app/(portal)/kts/page.tsx
+To https://github.com/Ln0og/123.git
+   fb8eccd..3456067  main -> main
+
+Last progress: 5s ago

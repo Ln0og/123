@@ -1,0 +1,12 @@
+
+The command exited with code 1.
+Output:
+portal : The term 'portal' is not recognized as the name of a cmdlet, function, script file, or operable program. 
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:30
++ grep -n -C 5 "SNN-" src/app/(portal)/kts/hien-trang/page.tsx
++                              ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (portal:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+

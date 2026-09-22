@@ -1,0 +1,22 @@
+
+The command exited with code 0.
+Output:
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Error: 
+EPERM: operation not permitted, rename 'C:\Delta Force\kts-vinhlong\node_modules\.prisma\client\query_engine-windows.dll.node.tmp2700' -> 'C:\Delta Force\kts-vinhlong\node_modules\.prisma\client\query_engine-windows.dll.node'
+
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Datasource "db": SQLite database "dev.db" at "file:./dev.db"
+
+Your database is now in sync with your Prisma schema. Done in 24ms
+
+Running generate... (Use --skip-generate to skip the generators)
+Running generate... - Prisma Client
+EPERM: operation not permitted, rename 'C:\Delta Force\kts-vinhlong\node_modules
+\.prisma\client\query_engine-windows.dll.node.tmp15904' -> 'C:\Delta Force\kts-v
+inhlong\node_modules\.prisma\client\query_engine-windows.dll.node'
+
+

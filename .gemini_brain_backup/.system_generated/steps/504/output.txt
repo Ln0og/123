@@ -1,0 +1,39 @@
+
+The command exited with code 1.
+Output:
+At line:1 char:29
++ cat > generate_template.js << 'EOF'
++                             ~
+Missing file specification after redirection operator.
+At line:1 char:28
++ cat > generate_template.js << 'EOF'
++                            ~
+The '<' operator is reserved for future use.
+At line:1 char:29
++ cat > generate_template.js << 'EOF'
++                             ~
+The '<' operator is reserved for future use.
+At line:3 char:32
++ const wb = XLSX.utils.book_new();
++                                ~
+An expression was expected after '('.
+At line:5 char:4
++   ["Mã", "Tên hệ thống", "Lớp (1-4)", "Trạng thái", "Mô tả", "Chủ quả ...
++    ~
+Missing type name after '['.
+At line:5 char:8
++   ["Mã", "Tên hệ thống", "Lớp (1-4)", "Trạng thái", "Mô tả", "Chủ quả ...
++        ~
+Missing argument in parameter list.
+At line:11 char:32
++ XLSX.utils.book_append_sheet(wb, ws, "DM_DOITUONG");
++                                ~
+Missing argument in parameter list.
+At line:12 char:18
++ XLSX.writeFile(wb, "public/Mau_03_KhaiBao.xlsx");
++                  ~
+Missing argument in parameter list.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingFileSpecification
+ 
+

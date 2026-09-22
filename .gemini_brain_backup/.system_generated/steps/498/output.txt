@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'src/app/(portal)/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/page.tsx', LF will be replaced by CRLF the next time Git touches it
+[main e67b3d0] Remove Dashboard feature entirely
+ 6 files changed, 1 insertion(+), 396 deletions(-)
+ delete mode 100644 src/app/api/dashboard/stats/route.ts
+ delete mode 100644 src/app/dashboard/page.tsx
+To https://github.com/Ln0og/123.git
+   3b6a409..e67b3d0  main -> main
+

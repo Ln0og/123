@@ -1,0 +1,44 @@
+
+The command exited with code 0.
+Output:
+
+
+    Directory: C:\Delta Force\kts-vinhlong
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----         9/21/2026   8:45 PM                .gemini_brain_backup                                                 
+d-----         9/21/2026  10:04 PM                .next                                                                
+d-----         9/19/2026  11:18 PM                node_modules                                                         
+d-----         9/21/2026   8:45 PM                prisma                                                               
+d-----         9/21/2026  12:10 AM                public                                                               
+d-----         9/19/2026  10:57 PM                src                                                                  
+-a----         9/19/2026  10:55 PM            190 .env                                                                 
+-a----         9/19/2026  10:53 PM            480 .gitignore                                                           
+-a----         9/21/2026   8:45 PM           2543 add_y_te_roadmap.js                                                  
+-a----         9/19/2026  10:54 PM            678 AGENTS.md                                                            
+-a----         9/21/2026   8:45 PM            950 check_5_items.js                                                     
+-a----         9/21/2026   8:45 PM            794 check_link.js                                                        
+-a----         9/19/2026  10:54 PM             11 CLAUDE.md                                                            
+-a----         9/21/2026   8:45 PM           2307 connect_cross_links.js                                               
+-a----         9/19/2026  10:53 PM            465 eslint.config.mjs                                                    
+-a----         9/21/2026   8:45 PM           4055 export_chat_history.js                                               
+-a----         9/21/2026  12:10 AM            742 generate_template.js                                                 
+-a----         9/21/2026   8:45 PM          10731 HUONG_DAN_VA_LOGIC_HE_THONG.md                                       
+-a----         9/21/2026  12:28 AM           3452 import_snn.js                                                        
+-a----         9/21/2026   8:45 PM          83562 LICH_SU_TRO_CHUYEN.md                                                
+-a----         9/21/2026   8:45 PM          20946 LICH_SU_TRO_CHUYEN_PHU.md                                            
+-a----         9/21/2026  10:04 PM            288 next-env.d.ts                                                        
+-a----         9/21/2026  10:02 PM            157 next.config.ts                                                       
+-a----         9/19/2026  11:18 PM         316281 package-lock.json                                                    
+-a----         9/19/2026  11:18 PM           1250 package.json                                                         
+-a----         9/19/2026  10:53 PM             94 postcss.config.mjs                                                   
+-a----         9/19/2026  11:44 PM            672 preview_excel.js                                                     
+-a----         9/19/2026  10:53 PM           1450 README.md                                                            
+-a----         9/21/2026   9:05 PM           1484 remove_ma.js                                                         
+-a----         9/21/2026   8:45 PM            601 test_db.js                                                           
+-a----         9/19/2026  10:53 PM            670 tsconfig.json                                                        
+
+
+

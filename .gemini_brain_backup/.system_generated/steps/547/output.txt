@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'src/app/(portal)/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/page.tsx', LF will be replaced by CRLF the next time Git touches it
+[main 0485061] Xóa trang Tổng quan theo yêu cầu
+ 4 files changed, 2 insertions(+), 160 deletions(-)
+ delete mode 100644 src/app/(portal)/kts/tong-quan/TongQuanClient.tsx
+ delete mode 100644 src/app/(portal)/kts/tong-quan/page.tsx
+To https://github.com/Ln0og/123.git
+   dab321f..0485061  main -> main
+

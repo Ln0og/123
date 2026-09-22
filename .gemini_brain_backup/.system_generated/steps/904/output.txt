@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+fb8eccd UI: Hợp nhất toàn bộ Khung Kiến trúc số (Sơ đồ 4 lớp + Kiểm kê Hiện trạng + Tiến độ Lộ trình) thành 1 Cổng Quản trị Kiến trúc duy nhất, loại bỏ thanh điều hướng trùng lặp
+6624e3a UI: Hợp nhất 'Khung 4 Lớp' và 'Bảng Kiểm Kê' thành 1 mục 'Danh mục Kiểm kê' duy nhất, có nút chuyển đổi Bảng/Thẻ linh hoạt
+d580ead UI: Bổ sung thanh chú thích & hướng dẫn sử dụng, ghi chú giải thích ngắn gọn cho từng khối chức năng và từng tầng lớp kiến trúc
+e15c44c Tính năng Sơ đồ: Phân loại trực quan phương án xử lý của nhiệm vụ (Nâng cấp, Thay thế, Bổ sung mới, Tích hợp) trên thẻ và cửa sổ chi tiết
+2c9ed28 UI: Thiết kế lại giao diện Sơ đồ phân tầng kiến trúc hiện đại, sang trọng theo phong cách IOC Executive Dashboard
+

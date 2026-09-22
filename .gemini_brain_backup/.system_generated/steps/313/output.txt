@@ -1,0 +1,22 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\KtsVinhLongNet\KtsVinhLong\Data\DbInitializer.cs. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -26,6 +26,16 @@
+             };
+ 
+             context.HeThongSos.AddRange(heThongSos);
++
++            var nhiemVus = new NhiemVu[]
++            {
++                new NhiemVu { Id = "NV01", Ma = "NV-01", Ten = "Nâng cấp Trục tích hợp chia sẻ dữ liệu LGSP", GiaiDoan = "2026-2027", Lop = 2, TienDo = 100, TrangThai = "hoan-thanh", DonViChuTriId = "DV01" },
++                new NhiemVu { Id = "NV02", Ma = "NV-02", Ten = "Triển khai CSDL Đất đai tập trung", GiaiDoan = "2026-2030", Lop = 2, TienDo = 45, TrangThai = "dang-thuc-hien", DonViChuTriId = "DV01" },
++                new NhiemVu { Id = "NV03", Ma = "NV-03", Ten = "Xây dựng Trung tâm điều hành thông minh (IOC)", GiaiDoan = "2027-2028", Lop = 3, TienDo = 0, TrangThai = "tre-han", DonViChuTriId = "DV01" }
++            };
++
++            context.NhiemVus.AddRange(nhiemVus);
++
+             context.SaveChanges();
+         }
+     }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

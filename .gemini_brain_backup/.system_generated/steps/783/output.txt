@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\so-do\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -31,7 +31,7 @@
+   BarChartOutlined,
+ } from "@ant-design/icons";
+ import { HeThongSoData, NhiemVuData } from "@/types";
+-import { TRANG_THAI_CONFIG } from "@/lib/utils";
++import { TRANG_THAI_CONFIG, PHUONG_AN_CONFIG } from "@/lib/utils";
+ 
+ interface FrameworkBlock {
+   id: string;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

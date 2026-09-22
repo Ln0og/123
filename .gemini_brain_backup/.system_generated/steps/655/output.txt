@@ -1,0 +1,24 @@
+Task: 0c724d03-995b-41e5-b753-c6096ba91ae8/task-653
+Status: DONE
+Log: C:\Users\Lnog\.gemini\antigravity\brain\0c724d03-995b-41e5-b753-c6096ba91ae8\.system_generated\tasks\task-653.log
+Log output:
+<truncated 568 lines>
+1789926249368.png
+ create mode 100644 .gemini_brain_backup/.user_uploaded/media_1789926268149.png
+ create mode 100644 .gemini_brain_backup/de_xuat_web_kts.md
+ create mode 100644 .gemini_brain_backup/de_xuat_web_kts.md.metadata.json
+ create mode 100644 .gemini_brain_backup/implementation_plan.md
+ create mode 100644 .gemini_brain_backup/implementation_plan.md.metadata.json
+ create mode 100644 .gemini_brain_backup/scratch/doc5.txt
+ create mode 100644 .gemini_brain_backup/scratch/doc6.txt
+ create mode 100644 .gemini_brain_backup/scratch/doc_output.txt
+ create mode 100644 .gemini_brain_backup/scratch/extract_files.py
+ create mode 100644 .gemini_brain_backup/scratch/output.txt
+ create mode 100644 .gemini_brain_backup/task.md
+ create mode 100644 .gemini_brain_backup/task.md.metadata.json
+ create mode 100644 .gemini_brain_backup/tong_hop_noi_dung.md
+ create mode 100644 .gemini_brain_backup/tong_hop_noi_dung.md.metadata.json
+To https://github.com/Ln0og/123.git
+   e10c6fc..4778036  main -> main
+
+Last progress: 3s ago

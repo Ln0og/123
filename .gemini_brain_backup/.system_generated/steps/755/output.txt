@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+Total Tasks: 9
+NV-02 Triển khai điện toán đám mây cho IDC tỉnh HTs: [ 'HT-02' ]
+NV-01 Nâng cấp CSDL đất đai kết nối NDOP quốc gia HTs: [ 'DL-02' ]
+NV-07 Phát triển App Vĩnh Long Smart HTs: []
+NV-04 Tích hợp Cổng DVCTT với Cổng DVCQG HTs: [ 'DL-03' ]
+NV-03 Kết nối CSDL Dân cư với VNeID HTs: [ 'DL-01' ]
+NV-05 Xây dựng hệ thống SOC tỉnh thế hệ mới HTs: [ 'HT-03' ]
+NV-06 Triển khai Từ điển dữ liệu dùng chung tỉnh HTs: []
+NV-08 Xây dựng Trợ lý ảo tỉnh Vĩnh Long HTs: []
+NV-09 Nâng cấp và liên thông Hệ thống thông tin quản lý Y tế (HIS/EMR) toàn tỉnh HTs: [ 'UD-03' ]
+

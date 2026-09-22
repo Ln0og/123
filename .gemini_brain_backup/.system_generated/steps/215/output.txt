@@ -1,0 +1,54 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -50,7 +50,7 @@
+         }
+       >
+         {item.moTa && (
+-          <p className="text-gray-600 text-sm mb-3">{item.moTa}</p>
++          <p className="text-gray-600 text-sm mb-3 whitespace-pre-line line-clamp-3" title={item.moTa}>{item.moTa}</p>
+         )}
+         <div className="flex gap-4 text-xs text-gray-400">
+           {item.chuQuan && (
+@@ -66,8 +66,10 @@
+     );
+   };
+ 
+-  const LopTab = ({ lop }: { lop: 1 | 2 | 3 | 4 }) => {
+-    const items = byLop(lop);
++  const LopTab = ({ lop, items }: { lop: 1 | 2 | 3 | 4, items: HeThongSoData[] }) => {
++    const [page, setPage] = useState(1);
++    const pageSize = 15;
++    
+     const cfg = LOP_CONFIG[lop];
+     const dangVanHanh = items.filter((i) => i.trangThai === "dang-van-hanh").length;
+     const canNangCap = items.filter((i) => i.trangThai === "can-nang-cap").length;
+@@ -74,4 +74,6 @@
+ 
++    const currentItems = items.slice((page - 1) * pageSize, page * pageSize);
++
+     return (
+       <div>
+         {/* Summary */}
+@@ -96,7 +96,18 @@
+         {items.length === 0 ? (
+           <Empty description="Chưa có hệ thống nào trong lớp này" />
+         ) : (
+-          items.map((item) => <HeThongCard key={item.id} item={item} />)
++          <>
++            {currentItems.map((item) => <HeThongCard key={item.id} item={item} />)}
++            <div className="flex justify-center mt-6">
++              <import_Pagination 
++                current={page} 
++                total={items.length} 
++                pageSize={pageSize} 
++                onChange={setPage} 
++                showSizeChanger={false}
++              />
++            </div>
++          </>
+         )}
+       </div>
+     );
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

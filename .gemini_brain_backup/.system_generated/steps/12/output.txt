@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Installed 4 packages in 73ms
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+OK
+

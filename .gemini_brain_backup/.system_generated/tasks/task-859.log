@@ -1,0 +1,26 @@
+
+> kts-vinhlong@0.1.0 build
+> next build
+
+▲ Next.js 16.3.5 (Turbopack)
+- Environments: .env
+✓ Running next.config.ts took 56ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 21.8s
+  Running TypeScript ...
+next.config.ts(6,5): error TS2353: Object literal may only specify known properties, and 'appIsrStatus' does not exist in type '{ position?: "top-left" | "top-right" | "bottom-left" | "bottom-right" | undefined; }'.
+src/app/(portal)/kts/hien-trang/page.tsx(534,59): error TS18048: 'percent' is possibly 'undefined'.
+src/app/(portal)/kts/hien-trang/page.tsx(567,67): error TS2345: Argument of type '"cards"' is not assignable to parameter of type 'SetStateAction<"list" | "dashboard">'.
+src/app/(portal)/kts/lo-trinh/page.tsx(332,59): error TS2339: Property 'title' does not exist on type '{ readonly label: "Lớp 1 — Hạ tầng số & An ninh mạng"; readonly shortLabel: "Hạ tầng số"; readonly color: "#4a044e"; readonly bgColor: "#fae8ff"; readonly borderColor: "#e879f9"; readonly badgeClass: "bg-fuchsia-100 text-fuchsia-950 border-fuchsia-400 font-bold"; readonly icon: "🏗️"; } | { ...; } | { ...; } | { ......'.
+  Property 'title' does not exist on type '{ readonly label: "Lớp 1 — Hạ tầng số & An ninh mạng"; readonly shortLabel: "Hạ tầng số"; readonly color: "#4a044e"; readonly bgColor: "#fae8ff"; readonly borderColor: "#e879f9"; readonly badgeClass: "bg-fuchsia-100 text-fuchsia-950 border-fuchsia-400 font-bold"; readonly icon: "🏗️"; }'.
+src/app/(portal)/kts/lo-trinh/page.tsx(582,68): error TS18048: 'percent' is possibly 'undefined'.
+src/app/(portal)/kts/lo-trinh/page.tsx(609,68): error TS18048: 'percent' is possibly 'undefined'.
+src/lib/auth.ts(52,10): error TS2352: Conversion of type 'AdapterUser & User' to type '{ role: string; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'role' is missing in type 'AdapterUser & User' but required in type '{ role: string; }'.
+src/lib/auth.ts(53,10): error TS2352: Conversion of type 'AdapterUser & User' to type '{ donViId: string; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'donViId' is missing in type 'AdapterUser & User' but required in type '{ donViId: string; }'.
+src/lib/auth.ts(54,10): error TS2352: Conversion of type 'AdapterUser & User' to type '{ donViTen: string; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'donViTen' is missing in type 'AdapterUser & User' but required in type '{ donViTen: string; }'.
+Failed to type check.
+

@@ -1,0 +1,17 @@
+Task: 0c724d03-995b-41e5-b753-c6096ba91ae8/task-681
+Status: RUNNING
+Log: C:\Users\Lnog\.gemini\antigravity\brain\0c724d03-995b-41e5-b753-c6096ba91ae8\.system_generated\tasks\task-681.log
+Log output:
+
+> kts-vinhlong@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://100.124.11.94:3000
+- Environments: .env
+✓ Ready in 493ms
+✓ Running next.config.ts took 118ms
+
+
+Last progress: 48s ago

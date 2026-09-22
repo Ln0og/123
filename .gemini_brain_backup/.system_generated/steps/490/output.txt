@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\admin\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -5,7 +5,7 @@
+ export default function AdminPage() {
+   const router = useRouter();
+   useEffect(() => {
+-    router.push("/dashboard");
++    router.push("/admin/he-thong");
+   }, [router]);
+   return null;
+ }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

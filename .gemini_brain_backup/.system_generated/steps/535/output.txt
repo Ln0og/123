@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+src/app/(portal)/layout.tsx:  { href: "/kts/tong-quan", label: "Tổng quan" },
+src/app/page.tsx:            <Link href="/kts/tong-quan" className="text-white hover:text-blue-200 text-sm transition-colors">
+src/app/page.tsx:            <Link href="/kts/tong-quan">
+

@@ -1,0 +1,1 @@
+{"File":"C:\\Delta Force\\kts-vinhlong\\src\\app\\(portal)\\kts\\hien-trang\\page.tsx","LineNumber":408,"LineContent":"              { label: \"🏛️ Khung 4 Lớp\", value: \"cards\", icon: \u003cAppstoreOutlined /\u003e },"}

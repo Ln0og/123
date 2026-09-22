@@ -1,0 +1,2 @@
+Created file file:///C:/Delta%20Force/kts-vinhlong/prisma/schema.prisma with requested content.
+If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
