@@ -733,3 +733,115 @@ prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`l
 prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
 prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
  GET /api/nhiem-vu 200 in 15ms (next.js: 5ms, application-code: 9ms)
+ GET /kts/lo-trinh 200 in 64ms (next.js: 8ms, application-code: 56ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 18ms (next.js: 5ms, application-code: 13ms)
+[browser] Uncaught ReferenceError: Segmented is not defined
+    at LoTrinhPage (src/app/(portal)/kts/lo-trinh/page.tsx:589:10)
+  587 |         </div>
+  588 |
+> 589 |         <Segmented
+      |          ^
+  590 |           value={detailView}
+  591 |           onChange={(val) => setDetailView(val as "timeline" | "table")}
+  592 |           options={[
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 21ms (next.js: 7ms, application-code: 14ms)
+ GET /kts/lo-trinh 200 in 72ms (next.js: 14ms, application-code: 58ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 19ms (next.js: 7ms, application-code: 12ms)
+[browser] Uncaught ReferenceError: Segmented is not defined
+    at LoTrinhPage (src/app/(portal)/kts/lo-trinh/page.tsx:589:10)
+  587 |         </div>
+  588 |
+> 589 |         <Segmented
+      |          ^
+  590 |           value={detailView}
+  591 |           onChange={(val) => setDetailView(val as "timeline" | "table")}
+  592 |           options={[
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 20ms (next.js: 4ms, application-code: 16ms)
+ GET /kts/lo-trinh 200 in 66ms (next.js: 8ms, application-code: 58ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 19ms (next.js: 4ms, application-code: 15ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 28ms (next.js: 5ms, application-code: 23ms)
+[browser] Uncaught ReferenceError: Segmented is not defined
+    at LoTrinhPage (src/app/(portal)/kts/lo-trinh/page.tsx:589:10)
+  587 |         </div>
+  588 |
+> 589 |         <Segmented
+      |          ^
+  590 |           value={detailView}
+  591 |           onChange={(val) => setDetailView(val as "timeline" | "table")}
+  592 |           options={[
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 207ms
+ GET /kts/lo-trinh 200 in 102ms (next.js: 17ms, application-code: 85ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 17ms (next.js: 4ms, application-code: 13ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 20ms (next.js: 8ms, application-code: 13ms)
+[browser] Uncaught ReferenceError: Segmented is not defined
+    at LoTrinhPage (src/app/(portal)/kts/lo-trinh/page.tsx:590:10)
+  588 |         </div>
+  589 |
+> 590 |         <Segmented
+      |          ^
+  591 |           value={detailView}
+  592 |           onChange={(val) => setDetailView(val as "timeline" | "table")}
+  593 |           options={[
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 189ms
+ GET /kts/lo-trinh 200 in 88ms (next.js: 17ms, application-code: 71ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 16ms (next.js: 5ms, application-code: 11ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 14ms (next.js: 3ms, application-code: 11ms)
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 162ms
+ GET /kts/lo-trinh 200 in 78ms (next.js: 12ms, application-code: 65ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 12ms (next.js: 3ms, application-code: 9ms)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 12ms (next.js: 4ms, application-code: 9ms)
+ GET /kts/lo-trinh 200 in 47ms (next.js: 6ms, application-code: 41ms)

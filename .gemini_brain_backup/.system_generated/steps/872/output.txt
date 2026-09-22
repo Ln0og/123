@@ -1,2 +1,47 @@
-Created file file:///C:/Delta%20Force/kts-vinhlong/next.config.ts with requested content.
-If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -547,7 +547,7 @@
+                       outerRadius={90}
+                       paddingAngle={4}
+                       dataKey="value"
+-                      label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
++                      label={({ percent }: { percent?: number }) => (percent !== undefined ? `${(percent * 100).toFixed(0)}%` : "")}
+                     >
+                       {priorityChartData.map((entry, index) => (
+                         <Cell key={`cell-${index}`} fill={entry.color} />
+@@ -577,7 +577,7 @@
+         </Row>
+       </div>
+ 
+-      {/* SECTION HEADER & EXECUTION VIEW SWITCHER */}
++      {/* SECTION HEADER */}
+       <div id="nhiem-vu-detail-section" className="pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-t border-slate-200">
+         <div>
+           <h2 className="text-xl font-bold text-gray-900 m-0 flex items-center gap-2">
+@@ -584,19 +584,9 @@
+-            Kế Hoạch Thực Thi & Chi Tiết 09 Nhiệm Vụ Số Hóa
++            Kế Hoạch Thực Thi & Cây Mốc Thời Gian 09 Nhiệm Vụ
+           </h2>
+           <p className="text-xs text-gray-500 mt-1 mb-0">
+-            Xem theo mốc thời gian 3 giai đoạn hoặc chuyển sang dạng bảng dữ liệu chi tiết
+-          </p>
+-        </div>
+-
+-        <Segmented
+-          value={detailView}
+-          onChange={(val) => setDetailView(val as "timeline" | "table")}
+-          options={[
+-            { label: "⏳ Mốc Thời Gian (3 Giai Đoạn)", value: "timeline", icon: <FieldTimeOutlined /> },
+-            { label: "📋 Bảng Danh Sách Nhiệm Vụ", value: "table", icon: <TableOutlined /> },
+-          ]}
+-          className="bg-slate-200/80 p-1 font-semibold text-gray-700"
+-        />
++            Hành trình chuyển đổi số tỉnh Vĩnh Long giai đoạn 2026–2030 qua các mốc chiến lược
++          </p>
++        </div>
+       </div>
+ 
+       {/* 3 KHỐI MỐC CHIẾN LƯỢC TRONG KẾ HOẠCH THỰC THI */}
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

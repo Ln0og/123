@@ -1,23 +1,5 @@
-The following changes were made by the replace_file_content tool to: C:\Delta Force\kts-vinhlong\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
-[diff_block_start]
-@@ -531,7 +531,7 @@
-                         outerRadius={90}
-                         paddingAngle={4}
-                         dataKey="value"
--                        label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
-+                        label={({ percent }: { percent?: number }) => `${((percent || 0) * 100).toFixed(0)}%`}
-                       >
-                         {layerChartData.map((entry, index) => (
-                           <Cell key={`cell-${index}`} fill={entry.color} />
-@@ -563,7 +563,7 @@
-           {/* Additional Trends & Quick Action */}
-           <Card 
-             title={<span className="font-bold text-gray-800">📅 Phân Bố Theo Năm Đưa Vào Khai Thác</span>}
--            extra={<Button type="link" onClick={() => setViewMode("cards")}>Xem chi tiết từng hệ thống →</Button>}
-+            extra={<Button type="link" onClick={() => setViewMode("list")}>Xem chi tiết từng hệ thống →</Button>}
-             className="shadow-xs"
-           >
-             <div className="h-56 w-full">
-[diff_block_end]
 
-Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
+The command exited with code 0.
+Output:
+Status: 200, Length: 24694
+

@@ -64,6 +64,7 @@ const { Search } = Input;
 export default function LoTrinhPage() {
   const [data, setData] = useState<NhiemVuData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTimelinePhase, setSelectedTimelinePhase] = useState<string>("all");
   const [filterLop, setFilterLop] = useState<string>("");
   const [filterTrangThai, setFilterTrangThai] = useState<string>("");
   const [filterUuTien, setFilterUuTien] = useState<string>("");
@@ -219,8 +220,11 @@ export default function LoTrinhPage() {
       if (target) target.tasks.push(task);
     });
 
-    return groups.filter((g) => g.tasks.length > 0);
-  }, [filteredData]);
+    if (selectedTimelinePhase === "all") {
+      return groups.filter((g) => g.tasks.length > 0);
+    }
+    return groups.filter((g) => g.phaseKey === selectedTimelinePhase && g.tasks.length > 0);
+  }, [filteredData, selectedTimelinePhase]);
 
   const renderModalContent = () => {
     if (!selectedTask) return null;
@@ -238,7 +242,7 @@ export default function LoTrinhPage() {
             STT: #{sttNumber}
           </span>
           <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-md border ${lopCfg.badgeClass}`}>
-            {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.title}
+            {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.label}
           </span>
           <span className={`inline-flex items-center text-xs font-bold px-3 py-1 rounded-md border ${UU_TIEN_CONFIG[selectedTask.uuTien]?.badgeClass || "bg-gray-100 text-gray-800 border-gray-300 font-bold"}`}>
             Ưu tiên: {UU_TIEN_CONFIG[selectedTask.uuTien]?.label || selectedTask.uuTien}
@@ -543,7 +547,7 @@ export default function LoTrinhPage() {
                       outerRadius={90}
                       paddingAngle={4}
                       dataKey="value"
-                      label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+                      label={({ percent }: { percent?: number }) => (percent !== undefined ? `${(percent * 100).toFixed(0)}%` : "")}
                     >
                       {priorityChartData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
@@ -574,27 +578,17 @@ export default function LoTrinhPage() {
         </Row>
       </div>
 
-      {/* SECTION HEADER & EXECUTION VIEW SWITCHER */}
+      {/* SECTION HEADER */}
       <div id="nhiem-vu-detail-section" className="pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-t border-slate-200">
         <div>
           <h2 className="text-xl font-bold text-gray-900 m-0 flex items-center gap-2">
             <span className="w-2.5 h-6 bg-blue-600 rounded-full inline-block"></span>
-            Kế Hoạch Thực Thi & Chi Tiết 09 Nhiệm Vụ Số Hóa
+            Kế Hoạch Thực Thi & Cây Mốc Thời Gian 09 Nhiệm Vụ
           </h2>
           <p className="text-xs text-gray-500 mt-1 mb-0">
-            Xem theo mốc thời gian 3 giai đoạn hoặc chuyển sang dạng bảng dữ liệu chi tiết
+            Hành trình chuyển đổi số tỉnh Vĩnh Long giai đoạn 2026–2030 qua các mốc chiến lược
           </p>
         </div>
-
-        <Segmented
-          value={detailView}
-          onChange={(val) => setDetailView(val as "timeline" | "table")}
-          options={[
-            { label: "⏳ Mốc Thời Gian (3 Giai Đoạn)", value: "timeline", icon: <FieldTimeOutlined /> },
-            { label: "📋 Bảng Danh Sách Nhiệm Vụ", value: "table", icon: <TableOutlined /> },
-          ]}
-          className="bg-slate-200/80 p-1 font-semibold text-gray-700"
-        />
       </div>
 
       {/* 3 KHỐI MỐC CHIẾN LƯỢC TRONG KẾ HOẠCH THỰC THI */}

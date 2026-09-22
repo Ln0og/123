@@ -1,0 +1,35 @@
+
+The command exited with code 1.
+Output:
+
+> kts-vinhlong@0.1.0 build
+> next build
+
+▲ Next.js 16.3.5 (Turbopack)
+- Environments: .env
+✓ Running next.config.ts took 69ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 20.9s
+  Running TypeScript ...
+src/app/(portal)/kts/lo-trinh/page.tsx(241,59): error TS2339: Property 'title' does not exist on type '{ readonly label: "Lớp 1 — Hạ tầng số & An ninh mạng"; readonly shortLabel: "Hạ tầng số"; readonly color: "#4a044e"; readonly bgColor: "#fae8ff"; readonly borderColor: "#e879f9"; readonly badgeClass: "bg-fuchsia-100 text-fuchsia-950 border-fuchsia-400 font-bold"; readonly icon: "🏗️"; } | { ...; } | { ...; } | { ......'.
+  Property 'title' does not exist on type '{ readonly label: "Lớp 1 — Hạ tầng số & An ninh mạng"; readonly shortLabel: "Hạ tầng số"; readonly color: "#4a044e"; readonly bgColor: "#fae8ff"; readonly borderColor: "#e879f9"; readonly badgeClass: "bg-fuchsia-100 text-fuchsia-950 border-fuchsia-400 font-bold"; readonly icon: "🏗️"; }'.
+src/app/(portal)/kts/lo-trinh/page.tsx(546,57): error TS18048: 'percent' is possibly 'undefined'.
+src/app/(portal)/kts/lo-trinh/page.tsx(589,10): error TS2304: Cannot find name 'Segmented'.
+src/app/(portal)/kts/lo-trinh/page.tsx(590,18): error TS2552: Cannot find name 'detailView'. Did you mean 'DataView'?
+src/app/(portal)/kts/lo-trinh/page.tsx(591,22): error TS7006: Parameter 'val' implicitly has an 'any' type.
+src/app/(portal)/kts/lo-trinh/page.tsx(591,30): error TS2304: Cannot find name 'setDetailView'.
+src/app/(portal)/kts/lo-trinh/page.tsx(593,81): error TS2304: Cannot find name 'FieldTimeOutlined'.
+src/app/(portal)/kts/lo-trinh/page.tsx(594,75): error TS2304: Cannot find name 'TableOutlined'.
+src/app/(portal)/kts/lo-trinh/page.tsx(603,26): error TS2304: Cannot find name 'setSelectedTimelinePhase'.
+src/app/(portal)/kts/lo-trinh/page.tsx(603,51): error TS2304: Cannot find name 'selectedTimelinePhase'.
+src/app/(portal)/kts/lo-trinh/page.tsx(605,13): error TS2304: Cannot find name 'selectedTimelinePhase'.
+src/app/(portal)/kts/lo-trinh/page.tsx(629,26): error TS2304: Cannot find name 'setSelectedTimelinePhase'.
+src/app/(portal)/kts/lo-trinh/page.tsx(629,51): error TS2304: Cannot find name 'selectedTimelinePhase'.
+src/app/(portal)/kts/lo-trinh/page.tsx(631,13): error TS2304: Cannot find name 'selectedTimelinePhase'.
+src/app/(portal)/kts/lo-trinh/page.tsx(655,26): error TS2304: Cannot find name 'setSelectedTimelinePhase'.
+src/app/(portal)/kts/lo-trinh/page.tsx(655,51): error TS2304: Cannot find name 'selectedTimelinePhase'.
+src/app/(portal)/kts/lo-trinh/page.tsx(657,13): error TS2304: Cannot find name 'selectedTimelinePhase'.
+Failed to type check.
+
+

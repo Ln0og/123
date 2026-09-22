@@ -1,0 +1,12 @@
+Task: 724a6bcd-bcc3-4ca2-973c-d3661f6678bd/task-530
+Status: RUNNING
+Log: C:\Users\ckgam\.gemini\antigravity\brain\724a6bcd-bcc3-4ca2-973c-d3661f6678bd\.system_generated\tasks\task-530.log
+Log output:
+<truncated 841 lines>
+ERE 1=1 ORDER BY `main`.`NhiemVu`.`uuTien` ASC, `main`.`NhiemVu`.`thoiHan` ASC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`DonVi`.`id`, `main`.`DonVi`.`ten`, `main`.`DonVi`.`loai`, `main`.`DonVi`.`parentId`, `main`.`DonVi`.`createdAt` FROM `main`.`DonVi` WHERE `main`.`DonVi`.`id` IN (?,?,?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`_HeThongNhiemVu`.`B`, `main`.`_HeThongNhiemVu`.`A` FROM `main`.`_HeThongNhiemVu` WHERE `main`.`_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 12ms (next.js: 4ms, application-code: 9ms)
+
+Last progress: 22s ago
