@@ -1,0 +1,27 @@
+The following changes were made by the replace_file_content tool to: E:\KTS\123\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -39,7 +39,12 @@
+   RocketOutlined,
+   CheckOutlined,
+   HourglassOutlined,
+-  ArrowRightOutlined
++  ArrowRightOutlined,
++  BranchesOutlined,
++  AppstoreOutlined,
++  AimOutlined,
++  CompassOutlined,
++  NodeIndexOutlined
+ } from "@ant-design/icons";
+ import type { ColumnsType } from "antd/es/table";
+ import { NhiemVuData } from "@/types";
+@@ -70,6 +70,7 @@
+   const [data, setData] = useState<NhiemVuData[]>([]);
+   const [loading, setLoading] = useState(true);
+   const [detailView, setDetailView] = useState<"timeline" | "table">("timeline");
++  const [timelineStyle, setTimelineStyle] = useState<"tree" | "grid">("tree");
+   const [selectedTimelinePhase, setSelectedTimelinePhase] = useState<string>("all");
+   const [filterLop, setFilterLop] = useState<string>("");
+   const [filterTrangThai, setFilterTrangThai] = useState<string>("");
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
