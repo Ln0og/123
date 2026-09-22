@@ -1,39 +1,17 @@
+Task: 724a6bcd-bcc3-4ca2-973c-d3661f6678bd/task-502
+Status: RUNNING
+Log: C:\Users\ckgam\.gemini\antigravity\brain\724a6bcd-bcc3-4ca2-973c-d3661f6678bd\.system_generated\tasks\task-502.log
+Log output:
 
-The command exited with code 1.
-Output:
-At line:1 char:29
-+ cat > generate_template.js << 'EOF'
-+                             ~
-Missing file specification after redirection operator.
-At line:1 char:28
-+ cat > generate_template.js << 'EOF'
-+                            ~
-The '<' operator is reserved for future use.
-At line:1 char:29
-+ cat > generate_template.js << 'EOF'
-+                             ~
-The '<' operator is reserved for future use.
-At line:3 char:32
-+ const wb = XLSX.utils.book_new();
-+                                ~
-An expression was expected after '('.
-At line:5 char:4
-+   ["Mã", "Tên hệ thống", "Lớp (1-4)", "Trạng thái", "Mô tả", "Chủ quả ...
-+    ~
-Missing type name after '['.
-At line:5 char:8
-+   ["Mã", "Tên hệ thống", "Lớp (1-4)", "Trạng thái", "Mô tả", "Chủ quả ...
-+        ~
-Missing argument in parameter list.
-At line:11 char:32
-+ XLSX.utils.book_append_sheet(wb, ws, "DM_DOITUONG");
-+                                ~
-Missing argument in parameter list.
-At line:12 char:18
-+ XLSX.writeFile(wb, "public/Mau_03_KhaiBao.xlsx");
-+                  ~
-Missing argument in parameter list.
-    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
-    + FullyQualifiedErrorId : MissingFileSpecification
- 
+> kts-vinhlong@0.1.0 dev
+> next dev
 
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.83.107:3000
+- Environments: .env
+✓ Ready in 667ms
+✓ Running next.config.ts took 171ms
+
+
+Last progress: 4s ago

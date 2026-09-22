@@ -1,15 +1,9 @@
 
-The command exited with code 1.
+The command exited with code 0.
 Output:
-At line:1 char:11
-+ git add . && git commit -m "Thêm tính năng Popup Modal chi tiết cho t ...
-+           ~~
-The token '&&' is not a valid statement separator in this version.
-At line:1 char:87
-+ ... "Thêm tính năng Popup Modal chi tiết cho trang Hiện Trạng" && git pus ...
-+                                                                ~~
-The token '&&' is not a valid statement separator in this version.
-    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
-    + FullyQualifiedErrorId : InvalidEndOfLine
- 
+commit ef34a07117ecd1e7362d7b720cd99bb5ccbe953d
+Author: Long <you@example.com>
+Date:   Mon Sep 21 09:32:28 2026 +0700
+
+    feat: cap nhat so do khung kts chuan QD 1425, toi uu giao dien, dong bo hien trang va lo trinh
 

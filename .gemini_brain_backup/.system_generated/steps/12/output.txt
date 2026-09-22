@@ -1,7 +1,5 @@
+{"name":".system_generated", "isDir":true}
+{"name":".user_uploaded", "isDir":true}
+{"name":"scratch", "isDir":true}
 
-The command exited with code 0.
-Output:
-Installed 4 packages in 73ms
-warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
-OK
-
+Summary: This directory contains 3 subdirectories and 0 files.

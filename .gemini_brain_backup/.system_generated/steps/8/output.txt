@@ -1,11 +1,5 @@
+{"name":"724a6bcd-bcc3-4ca2-973c-d3661f6678bd", "isDir":true}
+{"name":"ccebb1f9-e2cd-4027-960c-006162871fa0", "isDir":true}
+{"name":"tempmediaStorage", "isDir":true}
 
-The command exited with code 0.
-Output:
-
-Name        Source                                                       
-----        ------                                                       
-python.exe  C:\Users\Lnog\AppData\Local\Microsoft\WindowsApps\python.exe 
-python3.exe C:\Users\Lnog\AppData\Local\Microsoft\WindowsApps\python3.exe
-
-
-
+Summary: This directory contains 3 subdirectories and 0 files.

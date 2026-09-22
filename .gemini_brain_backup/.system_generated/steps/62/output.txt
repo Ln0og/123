@@ -1,0 +1,5 @@
+{"name":"dev.db", "sizeBytes":"208896"}
+{"name":"schema.prisma", "sizeBytes":"3284"}
+{"name":"seed.ts", "sizeBytes":"12955"}
+
+Summary: This directory contains 0 subdirectories and 3 files.

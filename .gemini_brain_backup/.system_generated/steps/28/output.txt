@@ -1,0 +1,16 @@
+
+The command exited with code 1.
+Output:
+Total turns in ccebb1f9: 5
+[eval]:44
+    console.log([Turn ] );
+                 ^
+
+ReferenceError: Turn is not defined
+    at [eval]:44:18
+    at Array.forEach (<anonymous>)
+    at [eval]:43:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.19.0
+

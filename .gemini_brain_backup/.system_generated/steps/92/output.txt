@@ -1,0 +1,4 @@
+Found 3 results
+app/api/auth
+app/api/auth/[...nextauth]
+lib/auth.ts

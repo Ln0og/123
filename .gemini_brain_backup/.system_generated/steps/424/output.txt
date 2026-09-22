@@ -1,0 +1,13 @@
+Task: 724a6bcd-bcc3-4ca2-973c-d3661f6678bd/task-119
+Status: RUNNING
+Log: C:\Users\ckgam\.gemini\antigravity\brain\724a6bcd-bcc3-4ca2-973c-d3661f6678bd\.system_generated\tasks\task-119.log
+Log output:
+<truncated 1195 lines>
+,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`NhiemVu`.`id`, `main`.`NhiemVu`.`ma`, `main`.`NhiemVu`.`ten`, `main`.`NhiemVu`.`moTa`, `main`.`NhiemVu`.`donViChuTriId`, `main`.`NhiemVu`.`uuTien`, `main`.`NhiemVu`.`thoiHan`, `main`.`NhiemVu`.`giaiDoan`, `main`.`NhiemVu`.`kpi`, `main`.`NhiemVu`.`nguonKiemChung`, `main`.`NhiemVu`.`trangThai`, `main`.`NhiemVu`.`tienDo`, `main`.`NhiemVu`.`lop`, `main`.`NhiemVu`.`phuongAnXuLy`, `main`.`NhiemVu`.`ghiChu`, `main`.`NhiemVu`.`createdAt`, `main`.`NhiemVu`.`updatedAt` FROM `main`.`NhiemVu` WHERE `main`.`NhiemVu`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/he-thong 200 in 52ms (next.js: 17ms, application-code: 34ms)
+✓ Compiled in 132ms
+ GET /kts/so-do 200 in 75ms (next.js: 43ms, application-code: 32ms)
+ GET /admin/he-thong 200 in 77ms (next.js: 16ms, application-code: 60ms)
+
+Last progress: 2s ago

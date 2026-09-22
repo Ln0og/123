@@ -1,0 +1,27 @@
+The following changes were made by the replace_file_content tool to: e:\KTS\123\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -190,15 +190,15 @@
+     return (
+       <div className="mt-3 space-y-4">
+         <div className="flex flex-wrap gap-2 items-center">
+-          <Tag className="font-mono font-bold text-sm bg-gray-100 text-gray-800 px-2 py-0.5">
++          <span className="font-mono font-bold text-sm bg-slate-200 text-slate-800 border border-slate-300 px-2.5 py-1 rounded-md">
+             {selectedItem.ma}
+-          </Tag>
+-          <Tag style={{ color: lopCfg.color, borderColor: lopCfg.borderColor, backgroundColor: lopCfg.bgColor }}>
++          </span>
++          <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-md border ${lopCfg.badgeClass}`}>
+             {lopCfg.icon} Lớp {selectedItem.lop}: {lopCfg.shortLabel}
+-          </Tag>
+-          <Tag color={TRANG_THAI_CONFIG[selectedItem.trangThai]?.antdColor || "default"}>
++          </span>
++          <span className={`inline-flex items-center text-xs font-bold px-3 py-1 rounded-md border ${TRANG_THAI_CONFIG[selectedItem.trangThai]?.badgeClass || "bg-gray-100 text-gray-800 border-gray-300 font-bold"}`}>
+             {TRANG_THAI_CONFIG[selectedItem.trangThai]?.label || selectedItem.trangThai}
+-          </Tag>
++          </span>
+         </div>
+ 
+         <Descriptions bordered column={1} size="small" labelStyle={{ width: "32%", backgroundColor: "#f8fafc", fontWeight: 600 }}>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

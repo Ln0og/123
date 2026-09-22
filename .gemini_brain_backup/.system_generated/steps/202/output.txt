@@ -1,0 +1,35 @@
+The following changes were made by the replace_file_content tool to: e:\KTS\123\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -563,29 +563,6 @@
+       {/* DASHBOARD VIEW */}
+       {viewMode === "dashboard" && (
+         <div className="space-y-6">
+-          {/* Progress Breakdown Bar Chart */}
+-          <Card 
+-            title={<span className="font-bold text-gray-800">📈 Tiến Độ Thực Hiện Từng Nhiệm Vụ Chuyển Đổi Số (%)</span>}
+-            extra={<Button type="link" onClick={() => setViewMode("table")}>Xem dạng bảng chi tiết →</Button>}
+-            className="shadow-xs"
+-          >
+-            <div className="h-72 w-full">
+-              <ResponsiveContainer width="100%" height="100%">
+-                <BarChart data={taskProgressChartData} margin={{ top: 10, right: 30, left: 0, bottom: 25 }}>
+-                  <XAxis dataKey="name" interval={0} tick={{ fontSize: 12, fontWeight: 600 }} />
+-                  <YAxis domain={[0, 100]} unit="%" />
+-                  <RechartsTooltip 
+-                    formatter={(val) => [`${val}%`, "Tiến độ"]}
+-                    labelFormatter={(label) => {
+-                      const item = taskProgressChartData.find(t => t.name === label);
+-                      return item ? `${item.name}: ${item.fullName}` : label;
+-                    }}
+-                  />
+-                  <Bar dataKey="tienDo" name="Tiến độ thực tế" fill="#1677ff" radius={[6, 6, 0, 0]} />
+-                </BarChart>
+-              </ResponsiveContainer>
+-            </div>
+-          </Card>
+ 
+           {/* 2 Donut / Pie Charts: Priority & Solution */}
+           <Row gutter={[16, 16]}>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

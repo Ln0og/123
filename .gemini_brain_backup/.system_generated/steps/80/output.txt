@@ -1,36 +1,43 @@
-Task: 0c724d03-995b-41e5-b753-c6096ba91ae8/task-74
-Status: RUNNING
-Log: C:\Users\Lnog\.gemini\antigravity\brain\0c724d03-995b-41e5-b753-c6096ba91ae8\.system_generated\tasks\task-74.log
-Log output:
-npm warn exec The following package was not found and will be installed: create-next-app@16.3.5
 
-Using defaults for unprovided options:
+The command exited with code 0.
+Output:
 
-  --ts                    TypeScript (use --js for JavaScript)
-  --no-react-compiler     No React Compiler (use --react-compiler for React Compiler)
-  --agents-md             AGENTS.md (use --no-agents-md for No AGENTS.md)
+> kts-vinhlong@0.1.0 dev
+> next dev
 
-Creating a new Next.js app in C:\Delta Force\kts-vinhlong.
+�-� Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.83.107:3000
+�o" Ready in 6.0s
+�o" Running next.config.ts took 248ms
 
-Using npm.
+�-< Compiling / ...
+ GET / 200 in 13.6s (next.js: 13.1s, application-code: 469ms)
+ GET /kts/hien-trang 200 in 2.1s (next.js: 2.0s, application-code: 35ms)
+[browser] Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead. 
+ GET /api/he-thong 500 in 815ms (next.js: 714ms, application-code: 101ms)
+ GET /api/he-thong 500 in 30ms (next.js: 5ms, application-code: 25ms)
+[browser] Uncaught TypeError: data.filter is not a function
+    at HienTrangPage (src/app/(portal)/kts/hien-trang/page.tsx:217:26)
+  215 |   }
+  216 |
+> 217 |   const lop1Count = data.filter((d) => d.lop === 1).length;
+      |                          ^
+  218 |   const lop2Count = data.filter((d) => d.lop === 2).length;
+  219 |   const lop3Count = data.filter((d) => d.lop === 3).length;
+  220 |   const lop4Count = data.filter((d) => d.lop === 4).length;
+Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead.
+ GET /kts/hien-trang? 200 in 217ms (next.js: 13ms, application-code: 205ms)
+ GET /api/he-thong 500 in 93ms (next.js: 10ms, application-code: 82ms)
+[browser] Uncaught TypeError: data.filter is not a function
+    at HienTrangPage (src/app/(portal)/kts/hien-trang/page.tsx:217:26)
+  215 |   }
+  216 |
+> 217 |   const lop1Count = data.filter((d) => d.lop === 1).length;
+      |                          ^
+  218 |   const lop2Count = data.filter((d) => d.lop === 2).length;
+  219 |   const lop3Count = data.filter((d) => d.lop === 3).length;
+  220 |   const lop4Count = data.filter((d) => d.lop === 4).length;
+ GET /api/he-thong 500 in 22ms (next.js: 7ms, application-code: 16ms)
+[browser] Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead. 
 
-Initializing project with template: app-tw 
-
-
-Installing dependencies:
-- next
-- react
-- react-dom
-
-Installing devDependencies:
-- @tailwindcss/postcss
-- @types/node
-- @types/react
-- @types/react-dom
-- eslint
-- eslint-config-next
-- tailwindcss
-- typescript
-
-
-Last progress: 12s ago

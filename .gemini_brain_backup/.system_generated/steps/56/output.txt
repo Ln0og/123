@@ -1,0 +1,24 @@
+
+The command exited with code 0.
+Output:
+.gemini_brain_backup
+.gitignore
+AGENTS.md
+CLAUDE.md
+eslint.config.mjs
+export_chat_history.js
+generate_template.js
+import_snn.js
+LICH_SU_TRO_CHUYEN.md
+LICH_SU_TRO_CHUYEN_PHU.md
+next.config.ts
+package-lock.json
+package.json
+postcss.config.mjs
+preview_excel.js
+prisma
+public
+README.md
+src
+tsconfig.json
+

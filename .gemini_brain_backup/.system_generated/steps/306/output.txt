@@ -1,0 +1,54 @@
+The following changes were made by the replace_file_content tool to: e:\KTS\123\src\app\(portal)\layout.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -9,7 +9,12 @@
+   const router = useRouter();
+ 
+   // Xác định view hiện tại để set giá trị cho Segmented
+-  const currentValue = pathname.includes("/kts/lo-trinh") ? "lo-trinh" : "hien-trang";
++  let currentValue = "hien-trang";
++  if (pathname.includes("/kts/so-do")) {
++    currentValue = "so-do";
++  } else if (pathname.includes("/kts/lo-trinh")) {
++    currentValue = "lo-trinh";
++  }
+ 
+   return (
+     <div className="min-h-screen bg-gray-50">
+@@ -42,7 +42,8 @@
+               size="large"
+               value={currentValue}
+               onChange={(val) => {
+-                if (val === "hien-trang") router.push("/kts/hien-trang");
++                if (val === "so-do") router.push("/kts/so-do");
++                else if (val === "hien-trang") router.push("/kts/hien-trang");
+                 else router.push("/kts/lo-trinh");
+               }}
+               className="bg-transparent"
+@@ -49,6 +49,14 @@
+                 {
+                   label: (
+-                    <div className="px-8 py-2 text-base font-semibold">
++                    <div className="px-6 py-2 text-base font-semibold">
++                      🏛️ Sơ đồ Khung KTS
++                    </div>
++                  ),
++                  value: "so-do",
++                },
++                {
++                  label: (
++                    <div className="px-6 py-2 text-base font-semibold">
+                       📊 Đánh giá Hiện trạng
+                     </div>
+                   ),
+@@ -55,7 +55,7 @@
+                 },
+                 {
+                   label: (
+-                    <div className="px-8 py-2 text-base font-semibold">
++                    <div className="px-6 py-2 text-base font-semibold">
+                       🚀 Kế hoạch Lộ trình
+                     </div>
+                   ),
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

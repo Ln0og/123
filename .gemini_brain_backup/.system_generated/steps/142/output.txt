@@ -1,0 +1,2 @@
+{"File":"e:\\KTS\\123\\.gemini_brain_backup\\de_xuat_web_kts.md","LineNumber":291,"LineContent":"\u003e Các câu hỏi sau sẽ ảnh hưởng đến thiết kế chi tiết:"}
+{"File":"e:\\KTS\\123\\.gemini_brain_backup\\tong_hop_noi_dung.md","LineNumber":13,"LineContent":"- **5 câu hỏi cốt lõi** mà Khung phải trả lời:"}

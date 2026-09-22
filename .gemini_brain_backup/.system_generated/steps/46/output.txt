@@ -1,0 +1,38 @@
+
+The command exited with code 0.
+Output:
+Copied: .user_uploaded\media_1789831851459.png
+Copied: .user_uploaded\media_1789917998341.png
+Copied: .user_uploaded\media_1789918138848.png
+Copied: .user_uploaded\media_1789918337737.png
+Copied: .user_uploaded\media_1789918457761.png
+Copied: .user_uploaded\media_1789918657574.png
+Copied: .user_uploaded\media_1789919437392.png
+Copied: .user_uploaded\media_1789919706970.png
+Copied: .user_uploaded\media_1789922308319.png
+Copied: .user_uploaded\media_1789922328027.png
+Copied: .user_uploaded\media_1789922592337.png
+Copied: .user_uploaded\media_1789922811591.png
+Copied: .user_uploaded\media_1789923712530.png
+Copied: .user_uploaded\media_1789924403607.png
+Copied: .user_uploaded\media_1789924718659.png
+Copied: .user_uploaded\media_1789925134695.png
+Copied: .user_uploaded\media_1789925267871.png
+Copied: .user_uploaded\media_1789925532730.png
+Copied: .user_uploaded\media_1789926249368.png
+Copied: .user_uploaded\media_1789926268149.png
+Copied: de_xuat_web_kts.md
+Copied: de_xuat_web_kts.md.metadata.json
+Copied: implementation_plan.md
+Copied: implementation_plan.md.metadata.json
+Copied: scratch\doc5.txt
+Copied: scratch\doc6.txt
+Copied: scratch\doc_output.txt
+Copied: scratch\extract_files.py
+Copied: scratch\output.txt
+Copied: task.md
+Copied: task.md.metadata.json
+Copied: tong_hop_noi_dung.md
+Copied: tong_hop_noi_dung.md.metadata.json
+Brain artifacts restored successfully to current conversation.
+

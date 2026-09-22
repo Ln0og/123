@@ -1,28 +1,104 @@
-{"name":"$GetCurrent", "isDir":true}
-{"name":"$Recycle.Bin", "isDir":true}
-{"name":"$WINDOWS.~BT", "isDir":true}
-{"name":"$Windows.~WS", "isDir":true}
-{"name":"Config.Msi", "isDir":true}
-{"name":"Delta Force", "isDir":true}
-{"name":"Documents and Settings"}
-{"name":"DumpStack.log", "sizeBytes":"8192"}
-{"name":"DumpStack.log.tmp", "sizeBytes":"8192"}
-{"name":"ESD", "isDir":true}
-{"name":"GF2Exilium", "isDir":true}
-{"name":"PerfLogs", "isDir":true}
-{"name":"Program Files", "isDir":true}
-{"name":"Program Files (x86)", "isDir":true}
-{"name":"ProgramData", "isDir":true}
-{"name":"Recovery", "isDir":true}
-{"name":"Riot Games", "isDir":true}
-{"name":"SQL2022", "isDir":true}
-{"name":"System Volume Information", "isDir":true}
-{"name":"UploadFile", "isDir":true}
-{"name":"Users", "isDir":true}
-{"name":"Windows", "isDir":true}
-{"name":"hiberfil.sys", "sizeBytes":"6793691136"}
-{"name":"inetpub", "isDir":true}
-{"name":"pagefile.sys", "sizeBytes":"15032385536"}
-{"name":"swapfile.sys", "sizeBytes":"16777216"}
+The following changes were made by the replace_file_content tool to: e:\KTS\123\src\app\(portal)\kts\lo-trinh\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -237,7 +237,7 @@
+     {
+       title: "Lớp",
+       dataIndex: "lop",
+-      width: 120,
++      width: 140,
+       filters: [1, 2, 3, 4].map((l) => ({ text: LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel, value: l })),
+       onFilter: (value, record) => record.lop === value,
+       render: (lop) => {
+@@ -244,7 +244,7 @@
+         return (
+-          <Tag style={{ color: cfg.color, borderColor: cfg.borderColor, backgroundColor: cfg.bgColor }}>
++          <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
+             {cfg.icon} Lớp {lop}
+-          </Tag>
++          </span>
+         );
+       },
+     },
+@@ -252,7 +252,7 @@
+       dataIndex: ["donViChuTri", "ten"],
+       width: 180,
+       render: (_, rec) => (
+-        <div className="text-xs text-gray-700 flex items-center gap-1.5">
++        <div className="text-xs font-medium text-gray-800 flex items-center gap-1.5">
+           <BankOutlined className="text-gray-400" />
+           <span>{rec.donViChuTri?.ten || "UBND tỉnh Vĩnh Long"}</span>
+         </div>
+@@ -260,10 +260,14 @@
+     {
+       title: "Ưu tiên",
+       dataIndex: "uuTien",
+-      width: 110,
++      width: 120,
+       render: (uuTien) => {
+-        const cfg = UU_TIEN_CONFIG[uuTien] || { label: uuTien, color: "#8c8c8c" };
+-        return <Tag color={uuTien === "cao" ? "red" : uuTien === "trung-binh" ? "orange" : "green"}>{cfg.label}</Tag>;
++        const cfg = UU_TIEN_CONFIG[uuTien] || { label: uuTien, badgeClass: "bg-gray-100 text-gray-800 border-gray-300 font-bold" };
++        return (
++          <span className={`inline-flex items-center text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
++            {cfg.label}
++          </span>
++        );
+       },
+     },
+     {
+@@ -275,7 +275,7 @@
+         const days = getDaysRemaining(thoiHan);
+         return (
+           <Tooltip title={days !== null ? (overdue ? `Trễ ${Math.abs(days)} ngày` : `Còn ${days} ngày`) : ""}>
+-            <span className={overdue ? "text-red-500 font-semibold" : days !== null && days <= 30 ? "text-orange-500" : "text-gray-600"}>
++            <span className={overdue ? "text-red-600 font-bold" : days !== null && days <= 30 ? "text-amber-600 font-bold" : "text-gray-700 font-medium"}>
+               {overdue && <WarningOutlined className="mr-1" />}
+               {formatDate(thoiHan)}
+             </span>
+@@ -293,12 +293,12 @@
+             size="small"
+             status={rec.trangThai === "tre-han" ? "exception" : rec.trangThai === "hoan-thanh" ? "success" : "active"}
+             strokeColor={
+-              rec.trangThai === "hoan-thanh" ? "#52c41a" :
+-              rec.trangThai === "tre-han" ? "#ff4d4f" :
+-              tienDo > 50 ? "#1677ff" : "#faad14"
++              rec.trangThai === "hoan-thanh" ? "#15803d" :
++              rec.trangThai === "tre-han" ? "#b91c1c" :
++              tienDo > 50 ? "#1d4ed8" : "#d97706"
+             }
+           />
+-          <div className="text-xs text-gray-400 mt-0.5">
++          <div className="text-xs font-semibold text-gray-500 mt-0.5">
+             {TRANG_THAI_CONFIG[rec.trangThai]?.label || rec.trangThai}
+           </div>
+         </div>
+@@ -317,18 +317,18 @@
+       <div className="mt-3 space-y-4">
+         {/* Badges and Tags */}
+         <div className="flex flex-wrap gap-2 items-center">
+-          <Tag className="font-bold text-sm bg-blue-100 text-blue-800 border-blue-300 px-2.5 py-0.5 rounded-full">
++          <span className="font-bold text-sm bg-blue-100 text-blue-950 border border-blue-400 px-3 py-1 rounded-md">
+             STT: #{sttNumber}
+-          </Tag>
+-          <Tag style={{ color: lopCfg.color, borderColor: lopCfg.borderColor, backgroundColor: lopCfg.bgColor }}>
++          </span>
++          <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-md border ${lopCfg.badgeClass}`}>
+             {lopCfg.icon} Lớp {selectedTask.lop}: {lopCfg.title}
+-          </Tag>
+-          <Tag color={selectedTask.uuTien === "cao" ? "red" : selectedTask.uuTien === "trung-binh" ? "orange" : "green"}>
++          </span>
++          <span className={`inline-flex items-center text-xs font-bold px-3 py-1 rounded-md border ${UU_TIEN_CONFIG[selectedTask.uuTien]?.badgeClass || "bg-gray-100 text-gray-800 border-gray-300 font-bold"}`}>
+             Ưu tiên: {UU_TIEN_CONFIG[selectedTask.uuTien]?.label || selectedTask.uuTien}
+-          </Tag>
+-          <Tag color={TRANG_THAI_CONFIG[selectedTask.trangThai]?.antdColor || "default"}>
++          </span>
++          <span className={`inline-flex items-center text-xs font-bold px-3 py-1 rounded-md border ${TRANG_THAI_CONFIG[selectedTask.trangThai]?.badgeClass || "bg-gray-100 text-gray-800 border-gray-300 font-bold"}`}>
+             {TRANG_THAI_CONFIG[selectedTask.trangThai]?.label || selectedTask.trangThai}
+-          </Tag>
++          </span>
+         </div>
+ 
+         {/* Descriptions Details */}
+[diff_block_end]
 
-Summary: This directory contains 20 subdirectories and 6 files.
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

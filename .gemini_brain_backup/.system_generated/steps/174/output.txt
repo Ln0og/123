@@ -1,51 +1,5 @@
 
-The command exited with code 1.
+The command exited with code 0.
 Output:
-
-added 3 packages, removed 394 packages, changed 4 packages, and audited 525 packages in 17s
-
-153 packages are looking for funding
-  run `npm fund` for details
-
-1 high severity vulnerability
-
-Some issues need review, and may require choosing
-a different dependency.
-
-Run `npm audit` for details.
-npm warn allow-scripts 4 packages have install scripts not yet covered by allowScripts:
-npm warn allow-scripts   unrs-resolver@1.12.2 (postinstall: node postinstall.js)
-npm warn allow-scripts   @prisma/client@5.22.0 (postinstall: node scripts/postinstall.js)
-npm warn allow-scripts   prisma@5.22.0 (preinstall: node scripts/preinstall-entry.js)
-npm warn allow-scripts   @prisma/engines@5.22.0 (postinstall: node scripts/postinstall.js)
-npm warn allow-scripts
-npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
-Environment variables loaded from .env
-Prisma schema loaded from prisma\schema.prisma
-Datasource "db": SQLite database "dev.db" at "file:./dev.db"
-
-SQLite database dev.db created at file:./dev.db
-
-Your database is now in sync with your Prisma schema. Done in 81ms
-
-Running generate... (Use --skip-generate to skip the generators)
-Running generate... - Prisma Client
-✔ Generated Prisma Client (v5.22.0) to .\node_modules\@prisma\client in 103ms
-
-┌─────────────────────────────────────────────────────────┐
-│  Update available 5.22.0 -> 8.0.0-rc.15                 │
-│                                                         │
-│  This is a major update - please follow the guide at    │
-│  https://pris.ly/d/major-version-upgrade                │
-│                                                         │
-│  Run the following to update                            │
-│    npm i --save-dev prisma@latest                       │
-│    npm i @prisma/client@latest                          │
-└─────────────────────────────────────────────────────────┘
-
-> kts-vinhlong@0.1.0 db:seed
-> ts-node --compiler-options "{\"module\":\"CommonJS\"}" prisma/seed.ts
-
-'ts-node' is not recognized as an internal or external command,
-operable program or batch file.
+GET /kts/hien-trang status: 200
 

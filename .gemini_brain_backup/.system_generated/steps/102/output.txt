@@ -1,2 +1,28 @@
-Created file file:///C:/Delta%20Force/kts-vinhlong/src/lib/utils.ts with requested content.
-If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+
+The command exited with code 0.
+Output:
+Prisma test error: PrismaClientInitializationError: 
+Invalid `prisma.heThongSo.findMany()` invocation in
+E:\KTS\123\test_db.js:6:41
+
+  3 
+  4 async function main() {
+  5   try {
+→ 6     const list = await prisma.heThongSo.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "sqlite"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at $n.handleRequestError (E:\KTS\123\node_modules\@prisma\client\runtime\library.js:121:7615)
+    at $n.handleAndLogRequestError (E:\KTS\123\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (E:\KTS\123\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (E:\KTS\123\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async main (E:\KTS\123\test_db.js:6:18) {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+

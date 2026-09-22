@@ -1,48 +1,6 @@
 
-The command exited with code 1.
+The command exited with code 0.
 Output:
-At line:1 char:49
-+ cat > src/app/(portal)/kts/hien-trang/page.tsx << 'EOF'
-+                                                 ~
-Missing file specification after redirection operator.
-At line:1 char:48
-+ cat > src/app/(portal)/kts/hien-trang/page.tsx << 'EOF'
-+                                                ~
-The '<' operator is reserved for future use.
-At line:1 char:49
-+ cat > src/app/(portal)/kts/hien-trang/page.tsx << 'EOF'
-+                                                 ~
-The '<' operator is reserved for future use.
-At line:3 char:19
-+ import { useEffect, useState } from "react";
-+                   ~
-Missing argument in parameter list.
-At line:4 char:14
-+ import { Card, Tag, Progress, Tabs, Badge, Spin, Empty, Pagination, M ...
-+              ~
-Missing argument in parameter list.
-At line:6 char:20
-+ import { LOP_CONFIG, TRANG_THAI_CONFIG } from "@/lib/utils";
-+                    ~
-Missing argument in parameter list.
-At line:8 char:19
-+   DatabaseOutlined,
-+                   ~
-Missing argument in parameter list.
-At line:15 char:39
-+ export default function HienTrangPage() {
-+                                       ~
-An expression was expected after '('.
-At line:16 char:54
-+   const [data, setData] = useState<HeThongSoData[]>([]);
-+                                                      ~
-Missing type name after '['.
-At line:23 char:14
-+   useEffect(() => {
-+              ~
-An expression was expected after '('.
-Not all parse errors were reported.  Correct the reported errors and try again.
-    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
-    + FullyQualifiedErrorId : MissingFileSpecification
- 
+origin	https://github.com/Ln0og/123.git (fetch)
+origin	https://github.com/Ln0og/123.git (push)
 

@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+ Volume in drive E is New Volume
+ Volume Serial Number is 4AFF-197A
+
+ Directory of E:\KTS\123
+
+File Not Found
+

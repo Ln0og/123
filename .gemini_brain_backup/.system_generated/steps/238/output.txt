@@ -1,25 +1,16 @@
-{"name":".agents", "isDir":true}
-{"name":".config", "isDir":true}
-{"name":"Common", "isDir":true}
-{"name":"Controllers", "isDir":true}
-{"name":"DTOs", "isDir":true}
-{"name":"Data", "isDir":true}
-{"name":"Filters", "isDir":true}
-{"name":"Helpers", "isDir":true}
-{"name":"Middleware", "isDir":true}
-{"name":"Migrations", "isDir":true}
-{"name":"Models", "isDir":true}
-{"name":"Program.cs", "sizeBytes":"20190"}
-{"name":"Properties", "isDir":true}
-{"name":"PropertyRental.csproj", "sizeBytes":"2982"}
-{"name":"Services", "isDir":true}
-{"name":"Utilities", "isDir":true}
-{"name":"Views", "isDir":true}
-{"name":"appsettings.Development.json", "sizeBytes":"127"}
-{"name":"appsettings.json", "sizeBytes":"3983"}
-{"name":"check_ids.js", "sizeBytes":"651"}
-{"name":"excel_comparison.txt", "sizeBytes":"1597"}
-{"name":"test_data.json"}
-{"name":"wwwroot", "isDir":true}
 
-Summary: This directory contains 16 subdirectories and 7 files.
+The command exited with code 1.
+Output:
+[eval]:1
+process.env.DATABASE_URL='file:./dev.db'; const { PrismaClient } = require('@prisma/client'); const p = new PrismaClient(); async function test() { const ht = await p.heThongSo.findFirst({ where: { ma: 'HT-03' }, include: { nhiemVus: true } }); console.log('HT-03 data:', ht); const allNv = await p.nhiemVu.findMany({ include: { heThongSos: true } }); console.log('All Nhiem Vu and their connected HeThongSos:'); allNv.forEach((nv, i) => { console.log([STT ] :  (Lop ) -> HeThong:, nv.heThongSos.map(h => h.ma)); }); } test();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+Expected ',', got ':'
+
+SyntaxError: missing ) after argument list
+    at makeContextifyScript (node:internal/vm:194:14)
+    at compileScript (node:internal/process/execution:388:10)
+    at evalTypeScript (node:internal/process/execution:260:22)
+    at node:internal/main/eval_string:71:3
+
+Node.js v24.19.0
+

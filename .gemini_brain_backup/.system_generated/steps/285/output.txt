@@ -1,0 +1,109 @@
+The following changes were made by the replace_file_content tool to: e:\KTS\123\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -176,16 +176,31 @@
+     const lopCfg = LOP_CONFIG[selectedItem.lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
+     const rawMoTa = selectedItem.moTa || "";
+     const lines = rawMoTa.split(/\\n|\n/).filter((l) => l.trim() !== "");
+-    const attributes = lines.map((line) => {
++    
++    // Group values by key to prevent multiple duplicate rows
++    const groupedAttributes: { key: string; values: string[] }[] = [];
++    const keyMap = new Map<string, string[]>();
++
++    lines.forEach((line) => {
+       const parts = line.split("::");
++      let key = "Thông tin bổ sung";
++      let val = line.trim();
+       if (parts.length >= 2) {
+-        return { key: parts[0].trim(), value: parts.slice(1).join("::").trim() };
+-      }
+-      return { key: "Thông tin bổ sung", value: line.trim() };
+-    });
+-
+-    const tenMienAttr = attributes.find((a) => a.key === "Tên miền");
+-    const otherAttributes = attributes.filter((a) => a.key !== "Tên miền" && a.value);
++        key = parts[0].trim();
++        val = parts.slice(1).join("::").trim();
++      }
++      if (!val) return;
++
++      if (!keyMap.has(key)) {
++        const arr: string[] = [];
++        keyMap.set(key, arr);
++        groupedAttributes.push({ key, values: arr });
++      }
++      keyMap.get(key)!.push(val);
++    });
++
++    const tenMienGroup = groupedAttributes.find((a) => a.key === "Tên miền");
++    const otherGroups = groupedAttributes.filter((a) => a.key !== "Tên miền");
+ 
+     return (
+       <div className="mt-3 space-y-4">
+@@ -215,25 +215,46 @@
+             </div>
+           </Descriptions.Item>
+ 
+-          {tenMienAttr && (
++          {tenMienGroup && tenMienGroup.values.length > 0 && (
+             <Descriptions.Item label="Tên miền / Đường dẫn">
+-              <div className="flex items-center gap-2">
+-                <GlobalOutlined className="text-blue-500" />
+-                <a
+-                  href={tenMienAttr.value.startsWith("http") ? tenMienAttr.value : `https://${tenMienAttr.value}`}
+-                  target="_blank"
+-                  rel="noreferrer"
+-                  className="text-blue-600 hover:underline font-mono text-xs"
+-                >
+-                  {tenMienAttr.value}
+-                </a>
+-              </div>
+-            </Descriptions.Item>
+-          )}
+-
+-          {otherAttributes.map((attr, idx) => (
++              <div className="flex flex-col gap-1">
++                {tenMienGroup.values.map((tm, tmIdx) => (
++                  <div key={tmIdx} className="flex items-center gap-2">
++                    <GlobalOutlined className="text-blue-500" />
++                    <a
++                      href={tm.startsWith("http") ? tm : `https://${tm}`}
++                      target="_blank"
++                      rel="noreferrer"
++                      className="text-blue-600 hover:underline font-mono text-xs"
++                    >
++                      {tm}
++                    </a>
++                  </div>
++                ))}
++              </div>
++            </Descriptions.Item>
++          )}
++
++          {otherGroups.map((attr, idx) => (
+             <Descriptions.Item key={idx} label={attr.key}>
+-              <span className="whitespace-pre-wrap text-gray-700">{attr.value}</span>
++              {attr.values.length === 1 ? (
++                <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
++                  {attr.values[0].startsWith("-") || attr.values[0].startsWith("'-")
++                    ? attr.values[0].replace(/^['\-\s]+/, '')
++                    : attr.values[0]}
++                </div>
++              ) : (
++                <ul className="list-disc list-outside ml-4 space-y-1.5 text-gray-700 m-0 p-0">
++                  {attr.values.map((v, vIdx) => {
++                    const cleanV = v.startsWith("-") || v.startsWith("'-") ? v.replace(/^['\-\s]+/, '') : v;
++                    return (
++                      <li key={vIdx} className="leading-relaxed pl-1">
++                        {cleanV}
++                      </li>
++                    );
++                  })}
++                </ul>
++              )}
+             </Descriptions.Item>
+           ))}
+         </Descriptions>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
+const os = require('os');
 
 async function parseTranscript(filePath) {
   if (!fs.existsSync(filePath)) return [];
@@ -92,25 +93,55 @@ function copyDirRecursive(src, dest) {
   }
 }
 
+function findActiveBrainDir() {
+  const possiblePaths = [
+    path.join(os.homedir(), '.gemini', 'antigravity', 'brain', '724a6bcd-bcc3-4ca2-973c-d3661f6678bd'),
+    'C:/Users/ckgam/.gemini/antigravity/brain/724a6bcd-bcc3-4ca2-973c-d3661f6678bd',
+    'C:/Users/Lnog/.gemini/antigravity/brain/0c724d03-995b-41e5-b753-c6096ba91ae8',
+  ];
+
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) return p;
+  }
+
+  // Search dynamically in ~/.gemini/antigravity/brain/
+  const baseBrain = path.join(os.homedir(), '.gemini', 'antigravity', 'brain');
+  if (fs.existsSync(baseBrain)) {
+    const subs = fs.readdirSync(baseBrain);
+    if (subs.length > 0) {
+      return path.join(baseBrain, subs[0]);
+    }
+  }
+
+  return null;
+}
+
 async function run() {
-  const currentBrainDir = path.resolve('C:/Users/Lnog/.gemini/antigravity/brain/0c724d03-995b-41e5-b753-c6096ba91ae8');
+  const currentBrainDir = findActiveBrainDir();
+  if (!currentBrainDir) {
+    console.error('No brain directory found!');
+    return;
+  }
+
+  console.log('Found brain directory:', currentBrainDir);
   const backupBrainDir = path.resolve(__dirname, '.gemini_brain_backup');
 
   console.log('Copying brain folder to backup directory...');
   copyDirRecursive(currentBrainDir, backupBrainDir);
   console.log('Brain backup copied successfully.');
 
-  const transcriptPath = path.join(currentBrainDir, '.system_generated/logs/transcript_full.jsonl');
-  let turns = await parseTranscript(transcriptPath);
-  if (turns.length === 0) {
-    const fallbackPath = path.join(currentBrainDir, '.system_generated/logs/transcript.jsonl');
-    turns = await parseTranscript(fallbackPath);
+  let transcriptPath = path.join(currentBrainDir, '.system_generated', 'logs', 'transcript_full.jsonl');
+  if (!fs.existsSync(transcriptPath)) {
+    transcriptPath = path.join(currentBrainDir, '.system_generated', 'logs', 'transcript.jsonl');
   }
+
+  console.log('Parsing transcript from:', transcriptPath);
+  let turns = await parseTranscript(transcriptPath);
 
   if (turns.length > 0) {
     const md = generateMarkdown(
       'Lịch Sử Toàn Bộ Cuộc Trò Chuyện - Dự Án Kiến Trúc Số Vĩnh Long',
-      'Phiên Làm Việc Chính (C:/Delta Force/kts-vinhlong)',
+      `Phiên Làm Việc Toàn Diện (${path.basename(currentBrainDir)})`,
       turns
     );
     const outputPath = path.resolve(__dirname, 'LICH_SU_TRO_CHUYEN.md');

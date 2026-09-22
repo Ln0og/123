@@ -1,13 +1,5 @@
+{"name":"chunks", "isDir":true}
+{"name":"transcript.jsonl", "sizeBytes":"884410"}
+{"name":"transcript_full.jsonl", "sizeBytes":"1288392"}
 
-The command exited with code 1.
-Output:
-uv 0.12.15 (d35f1f270 2026-09-15 x86_64-pc-windows-msvc)
-head : The term 'head' is not recognized as the name of a cmdlet, function, script file, or operable program. Check 
-the spelling of the name, or if a path was included, verify that the path is correct and try again.
-At line:1 char:42
-+ uv --version 2>&1; uv python list 2>&1 | head -5
-+                                          ~~~~
-    + CategoryInfo          : ObjectNotFound: (head:String) [], CommandNotFoundException
-    + FullyQualifiedErrorId : CommandNotFoundException
- 
-
+Summary: This directory contains 1 subdirectories and 2 files.

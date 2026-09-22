@@ -1,12 +1,16 @@
 
-The command exited with code 0.
+The command exited with code 1.
 Output:
+[eval]:57
+    md += '### <a id=" luot-
+          ^^^^^^^^^^^^^^^^^^
+Expected ',', got '<eof>'
 
-CommandType     Name                                               Version    Source                                   
------------     ----                                               -------    ------                                   
-Application     wscript.exe                                        5.812.1... C:\Windows\system32\wscript.exe          
-False
-False
+SyntaxError: Invalid or unexpected token
+    at makeContextifyScript (node:internal/vm:194:14)
+    at compileScript (node:internal/process/execution:388:10)
+    at evalTypeScript (node:internal/process/execution:260:22)
+    at node:internal/main/eval_string:71:3
 
-
+Node.js v24.19.0
 

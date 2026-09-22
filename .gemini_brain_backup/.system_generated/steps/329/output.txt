@@ -1,6 +1,43 @@
+The following changes were made by the replace_file_content tool to: e:\KTS\HUONG_DAN_VA_LOGIC_HE_THONG.md. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -51,13 +51,30 @@
+ * **Mục đích:** Là trang giới thiệu tổng quan, cung cấp kiến thức nền tảng và căn cứ pháp lý về Khung KTS cho toàn thể cán bộ và người dùng.
+ * **Các khối nội dung:**
+   - **Banner Khung KTS:** Căn cứ pháp lý theo QĐ 1425/QĐ-TTg, phiên bản 1.0.
+-  - **4 Trụ cột / Lớp Kiến trúc chuẩn:**
+-    1. **Lớp 1 - Nghiệp vụ (Business):** Quy trình, dịch vụ công, chỉ đạo điều hành.
+-    2. **Lớp 2 - Dữ liệu (Data):** CSDL dùng chung, danh mục dùng chung, chuẩn kết nối.
+-    3. **Lớp 3 - Ứng dụng (Application):** Cổng DVC, Một cửa điện tử, Hệ thống quản lý chuyên ngành.
+-    4. **Lớp 4 - Hạ tầng & An toàn thông tin (Infrastructure & Security):** Trung tâm dữ liệu, Mạng TSLCD, SOC giám sát.
+-  - **Nguyên tắc triển khai:** Dùng chung, kế thừa, dữ liệu mở, an toàn mạng.
+-  - **Nút điều hướng nhanh:** Chuyển thẳng tới trang Hiện trạng KTS.
++  - **4 Lớp Kiến trúc chuẩn theo QĐ 1425/QĐ-TTg:**
++    1. **Lớp 1: Hạ tầng số và an ninh mạng dùng chung** (Cloud, Mạng TSLCD, SOC 4 lớp, IoT).
++    2. **Lớp 2: Dữ liệu và nền tảng lõi** (Trục LGSP/NDXP, Kho dữ liệu dùng chung, CSDL Quốc gia, Master Data, Nền tảng định danh VNeID, GIS).
++    3. **Lớp 3: Ứng dụng và nghiệp vụ dùng chung** (Chia 2 nhánh: *Chính quyền số* & *Kinh tế số - Xã hội số*).
++    4. **Lớp 4: Kênh tương tác và đo lường hiệu quả** (Cổng DVC, Một cửa, Vĩnh Long Smart Mobile App, Dashboard KPIs).
++  - **04 Thành phần xuyên suốt:** (1) Quản trị, điều phối & giám sát; (2) Tiêu chuẩn, quy chuẩn kỹ thuật; (3) Chiến lược Ưu tiên AI (AI First); (4) Lấy dữ liệu làm trung tâm (Data-Centric).
++  - **Nút điều hướng nhanh:** Chuyển thẳng tới Sơ đồ Khung KTS, Hiện trạng KTS và Lộ trình KTS.
++
++---
++
++### 2. 🏛️ Trang Sơ Đồ Khung Kiến Trúc Tổng Thể (`/kts/so-do`)
++* **Đường dẫn:** `http://localhost:3000/kts/so-do`
++* **Mục đích:** Thể hiện trực quan toàn bộ **Khung Kiến trúc Tổng thể Quốc gia số (Phiên bản 1.0)** cấp tỉnh theo **Hình 8 - Quyết định 1425/QĐ-TTg**.
++* **Cấu trúc thiết kế:**
++  - **2 Cột Biên Chạy Dọc (04 Thành phần xuyên suốt):**
++    - Cột Trái: *1. Quản trị & Điều phối* • *2. Tiêu chuẩn & Quy chuẩn kỹ thuật*.
++    - Cột Phải: *3. Chiến lược Ưu tiên AI (AI First)* • *4. Lấy dữ liệu làm trung tâm (Data-Centric)*.
++  - **Trung Tâm (04 Lớp Kiến Trúc Chuẩn Top-Down):**
++    - **Lớp 4 (Trên cùng):** Kênh tương tác và đo lường hiệu quả (DVC, Mobile App, Portal, KPI Metric).
++    - **Lớp 3:** Ứng dụng và nghiệp vụ dùng chung (Tổ chức 2 cột song song: *Chính quyền số* vs. *Kinh tế số & Xã hội số*).
++    - **Lớp 2:** Dữ liệu và nền tảng lõi (Trục LGSP/NDXP, Kho Master Data, CSDL Quốc gia, Nền tảng GIS/SSO).
++    - **Lớp 1 (Nền tảng đáy):** Hạ tầng số và an ninh mạng dùng chung (Cloud/IDC, Mạng TSLCD, SOC giám sát 4 lớp, IoT/Camera).
++* **Tương tác thông minh:**
++  - Nhấp vào bất kỳ khối nào trên sơ đồ để xem định nghĩa, các **CSDL/hệ thống hiện trạng trực thuộc** và các **dự án nâng cấp trong Kế hoạch Lộ trình**.
+ 
+ ---
+ 
+[diff_block_end]
 
-The command exited with code 0.
-Stdout:
-
-Stderr:
-
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

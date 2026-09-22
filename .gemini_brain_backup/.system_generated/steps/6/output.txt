@@ -1,20 +1,13 @@
+{"name":".system_generated", "isDir":true}
+{"name":".user_uploaded", "isDir":true}
+{"name":"de_xuat_web_kts.md", "sizeBytes":"15056"}
+{"name":"de_xuat_web_kts.md.metadata.json", "sizeBytes":"378"}
+{"name":"implementation_plan.md", "sizeBytes":"3569"}
+{"name":"implementation_plan.md.metadata.json", "sizeBytes":"267"}
+{"name":"scratch", "isDir":true}
+{"name":"task.md", "sizeBytes":"1561"}
+{"name":"task.md.metadata.json", "sizeBytes":"154"}
+{"name":"tong_hop_noi_dung.md", "sizeBytes":"12316"}
+{"name":"tong_hop_noi_dung.md.metadata.json", "sizeBytes":"505"}
 
-The command exited with code 0.
-Output:
-python3 : Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut 
-from Settings > Apps > Advanced app settings > App execution aliases.
-At line:1 char:1
-+ python3 --version 2>&1; py --version 2>&1; where python3 2>&1; where  ...
-+ ~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (Python was not ...cution aliases.:String) [], RemoteException
-    + FullyQualifiedErrorId : NativeCommandError
- 
-py : The term 'py' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the 
-spelling of the name, or if a path was included, verify that the path is correct and try again.
-At line:1 char:25
-+ python3 --version 2>&1; py --version 2>&1; where python3 2>&1; where  ...
-+                         ~~
-    + CategoryInfo          : ObjectNotFound: (py:String) [], CommandNotFoundException
-    + FullyQualifiedErrorId : CommandNotFoundException
- 
-
+Summary: This directory contains 3 subdirectories and 8 files.

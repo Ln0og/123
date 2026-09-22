@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+Created NV-09 and connected to UD-03!
+
+--- KẾT QUẢ ĐỐI CHIẾU 5 HỆ THỐNG CẦN NÂNG CẤP ---
+1. [HT-02] Trung tâm tích hợp dữ liệu tỉnh (IDC)
+   -> LỘ TRÌNH: [NV-02] Triển khai điện toán đám mây cho IDC tỉnh (Hạn: 31/12/2026, Tiến độ: 40%)
+2. [UD-03] Hệ thống thông tin quản lý y tế (HIS)
+   -> LỘ TRÌNH: [NV-09] Nâng cấp và liên thông Hệ thống thông tin quản lý Y tế (HIS/EMR) toàn tỉnh (Hạn: 30/6/2027, Tiến độ: 25%)
+3. [HT-03] Hệ thống giám sát ATTT (SOC tỉnh)
+   -> LỘ TRÌNH: [NV-05] Xây dựng hệ thống SOC tỉnh thế hệ mới (Hạn: 31/12/2027, Tiến độ: 10%)
+4. [DL-01] CSDL Dân cư tỉnh
+   -> LỘ TRÌNH: [NV-03] Kết nối CSDL Dân cư với VNeID (Hạn: 30/9/2026, Tiến độ: 75%)
+5. [DL-02] CSDL Đất đai tỉnh
+   -> LỘ TRÌNH: [NV-01] Nâng cấp CSDL đất đai kết nối NDOP quốc gia (Hạn: 30/6/2027, Tiến độ: 20%)
+

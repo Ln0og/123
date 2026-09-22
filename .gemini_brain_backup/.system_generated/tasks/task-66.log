@@ -1,0 +1,54 @@
+
+> kts-vinhlong@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.83.107:3000
+✓ Ready in 6.0s
+✓ Running next.config.ts took 248ms
+
+○ Compiling / ...
+ GET / 200 in 13.6s (next.js: 13.1s, application-code: 469ms)
+ GET /kts/hien-trang 200 in 2.1s (next.js: 2.0s, application-code: 35ms)
+[browser] Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead. 
+ GET /api/he-thong 500 in 815ms (next.js: 714ms, application-code: 101ms)
+ GET /api/he-thong 500 in 30ms (next.js: 5ms, application-code: 25ms)
+[browser] Uncaught TypeError: data.filter is not a function
+    at HienTrangPage (src/app/(portal)/kts/hien-trang/page.tsx:217:26)
+  215 |   }
+  216 |
+> 217 |   const lop1Count = data.filter((d) => d.lop === 1).length;
+      |                          ^
+  218 |   const lop2Count = data.filter((d) => d.lop === 2).length;
+  219 |   const lop3Count = data.filter((d) => d.lop === 3).length;
+  220 |   const lop4Count = data.filter((d) => d.lop === 4).length;
+Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead.
+ GET /kts/hien-trang? 200 in 217ms (next.js: 13ms, application-code: 205ms)
+ GET /api/he-thong 500 in 93ms (next.js: 10ms, application-code: 82ms)
+[browser] Uncaught TypeError: data.filter is not a function
+    at HienTrangPage (src/app/(portal)/kts/hien-trang/page.tsx:217:26)
+  215 |   }
+  216 |
+> 217 |   const lop1Count = data.filter((d) => d.lop === 1).length;
+      |                          ^
+  218 |   const lop2Count = data.filter((d) => d.lop === 2).length;
+  219 |   const lop3Count = data.filter((d) => d.lop === 3).length;
+  220 |   const lop4Count = data.filter((d) => d.lop === 4).length;
+ GET /api/he-thong 500 in 22ms (next.js: 7ms, application-code: 16ms)
+[browser] Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead. 
+  Reload env: .env
+Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead.
+ GET /kts/hien-trang 200 in 306ms (next.js: 35ms, application-code: 271ms)
+[browser] Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead. 
+ GET /api/he-thong 500 in 35ms (next.js: 20ms, application-code: 15ms)
+ GET /api/he-thong 500 in 16ms (next.js: 5ms, application-code: 11ms)
+[browser] Uncaught TypeError: data.filter is not a function
+    at HienTrangPage (src/app/(portal)/kts/hien-trang/page.tsx:217:26)
+  215 |   }
+  216 |
+> 217 |   const lop1Count = data.filter((d) => d.lop === 1).length;
+      |                          ^
+  218 |   const lop2Count = data.filter((d) => d.lop === 2).length;
+  219 |   const lop3Count = data.filter((d) => d.lop === 3).length;
+  220 |   const lop4Count = data.filter((d) => d.lop === 4).length;

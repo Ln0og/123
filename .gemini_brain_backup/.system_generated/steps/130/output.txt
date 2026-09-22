@@ -1,0 +1,8 @@
+{"name":"he-thong", "isDir":true}
+{"name":"import", "isDir":true}
+{"name":"khung", "isDir":true}
+{"name":"layout.tsx", "sizeBytes":"4743"}
+{"name":"nhiem-vu", "isDir":true}
+{"name":"page.tsx", "sizeBytes":"263"}
+
+Summary: This directory contains 4 subdirectories and 2 files.

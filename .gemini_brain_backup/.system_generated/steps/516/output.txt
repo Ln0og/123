@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+C:/Users/ckgam/.gemini/antigravity/brain/724a6bcd-bcc3-4ca2-973c-d3661f6678bd true
+C:/Users/Lnog/.gemini/antigravity/brain/0c724d03-995b-41e5-b753-c6096ba91ae8 false
+

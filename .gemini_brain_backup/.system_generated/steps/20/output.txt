@@ -1,0 +1,16 @@
+
+The command exited with code 0.
+Output:
+--- Dir: C:\\Users\\ckgam\\.gemini\\antigravity\\brain
+724a6bcd-bcc3-4ca2-973c-d3661f6678bd [DIR]
+ccebb1f9-e2cd-4027-960c-006162871fa0 [DIR]
+tempmediaStorage [DIR]
+--- Dir: C:\\Users\\ckgam\\.gemini\\antigravity\\brain\\ccebb1f9-e2cd-4027-960c-006162871fa0\\.system_generated\\logs
+chunks [DIR]
+transcript.jsonl 243154 bytes
+transcript_full.jsonl 340231 bytes
+--- Dir: C:\\Users\\ckgam\\.gemini\\antigravity\\brain\\724a6bcd-bcc3-4ca2-973c-d3661f6678bd\\.system_generated\\logs
+chunks [DIR]
+transcript.jsonl 19583 bytes
+transcript_full.jsonl 27047 bytes
+

@@ -1,2 +1,31 @@
-Created file file:///C:/Delta%20Force/kts-vinhlong/src/app/%28portal%29/kts/hien-trang/page.tsx with requested content.
-If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+
+The command exited with code 0.
+Output:
+warning: in the working copy of 'src/app/(portal)/kts/hien-trang/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/lo-trinh/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/utils.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'HUONG_DAN_VA_LOGIC_HE_THONG.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'LICH_SU_TRO_CHUYEN.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'LICH_SU_TRO_CHUYEN_PHU.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'add_y_te_roadmap.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'check_5_items.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'check_link.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'connect_cross_links.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'export_chat_history.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(portal)/kts/so-do/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'test_db.js', LF will be replaced by CRLF the next time Git touches it
+[main ef34a07] feat: cap nhat so do khung kts chuan QD 1425, toi uu giao dien, dong bo hien trang va lo trinh
+ 17 files changed, 4523 insertions(+), 365 deletions(-)
+ create mode 100644 HUONG_DAN_VA_LOGIC_HE_THONG.md
+ create mode 100644 LICH_SU_TRO_CHUYEN.md
+ create mode 100644 LICH_SU_TRO_CHUYEN_PHU.md
+ create mode 100644 add_y_te_roadmap.js
+ create mode 100644 check_5_items.js
+ create mode 100644 check_link.js
+ create mode 100644 connect_cross_links.js
+ create mode 100644 export_chat_history.js
+ create mode 100644 src/app/(portal)/kts/so-do/page.tsx
+ create mode 100644 test_db.js
+To https://github.com/Ln0og/123.git
+   6f8a946..ef34a07  main -> main
+

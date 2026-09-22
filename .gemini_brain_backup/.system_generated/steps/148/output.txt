@@ -1,0 +1,78 @@
+
+The command exited with code 0.
+Output:
+NV codes: [
+  { ma: 'NV-02', ten: 'Triển khai điện toán đám mây cho IDC tỉnh' },
+  { ma: 'NV-01', ten: 'Nâng cấp CSDL đất đai kết nối NDOP quốc gia' },
+  { ma: 'NV-07', ten: 'Phát triển App Vĩnh Long Smart' },
+  { ma: 'NV-04', ten: 'Tích hợp Cổng DVCTT với Cổng DVCQG' },
+  { ma: 'NV-03', ten: 'Kết nối CSDL Dân cư với VNeID' },
+  { ma: 'NV-05', ten: 'Xây dựng hệ thống SOC tỉnh thế hệ mới' },
+  { ma: 'NV-06', ten: 'Triển khai Từ điển dữ liệu dùng chung tỉnh' },
+  { ma: 'NV-08', ten: 'Xây dựng Trợ lý ảo tỉnh Vĩnh Long' }
+]
+HT/DL/SNN codes: [
+  {
+    ma: 'HT-02',
+    ten: 'Trung tâm tích hợp dữ liệu tỉnh (IDC)',
+    lop: 1,
+    chuQuan: 'Sở TT&TT'
+  },
+  {
+    ma: 'HT-01',
+    ten: 'Hạ tầng mạng WAN tỉnh',
+    lop: 1,
+    chuQuan: 'Sở TT&TT'
+  },
+  {
+    ma: 'DL-03',
+    ten: 'Nền tảng tích hợp chia sẻ dữ liệu (LGSP)',
+    lop: 2,
+    chuQuan: 'Sở TT&TT'
+  },
+  {
+    ma: 'HT-03',
+    ten: 'Hệ thống giám sát ATTT (SOC tỉnh)',
+    lop: 1,
+    chuQuan: 'Sở TT&TT'
+  },
+  {
+    ma: 'DL-01',
+    ten: 'CSDL Dân cư tỉnh',
+    lop: 2,
+    chuQuan: 'Công an tỉnh'
+  },
+  {
+    ma: 'DL-02',
+    ten: 'CSDL Đất đai tỉnh',
+    lop: 2,
+    chuQuan: 'Sở TN&MT'
+  },
+  {
+    ma: 'SNN-01',
+    ten: 'Phần mềm quản lý, sử dụng và tạo lập dữ liệu, bản đồ chuyên ngành nông nghiệp và bản đồ thổ nhưỡng quản lý vùng canh tác bao gồm trồng trọt, chăn nuôi, thủy sản, lâm nghiệp, diêm nghiệp',
+    lop: 2,
+    chuQuan: 'Sở Nông nghiệp và Môi trường'
+  },
+  {
+    ma: 'SNN-05',
+    ten: 'DA trạm quan trắc khí tượng thủy văn nội đồng: phầm mềm VnEmisoft-dữ liệu quan trắc;',
+    lop: 2,
+    chuQuan: 'Sở Nông nghiệp và Môi trường - Chi cục Thủy lợi'
+  },
+  {
+    ma: 'SNN-09',
+    ten: 'Phần mềm Quản lý an toàn thực phẩm và truy xuất nguồn gốc nông lâm thuỷ sản tỉnh Bến Tre cũ\r\n' +
+      ' IOC Bến Tre có tích hợp (Chỉ có dữ liệu của Bến Tre cũ, xin nâng cấp nhập đủ VL mới)',
+    lop: 2,
+    chuQuan: 'Sở Nông nghiệp và Môi trường - Chi cục Phát triển nông thôn và Quản lý chất lượng'
+  },
+  {
+    ma: 'SNN-10',
+    ten: 'Phần mềm “Chương trình mỗi xã một sản phẩm tỉnh Bến Tre” thuộc đề tài “Nghiên cứu xây dựng mô hình chuyển đổi số trong quản lý chương trình mỗi xã một sản phẩm trên địa bàn tỉnh Bến Tre” goi tắt là Hệ thống OCOP\r\n' +
+      '(Chỉ có dữ liệu của Bến Tre cũ, xin nâng cấp nhập đủ VL mới)',
+    lop: 2,
+    chuQuan: 'Sở Nông nghiệp và Môi trường - Chi cục Phát triển nông thôn và Quản lý chất lượng'
+  }
+]
+

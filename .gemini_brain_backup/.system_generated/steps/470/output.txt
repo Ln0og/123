@@ -1,0 +1,11 @@
+You have 1 background task(s) currently running:
+{
+  "taskId":  "724a6bcd-bcc3-4ca2-973c-d3661f6678bd/task-119",
+  "toolName":  "run_command",
+  "toolSummary":  "Start dev server",
+  "description":  "cmd /c npm run dev",
+  "startTime":  "2026-09-21T00:27:07.503259800Z",
+  "stepIndex":  119,
+  "logUri":  "file:///C:/Users/ckgam/.gemini/antigravity/brain/724a6bcd-bcc3-4ca2-973c-d3661f6678bd/.system_generated/tasks/task-119.log",
+  "isDaemon":  true
+}

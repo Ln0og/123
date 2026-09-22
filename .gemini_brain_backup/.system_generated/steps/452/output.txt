@@ -1,0 +1,33 @@
+The following changes were made by the replace_file_content tool to: e:\KTS\123\src\app\(portal)\kts\so-do\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -369,8 +369,8 @@
+         onClick={() => setSelectedBlock(block)}
+         className="bg-white hover:bg-slate-50/90 rounded-xl p-3.5 border border-slate-200 hover:border-blue-500 shadow-xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[92px] group select-none relative"
+       >
+-        {/* Top Header inside tile: Icon + Badges */}
+-        <div className="flex items-center justify-between gap-2 mb-1.5">
++        {/* Top Header inside tile: Icon + Action */}
++        <div className="flex items-center justify-between gap-2 mb-2">
+           <div
+             className="w-8 h-8 rounded-lg flex items-center justify-center text-sm shrink-0 transition-transform group-hover:scale-105 shadow-xs"
+             style={{ backgroundColor: block.bgColor, color: block.color }}
+@@ -378,15 +378,10 @@
+           </div>
+ 
+           <div className="flex items-center gap-1.5 shrink-0">
+-            {items.length > 0 && (
+-              <span className="text-[11px] font-bold text-slate-600 bg-slate-100 group-hover:bg-blue-50 group-hover:text-blue-700 px-2 py-0.5 rounded-md border border-slate-200 transition-colors">
+-                {items.length} HT
+-              </span>
+-            )}
+             {hasUpgrade && (
+               <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" title="Có nhiệm vụ lộ trình nâng cấp" />
+             )}
+-            <RightOutlined className="text-[10px] text-slate-300 group-hover:text-blue-500 transition-colors ml-0.5" />
++            <RightOutlined className="text-[11px] text-slate-300 group-hover:text-blue-500 transition-colors" />
+           </div>
+         </div>
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

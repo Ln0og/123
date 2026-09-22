@@ -1,5 +1,20 @@
+{"name":".gemini_brain_backup", "isDir":true}
+{"name":".git", "isDir":true}
+{"name":".gitignore", "sizeBytes":"521"}
+{"name":"AGENTS.md", "sizeBytes":"687"}
+{"name":"CLAUDE.md", "sizeBytes":"12"}
+{"name":"README.md", "sizeBytes":"1486"}
+{"name":"eslint.config.mjs", "sizeBytes":"483"}
+{"name":"generate_template.js", "sizeBytes":"754"}
+{"name":"import_snn.js", "sizeBytes":"3555"}
+{"name":"next.config.ts", "sizeBytes":"243"}
+{"name":"package-lock.json", "sizeBytes":"325294"}
+{"name":"package.json", "sizeBytes":"1296"}
+{"name":"postcss.config.mjs", "sizeBytes":"101"}
+{"name":"preview_excel.js", "sizeBytes":"691"}
+{"name":"prisma", "isDir":true}
+{"name":"public", "isDir":true}
+{"name":"src", "isDir":true}
+{"name":"tsconfig.json", "sizeBytes":"704"}
 
-The command exited with code 1.
-Output:
-Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.
-
+Summary: This directory contains 5 subdirectories and 13 files.

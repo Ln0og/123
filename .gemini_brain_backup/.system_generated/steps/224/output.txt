@@ -1,0 +1,55 @@
+The following changes were made by the replace_file_content tool to: e:\KTS\123\src\app\(portal)\kts\hien-trang\page.tsx. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -306,13 +306,13 @@
+     {
+       title: "Lớp",
+       dataIndex: "lop",
+-      width: 130,
++      width: 140,
+       render: (lop: number) => {
+         const cfg = LOP_CONFIG[lop as 1 | 2 | 3 | 4] || LOP_CONFIG[1];
+         return (
+-          <Tag style={{ color: cfg.color, borderColor: cfg.borderColor, backgroundColor: cfg.bgColor }}>
++          <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
+             {cfg.icon} Lớp {lop}
+-          </Tag>
++          </span>
+         );
+       },
+     },
+@@ -320,7 +320,7 @@
+       dataIndex: ["donVi", "ten"],
+       width: 200,
+       render: (_: unknown, rec: HeThongSoData) => (
+-        <div className="text-xs text-gray-700 flex items-center gap-1.5">
++        <div className="text-xs font-medium text-gray-800 flex items-center gap-1.5">
+           <BankOutlined className="text-gray-400" />
+           <span>{rec.donVi?.ten || rec.chuQuan || "Chưa xác định"}</span>
+         </div>
+@@ -329,7 +329,7 @@
+       title: "Năm",
+       dataIndex: "namTrienKhai",
+       width: 85,
+-      render: (nam: number | null) => nam ? <span className="text-xs text-gray-600">{nam}</span> : <span className="text-gray-400">—</span>,
++      render: (nam: number | null) => nam ? <span className="text-xs font-semibold text-gray-700">{nam}</span> : <span className="text-gray-400">—</span>,
+     },
+     {
+       title: "Trạng thái",
+@@ -336,7 +336,11 @@
+-      width: 135,
++      width: 145,
+       render: (tt: string) => {
+-        const cfg = TRANG_THAI_CONFIG[tt] || { label: tt, antdColor: "default" };
+-        return <Tag color={cfg.antdColor}>{cfg.label}</Tag>;
++        const cfg = TRANG_THAI_CONFIG[tt] || { label: tt, badgeClass: "bg-gray-100 text-gray-800 border-gray-300 font-bold" };
++        return (
++          <span className={`inline-flex items-center text-xs font-bold px-2.5 py-1 rounded-md border ${cfg.badgeClass}`}>
++            {cfg.label}
++          </span>
++        );
+       },
+     },
+   ];
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
