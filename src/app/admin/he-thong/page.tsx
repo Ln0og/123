@@ -1,12 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Table, Button, Modal, Form, Input, Select, Tag, message, Popconfirm, Card } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useState, useEffect, useMemo } from "react";
+import { Table, Button, Modal, Form, Input, Select, Tag, message, Popconfirm, Card, Space } from "antd";
+import { PlusOutlined, EditOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import { HeThongSoData, DonViData } from "@/types";
 import { LOP_CONFIG, TRANG_THAI_CONFIG } from "@/lib/utils";
 
-const { TextArea } = Input;
+const { TextArea, Search } = Input;
 
 export default function AdminHeThongPage() {
   const [data, setData] = useState<HeThongSoData[]>([]);
@@ -16,6 +16,8 @@ export default function AdminHeThongPage() {
   const [editing, setEditing] = useState<HeThongSoData | null>(null);
   const [form] = Form.useForm();
   const [saving, setSaving] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterLop, setFilterLop] = useState<number | null>(null);
 
   const fetchHeThong = () => {
     Promise.all([
@@ -32,6 +34,21 @@ export default function AdminHeThongPage() {
     fetchHeThong();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const filteredData = useMemo(() => {
+    return data.filter((item) => {
+      if (filterLop && item.lop !== filterLop) return false;
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        const matchMa = item.ma?.toLowerCase().includes(q);
+        const matchTen = item.ten?.toLowerCase().includes(q);
+        const matchMoTa = item.moTa?.toLowerCase().includes(q);
+        const matchChuQuan = item.chuQuan?.toLowerCase().includes(q);
+        if (!matchMa && !matchTen && !matchMoTa && !matchChuQuan) return false;
+      }
+      return true;
+    });
+  }, [data, filterLop, searchQuery]);
 
   const openCreate = () => {
     setEditing(null);
@@ -76,32 +93,65 @@ export default function AdminHeThongPage() {
   };
 
   const columns: ColumnsType<HeThongSoData> = [
-    
-    { title: "Tên hệ thống", dataIndex: "ten", render: (ten, rec) => (
-      <div><div className="font-medium">{ten}</div>{rec.moTa && <div className="text-xs text-gray-400 truncate max-w-xs">{rec.moTa}</div>}</div>
-    )},
-    { title: "Lớp", dataIndex: "lop", width: 110, filters: [1,2,3,4].map(l => ({ text: LOP_CONFIG[l as 1|2|3|4].shortLabel, value: l })), onFilter: (v, r) => r.lop === v, render: lop => {
-      const cfg = LOP_CONFIG[lop as 1|2|3|4];
-      return <Tag style={{ color: cfg.color, backgroundColor: cfg.bgColor, borderColor: cfg.borderColor }}>{cfg.icon} L{lop}</Tag>;
-    }},
-    { title: "Chủ quản", dataIndex: "chuQuan", width: 120 },
-    { title: "Trạng thái", dataIndex: "trangThai", width: 140, render: ts => {
-      const cfg = TRANG_THAI_CONFIG[ts];
-      return cfg ? <Tag color={cfg.antdColor}>{cfg.label}</Tag> : <Tag>{ts}</Tag>;
-    }},
-    { title: "Thao tác", width: 100, render: (_, rec) => (
-      <div className="flex gap-2">
-        <Button icon={<EditOutlined />} size="small" onClick={() => openEdit(rec)} />
-        <Popconfirm title="Xóa hệ thống này?" onConfirm={() => handleDelete(rec.id)} okText="Xóa" cancelText="Hủy" okButtonProps={{ danger: true }}>
-          <Button icon={<DeleteOutlined />} size="small" danger />
-        </Popconfirm>
-      </div>
-    )},
+    {
+      title: "Mã",
+      dataIndex: "ma",
+      width: 90,
+      render: (ma: string) => (
+        <span className="font-mono text-xs font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
+          {ma}
+        </span>
+      ),
+    },
+    {
+      title: "Tên hệ thống",
+      dataIndex: "ten",
+      render: (ten, rec) => (
+        <div>
+          <div className="font-medium text-gray-900">{ten}</div>
+          {rec.moTa && <div className="text-xs text-gray-400 line-clamp-1 max-w-md">{rec.moTa}</div>}
+        </div>
+      ),
+    },
+    {
+      title: "Lớp",
+      dataIndex: "lop",
+      width: 120,
+      filters: [1, 2, 3, 4].map(l => ({ text: LOP_CONFIG[l as 1 | 2 | 3 | 4].shortLabel, value: l })),
+      onFilter: (v, r) => r.lop === v,
+      render: lop => {
+        const cfg = LOP_CONFIG[lop as 1 | 2 | 3 | 4];
+        return <Tag style={{ color: cfg.color, backgroundColor: cfg.bgColor, borderColor: cfg.borderColor }}>{cfg.icon} L{lop}</Tag>;
+      },
+    },
+    { title: "Chủ quản", dataIndex: "chuQuan", width: 140 },
+    {
+      title: "Trạng thái",
+      dataIndex: "trangThai",
+      width: 140,
+      render: ts => {
+        const cfg = TRANG_THAI_CONFIG[ts];
+        return cfg ? <Tag color={cfg.antdColor}>{cfg.label}</Tag> : <Tag>{ts}</Tag>;
+      },
+    },
+    {
+      title: "Thao tác",
+      width: 100,
+      align: "center",
+      render: (_, rec) => (
+        <div className="flex justify-center gap-2">
+          <Button icon={<EditOutlined />} size="small" onClick={() => openEdit(rec)} />
+          <Popconfirm title="Xóa hệ thống này?" onConfirm={() => handleDelete(rec.id)} okText="Xóa" cancelText="Hủy" okButtonProps={{ danger: true }}>
+            <Button icon={<DeleteOutlined />} size="small" danger />
+          </Popconfirm>
+        </div>
+      ),
+    },
   ];
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
           <h1 className="text-xl font-bold text-gray-800">Quản lý Hệ thống Số</h1>
           <p className="text-gray-400 text-sm">Danh mục các hệ thống số theo 4 lớp kiến trúc</p>
@@ -112,7 +162,42 @@ export default function AdminHeThongPage() {
       </div>
 
       <Card className="shadow-sm">
-        <Table columns={columns} dataSource={data} rowKey="id" loading={loading} size="middle" pagination={{ pageSize: 20 }} />
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            <Search
+              placeholder="Tìm theo mã, tên, mô tả, chủ quản..."
+              allowClear
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ width: 280 }}
+            />
+            <Select
+              placeholder="Tất cả các lớp"
+              allowClear
+              value={filterLop}
+              onChange={(val) => setFilterLop(val)}
+              style={{ width: 160 }}
+            >
+              {[1, 2, 3, 4].map(l => (
+                <Select.Option key={l} value={l}>
+                  {LOP_CONFIG[l as 1 | 2 | 3 | 4].icon} Lớp {l}
+                </Select.Option>
+              ))}
+            </Select>
+          </div>
+          <div className="text-xs text-gray-500 font-medium">
+            Hiển thị <span className="font-bold text-blue-600">{filteredData.length}</span> / {data.length} hệ thống
+          </div>
+        </div>
+
+        <Table
+          columns={columns}
+          dataSource={filteredData}
+          rowKey="id"
+          loading={loading}
+          size="middle"
+          pagination={{ pageSize: 20 }}
+        />
       </Card>
 
       <Modal

@@ -1,13 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Table, Button, Modal, Form, Input, Select, DatePicker, Tag, message, Popconfirm, Card, Progress, Slider } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined, WarningOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined, DeleteOutlined, WarningOutlined, SearchOutlined, BankOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import { NhiemVuData, DonViData } from "@/types";
 import { LOP_CONFIG, TRANG_THAI_CONFIG, UU_TIEN_CONFIG, PHUONG_AN_CONFIG, formatDate, isOverdue } from "@/lib/utils";
 import dayjs from "dayjs";
 
-const { TextArea } = Input;
+const { TextArea, Search } = Input;
 
 export default function AdminNhiemVuPage() {
   const [data, setData] = useState<NhiemVuData[]>([]);
@@ -18,6 +18,8 @@ export default function AdminNhiemVuPage() {
   const [editing, setEditing] = useState<NhiemVuData | null>(null);
   const [form] = Form.useForm();
   const [saving, setSaving] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterLop, setFilterLop] = useState<number | null>(null);
 
   const fetchNhiemVu = () => {
     Promise.all([
@@ -36,6 +38,21 @@ export default function AdminNhiemVuPage() {
     fetchNhiemVu();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const filteredData = useMemo(() => {
+    return data.filter((item) => {
+      if (filterLop && item.lop !== filterLop) return false;
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        const matchMa = item.ma?.toLowerCase().includes(q);
+        const matchTen = item.ten?.toLowerCase().includes(q);
+        const matchMoTa = item.moTa?.toLowerCase().includes(q);
+        const matchDonVi = item.donViChuTri?.ten?.toLowerCase().includes(q);
+        if (!matchMa && !matchTen && !matchMoTa && !matchDonVi) return false;
+      }
+      return true;
+    });
+  }, [data, filterLop, searchQuery]);
 
   const openEdit = (record: NhiemVuData) => {
     setEditing(record);
@@ -62,7 +79,10 @@ export default function AdminNhiemVuPage() {
       const url = editing ? `/api/nhiem-vu/${editing.id}` : "/api/nhiem-vu";
       const method = editing ? "PUT" : "POST";
       const res = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-      if (res.ok) { message.success(editing ? "Đã cập nhật!" : "Đã thêm!"); setModalOpen(false);        fetchNhiemVu();
+      if (res.ok) {
+        message.success(editing ? "Đã cập nhật!" : "Đã thêm!");
+        setModalOpen(false);
+        fetchNhiemVu();
       } else {
         message.error("Lỗi khi lưu!");
       }
@@ -79,47 +99,111 @@ export default function AdminNhiemVuPage() {
   };
 
   const columns: ColumnsType<NhiemVuData> = [
-    
-    { title: "Nhiệm vụ", dataIndex: "ten", render: (ten, rec) => (
-      <div>
-        <div className="font-medium text-gray-800">{ten}</div>
-        {rec.phuongAnXuLy && <div className="text-xs text-blue-500">{PHUONG_AN_CONFIG[rec.phuongAnXuLy]}</div>}
-      </div>
-    )},
-    { title: "Lớp", dataIndex: "lop", width: 100, render: lop => {
-      const cfg = LOP_CONFIG[lop as 1|2|3|4];
-      return <Tag style={{ color: cfg.color, backgroundColor: cfg.bgColor, borderColor: cfg.borderColor }}>{cfg.icon} L{lop}</Tag>;
-    }},
-    { title: "Ưu tiên", dataIndex: "uuTien", width: 90, render: uuTien => (
-      <Tag color={uuTien === "cao" ? "red" : uuTien === "trung-binh" ? "orange" : "green"}>
-        {UU_TIEN_CONFIG[uuTien]?.label || uuTien}
-      </Tag>
-    )},
-    { title: "Thời hạn", dataIndex: "thoiHan", width: 110, render: (d, rec) => {
-      const overdue = isOverdue(d) && rec.trangThai !== "hoan-thanh";
-      return <span className={overdue ? "text-red-500 font-semibold" : "text-gray-600"}>
-        {overdue && <WarningOutlined className="mr-1" />}{formatDate(d)}
-      </span>;
-    }},
-    { title: "Tiến độ", dataIndex: "tienDo", width: 150, render: (p, rec) => (
-      <div>
-        <Progress percent={p} size="small" status={rec.trangThai === "hoan-thanh" ? "success" : isOverdue(rec.thoiHan) && rec.trangThai !== "hoan-thanh" ? "exception" : "active"} />
-        <div className="text-xs text-gray-400">{TRANG_THAI_CONFIG[rec.trangThai]?.label}</div>
-      </div>
-    )},
-    { title: "Thao tác", width: 90, render: (_, rec) => (
-      <div className="flex gap-1">
-        <Button icon={<EditOutlined />} size="small" onClick={() => openEdit(rec)} />
-        <Popconfirm title="Xóa nhiệm vụ này?" onConfirm={() => handleDelete(rec.id)} okText="Xóa" cancelText="Hủy" okButtonProps={{ danger: true }}>
-          <Button icon={<DeleteOutlined />} size="small" danger />
-        </Popconfirm>
-      </div>
-    )},
+    {
+      title: "Mã",
+      dataIndex: "ma",
+      width: 90,
+      render: (ma: string) => (
+        <span className="font-mono text-xs font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
+          {ma}
+        </span>
+      ),
+    },
+    {
+      title: "Nhiệm vụ & Mục tiêu",
+      dataIndex: "ten",
+      render: (ten, rec) => (
+        <div>
+          <div className="font-semibold text-gray-900">{ten}</div>
+          {rec.phuongAnXuLy && <div className="text-xs text-blue-600 mt-0.5">{PHUONG_AN_CONFIG[rec.phuongAnXuLy]}</div>}
+          {rec.heThongSos && rec.heThongSos.length > 0 && (
+            <div className="flex items-center gap-1 flex-wrap mt-1">
+              <span className="text-[10px] text-gray-400">Tác động:</span>
+              {rec.heThongSos.map(h => (
+                <Tag key={h.id} className="m-0 text-[10px] bg-slate-50 text-slate-600 border-slate-200">{h.ma}</Tag>
+              ))}
+            </div>
+          )}
+        </div>
+      ),
+    },
+    {
+      title: "Lớp",
+      dataIndex: "lop",
+      width: 100,
+      render: lop => {
+        const cfg = LOP_CONFIG[lop as 1 | 2 | 3 | 4];
+        return <Tag style={{ color: cfg.color, backgroundColor: cfg.bgColor, borderColor: cfg.borderColor }}>{cfg.icon} L{lop}</Tag>;
+      },
+    },
+    {
+      title: "Chủ trì",
+      dataIndex: ["donViChuTri", "ten"],
+      width: 160,
+      render: (_, rec) => (
+        <div className="text-xs text-gray-700 flex items-center gap-1">
+          <BankOutlined className="text-gray-400 shrink-0" />
+          <span className="truncate">{rec.donViChuTri?.ten || "UBND tỉnh"}</span>
+        </div>
+      ),
+    },
+    {
+      title: "Ưu tiên",
+      dataIndex: "uuTien",
+      width: 110,
+      render: uuTien => (
+        <Tag color={uuTien === "cao" ? "red" : uuTien === "trung-binh" ? "orange" : "green"}>
+          {UU_TIEN_CONFIG[uuTien]?.label || uuTien}
+        </Tag>
+      ),
+    },
+    {
+      title: "Thời hạn",
+      dataIndex: "thoiHan",
+      width: 120,
+      render: (d, rec) => {
+        const overdue = isOverdue(d) && rec.trangThai !== "hoan-thanh";
+        return (
+          <span className={overdue ? "text-red-500 font-semibold text-xs" : "text-gray-600 text-xs"}>
+            {overdue && <WarningOutlined className="mr-1" />}
+            {formatDate(d)}
+          </span>
+        );
+      },
+    },
+    {
+      title: "Tiến độ",
+      dataIndex: "tienDo",
+      width: 140,
+      render: (p, rec) => (
+        <div>
+          <Progress
+            percent={p}
+            size="small"
+            status={rec.trangThai === "hoan-thanh" ? "success" : isOverdue(rec.thoiHan) && rec.trangThai !== "hoan-thanh" ? "exception" : "active"}
+          />
+          <div className="text-[11px] text-gray-400 mt-0.5">{TRANG_THAI_CONFIG[rec.trangThai]?.label}</div>
+        </div>
+      ),
+    },
+    {
+      title: "Thao tác",
+      width: 90,
+      align: "center",
+      render: (_, rec) => (
+        <div className="flex justify-center gap-1">
+          <Button icon={<EditOutlined />} size="small" onClick={() => openEdit(rec)} />
+          <Popconfirm title="Xóa nhiệm vụ này?" onConfirm={() => handleDelete(rec.id)} okText="Xóa" cancelText="Hủy" okButtonProps={{ danger: true }}>
+            <Button icon={<DeleteOutlined />} size="small" danger />
+          </Popconfirm>
+        </div>
+      ),
+    },
   ];
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
           <h1 className="text-xl font-bold text-gray-800">Nhiệm vụ & Lộ trình</h1>
           <p className="text-gray-400 text-sm">Quản lý các nhiệm vụ chuyển đổi kiến trúc số (tương ứng bảng HOANTHIEN_NV trong Mẫu 03)</p>
@@ -128,9 +212,45 @@ export default function AdminNhiemVuPage() {
           Thêm nhiệm vụ
         </Button>
       </div>
+
       <Card className="shadow-sm">
-        <Table columns={columns} dataSource={data} rowKey="id" loading={loading} size="middle" pagination={{ pageSize: 20 }}
-          rowClassName={r => isOverdue(r.thoiHan) && r.trangThai !== "hoan-thanh" ? "bg-red-50" : r.trangThai === "hoan-thanh" ? "bg-green-50" : ""} />
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            <Search
+              placeholder="Tìm theo mã, tên nhiệm vụ, đơn vị..."
+              allowClear
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ width: 280 }}
+            />
+            <Select
+              placeholder="Tất cả các lớp"
+              allowClear
+              value={filterLop}
+              onChange={(val) => setFilterLop(val)}
+              style={{ width: 160 }}
+            >
+              {[1, 2, 3, 4].map(l => (
+                <Select.Option key={l} value={l}>
+                  {LOP_CONFIG[l as 1 | 2 | 3 | 4].icon} Lớp {l}
+                </Select.Option>
+              ))}
+            </Select>
+          </div>
+          <div className="text-xs text-gray-500 font-medium">
+            Hiển thị <span className="font-bold text-blue-600">{filteredData.length}</span> / {data.length} nhiệm vụ
+          </div>
+        </div>
+
+        <Table
+          columns={columns}
+          dataSource={filteredData}
+          rowKey="id"
+          loading={loading}
+          size="middle"
+          pagination={{ pageSize: 20 }}
+          rowClassName={r => isOverdue(r.thoiHan) && r.trangThai !== "hoan-thanh" ? "bg-red-50/40" : r.trangThai === "hoan-thanh" ? "bg-green-50/40" : ""}
+        />
       </Card>
 
       <Modal title={editing ? "Sửa nhiệm vụ" : "Thêm nhiệm vụ mới"} open={modalOpen} onOk={handleSave} onCancel={() => setModalOpen(false)} confirmLoading={saving} okText={editing ? "Cập nhật" : "Thêm mới"} width={720}>

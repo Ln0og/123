@@ -42,6 +42,7 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
   const menuItems = [
     { key: "/admin/he-thong", icon: <AppstoreOutlined />, label: <Link href="/admin/he-thong">Hệ thống số</Link> },
     { key: "/admin/nhiem-vu", icon: <OrderedListOutlined />, label: <Link href="/admin/nhiem-vu">Nhiệm vụ & Lộ trình</Link> },
+    { key: "/admin/khung", icon: <ApartmentOutlined />, label: <Link href="/admin/khung">Khung Kiến trúc Số</Link> },
     { key: "/admin/import", icon: <UploadOutlined />, label: <Link href="/admin/import">Import XLSX</Link> },
   ];
 

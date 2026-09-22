@@ -1,24 +1,52 @@
-
-The command exited with code 0.
-Output:
-
-
-    Directory: C:\Users\Lnog\.gemini\antigravity\brain\0c724d03-995b-41e5-b753-c6096ba91ae8
-
-
-Mode                 LastWriteTime         Length Name                                                                 
-----                 -------------         ------ ----                                                                 
-d-----         9/19/2026  10:52 PM                .system_generated                                                    
-d-----         9/21/2026  10:25 PM                .user_uploaded                                                       
-d-----         9/19/2026  10:32 PM                scratch                                                              
--a----         9/19/2026  10:50 PM          14759 de_xuat_web_kts.md                                                   
--a----         9/19/2026  10:50 PM            373 de_xuat_web_kts.md.metadata.json                                     
--a----         9/20/2026  10:12 PM           3514 implementation_plan.md                                               
--a----         9/20/2026  10:12 PM            262 implementation_plan.md.metadata.json                                 
--a----         9/20/2026  10:49 PM           1524 task.md                                                              
--a----         9/19/2026  10:51 PM            151 task.md.metadata.json                                                
--a----         9/19/2026  10:34 PM          12194 tong_hop_noi_dung.md                                                 
--a----         9/19/2026  10:34 PM            501 tong_hop_noi_dung.md.metadata.json                                   
-
-
-
+Found 76 results
+node_modules/@auth
+node_modules/@auth/core/lib/actions/callback/oauth
+node_modules/@auth/core/lib/actions/signin/authorization-url.d.ts
+node_modules/@auth/core/lib/actions/signin/authorization-url.d.ts.map
+node_modules/@auth/core/lib/actions/signin/authorization-url.js
+node_modules/@auth/core/lib/actions/webauthn-options.d.ts
+node_modules/@auth/core/lib/actions/webauthn-options.d.ts.map
+node_modules/@auth/core/lib/actions/webauthn-options.js
+node_modules/@auth/core/lib/utils/webauthn-client.d.ts
+node_modules/@auth/core/lib/utils/webauthn-client.d.ts.map
+node_modules/@auth/core/lib/utils/webauthn-client.js
+node_modules/@auth/core/lib/utils/webauthn-utils.d.ts
+node_modules/@auth/core/lib/utils/webauthn-utils.d.ts.map
+node_modules/@auth/core/lib/utils/webauthn-utils.js
+node_modules/@auth/core/providers/auth0.d.ts
+node_modules/@auth/core/providers/auth0.d.ts.map
+node_modules/@auth/core/providers/auth0.js
+node_modules/@auth/core/providers/authentik.d.ts
+node_modules/@auth/core/providers/authentik.d.ts.map
+node_modules/@auth/core/providers/authentik.js
+node_modules/@auth/core/providers/fusionauth.d.ts
+node_modules/@auth/core/providers/fusionauth.d.ts.map
+node_modules/@auth/core/providers/fusionauth.js
+node_modules/@auth/core/providers/oauth.d.ts
+node_modules/@auth/core/providers/oauth.d.ts.map
+node_modules/@auth/core/providers/oauth.js
+node_modules/@auth/core/providers/webauthn.d.ts
+node_modules/@auth/core/providers/webauthn.d.ts.map
+node_modules/@auth/core/providers/webauthn.js
+node_modules/@auth/core/src/lib/actions/callback/oauth
+node_modules/@auth/core/src/lib/actions/signin/authorization-url.ts
+node_modules/@auth/core/src/lib/actions/webauthn-options.ts
+node_modules/@auth/core/src/lib/utils/webauthn-client.js
+node_modules/@auth/core/src/lib/utils/webauthn-utils.ts
+node_modules/@auth/core/src/providers/auth0.ts
+node_modules/@auth/core/src/providers/authentik.ts
+node_modules/@auth/core/src/providers/fusionauth.ts
+node_modules/@auth/core/src/providers/oauth.ts
+node_modules/@auth/core/src/providers/webauthn.ts
+node_modules/antd/es/result/unauthorized.d.ts
+node_modules/antd/es/result/unauthorized.js
+node_modules/antd/lib/result/unauthorized.d.ts
+node_modules/antd/lib/result/unauthorized.js
+node_modules/caniuse-lite/data/features/webauthn.js
+node_modules/next/dist/client/components/builtin/unauthorized.d.ts
+node_modules/next/dist/client/components/builtin/unauthorized.js
+node_modules/next/dist/client/components/builtin/unauthorized.js.map
+node_modules/next/dist/client/components/unauthorized.d.ts
+node_modules/next/dist/client/components/unauthorized.js
+node_modules/next/dist/client/components/unauthorized.js.map
+(...26 more results not shown)
