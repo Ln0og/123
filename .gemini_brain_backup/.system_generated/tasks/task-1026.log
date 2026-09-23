@@ -1,0 +1,13 @@
+
+> kts-vinhlong@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.83.107:3000
+- Environments: .env
+✓ Ready in 8.2s
+✓ Running next.config.ts took 299ms
+
+ GET / 200 in 3.9s (next.js: 1016ms, application-code: 2.9s)
+ GET /kts/lo-trinh 200 in 1851ms (next.js: 87ms, application-code: 1764ms)

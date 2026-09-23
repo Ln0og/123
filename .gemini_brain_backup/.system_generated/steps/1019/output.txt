@@ -1,0 +1,29 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript/00000015.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000031.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/transcript.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/transcript_full.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/tasks/task-910.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'LICH_SU_TRO_CHUYEN.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript/00000016.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1002/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1004/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1009/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1013/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1015/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/tasks/task-1011.log', LF will be replaced by CRLF the next time Git touches it
+[main 890a7d8] chore: start dev server and sync chat history
+ 15 files changed, 451 insertions(+), 3 deletions(-)
+ create mode 100644 .gemini_brain_backup/.system_generated/logs/chunks/transcript/00000016.jsonl
+ create mode 100644 .gemini_brain_backup/.system_generated/messages/f6e80d25-bcd2-4fe6-b6b6-48ecee2f3056.json
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1002/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1004/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1009/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1013/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1015/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/tasks/task-1011.log
+To https://github.com/Ln0og/123.git
+   78b6283..890a7d8  main -> main
+
