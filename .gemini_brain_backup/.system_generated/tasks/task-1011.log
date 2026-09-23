@@ -1,0 +1,16 @@
+
+> kts-vinhlong@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.83.107:3000
+- Environments: .env
+✓ Ready in 2.8s
+✓ Running next.config.ts took 263ms
+
+ GET / 200 in 1124ms (next.js: 517ms, application-code: 607ms)
+ GET /kts/hien-trang 200 in 342ms (next.js: 25ms, application-code: 317ms)
+ GET /kts/lo-trinh 200 in 119ms (next.js: 21ms, application-code: 98ms)
+Warning: [antd: Spin] `tip` is deprecated. Please use `description` instead.
+ GET /admin/he-thong 200 in 287ms (next.js: 24ms, application-code: 263ms)
