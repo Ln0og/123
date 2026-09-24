@@ -1,0 +1,16 @@
+Task: 724a6bcd-bcc3-4ca2-973c-d3661f6678bd/task-1064
+Status: RUNNING
+Log: C:\Users\ckgam\.gemini\antigravity\brain\724a6bcd-bcc3-4ca2-973c-d3661f6678bd\.system_generated\tasks\task-1064.log
+Log output:
+<truncated 90 lines>
+_HeThongNhiemVu`.`B` IN (?,?,?,?,?,?,?,?,?)
+prisma:query SELECT `main`.`HeThongSo`.`id`, `main`.`HeThongSo`.`ma`, `main`.`HeThongSo`.`ten`, `main`.`HeThongSo`.`loai`, `main`.`HeThongSo`.`lop`, `main`.`HeThongSo`.`moTa`, `main`.`HeThongSo`.`chuQuan`, `main`.`HeThongSo`.`trangThai`, `main`.`HeThongSo`.`namTrienKhai`, `main`.`HeThongSo`.`donViId`, `main`.`HeThongSo`.`createdAt`, `main`.`HeThongSo`.`updatedAt` FROM `main`.`HeThongSo` WHERE `main`.`HeThongSo`.`id` IN (?,?,?,?,?,?) LIMIT ? OFFSET ?
+ GET /api/nhiem-vu 200 in 22ms (next.js: 6ms, application-code: 16ms)
+ GET /kts/hien-trang 200 in 36ms (next.js: 9ms, application-code: 28ms)
+ GET /kts/hien-trang 200 in 32ms (next.js: 8ms, application-code: 24ms)
+ GET /kts/hien-trang 200 in 23ms (next.js: 7ms, application-code: 17ms)
+ GET /kts/hien-trang 200 in 28ms (next.js: 6ms, application-code: 21ms)
+ GET /kts/hien-trang 200 in 31ms (next.js: 9ms, application-code: 22ms)
+ GET /kts/hien-trang 200 in 29ms (next.js: 7ms, application-code: 23ms)
+
+Last progress: 1s ago

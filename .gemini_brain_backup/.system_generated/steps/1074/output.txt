@@ -1,0 +1,31 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript/00000016.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000031.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/transcript.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/transcript_full.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/tasks/task-1049.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'LICH_SU_TRO_CHUYEN.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000032.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1055/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1057/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1062/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1066/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1068/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/tasks/task-1064.log', LF will be replaced by CRLF the next time Git touches it
+[main e18781e] chore: restart dev server and sync chat
+ 17 files changed, 275 insertions(+), 4 deletions(-)
+ create mode 100644 .gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000032.jsonl
+ create mode 100644 .gemini_brain_backup/.system_generated/messages/0ffb79fa-2052-4605-8003-9b5226a5e30d.json
+ create mode 100644 .gemini_brain_backup/.system_generated/messages/2e259728-65e8-4437-8f76-f895244487f6.json
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1055/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1057/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1062/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1066/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1068/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/tasks/task-1064.log
+ create mode 100644 .gemini_brain_backup/.system_generated/tasks/task-1068.log
+To https://github.com/Ln0og/123.git
+   de47e05..e18781e  main -> main
+
