@@ -1,0 +1,29 @@
+
+The command exited with code 0.
+Output:
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript/00000016.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/chunks/transcript_full/00000031.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/transcript.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/logs/transcript_full.jsonl', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/tasks/task-1011.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'LICH_SU_TRO_CHUYEN.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1017/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1019/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1024/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1028/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/steps/1030/output.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini_brain_backup/.system_generated/tasks/task-1026.log', LF will be replaced by CRLF the next time Git touches it
+[main 3bd2aa8] chore: restart dev server and backup chat
+ 16 files changed, 208 insertions(+), 4 deletions(-)
+ create mode 100644 .gemini_brain_backup/.system_generated/messages/3fea04cb-8a6a-4487-8e66-924e1ddb1ece.json
+ create mode 100644 .gemini_brain_backup/.system_generated/messages/9343f1cf-e26a-4dae-98a3-11fb586f13c4.json
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1017/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1019/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1024/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1028/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/steps/1030/output.txt
+ create mode 100644 .gemini_brain_backup/.system_generated/tasks/task-1026.log
+ create mode 100644 .gemini_brain_backup/.system_generated/tasks/task-1030.log
+To https://github.com/Ln0og/123.git
+   890a7d8..3bd2aa8  main -> main
+
