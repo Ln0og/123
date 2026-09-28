@@ -2950,3 +2950,19 @@ kéo thêm một thư mục để chưa project này :https://github.com/NguyenT
 
 ---
 
+<a id="luot-69"></a>
+
+### 📍 Lượt 69 (2026-09-28T00:36:05Z)
+
+**👤 Người dùng:**
+
+```
+project mới kéo về được viết bằng ngôn ngữ gì
+```
+
+**🤖 Trợ lý AI:**
+
+Phân tích công nghệ của dự án `NQ57_github`: C#, ASP.NET Core 7.0 MVC, Razor Views, Entity Framework Core 7, SQL Server, NetTopologySuite (GIS GeoJSON), EPPlus/ClosedXML.
+
+---
+
